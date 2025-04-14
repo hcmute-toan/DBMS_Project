@@ -1,0 +1,972 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\models\\rolepermission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\models\\rolepermission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\models\\permission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\models\\permission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\models\\warehouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\models\\warehouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\models\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\models\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\models\\supplier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\models\\supplier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\models\\exportuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\models\\exportuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\models\\import.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\models\\import.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\models\\exportdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\models\\exportdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\models\\export.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\models\\export.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\models\\importuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\models\\importuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\models\\importdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\models\\importdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\models\\productspecs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\models\\productspecs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\models\\specs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\models\\specs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\models\\productcategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\models\\productcategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\laptopshop.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\laptopshop.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\views\\notificationview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\views\\notificationview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\views\\roleview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\views\\roleview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\views\\userview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\views\\userview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\views\\warehouseview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\views\\warehouseview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\views\\customerview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\views\\customerview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\views\\supplierview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\views\\supplierview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\views\\exportview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\views\\exportview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\views\\importview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\views\\importview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\views\\specsview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\views\\specsview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\views\\categoryview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\views\\categoryview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\views\\productview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\views\\productview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\themes\\materialdesigntheme.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\themes\\materialdesigntheme.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\helpers\\passwordhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\helpers\\passwordhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\helpers\\constants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\helpers\\constants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\helpers\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\helpers\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\services\\permissionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\services\\permissionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\services\\authenticationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\services\\authenticationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\services\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\services\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\services\\navigationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\services\\navigationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\services\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\services\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\views\\loginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\views\\loginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\viewmodels\\baseviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\viewmodels\\baseviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\viewmodels\\notificationviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\viewmodels\\notificationviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\viewmodels\\roleviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\viewmodels\\roleviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\viewmodels\\userviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\viewmodels\\userviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\viewmodels\\warehouseviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\viewmodels\\warehouseviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\viewmodels\\customerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\viewmodels\\customerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\viewmodels\\supplierviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\viewmodels\\supplierviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\viewmodels\\exportviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\viewmodels\\exportviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\viewmodels\\importviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\viewmodels\\importviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\viewmodels\\specsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\viewmodels\\specsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\viewmodels\\categoryviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\viewmodels\\categoryviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\viewmodels\\productviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\viewmodels\\productviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\viewmodels\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\viewmodels\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|d:\\hk2-n3-2024\\dbms\\finalproject\\laptopshop\\finalproject\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7CEED6C4-37B6-450F-A4A8-A948F4E07AF0}|FinalProject\\LaptopShop.csproj|solutionrelative:finalproject\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 11,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "FinalProject\\MainWindow.xaml.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\MainWindow.xaml.cs",
+              "RelativeToolTip": "FinalProject\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-30T13:36:22.889Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Import.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\Import.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Models\\Import.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\Import.cs",
+              "RelativeToolTip": "FinalProject\\Models\\Import.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:09:14.715Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ExportUser.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\ExportUser.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Models\\ExportUser.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\ExportUser.cs",
+              "RelativeToolTip": "FinalProject\\Models\\ExportUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:19:44.554Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Supplier.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\Supplier.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Models\\Supplier.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\Supplier.cs",
+              "RelativeToolTip": "FinalProject\\Models\\Supplier.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:19:53.86Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Customer.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\Customer.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Models\\Customer.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\Customer.cs",
+              "RelativeToolTip": "FinalProject\\Models\\Customer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:20:05.745Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Warehouse.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\Warehouse.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Models\\Warehouse.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\Warehouse.cs",
+              "RelativeToolTip": "FinalProject\\Models\\Warehouse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:20:15.391Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Role.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\Role.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Models\\Role.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\Role.cs",
+              "RelativeToolTip": "FinalProject\\Models\\Role.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:20:32.494Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Permission.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\Permission.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Models\\Permission.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\Permission.cs",
+              "RelativeToolTip": "FinalProject\\Models\\Permission.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:20:41.02Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RolePermission.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\RolePermission.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Models\\RolePermission.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\RolePermission.cs",
+              "RelativeToolTip": "FinalProject\\Models\\RolePermission.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:20:51.55Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "User.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\User.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Models\\User.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\User.cs",
+              "RelativeToolTip": "FinalProject\\Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:20:23.61Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Notification.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\Notification.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Models\\Notification.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\Notification.cs",
+              "RelativeToolTip": "FinalProject\\Models\\Notification.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:21:04.419Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ExportDetail.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\ExportDetail.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Models\\ExportDetail.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\ExportDetail.cs",
+              "RelativeToolTip": "FinalProject\\Models\\ExportDetail.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:19:34.009Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Export.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\Export.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Models\\Export.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\Export.cs",
+              "RelativeToolTip": "FinalProject\\Models\\Export.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:19:15.929Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ImportUser.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\ImportUser.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Models\\ImportUser.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\ImportUser.cs",
+              "RelativeToolTip": "FinalProject\\Models\\ImportUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:19:07.33Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ImportDetail.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\ImportDetail.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Models\\ImportDetail.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\ImportDetail.cs",
+              "RelativeToolTip": "FinalProject\\Models\\ImportDetail.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:18:56.761Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ProductSpecs.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\ProductSpecs.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Models\\ProductSpecs.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\ProductSpecs.cs",
+              "RelativeToolTip": "FinalProject\\Models\\ProductSpecs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:18:37.676Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Specs.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\Specs.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Models\\Specs.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\Specs.cs",
+              "RelativeToolTip": "FinalProject\\Models\\Specs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:18:23.393Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ProductCategory.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\ProductCategory.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Models\\ProductCategory.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\ProductCategory.cs",
+              "RelativeToolTip": "FinalProject\\Models\\ProductCategory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:18:09.878Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Category.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\Category.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Models\\Category.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\Category.cs",
+              "RelativeToolTip": "FinalProject\\Models\\Category.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:17:49.778Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Product.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Models\\Product.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Models\\Product.cs",
+              "RelativeToolTip": "FinalProject\\Models\\Product.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:08:34.731Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "ExportView.xaml",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\ExportView.xaml",
+              "RelativeDocumentMoniker": "FinalProject\\Views\\ExportView.xaml",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\ExportView.xaml",
+              "RelativeToolTip": "FinalProject\\Views\\ExportView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-14T01:27:34.565Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "SupplierView.xaml",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\SupplierView.xaml",
+              "RelativeDocumentMoniker": "FinalProject\\Views\\SupplierView.xaml",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\SupplierView.xaml",
+              "RelativeToolTip": "FinalProject\\Views\\SupplierView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-14T01:27:41.098Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "CustomerView.xaml",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\CustomerView.xaml",
+              "RelativeDocumentMoniker": "FinalProject\\Views\\CustomerView.xaml",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\CustomerView.xaml",
+              "RelativeToolTip": "FinalProject\\Views\\CustomerView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-14T01:27:49.592Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "WarehouseView.xaml",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\WarehouseView.xaml",
+              "RelativeDocumentMoniker": "FinalProject\\Views\\WarehouseView.xaml",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\WarehouseView.xaml",
+              "RelativeToolTip": "FinalProject\\Views\\WarehouseView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-14T01:27:55.91Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "UserView.xaml",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\UserView.xaml",
+              "RelativeDocumentMoniker": "FinalProject\\Views\\UserView.xaml",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\UserView.xaml",
+              "RelativeToolTip": "FinalProject\\Views\\UserView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-14T01:28:02.194Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "RoleView.xaml",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\RoleView.xaml",
+              "RelativeDocumentMoniker": "FinalProject\\Views\\RoleView.xaml",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\RoleView.xaml",
+              "RelativeToolTip": "FinalProject\\Views\\RoleView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-14T01:28:08.944Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "NotificationView.xaml",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\NotificationView.xaml",
+              "RelativeDocumentMoniker": "FinalProject\\Views\\NotificationView.xaml",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\NotificationView.xaml",
+              "RelativeToolTip": "FinalProject\\Views\\NotificationView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-14T01:28:15.74Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "ImportView.xaml",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\ImportView.xaml",
+              "RelativeDocumentMoniker": "FinalProject\\Views\\ImportView.xaml",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\ImportView.xaml",
+              "RelativeToolTip": "FinalProject\\Views\\ImportView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-14T01:27:29.317Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "SpecsView.xaml",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\SpecsView.xaml",
+              "RelativeDocumentMoniker": "FinalProject\\Views\\SpecsView.xaml",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\SpecsView.xaml",
+              "RelativeToolTip": "FinalProject\\Views\\SpecsView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-14T01:27:23.55Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "CategoryView.xaml",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\CategoryView.xaml",
+              "RelativeDocumentMoniker": "FinalProject\\Views\\CategoryView.xaml",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\CategoryView.xaml",
+              "RelativeToolTip": "FinalProject\\Views\\CategoryView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-14T01:27:17.091Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "ProductView.xaml",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\ProductView.xaml",
+              "RelativeDocumentMoniker": "FinalProject\\Views\\ProductView.xaml",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\ProductView.xaml",
+              "RelativeToolTip": "FinalProject\\Views\\ProductView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-14T01:27:05.778Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "FinalProject\\Views\\MainWindow.xaml",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\MainWindow.xaml",
+              "RelativeToolTip": "FinalProject\\Views\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-14T01:26:58.433Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "MaterialDesignTheme.xaml",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Themes\\MaterialDesignTheme.xaml",
+              "RelativeDocumentMoniker": "FinalProject\\Themes\\MaterialDesignTheme.xaml",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Themes\\MaterialDesignTheme.xaml",
+              "RelativeToolTip": "FinalProject\\Themes\\MaterialDesignTheme.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-14T01:26:11.901Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "PasswordHelper.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Helpers\\PasswordHelper.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Helpers\\PasswordHelper.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Helpers\\PasswordHelper.cs",
+              "RelativeToolTip": "FinalProject\\Helpers\\PasswordHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:25:56.323Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "Constants.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Helpers\\Constants.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Helpers\\Constants.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Helpers\\Constants.cs",
+              "RelativeToolTip": "FinalProject\\Helpers\\Constants.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:25:50.116Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "RelayCommand.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Helpers\\RelayCommand.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Helpers\\RelayCommand.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Helpers\\RelayCommand.cs",
+              "RelativeToolTip": "FinalProject\\Helpers\\RelayCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:25:41.959Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "PermissionService.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Services\\PermissionService.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Services\\PermissionService.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Services\\PermissionService.cs",
+              "RelativeToolTip": "FinalProject\\Services\\PermissionService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:25:21.381Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "AuthenticationService.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Services\\AuthenticationService.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Services\\AuthenticationService.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Services\\AuthenticationService.cs",
+              "RelativeToolTip": "FinalProject\\Services\\AuthenticationService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:25:14.702Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "NotificationService.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Services\\NotificationService.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Services\\NotificationService.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Services\\NotificationService.cs",
+              "RelativeToolTip": "FinalProject\\Services\\NotificationService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:25:06.653Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "NavigationService.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Services\\NavigationService.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Services\\NavigationService.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Services\\NavigationService.cs",
+              "RelativeToolTip": "FinalProject\\Services\\NavigationService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:24:57.085Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "DatabaseService.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Services\\DatabaseService.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Services\\DatabaseService.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Services\\DatabaseService.cs",
+              "RelativeToolTip": "FinalProject\\Services\\DatabaseService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:24:47.696Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "LoginWindow.xaml",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\LoginWindow.xaml",
+              "RelativeDocumentMoniker": "FinalProject\\Views\\LoginWindow.xaml",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\Views\\LoginWindow.xaml",
+              "RelativeToolTip": "FinalProject\\Views\\LoginWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-14T01:24:23.706Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "BaseViewModel.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\BaseViewModel.cs",
+              "RelativeDocumentMoniker": "FinalProject\\ViewModels\\BaseViewModel.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\BaseViewModel.cs",
+              "RelativeToolTip": "FinalProject\\ViewModels\\BaseViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:24:02.581Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "NotificationViewModel.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\NotificationViewModel.cs",
+              "RelativeDocumentMoniker": "FinalProject\\ViewModels\\NotificationViewModel.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\NotificationViewModel.cs",
+              "RelativeToolTip": "FinalProject\\ViewModels\\NotificationViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:23:55.387Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "RoleViewModel.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\RoleViewModel.cs",
+              "RelativeDocumentMoniker": "FinalProject\\ViewModels\\RoleViewModel.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\RoleViewModel.cs",
+              "RelativeToolTip": "FinalProject\\ViewModels\\RoleViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:23:47.646Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "UserViewModel.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\UserViewModel.cs",
+              "RelativeDocumentMoniker": "FinalProject\\ViewModels\\UserViewModel.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\UserViewModel.cs",
+              "RelativeToolTip": "FinalProject\\ViewModels\\UserViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:23:40.026Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "WarehouseViewModel.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\WarehouseViewModel.cs",
+              "RelativeDocumentMoniker": "FinalProject\\ViewModels\\WarehouseViewModel.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\WarehouseViewModel.cs",
+              "RelativeToolTip": "FinalProject\\ViewModels\\WarehouseViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:23:32.391Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "CustomerViewModel.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\CustomerViewModel.cs",
+              "RelativeDocumentMoniker": "FinalProject\\ViewModels\\CustomerViewModel.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\CustomerViewModel.cs",
+              "RelativeToolTip": "FinalProject\\ViewModels\\CustomerViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:23:24.549Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "SupplierViewModel.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\SupplierViewModel.cs",
+              "RelativeDocumentMoniker": "FinalProject\\ViewModels\\SupplierViewModel.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\SupplierViewModel.cs",
+              "RelativeToolTip": "FinalProject\\ViewModels\\SupplierViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:23:11.625Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "ExportViewModel.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\ExportViewModel.cs",
+              "RelativeDocumentMoniker": "FinalProject\\ViewModels\\ExportViewModel.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\ExportViewModel.cs",
+              "RelativeToolTip": "FinalProject\\ViewModels\\ExportViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:23:05.034Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "ImportViewModel.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\ImportViewModel.cs",
+              "RelativeDocumentMoniker": "FinalProject\\ViewModels\\ImportViewModel.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\ImportViewModel.cs",
+              "RelativeToolTip": "FinalProject\\ViewModels\\ImportViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:22:55.497Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "SpecsViewModel.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\SpecsViewModel.cs",
+              "RelativeDocumentMoniker": "FinalProject\\ViewModels\\SpecsViewModel.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\SpecsViewModel.cs",
+              "RelativeToolTip": "FinalProject\\ViewModels\\SpecsViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:22:47.014Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "CategoryViewModel.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\CategoryViewModel.cs",
+              "RelativeDocumentMoniker": "FinalProject\\ViewModels\\CategoryViewModel.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\CategoryViewModel.cs",
+              "RelativeToolTip": "FinalProject\\ViewModels\\CategoryViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:22:40.003Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "ProductViewModel.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\ProductViewModel.cs",
+              "RelativeDocumentMoniker": "FinalProject\\ViewModels\\ProductViewModel.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\ProductViewModel.cs",
+              "RelativeToolTip": "FinalProject\\ViewModels\\ProductViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:22:30.317Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "LoginViewModel.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\LoginViewModel.cs",
+              "RelativeDocumentMoniker": "FinalProject\\ViewModels\\LoginViewModel.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\LoginViewModel.cs",
+              "RelativeToolTip": "FinalProject\\ViewModels\\LoginViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:22:22.941Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "MainViewModel.cs",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\MainViewModel.cs",
+              "RelativeDocumentMoniker": "FinalProject\\ViewModels\\MainViewModel.cs",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\ViewModels\\MainViewModel.cs",
+              "RelativeToolTip": "FinalProject\\ViewModels\\MainViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T01:22:04.944Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "App.xaml",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\App.xaml",
+              "RelativeDocumentMoniker": "FinalProject\\App.xaml",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\App.xaml",
+              "RelativeToolTip": "FinalProject\\App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-14T01:05:42Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "LaptopShop.csproj",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\LaptopShop.csproj",
+              "RelativeDocumentMoniker": "FinalProject\\LaptopShop.csproj",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\LaptopShop.csproj",
+              "RelativeToolTip": "FinalProject\\LaptopShop.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-14T01:04:19.291Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "FinalProject\\MainWindow.xaml",
+              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalProject\\LaptopShop\\FinalProject\\MainWindow.xaml",
+              "RelativeToolTip": "FinalProject\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-14T00:39:44.157Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
