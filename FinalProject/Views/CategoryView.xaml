@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="FinalProject.Views.CategoryView"  
+   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
+   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
+   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
+   mc:Ignorable="d"  
+   d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Nhập liệu -->
+            <RowDefinition Height="Auto"/>
+            <!-- Buttons -->
+            <RowDefinition Height="*"/>
+            <!-- DataGrid -->
+        </Grid.RowDefinitions>
+
+        <!-- Nhập liệu -->
+        <Grid Grid.Row="0" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Tên danh mục -->
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="Tên danh mục" FontWeight="Bold"/>
+                <TextBox Text="{Binding CategoryName, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
+            </StackPanel>
+
+            <!-- Mô tả -->
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="Mô tả" FontWeight="Bold"/>
+                <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
+            <Button Content="Thêm" Width="80" Margin="5" Command="{Binding AddCommand}" />
+            <Button Content="Xóa" Width="80" Margin="5" Command="{Binding DeleteCommand}" />
+            <Button Content="Sửa" Width="80" Margin="5" Command="{Binding EditCommand}" />
+        </StackPanel>
+
+        <!-- DataGrid -->
+        <DataGrid Grid.Row="2" ItemsSource="{Binding CategoryList}"
+                  SelectedItem="{Binding SelectedCategory}"
+                  AutoGenerateColumns="False" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding CategoryId}" Width="Auto"/>
+                <DataGridTextColumn Header="Tên danh mục" Binding="{Binding CategoryName}" Width="*"/>
+                <DataGridTextColumn Header="Mô tả" Binding="{Binding Description}" Width="2*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
