@@ -1,0 +1,40 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\HCMUTE_DoGiaHuan_22110030_Subject\\Database Management System\\LaptopShopProject\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\hcmute_dogiahuan_22110030_subject\\database management system\\laptopshopproject\\laptopshopproject\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "D:\\HCMUTE_DoGiaHuan_22110030_Subject\\Database Management System\\LaptopShopProject\\LaptopShopProject\\Form1.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Form1.cs",
+              "ToolTip": "D:\\HCMUTE_DoGiaHuan_22110030_Subject\\Database Management System\\LaptopShopProject\\LaptopShopProject\\Form1.cs [Design]",
+              "RelativeToolTip": "LaptopShopProject\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T07:33:22.349Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

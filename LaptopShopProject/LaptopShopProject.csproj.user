@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\CategoryForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\CustomerForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\ExportForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\ImportForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\NotificationForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\ProductForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\RoleForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\SpecForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\SupplierForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\WarehouseForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>
