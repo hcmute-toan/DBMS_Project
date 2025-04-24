@@ -1,12 +1,3 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace LaptopShopProject.Models
-{
-    internal class Product
-    {
-    }
-}
+namespace LaptopShopProject.Models { internal class Product { public int ProductId { get; set; } public string ProductName { get; set; } public string Description { get; set; } public string Brand { get; set; } public string Ean13 { get; set; } public decimal ImportPrice { get; set; } public decimal WholesalePrice { get; set; } public decimal RetailPrice { get; set; } public string ImagePath { get; set; } public int WarehouseId { get; set; } public bool Status { get; set; } } }
