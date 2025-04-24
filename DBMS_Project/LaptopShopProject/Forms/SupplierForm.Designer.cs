@@ -1,11 +1,18 @@
 ﻿namespace LaptopStoreApp.Forms
 {
     partial class SupplierForm
-    {
+    { ///
+
+      /// Required designer variable. /// private System.ComponentModel.IContainer components = null;
+
+
+
         /// <summary> 
-        /// Required designer variable.
+        /// Clean up any resources being used.
         /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         private System.ComponentModel.IContainer components = null;
+
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -19,6 +26,7 @@
             }
             base.Dispose(disposing);
         }
+
 
         #region Component Designer generated code
 
@@ -50,6 +58,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(754, 354);
             this.dataGridView1.TabIndex = 40;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // button3
             // 
@@ -59,6 +68,7 @@
             this.button3.TabIndex = 39;
             this.button3.Text = "Sửa";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
@@ -68,6 +78,7 @@
             this.button2.TabIndex = 38;
             this.button2.Text = "Xóa";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -77,6 +88,7 @@
             this.button1.TabIndex = 37;
             this.button1.Text = "Thêm";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label5
             // 
@@ -164,6 +176,7 @@
             this.Controls.Add(this.label1);
             this.Name = "SupplierForm";
             this.Size = new System.Drawing.Size(828, 516);
+            this.Load += new System.EventHandler(this.SupplierForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -185,4 +198,5 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
     }
+
 }

@@ -1,11 +1,18 @@
 ﻿namespace LaptopStoreApp.Forms
 {
     partial class CategoryForm
-    {
+    { ///
+
+      /// Required designer variable. /// private System.ComponentModel.IContainer components = null;
+
+
+
         /// <summary> 
-        /// Required designer variable.
+        /// Clean up any resources being used.
         /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         private System.ComponentModel.IContainer components = null;
+
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -87,6 +94,7 @@
             button3.TabIndex = 39;
             button3.Text = "Sửa";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
@@ -97,6 +105,7 @@
             button2.TabIndex = 38;
             button2.Text = "Xóa";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -107,6 +116,7 @@
             button1.TabIndex = 37;
             button1.Text = "Thêm";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // dataGridView1
             // 
@@ -117,6 +127,7 @@
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(913, 402);
             dataGridView1.TabIndex = 40;
+            dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // CategoryForm
             // 
@@ -151,4 +162,5 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView dataGridView1;
     }
+
 }

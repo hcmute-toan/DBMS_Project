@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="LaptopShopProject.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ConnStr" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data Source=YNWA\\SQLEXPRESS;Initial Catalog=DBMS_2;Integrated Security=True;Trust Server Certificate=True</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

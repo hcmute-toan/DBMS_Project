@@ -1,130 +1,130 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\",
+  "WorkspaceRootPath": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\hk2-n3-2024\\dbms\\finallaptopshop\\dbms_project\\laptopshopproject\\dataaccess\\supplierrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\dataaccess\\supplierrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\hk2-n3-2024\\dbms\\finallaptopshop\\dbms_project\\laptopshopproject\\dataaccess\\exportrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\dataaccess\\exportrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\hk2-n3-2024\\dbms\\finallaptopshop\\dbms_project\\laptopshopproject\\dataaccess\\importrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\dataaccess\\importrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\dataaccess\\importrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\hk2-n3-2024\\dbms\\finallaptopshop\\dbms_project\\laptopshopproject\\utilities\\helper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\utilities\\helper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\forms\\importform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\importform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\hk2-n3-2024\\dbms\\finallaptopshop\\dbms_project\\laptopshopproject\\utilities\\logger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\utilities\\logger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\forms\\customerform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\customerform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\hk2-n3-2024\\dbms\\finallaptopshop\\dbms_project\\laptopshopproject\\dataaccess\\reportrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\dataaccess\\reportrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\forms\\importform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\importform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\hk2-n3-2024\\dbms\\finallaptopshop\\dbms_project\\laptopshopproject\\dataaccess\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\dataaccess\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\hk2-n3-2024\\dbms\\finallaptopshop\\dbms_project\\laptopshopproject\\dataaccess\\customerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\dataaccess\\customerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\hk2-n3-2024\\dbms\\finallaptopshop\\dbms_project\\laptopshopproject\\dataaccess\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\dataaccess\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\hk2-n3-2024\\dbms\\finallaptopshop\\dbms_project\\laptopshopproject\\dataaccess\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\dataaccess\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\hk2-n3-2024\\dbms\\finallaptopshop\\dbms_project\\laptopshopproject\\dataaccess\\databaseconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\dataaccess\\databaseconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\hk2-n3-2024\\dbms\\finallaptopshop\\dbms_project\\laptopshopproject\\models\\exportdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\models\\exportdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\hk2-n3-2024\\dbms\\finallaptopshop\\dbms_project\\laptopshopproject\\models\\export.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\models\\export.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\hk2-n3-2024\\dbms\\finallaptopshop\\dbms_project\\laptopshopproject\\models\\importdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\models\\importdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\hk2-n3-2024\\dbms\\finallaptopshop\\dbms_project\\laptopshopproject\\models\\import.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\models\\import.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\models\\import.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\hk2-n3-2024\\dbms\\finallaptopshop\\dbms_project\\laptopshopproject\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\forms\\importform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\importform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\hk2-n3-2024\\dbms\\finallaptopshop\\dbms_project\\laptopshopproject\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\dataaccess\\databaseconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\dataaccess\\databaseconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\hk2-n3-2024\\dbms\\finallaptopshop\\dbms_project\\laptopshopproject\\models\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\forms\\categoryform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\categoryform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\dataaccess\\customerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\dataaccess\\customerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\forms\\customerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\customerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\models\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\models\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\hk2-n3-2024\\dbms\\finallaptopshop\\dbms_project\\laptopshopproject\\models\\supplier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\models\\supplier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\models\\supplier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\hk2-n3-2024\\dbms\\finallaptopshop\\dbms_project\\laptopshopproject\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\dataaccess\\supplierrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\dataaccess\\supplierrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\hk2-n3-2024\\dbms\\finallaptopshop\\dbms_project\\laptopshopproject\\laptopshopproject.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\laptopshopproject.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\forms\\supplierform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\supplierform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\laptopshopproject\\forms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\forms\\exportform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\exportform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\laptopshopproject\\forms\\notificationform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\notificationform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\forms\\supplierform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\supplierform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\laptopshopproject\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\laptopshopproject\\forms\\roleform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\roleform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\laptopshopproject\\forms\\specform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\specform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\laptopshopproject\\forms\\supplierform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\forms\\supplierform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\supplierform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\laptopshopproject\\forms\\warehouseform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\warehouseform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\dataaccess\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\dataaccess\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\hk2-n3-2024\\dbms\\finallaptopshop\\dbms_project\\laptopshopproject\\forms\\categoryform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\forms\\categoryform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\categoryform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\laptopshopproject\\forms\\categoryform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\categoryform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\hk2-n3-2024\\dbms\\finallaptopshop\\dbms_project\\laptopshopproject\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\forms\\categoryform.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\categoryform.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\forms\\loginform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\loginform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\forms\\exportform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\exportform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\dataaccess\\exportrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\dataaccess\\exportrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\models\\export.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\models\\export.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\forms\\importform.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\importform.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\properties\\settings.settings||{6D2695F9-5365-4A78-89ED-F205C045BFE6}",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\properties\\settings.settings||{6D2695F9-5365-4A78-89ED-F205C045BFE6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\projectfianl\\4\\dbms_project\\dbms_project\\laptopshopproject\\laptopshopproject.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\laptopshopproject.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -134,396 +134,425 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 29,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Helper.cs",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Utilities\\Helper.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Utilities\\Helper.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Utilities\\Helper.cs",
-              "RelativeToolTip": "LaptopShopProject\\Utilities\\Helper.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:55:44.253Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Logger.cs",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Utilities\\Logger.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Utilities\\Logger.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Utilities\\Logger.cs",
-              "RelativeToolTip": "LaptopShopProject\\Utilities\\Logger.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 10,
+              "Title": "Customer.cs",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Models\\Customer.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Models\\Customer.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Models\\Customer.cs",
+              "RelativeToolTip": "LaptopShopProject\\Models\\Customer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:55:37.676Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ReportRepository.cs",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\DataAccess\\ReportRepository.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\ReportRepository.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\DataAccess\\ReportRepository.cs",
-              "RelativeToolTip": "LaptopShopProject\\DataAccess\\ReportRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:55:17.446Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CategoryRepository.cs",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\DataAccess\\CategoryRepository.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\CategoryRepository.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\DataAccess\\CategoryRepository.cs",
-              "RelativeToolTip": "LaptopShopProject\\DataAccess\\CategoryRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:55:11.054Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "CustomerRepository.cs",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\DataAccess\\CustomerRepository.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\CustomerRepository.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\DataAccess\\CustomerRepository.cs",
-              "RelativeToolTip": "LaptopShopProject\\DataAccess\\CustomerRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:54:54.195Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "SupplierRepository.cs",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\DataAccess\\SupplierRepository.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\SupplierRepository.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\DataAccess\\SupplierRepository.cs",
-              "RelativeToolTip": "LaptopShopProject\\DataAccess\\SupplierRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:54:46.977Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ExportRepository.cs",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\DataAccess\\ExportRepository.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\ExportRepository.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\DataAccess\\ExportRepository.cs",
-              "RelativeToolTip": "LaptopShopProject\\DataAccess\\ExportRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:54:39.946Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ImportRepository.cs",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\DataAccess\\ImportRepository.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\ImportRepository.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\DataAccess\\ImportRepository.cs",
-              "RelativeToolTip": "LaptopShopProject\\DataAccess\\ImportRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:54:32.205Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ProductRepository.cs",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\DataAccess\\ProductRepository.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\ProductRepository.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\DataAccess\\ProductRepository.cs",
-              "RelativeToolTip": "LaptopShopProject\\DataAccess\\ProductRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:54:22.342Z",
+              "WhenOpened": "2025-04-24T08:20:44.01Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "UserRepository.cs",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\DataAccess\\UserRepository.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\UserRepository.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\DataAccess\\UserRepository.cs",
-              "RelativeToolTip": "LaptopShopProject\\DataAccess\\UserRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "CustomerForm.cs",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\CustomerForm.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\CustomerForm.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\CustomerForm.cs",
+              "RelativeToolTip": "LaptopShopProject\\Forms\\CustomerForm.cs",
+              "ViewState": "AQIAALEAAAAAAAAAAAAAwNQAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:53:51.879Z",
+              "WhenOpened": "2025-04-24T08:20:22.138Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CustomerForm.Designer.cs",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\CustomerForm.Designer.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\CustomerForm.Designer.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\CustomerForm.Designer.cs",
+              "RelativeToolTip": "LaptopShopProject\\Forms\\CustomerForm.Designer.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAAwA0AAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T08:20:11.65Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CustomerRepository.cs",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\CustomerRepository.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\CustomerRepository.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\CustomerRepository.cs",
+              "RelativeToolTip": "LaptopShopProject\\DataAccess\\CustomerRepository.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAxwA4AAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T08:19:31.259Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 11,
-              "Title": "ExportDetail.cs",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Models\\ExportDetail.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Models\\ExportDetail.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Models\\ExportDetail.cs",
-              "RelativeToolTip": "LaptopShopProject\\Models\\ExportDetail.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Title": "Supplier.cs",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Models\\Supplier.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Models\\Supplier.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Models\\Supplier.cs",
+              "RelativeToolTip": "LaptopShopProject\\Models\\Supplier.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:52:56.126Z",
+              "WhenOpened": "2025-04-24T08:15:30.611Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 12,
-              "Title": "Export.cs",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Models\\Export.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Models\\Export.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Models\\Export.cs",
-              "RelativeToolTip": "LaptopShopProject\\Models\\Export.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "SupplierRepository.cs",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\SupplierRepository.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\SupplierRepository.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\SupplierRepository.cs",
+              "RelativeToolTip": "LaptopShopProject\\DataAccess\\SupplierRepository.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAA0AAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:52:49.062Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "ImportDetail.cs",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Models\\ImportDetail.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Models\\ImportDetail.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Models\\ImportDetail.cs",
-              "RelativeToolTip": "LaptopShopProject\\Models\\ImportDetail.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:52:39.691Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Import.cs",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Models\\Import.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Models\\Import.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Models\\Import.cs",
-              "RelativeToolTip": "LaptopShopProject\\Models\\Import.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:52:30.71Z",
+              "WhenOpened": "2025-04-24T08:15:22.267Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 15,
-              "Title": "Product.cs",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Models\\Product.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Models\\Product.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Models\\Product.cs",
-              "RelativeToolTip": "LaptopShopProject\\Models\\Product.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "SupplierForm.cs",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\SupplierForm.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\SupplierForm.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\SupplierForm.cs",
+              "RelativeToolTip": "LaptopShopProject\\Forms\\SupplierForm.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAAM8AAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:52:22.073Z",
+              "WhenOpened": "2025-04-24T08:15:02.869Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 16,
-              "Title": "Category.cs",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Models\\Category.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Models\\Category.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Models\\Category.cs",
-              "RelativeToolTip": "LaptopShopProject\\Models\\Category.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "SupplierForm.cs [Design]",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\SupplierForm.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\SupplierForm.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\SupplierForm.cs [Design]",
+              "RelativeToolTip": "LaptopShopProject\\Forms\\SupplierForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:52:09.119Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T08:15:01.265Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Customer.cs",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Models\\Customer.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Models\\Customer.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Models\\Customer.cs",
-              "RelativeToolTip": "LaptopShopProject\\Models\\Customer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 13,
+              "Title": "SupplierForm.Designer.cs",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\SupplierForm.Designer.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\SupplierForm.Designer.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\SupplierForm.Designer.cs",
+              "RelativeToolTip": "LaptopShopProject\\Forms\\SupplierForm.Designer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAABVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:51:58.284Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "Supplier.cs",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Models\\Supplier.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Models\\Supplier.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Models\\Supplier.cs",
-              "RelativeToolTip": "LaptopShopProject\\Models\\Supplier.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:51:25.278Z",
+              "WhenOpened": "2025-04-24T08:14:50.027Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 19,
-              "Title": "User.cs",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Models\\User.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Models\\User.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Models\\User.cs",
-              "RelativeToolTip": "LaptopShopProject\\Models\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "Category.cs",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Models\\Category.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Models\\Category.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Models\\Category.cs",
+              "RelativeToolTip": "LaptopShopProject\\Models\\Category.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAABCAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:51:12.845Z",
+              "WhenOpened": "2025-04-24T08:09:26.517Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "DatabaseConnection.cs",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\DataAccess\\DatabaseConnection.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\DatabaseConnection.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\DataAccess\\DatabaseConnection.cs",
-              "RelativeToolTip": "LaptopShopProject\\DataAccess\\DatabaseConnection.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 17,
+              "Title": "CategoryRepository.cs",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\CategoryRepository.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\CategoryRepository.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\CategoryRepository.cs",
+              "RelativeToolTip": "LaptopShopProject\\DataAccess\\CategoryRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-23T12:21:46.304Z",
+              "WhenOpened": "2025-04-24T08:09:13.749Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "CategoryForm.cs",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\CategoryForm.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\CategoryForm.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\CategoryForm.cs",
+              "RelativeToolTip": "LaptopShopProject\\Forms\\CategoryForm.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAJEAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T08:08:59.705Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 20,
-              "Title": "LaptopShopProject.csproj",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\LaptopShopProject.csproj",
-              "RelativeDocumentMoniker": "LaptopShopProject\\LaptopShopProject.csproj",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\LaptopShopProject.csproj",
-              "RelativeToolTip": "LaptopShopProject\\LaptopShopProject.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-23T12:19:53.761Z"
+              "Title": "CategoryForm.resx",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\CategoryForm.resx",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\CategoryForm.resx",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\CategoryForm.resx",
+              "RelativeToolTip": "LaptopShopProject\\Forms\\CategoryForm.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2025-04-24T08:08:57.204Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "NotificationForm.cs [Design]",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Forms\\NotificationForm.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\NotificationForm.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Forms\\NotificationForm.cs [Design]",
-              "RelativeToolTip": "LaptopShopProject\\Forms\\NotificationForm.cs [Design]",
+              "DocumentIndex": 7,
+              "Title": "CategoryForm.Designer.cs",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\CategoryForm.Designer.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\CategoryForm.Designer.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\CategoryForm.Designer.cs",
+              "RelativeToolTip": "LaptopShopProject\\Forms\\CategoryForm.Designer.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAAwA0AAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-23T11:56:54.376Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "RoleForm.cs [Design]",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Forms\\RoleForm.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\RoleForm.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Forms\\RoleForm.cs [Design]",
-              "RelativeToolTip": "LaptopShopProject\\Forms\\RoleForm.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-23T11:56:51.895Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "SpecForm.cs [Design]",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Forms\\SpecForm.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\SpecForm.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Forms\\SpecForm.cs [Design]",
-              "RelativeToolTip": "LaptopShopProject\\Forms\\SpecForm.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-23T11:56:51.205Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "SupplierForm.cs [Design]",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Forms\\SupplierForm.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\SupplierForm.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Forms\\SupplierForm.cs [Design]",
-              "RelativeToolTip": "LaptopShopProject\\Forms\\SupplierForm.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-23T11:56:50.356Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "WarehouseForm.cs [Design]",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Forms\\WarehouseForm.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\WarehouseForm.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Forms\\WarehouseForm.cs [Design]",
-              "RelativeToolTip": "LaptopShopProject\\Forms\\WarehouseForm.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-23T11:56:49.437Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "CategoryForm.cs",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Forms\\CategoryForm.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\CategoryForm.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Forms\\CategoryForm.cs",
-              "RelativeToolTip": "LaptopShopProject\\Forms\\CategoryForm.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAEwBoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-23T11:56:28.29Z",
+              "WhenOpened": "2025-04-24T08:08:38.357Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 21,
-              "Title": "LoginForm.cs [Design]",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Forms\\LoginForm.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\LoginForm.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Forms\\LoginForm.cs [Design]",
-              "RelativeToolTip": "LaptopShopProject\\Forms\\LoginForm.cs [Design]",
+              "Title": "LoginForm.Designer.cs",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\LoginForm.Designer.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\LoginForm.Designer.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\LoginForm.Designer.cs",
+              "RelativeToolTip": "LaptopShopProject\\Forms\\LoginForm.Designer.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAA0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T07:41:25.769Z"
+              "WhenOpened": "2025-04-24T08:04:10.454Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 23,
-              "Title": "MainForm.cs [Design]",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Forms\\MainForm.cs",
+              "Title": "ExportRepository.cs",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\ExportRepository.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\ExportRepository.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\ExportRepository.cs",
+              "RelativeToolTip": "LaptopShopProject\\DataAccess\\ExportRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T07:56:46.48Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Export.cs",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Models\\Export.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Models\\Export.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Models\\Export.cs",
+              "RelativeToolTip": "LaptopShopProject\\Models\\Export.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T07:55:02.186Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ExportForm.Designer.cs",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ExportForm.Designer.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\ExportForm.Designer.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ExportForm.Designer.cs",
+              "RelativeToolTip": "LaptopShopProject\\Forms\\ExportForm.Designer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T07:54:52.703Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "ExportForm.cs",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ExportForm.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\ExportForm.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ExportForm.cs",
+              "RelativeToolTip": "LaptopShopProject\\Forms\\ExportForm.cs",
+              "ViewState": "AQIAAP4AAAAAAAAAAAAAAHwAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T07:54:22.242Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "MainForm.cs",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\MainForm.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\MainForm.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Forms\\MainForm.cs [Design]",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\MainForm.cs",
+              "RelativeToolTip": "LaptopShopProject\\Forms\\MainForm.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAA/AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T07:37:32.115Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "MainForm.cs [Design]",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\MainForm.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\MainForm.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\MainForm.cs [Design]",
               "RelativeToolTip": "LaptopShopProject\\Forms\\MainForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T07:40:12.881Z"
+              "WhenOpened": "2025-04-24T07:37:29.942Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ImportForm.cs",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ImportForm.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\ImportForm.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ImportForm.cs",
+              "RelativeToolTip": "LaptopShopProject\\Forms\\ImportForm.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T07:31:26.66Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Import.cs",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Models\\Import.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Models\\Import.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Models\\Import.cs",
+              "RelativeToolTip": "LaptopShopProject\\Models\\Import.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T07:28:35.406Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "ImportForm.resx",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ImportForm.resx",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\ImportForm.resx",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ImportForm.resx",
+              "RelativeToolTip": "LaptopShopProject\\Forms\\ImportForm.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2025-04-24T07:28:26.309Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ImportForm.Designer.cs",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ImportForm.Designer.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\ImportForm.Designer.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ImportForm.Designer.cs",
+              "RelativeToolTip": "LaptopShopProject\\Forms\\ImportForm.Designer.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAAwBAAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T07:28:19.549Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ImportForm.cs [Design]",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ImportForm.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\ImportForm.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ImportForm.cs [Design]",
+              "RelativeToolTip": "LaptopShopProject\\Forms\\ImportForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T07:28:17.032Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ImportRepository.cs",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\ImportRepository.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\ImportRepository.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\ImportRepository.cs",
+              "RelativeToolTip": "LaptopShopProject\\DataAccess\\ImportRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T07:27:58.005Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Program.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Program.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Program.cs",
+              "RelativeToolTip": "LaptopShopProject\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T07:26:02.885Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DatabaseConnection.cs",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\DatabaseConnection.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\DatabaseConnection.cs",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\DatabaseConnection.cs",
+              "RelativeToolTip": "LaptopShopProject\\DataAccess\\DatabaseConnection.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T07:21:33.995Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 29,
-              "Title": "CategoryForm.cs [Design]",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Forms\\CategoryForm.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\CategoryForm.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Forms\\CategoryForm.cs [Design]",
-              "RelativeToolTip": "LaptopShopProject\\Forms\\CategoryForm.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-23T11:55:53.147Z"
+              "Title": "Settings.settings",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Properties\\Settings.settings",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Properties\\Settings.settings",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Properties\\Settings.settings",
+              "RelativeToolTip": "LaptopShopProject\\Properties\\Settings.settings",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002767|",
+              "WhenOpened": "2025-04-24T07:20:36.946Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 30,
-              "Title": "MainForm.cs",
-              "DocumentMoniker": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Forms\\MainForm.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\MainForm.cs",
-              "ToolTip": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\Forms\\MainForm.cs",
-              "RelativeToolTip": "LaptopShopProject\\Forms\\MainForm.cs",
-              "ViewState": "AgIAAFMAAAAAAAAAAAAwwGIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T07:40:14.925Z"
+              "Title": "LaptopShopProject",
+              "DocumentMoniker": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\LaptopShopProject.csproj",
+              "RelativeDocumentMoniker": "LaptopShopProject\\LaptopShopProject.csproj",
+              "ToolTip": "D:\\DBMS\\ProjectFianl\\4\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\LaptopShopProject.csproj",
+              "RelativeToolTip": "LaptopShopProject\\LaptopShopProject.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-24T07:20:33.011Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             }
           ]
         }

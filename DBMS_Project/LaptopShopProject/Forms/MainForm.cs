@@ -1,108 +1,100 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LaptopStoreApp.Forms
 {
-    public partial class MainForm: Form
+    public partial class MainForm : Form
     {
+        private UserControl _currentControl; // Track the current UserControl (optional)
+
         public MainForm()
         {
             InitializeComponent();
         }
 
+        // Helper method to load a UserControl into the panel
+        private void LoadUserControl(UserControl userControl)
+        {
+            try
+            {
+                // Dispose of the previous UserControl (if any)
+                if (_currentControl != null)
+                {
+                    _currentControl.Dispose();
+                }
+
+                // Clear the panel
+                panel1.Controls.Clear();
+
+                // Set the new UserControl
+                _currentControl = userControl;
+                _currentControl.Dock = DockStyle.Fill;
+                panel1.Controls.Add(_currentControl);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải giao diện: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void Product_Click(object sender, EventArgs e)
         {
-            panel1.Controls.Clear();
-
-            ProductForm productForm = new ProductForm();
-
-            productForm.Dock = DockStyle.Fill;  
-
-            panel1.Controls.Add(productForm);
-
-            
+            LoadUserControl(new ProductForm());
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            panel1.Controls.Clear();
-
-            ImportForm importForm = new ImportForm();
-
-            importForm.Dock = DockStyle.Fill;
-
-            panel1.Controls.Add(importForm);
+            LoadUserControl(new ImportForm());
         }
 
         private void Export_Click(object sender, EventArgs e)
         {
-            panel1.Controls.Clear();
-            ExportForm exportForm = new ExportForm();
-            exportForm.Dock = DockStyle.Fill;
-            panel1.Controls.Add(exportForm);
+            LoadUserControl(new ExportForm());
         }
 
         private void Category_Click(object sender, EventArgs e)
         {
-            panel1.Controls.Clear();
-            CategoryForm categoryForm = new CategoryForm();
-            categoryForm.Dock = DockStyle.Fill;
-            panel1.Controls.Add(categoryForm);
+            LoadUserControl(new CategoryForm());
         }
 
         private void Supplier_Click(object sender, EventArgs e)
         {
-            panel1.Controls.Clear();
-            SupplierForm supplierForm = new SupplierForm();
-            supplierForm.Dock = DockStyle.Fill;
-            panel1.Controls.Add(supplierForm);
+            LoadUserControl(new SupplierForm());
         }
 
         private void Customer_Click(object sender, EventArgs e)
         {
-            panel1.Controls.Clear();
-            CustomerForm customerForm = new CustomerForm();
-            customerForm.Dock = DockStyle.Fill;
-            panel1.Controls.Add(customerForm);
+            LoadUserControl(new CustomerForm());
         }
 
         private void Notification_Click(object sender, EventArgs e)
         {
-            panel1.Controls.Clear();
-            NotificationForm notificationForm = new NotificationForm();
-            notificationForm.Dock = DockStyle.Fill;
-            panel1.Controls.Add(notificationForm);
+            LoadUserControl(new NotificationForm());
         }
 
         private void Warehouse_Click(object sender, EventArgs e)
         {
-            panel1.Controls.Clear();
-            WarehouseForm warehouseForm = new WarehouseForm();
-            warehouseForm.Dock = DockStyle.Fill;
-            panel1.Controls.Add(warehouseForm);
+            LoadUserControl(new WarehouseForm());
         }
 
         private void Spec_Click(object sender, EventArgs e)
         {
-            panel1.Controls.Clear();
-            SpecForm specForm = new SpecForm();
-            specForm.Dock = DockStyle.Fill;
-            panel1.Controls.Add(specForm);
+            LoadUserControl(new SpecForm());
         }
 
         private void Role_Click(object sender, EventArgs e)
         {
-            panel1.Controls.Clear();
-            RoleForm roleForm = new RoleForm();
-            roleForm.Dock = DockStyle.Fill;
-            panel1.Controls.Add(roleForm);
+            LoadUserControl(new RoleForm());
+        }
+
+        // Optional: Clean up when the MainForm is closing
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            if (_currentControl != null)
+            {
+                _currentControl.Dispose();
+            }
+            base.OnFormClosing(e);
         }
     }
 }
