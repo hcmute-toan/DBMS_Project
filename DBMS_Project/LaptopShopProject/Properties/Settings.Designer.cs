@@ -25,8 +25,8 @@ namespace LaptopShopProject.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=TONYNYAN\\\\TonyNyan;Initial Catalog=dbms_laptopshop;Integrated Securit" +
-            "y=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=TONYNYAN\\TonyNyan;Initial Catalog=dbms_laptopshop;Integrated Security" +
+            "=True;Encrypt=True;Trust Server Certificate=True")]
         public string ConnStr {
             get {
                 return ((string)(this["ConnStr"]));

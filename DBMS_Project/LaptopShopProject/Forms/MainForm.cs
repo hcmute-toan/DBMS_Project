@@ -8,6 +8,7 @@ namespace LaptopStoreApp.Forms
     public partial class MainForm : Form
     {
         private readonly User _currentUser;
+        private Control _currentControl; // To keep track of the currently displayed control
 
         public MainForm(User user)
         {
@@ -49,63 +50,74 @@ namespace LaptopStoreApp.Forms
             }
         }
 
-        private void btnUserManagement_Click(object sender, EventArgs e)
+        private void ShowControl(Control control)
         {
-            // Open User Management Form (to be implemented)
-            UserManagementForm userForm = new UserManagementForm(_currentUser);
-            userForm.ShowDialog();
+            // Clear the current control from the panel
+            if (_currentControl != null)
+            {
+                pnMainView.Controls.Remove(_currentControl);
+                _currentControl.Dispose();
+            }
+
+            // Add the new control to the panel
+            control.Dock = DockStyle.Fill;
+            pnMainView.Controls.Add(control);
+            _currentControl = control;
         }
 
-        private void btnProductManagement_Click(object sender, EventArgs e)
+        private void BtnUserManagement_Click(object sender, EventArgs e)
         {
-            // Open Product Management Form (to be implemented)
-            ProductManagementForm productForm = new ProductManagementForm(_currentUser);
-            productForm.ShowDialog();
+            // Placeholder for UserManagementForm (as UserControl)
+            // ShowControl(new UserManagementForm(_currentUser));
+            MessageBox.Show("User Management functionality not implemented yet.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void btnImportManagement_Click(object sender, EventArgs e)
+        private void BtnProductManagement_Click(object sender, EventArgs e)
         {
-            // Open Import Management Form (to be implemented)
-            ImportManagementForm importForm = new ImportManagementForm(_currentUser);
-            importForm.ShowDialog();
+            // Placeholder for ProductManagementForm (as UserControl)
+            // ShowControl(new ProductManagementForm(_currentUser));
+            MessageBox.Show("Product Management functionality not implemented yet.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void btnExportManagement_Click(object sender, EventArgs e)
+        private void BtnImportManagement_Click(object sender, EventArgs e)
         {
-            // Open Export Management Form (to be implemented)
-            ExportManagementForm exportForm = new ExportManagementForm(_currentUser);
-            exportForm.ShowDialog();
+            // Placeholder for ImportManagementForm (as UserControl)
+            // ShowControl(new ImportManagementForm(_currentUser));
+            MessageBox.Show("Import Management functionality not implemented yet.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void btnSupplierManagement_Click(object sender, EventArgs e)
+        private void BtnExportManagement_Click(object sender, EventArgs e)
         {
-            // Open Supplier Management Form (to be implemented)
-            SupplierManagementForm supplierForm = new SupplierManagementForm(_currentUser);
-            supplierForm.ShowDialog();
+            // Placeholder for ExportManagementForm (as UserControl)
+            // ShowControl(new ExportManagementForm(_currentUser));
+            MessageBox.Show("Export Management functionality not implemented yet.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void btnCustomerManagement_Click(object sender, EventArgs e)
+        private void BtnSupplierManagement_Click(object sender, EventArgs e)
         {
-            // Open Customer Management Form (to be implemented)
-            CustomerManagementForm customerForm = new CustomerManagementForm(_currentUser);
-            customerForm.ShowDialog();
+            // Placeholder for SupplierManagementForm (as UserControl)
+            // ShowControl(new SupplierManagementForm(_currentUser));
+            MessageBox.Show("Supplier Management functionality not implemented yet.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void btnCategoryManagement_Click(object sender, EventArgs e)
+        private void BtnCustomerManagement_Click(object sender, EventArgs e)
         {
-            // Open Category Management Form (to be implemented)
-            CategoryManagementForm categoryForm = new CategoryManagementForm(_currentUser);
-            categoryForm.ShowDialog();
+            ShowControl(new CustomerManagementForm(_currentUser));
         }
 
-        private void btnReport_Click(object sender, EventArgs e)
+        private void BtnCategoryManagement_Click(object sender, EventArgs e)
         {
-            // Open Report Form (to be implemented)
-            ReportForm reportForm = new ReportForm(_currentUser);
-            reportForm.ShowDialog();
+            ShowControl(new CategoryManagementForm(_currentUser));
         }
 
-        private void btnLogout_Click(object sender, EventArgs e)
+        private void BtnReport_Click(object sender, EventArgs e)
+        {
+            // Placeholder for ReportForm (as UserControl)
+            // ShowControl(new ReportForm(_currentUser));
+            MessageBox.Show("Report functionality not implemented yet.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void BtnLogout_Click(object sender, EventArgs e)
         {
             // Confirm logout
             DialogResult result = MessageBox.Show("Are you sure you want to log out?", "Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -116,6 +128,12 @@ namespace LaptopStoreApp.Forms
                 loginForm.Show();
                 this.Close();
             }
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            Application.Exit(); // Ensure the application exits completely
         }
     }
 }

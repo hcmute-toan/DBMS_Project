@@ -47,6 +47,7 @@
             btnRefresh.TabIndex = 24;
             btnRefresh.Text = "Refresh";
             btnRefresh.UseVisualStyleBackColor = true;
+            btnRefresh.Click += new EventHandler(btnRefresh_Click);
             // 
             // btnUpdate
             // 
@@ -57,6 +58,7 @@
             btnUpdate.TabIndex = 23;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += new EventHandler(btnUpdate_Click);
             // 
             // btnDelete
             // 
@@ -67,6 +69,7 @@
             btnDelete.TabIndex = 22;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += new EventHandler(btnDelete_Click);
             // 
             // btnAdd
             // 
@@ -77,7 +80,7 @@
             btnAdd.TabIndex = 21;
             btnAdd.Text = "Add";
             btnAdd.UseVisualStyleBackColor = true;
-            btnAdd.Click += btnAdd_Click;
+            btnAdd.Click += new EventHandler(btnAdd_Click);
             // 
             // txtContactInfo
             // 
@@ -104,6 +107,7 @@
             dgvCustomers.RowHeadersWidth = 51;
             dgvCustomers.Size = new Size(583, 335);
             dgvCustomers.TabIndex = 18;
+            dgvCustomers.SelectionChanged += new EventHandler(dgvCustomers_SelectionChanged);
             // 
             // CustomerManagementForm
             // 

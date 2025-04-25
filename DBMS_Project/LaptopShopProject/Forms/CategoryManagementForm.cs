@@ -1,174 +1,233 @@
 ﻿using LaptopShopProject.DataAccess;
 using LaptopShopProject.Models;
 using System;
-using System.Collections.Generic;
-using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace LaptopShopProject.Forms
 {
-    public partial class CategoryManagementForm : Form
+    public partial class CategoryManagementForm : UserControl
     {
+        private readonly User _currentUser;
         private readonly CategoryRepository _categoryRepository;
-        private int _currentUserId; // Store the ID of the logged-in user
-        private int _selectedCategoryId; // Store the ID of the selected category
+        private int _selectedCategoryId = 0;
 
-        public CategoryManagementForm(int currentUserId)
+        public CategoryManagementForm(User currentUser)
         {
             InitializeComponent();
+            _currentUser = currentUser;
             _categoryRepository = new CategoryRepository();
-            _currentUserId = currentUserId;
-            LoadCategories(); // Load categories when the form initializes
+            // Gắn sự kiện SelectionChanged để đảm bảo chọn dòng hiển thị dữ liệu
+            dgvCategories.SelectionChanged += dgvCategories_SelectionChanged;
+            // Gắn sự kiện Click cho các nút
+            btnAdd.Click += btnAdd_Click;
+            btnUpdate.Click += btnUpdate_Click;
+            btnDelete.Click += btnDelete_Click;
+            btnRefresh.Click += btnRefresh_Click;
+            LoadCategories();
         }
 
-        // Load all categories into the DataGridView
         private void LoadCategories()
         {
             try
             {
-                List<Category> categories = _categoryRepository.GetAllCategories();
+                var categories = _categoryRepository.GetAllCategories();
+                if (categories == null || !categories.Any())
+                {
+                    MessageBox.Show("No categories found.", "Information",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dgvCategories.DataSource = null;
+                    ClearInputs();
+                    return;
+                }
+
                 dgvCategories.DataSource = categories;
-                // Optionally, customize column headers
-                dgvCategories.Columns["CategoryId"].HeaderText = "ID";
-                dgvCategories.Columns["CategoryName"].HeaderText = "Category Name";
-                dgvCategories.Columns["Description"].HeaderText = "Description";
+
+                // Configure DataGridView columns
+                if (dgvCategories.Columns.Contains("CategoryId"))
+                    dgvCategories.Columns["CategoryId"].HeaderText = "ID";
+                if (dgvCategories.Columns.Contains("CategoryName"))
+                    dgvCategories.Columns["CategoryName"].HeaderText = "Category Name";
+                if (dgvCategories.Columns.Contains("Description"))
+                    dgvCategories.Columns["Description"].HeaderText = "Description";
+
+                // Clear selection
+                dgvCategories.ClearSelection();
                 ClearInputs();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading categories: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading categories: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        // Clear input fields and reset selected category
         private void ClearInputs()
         {
-            txtCategoryName.Clear();
-            txtDescription.Clear();
+            txtCategoryName.Text = string.Empty;
+            txtDescription.Text = string.Empty;
             _selectedCategoryId = 0;
-            btnUpdate.Enabled = false;
-            btnDelete.Enabled = false;
-            btnAdd.Enabled = true;
         }
 
-        // Handle Add button click
         private void btnAdd_Click(object sender, EventArgs e)
         {
             try
             {
-                // Validate inputs
                 if (string.IsNullOrWhiteSpace(txtCategoryName.Text))
                 {
-                    MessageBox.Show("Please enter a category name.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Category name is required.", "Validation Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                // Create new category object
-                Category newCategory = new Category
+                if (string.IsNullOrWhiteSpace(txtDescription.Text))
+                {
+                    MessageBox.Show("Description is required.", "Validation Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var category = new Category
                 {
                     CategoryName = txtCategoryName.Text.Trim(),
                     Description = txtDescription.Text.Trim()
                 };
 
-                // Insert category using repository
-                _categoryRepository.InsertCategory(_currentUserId, newCategory);
-                MessageBox.Show("Category added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadCategories(); // Refresh the grid
+                _categoryRepository.InsertCategory(_currentUser.UserId, category);
+                MessageBox.Show("Category added successfully!", "Success",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                LoadCategories();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error adding category: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error adding category: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        // Handle Update button click
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             try
             {
-                // Validate inputs
-                if (_selectedCategoryId == 0)
+                if (_selectedCategoryId == 0 || dgvCategories.SelectedRows.Count == 0)
                 {
-                    MessageBox.Show("Please select a category to update.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                if (string.IsNullOrWhiteSpace(txtCategoryName.Text))
-                {
-                    MessageBox.Show("Please enter a category name.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Please select a category to update.", "Validation Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                // Create updated category object
-                Category updatedCategory = new Category
+                if (string.IsNullOrWhiteSpace(txtCategoryName.Text))
+                {
+                    MessageBox.Show("Category name is required.", "Validation Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txtDescription.Text))
+                {
+                    MessageBox.Show("Description is required.", "Validation Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var category = new Category
                 {
                     CategoryId = _selectedCategoryId,
                     CategoryName = txtCategoryName.Text.Trim(),
                     Description = txtDescription.Text.Trim()
                 };
 
-                // Update category using repository
-                _categoryRepository.UpdateCategory(_currentUserId, updatedCategory);
-                MessageBox.Show("Category updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadCategories(); // Refresh the grid
+                _categoryRepository.UpdateCategory(_currentUser.UserId, category);
+                MessageBox.Show("Category updated successfully!", "Success",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                LoadCategories();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error updating category: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error updating category: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        // Handle Delete button click
         private void btnDelete_Click(object sender, EventArgs e)
         {
             try
             {
-                // Validate selection
-                if (_selectedCategoryId == 0)
+                if (_selectedCategoryId == 0 || dgvCategories.SelectedRows.Count == 0)
                 {
-                    MessageBox.Show("Please select a category to delete.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Please select a category to delete.", "Validation Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                // Confirm deletion
-                DialogResult result = MessageBox.Show("Are you sure you want to delete this category?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show(
+                    "Are you sure you want to delete this category?",
+                    "Confirm Delete",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
                 if (result == DialogResult.Yes)
                 {
-                    // Delete category using repository
-                    _categoryRepository.DeleteCategory(_currentUserId, _selectedCategoryId);
-                    MessageBox.Show("Category deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadCategories(); // Refresh the grid
+                    _categoryRepository.DeleteCategory(_currentUser.UserId, _selectedCategoryId);
+                    MessageBox.Show("Category deleted successfully!", "Success",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    LoadCategories();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error deleting category: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error deleting category: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        // Handle Refresh button click
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            LoadCategories(); // Reload categories
+            try
+            {
+                LoadCategories();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error refreshing categories: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        // Handle DataGridView row selection
         private void dgvCategories_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvCategories.SelectedRows.Count > 0)
+            try
             {
-                // Get the selected category
-                DataGridViewRow row = dgvCategories.SelectedRows[0];
-                _selectedCategoryId = Convert.ToInt32(row.Cells["CategoryId"].Value);
-                txtCategoryName.Text = row.Cells["CategoryName"].Value.ToString();
-                txtDescription.Text = row.Cells["Description"].Value.ToString();
+                if (dgvCategories.SelectedRows.Count > 0)
+                {
+                    var selectedRow = dgvCategories.SelectedRows[0];
+                    var category = selectedRow.DataBoundItem as Category;
 
-                // Enable Update and Delete buttons, disable Add button
-                btnUpdate.Enabled = true;
-                btnDelete.Enabled = true;
-                btnAdd.Enabled = false;
+                    if (category != null)
+                    {
+                        _selectedCategoryId = category.CategoryId;
+                        txtCategoryName.Text = category.CategoryName ?? string.Empty;
+                        txtDescription.Text = category.Description ?? string.Empty;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Selected row does not contain valid category data.", "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ClearInputs();
+                    }
+                }
+                else
+                {
+                    ClearInputs();
+                }
             }
-            else
+            catch (Exception ex)
             {
+                MessageBox.Show($"Error selecting category: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 ClearInputs();
             }
         }

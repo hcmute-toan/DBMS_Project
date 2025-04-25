@@ -64,7 +64,7 @@
             btnUserManagement.TabIndex = 13;
             btnUserManagement.Text = "User Management";
             btnUserManagement.UseVisualStyleBackColor = true;
-            btnUserManagement.Click += btnUserManagement_Click;
+            btnUserManagement.Click += BtnUserManagement_Click;
             // 
             // btnProductManagement
             // 
@@ -75,6 +75,7 @@
             btnProductManagement.TabIndex = 14;
             btnProductManagement.Text = "Product Management";
             btnProductManagement.UseVisualStyleBackColor = true;
+            btnProductManagement.Click += BtnProductManagement_Click;
             // 
             // btnImportManagement
             // 
@@ -85,6 +86,7 @@
             btnImportManagement.TabIndex = 15;
             btnImportManagement.Text = "Import Management";
             btnImportManagement.UseVisualStyleBackColor = true;
+            btnImportManagement.Click += BtnImportManagement_Click;
             // 
             // btnExportManagement
             // 
@@ -95,6 +97,7 @@
             btnExportManagement.TabIndex = 16;
             btnExportManagement.Text = "Export Management";
             btnExportManagement.UseVisualStyleBackColor = true;
+            btnExportManagement.Click += BtnExportManagement_Click;
             // 
             // btnSupplierManagement
             // 
@@ -105,6 +108,7 @@
             btnSupplierManagement.TabIndex = 17;
             btnSupplierManagement.Text = "Supplier Management";
             btnSupplierManagement.UseVisualStyleBackColor = true;
+            btnSupplierManagement.Click += BtnSupplierManagement_Click;
             // 
             // btnCustomerManagement
             // 
@@ -115,6 +119,7 @@
             btnCustomerManagement.TabIndex = 18;
             btnCustomerManagement.Text = "Customer Management";
             btnCustomerManagement.UseVisualStyleBackColor = true;
+            btnCustomerManagement.Click += BtnCustomerManagement_Click;
             // 
             // btnCategoryManagement
             // 
@@ -125,6 +130,7 @@
             btnCategoryManagement.TabIndex = 19;
             btnCategoryManagement.Text = "Category Management";
             btnCategoryManagement.UseVisualStyleBackColor = true;
+            btnCategoryManagement.Click += BtnCategoryManagement_Click;
             // 
             // btnReport
             // 
@@ -135,6 +141,7 @@
             btnReport.TabIndex = 20;
             btnReport.Text = "Report";
             btnReport.UseVisualStyleBackColor = true;
+            btnReport.Click += BtnReport_Click;
             // 
             // btnLogout
             // 
@@ -145,6 +152,7 @@
             btnLogout.TabIndex = 21;
             btnLogout.Text = "Logout";
             btnLogout.UseVisualStyleBackColor = true;
+            btnLogout.Click += BtnLogout_Click;
             // 
             // lblUserName
             // 
