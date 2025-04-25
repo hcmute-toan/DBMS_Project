@@ -29,82 +29,88 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            label2 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            button1 = new Button();
+            txtUsername = new TextBox();
+            txtPassword = new TextBox();
+            btnLogin = new Button();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Times New Roman", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.Blue;
-            label1.Location = new Point(40, 53);
-            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.ForeColor = Color.RoyalBlue;
+            label1.Location = new Point(183, 261);
+            label1.Margin = new Padding(5, 0, 5, 0);
             label1.Name = "label1";
-            label1.Size = new Size(89, 31);
+            label1.Size = new Size(111, 38);
             label1.TabIndex = 0;
             label1.Text = "Log in";
             // 
-            // label2
+            // txtUsername
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.ForeColor = SystemColors.ButtonShadow;
-            label2.Location = new Point(43, 100);
-            label2.Margin = new Padding(4, 0, 4, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(167, 15);
-            label2.TabIndex = 1;
-            label2.Text = "Please enter your login detail";
+            txtUsername.BackColor = SystemColors.HighlightText;
+            txtUsername.BorderStyle = BorderStyle.FixedSingle;
+            txtUsername.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txtUsername.Location = new Point(49, 321);
+            txtUsername.Margin = new Padding(3, 4, 3, 4);
+            txtUsername.Multiline = true;
+            txtUsername.Name = "txtUsername";
+            txtUsername.Size = new Size(380, 73);
+            txtUsername.TabIndex = 2;
             // 
-            // textBox1
+            // txtPassword
             // 
-            textBox1.BackColor = SystemColors.HighlightText;
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(43, 201);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(333, 55);
-            textBox1.TabIndex = 2;
+            txtPassword.BorderStyle = BorderStyle.FixedSingle;
+            txtPassword.Location = new Point(49, 425);
+            txtPassword.Margin = new Padding(3, 4, 3, 4);
+            txtPassword.Multiline = true;
+            txtPassword.Name = "txtPassword";
+            txtPassword.Size = new Size(380, 73);
+            txtPassword.TabIndex = 3;
             // 
-            // textBox2
+            // btnLogin
             // 
-            textBox2.BorderStyle = BorderStyle.FixedSingle;
-            textBox2.Location = new Point(43, 271);
-            textBox2.Multiline = true;
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(333, 55);
-            textBox2.TabIndex = 3;
+            btnLogin.BackColor = Color.RoyalBlue;
+            btnLogin.Font = new Font("Times New Roman", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnLogin.ForeColor = Color.Snow;
+            btnLogin.Location = new Point(49, 559);
+            btnLogin.Margin = new Padding(3, 4, 3, 4);
+            btnLogin.Name = "btnLogin";
+            btnLogin.Size = new Size(381, 83);
+            btnLogin.TabIndex = 4;
+            btnLogin.Text = "Log in";
+            btnLogin.UseVisualStyleBackColor = false;
+            btnLogin.Click += btnLogin_Click;
             // 
-            // button1
+            // pictureBox1
             // 
-            button1.BackColor = Color.Blue;
-            button1.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.ForeColor = SystemColors.ButtonHighlight;
-            button1.Location = new Point(43, 364);
-            button1.Name = "button1";
-            button1.Size = new Size(333, 62);
-            button1.TabIndex = 4;
-            button1.Text = "Log in";
-            button1.UseVisualStyleBackColor = false;
+            pictureBox1.Image = LaptopShopProject.Properties.Resources.MiddleGear_Logo;
+            pictureBox1.Location = new Point(139, 16);
+            pictureBox1.Margin = new Padding(3, 4, 3, 4);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(198, 227);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 5;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
             // 
             // LoginForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ButtonHighlight;
-            ClientSize = new Size(412, 519);
-            Controls.Add(button1);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
-            Controls.Add(label2);
+            BackColor = Color.LightCyan;
+            ClientSize = new Size(471, 692);
+            Controls.Add(pictureBox1);
+            Controls.Add(btnLogin);
+            Controls.Add(txtPassword);
+            Controls.Add(txtUsername);
             Controls.Add(label1);
-            Margin = new Padding(4, 3, 4, 3);
+            Margin = new Padding(5, 4, 5, 4);
             Name = "LoginForm";
             Text = "LoginForm";
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
 
@@ -113,9 +119,9 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private Button button1;
+        private TextBox txtUsername;
+        private TextBox txtPassword;
+        private Button btnLogin;
+        private PictureBox pictureBox1;
     }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\LaptopShopProject.csproj": {}
+    "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\LaptopShopProject.csproj": {}
   },
   "projects": {
-    "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\LaptopShopProject.csproj": {
+    "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\LaptopShopProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\LaptopShopProject.csproj",
+        "projectUniqueName": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\LaptopShopProject.csproj",
         "projectName": "LaptopShopProject",
-        "projectPath": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\LaptopShopProject.csproj",
+        "projectPath": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\LaptopShopProject.csproj",
         "packagesPath": "C:\\Users\\vanco\\.nuget\\packages\\",
-        "outputPath": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\LaptopShopProject\\obj\\",
+        "outputPath": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -49,6 +49,12 @@
       "frameworks": {
         "net9.0-windows7.0": {
           "targetAlias": "net9.0-windows",
+          "dependencies": {
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

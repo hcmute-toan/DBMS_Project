@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace LaptopShopProject.Models
 {
-    internal class Product
+    public class Product
     {
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        public decimal Price { get; set; }
+        public int StockQuantity { get; set; }
+        public string Brands { get; set; } // For vw_ProductDetails
     }
 }

@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
+using LaptopShopProject.Properties;
+using Microsoft.Data.SqlClient;
+
 
 namespace LaptopShopProject.DataAccess
 {
-    public class DatabaseConnection
+    public static class DatabaseConnection
     {
-        private readonly string _connectionString = Properties.Settings.Default.ConnStr;
-
-        public SqlConnection GetConnection()
+        public static SqlConnection GetConnection()
         {
-            return new SqlConnection(_connectionString);
+            try
+            {
+                return new SqlConnection(Settings.Default.ConnStr);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to create database connection. Ensure the connection string is correct.", ex);
+            }
         }
     }
 }

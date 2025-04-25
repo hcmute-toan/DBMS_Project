@@ -28,159 +28,194 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Product = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.Export = new System.Windows.Forms.Button();
-            this.Category = new System.Windows.Forms.Button();
-            this.Supplier = new System.Windows.Forms.Button();
-            this.Customer = new System.Windows.Forms.Button();
-            this.Notification = new System.Windows.Forms.Button();
-            this.Warehouse = new System.Windows.Forms.Button();
-            this.Spec = new System.Windows.Forms.Button();
-            this.Role = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.SuspendLayout();
+            pictureBox1 = new PictureBox();
+            btnUserManagement = new Button();
+            btnProductManagement = new Button();
+            btnImportManagement = new Button();
+            btnExportManagement = new Button();
+            btnSupplierManagement = new Button();
+            btnCustomerManagement = new Button();
+            btnCategoryManagement = new Button();
+            btnReport = new Button();
+            btnLogout = new Button();
+            lblUserName = new Label();
+            lbRoleUser = new Label();
+            pnMainView = new Panel();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            SuspendLayout();
             // 
-            // Product
+            // pictureBox1
             // 
-            this.Product.Location = new System.Drawing.Point(26, 25);
-            this.Product.Name = "Product";
-            this.Product.Size = new System.Drawing.Size(252, 31);
-            this.Product.TabIndex = 1;
-            this.Product.Text = "Products";
-            this.Product.UseVisualStyleBackColor = true;
-            this.Product.Click += new System.EventHandler(this.Product_Click);
+            pictureBox1.Image = LaptopShopProject.Properties.Resources.MiddleGear_Logo;
+            pictureBox1.Location = new Point(49, 5);
+            pictureBox1.Margin = new Padding(3, 4, 3, 4);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(197, 219);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 12;
+            pictureBox1.TabStop = false;
             // 
-            // button2
+            // btnUserManagement
             // 
-            this.button2.Location = new System.Drawing.Point(26, 80);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(252, 31);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Imports";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            btnUserManagement.Location = new Point(49, 260);
+            btnUserManagement.Margin = new Padding(3, 4, 3, 4);
+            btnUserManagement.Name = "btnUserManagement";
+            btnUserManagement.Size = new Size(197, 44);
+            btnUserManagement.TabIndex = 13;
+            btnUserManagement.Text = "User Management";
+            btnUserManagement.UseVisualStyleBackColor = true;
+            btnUserManagement.Click += btnUserManagement_Click;
             // 
-            // Export
+            // btnProductManagement
             // 
-            this.Export.Location = new System.Drawing.Point(26, 131);
-            this.Export.Name = "Export";
-            this.Export.Size = new System.Drawing.Size(252, 31);
-            this.Export.TabIndex = 4;
-            this.Export.Text = "Exports";
-            this.Export.UseVisualStyleBackColor = true;
-            this.Export.Click += new System.EventHandler(this.Export_Click);
+            btnProductManagement.Location = new Point(49, 329);
+            btnProductManagement.Margin = new Padding(3, 4, 3, 4);
+            btnProductManagement.Name = "btnProductManagement";
+            btnProductManagement.Size = new Size(197, 44);
+            btnProductManagement.TabIndex = 14;
+            btnProductManagement.Text = "Product Management";
+            btnProductManagement.UseVisualStyleBackColor = true;
             // 
-            // Category
+            // btnImportManagement
             // 
-            this.Category.Location = new System.Drawing.Point(26, 189);
-            this.Category.Name = "Category";
-            this.Category.Size = new System.Drawing.Size(252, 31);
-            this.Category.TabIndex = 5;
-            this.Category.Text = "Categories";
-            this.Category.UseVisualStyleBackColor = true;
-            this.Category.Click += new System.EventHandler(this.Category_Click);
+            btnImportManagement.Location = new Point(49, 399);
+            btnImportManagement.Margin = new Padding(3, 4, 3, 4);
+            btnImportManagement.Name = "btnImportManagement";
+            btnImportManagement.Size = new Size(197, 44);
+            btnImportManagement.TabIndex = 15;
+            btnImportManagement.Text = "Import Management";
+            btnImportManagement.UseVisualStyleBackColor = true;
             // 
-            // Supplier
+            // btnExportManagement
             // 
-            this.Supplier.Location = new System.Drawing.Point(26, 243);
-            this.Supplier.Name = "Supplier";
-            this.Supplier.Size = new System.Drawing.Size(252, 31);
-            this.Supplier.TabIndex = 6;
-            this.Supplier.Text = "Suppliers";
-            this.Supplier.UseVisualStyleBackColor = true;
-            this.Supplier.Click += new System.EventHandler(this.Supplier_Click);
+            btnExportManagement.Location = new Point(49, 471);
+            btnExportManagement.Margin = new Padding(3, 4, 3, 4);
+            btnExportManagement.Name = "btnExportManagement";
+            btnExportManagement.Size = new Size(197, 44);
+            btnExportManagement.TabIndex = 16;
+            btnExportManagement.Text = "Export Management";
+            btnExportManagement.UseVisualStyleBackColor = true;
             // 
-            // Customer
+            // btnSupplierManagement
             // 
-            this.Customer.Location = new System.Drawing.Point(26, 298);
-            this.Customer.Name = "Customer";
-            this.Customer.Size = new System.Drawing.Size(252, 31);
-            this.Customer.TabIndex = 7;
-            this.Customer.Text = "Customers";
-            this.Customer.UseVisualStyleBackColor = true;
-            this.Customer.Click += new System.EventHandler(this.Customer_Click);
+            btnSupplierManagement.Location = new Point(49, 543);
+            btnSupplierManagement.Margin = new Padding(3, 4, 3, 4);
+            btnSupplierManagement.Name = "btnSupplierManagement";
+            btnSupplierManagement.Size = new Size(197, 44);
+            btnSupplierManagement.TabIndex = 17;
+            btnSupplierManagement.Text = "Supplier Management";
+            btnSupplierManagement.UseVisualStyleBackColor = true;
             // 
-            // Notification
+            // btnCustomerManagement
             // 
-            this.Notification.Location = new System.Drawing.Point(26, 356);
-            this.Notification.Name = "Notification";
-            this.Notification.Size = new System.Drawing.Size(252, 31);
-            this.Notification.TabIndex = 8;
-            this.Notification.Text = "Notifications";
-            this.Notification.UseVisualStyleBackColor = true;
-            this.Notification.Click += new System.EventHandler(this.Notification_Click);
+            btnCustomerManagement.Location = new Point(49, 612);
+            btnCustomerManagement.Margin = new Padding(3, 4, 3, 4);
+            btnCustomerManagement.Name = "btnCustomerManagement";
+            btnCustomerManagement.Size = new Size(197, 44);
+            btnCustomerManagement.TabIndex = 18;
+            btnCustomerManagement.Text = "Customer Management";
+            btnCustomerManagement.UseVisualStyleBackColor = true;
             // 
-            // Warehouse
+            // btnCategoryManagement
             // 
-            this.Warehouse.Location = new System.Drawing.Point(26, 419);
-            this.Warehouse.Name = "Warehouse";
-            this.Warehouse.Size = new System.Drawing.Size(252, 31);
-            this.Warehouse.TabIndex = 9;
-            this.Warehouse.Text = "Warehouses";
-            this.Warehouse.UseVisualStyleBackColor = true;
-            this.Warehouse.Click += new System.EventHandler(this.Warehouse_Click);
+            btnCategoryManagement.Location = new Point(49, 683);
+            btnCategoryManagement.Margin = new Padding(3, 4, 3, 4);
+            btnCategoryManagement.Name = "btnCategoryManagement";
+            btnCategoryManagement.Size = new Size(197, 44);
+            btnCategoryManagement.TabIndex = 19;
+            btnCategoryManagement.Text = "Category Management";
+            btnCategoryManagement.UseVisualStyleBackColor = true;
             // 
-            // Spec
+            // btnReport
             // 
-            this.Spec.Location = new System.Drawing.Point(26, 479);
-            this.Spec.Name = "Spec";
-            this.Spec.Size = new System.Drawing.Size(252, 31);
-            this.Spec.TabIndex = 10;
-            this.Spec.Text = "Specs";
-            this.Spec.UseVisualStyleBackColor = true;
-            this.Spec.Click += new System.EventHandler(this.Spec_Click);
+            btnReport.Location = new Point(49, 751);
+            btnReport.Margin = new Padding(3, 4, 3, 4);
+            btnReport.Name = "btnReport";
+            btnReport.Size = new Size(197, 44);
+            btnReport.TabIndex = 20;
+            btnReport.Text = "Report";
+            btnReport.UseVisualStyleBackColor = true;
             // 
-            // Role
+            // btnLogout
             // 
-            this.Role.Location = new System.Drawing.Point(26, 531);
-            this.Role.Name = "Role";
-            this.Role.Size = new System.Drawing.Size(252, 31);
-            this.Role.TabIndex = 11;
-            this.Role.Text = "Roles";
-            this.Role.UseVisualStyleBackColor = true;
-            this.Role.Click += new System.EventHandler(this.Role_Click);
+            btnLogout.Location = new Point(49, 816);
+            btnLogout.Margin = new Padding(3, 4, 3, 4);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new Size(197, 44);
+            btnLogout.TabIndex = 21;
+            btnLogout.Text = "Logout";
+            btnLogout.UseVisualStyleBackColor = true;
             // 
-            // panel1
+            // lblUserName
             // 
-            this.panel1.Location = new System.Drawing.Point(333, 25);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(961, 537);
-            this.panel1.TabIndex = 12;
+            lblUserName.AutoSize = true;
+            lblUserName.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblUserName.Location = new Point(273, 12);
+            lblUserName.Name = "lblUserName";
+            lblUserName.Size = new Size(102, 23);
+            lblUserName.TabIndex = 22;
+            lblUserName.Text = "Username:";
+            // 
+            // lbRoleUser
+            // 
+            lbRoleUser.AutoSize = true;
+            lbRoleUser.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbRoleUser.Location = new Point(273, 64);
+            lbRoleUser.Name = "lbRoleUser";
+            lbRoleUser.Size = new Size(56, 23);
+            lbRoleUser.TabIndex = 23;
+            lbRoleUser.Text = "Role:";
+            // 
+            // pnMainView
+            // 
+            pnMainView.Location = new Point(302, 93);
+            pnMainView.Margin = new Padding(3, 4, 3, 4);
+            pnMainView.Name = "pnMainView";
+            pnMainView.Size = new Size(1058, 869);
+            pnMainView.TabIndex = 24;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1306, 591);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.Role);
-            this.Controls.Add(this.Spec);
-            this.Controls.Add(this.Warehouse);
-            this.Controls.Add(this.Notification);
-            this.Controls.Add(this.Customer);
-            this.Controls.Add(this.Supplier);
-            this.Controls.Add(this.Category);
-            this.Controls.Add(this.Export);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.Product);
-            this.Name = "MainForm";
-            this.Text = "MainForm";
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.LightCyan;
+            ClientSize = new Size(1374, 1001);
+            Controls.Add(pnMainView);
+            Controls.Add(lbRoleUser);
+            Controls.Add(lblUserName);
+            Controls.Add(btnLogout);
+            Controls.Add(btnReport);
+            Controls.Add(btnCategoryManagement);
+            Controls.Add(btnCustomerManagement);
+            Controls.Add(btnSupplierManagement);
+            Controls.Add(btnExportManagement);
+            Controls.Add(btnImportManagement);
+            Controls.Add(btnProductManagement);
+            Controls.Add(btnUserManagement);
+            Controls.Add(pictureBox1);
+            Margin = new Padding(5, 4, 5, 4);
+            Name = "MainForm";
+            Text = "MainForm";
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Button Product;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button Export;
-        private System.Windows.Forms.Button Category;
-        private System.Windows.Forms.Button Supplier;
-        private System.Windows.Forms.Button Customer;
-        private System.Windows.Forms.Button Notification;
-        private System.Windows.Forms.Button Warehouse;
-        private System.Windows.Forms.Button Spec;
-        private System.Windows.Forms.Button Role;
-        private System.Windows.Forms.Panel panel1;
+
+        private PictureBox pictureBox1;
+        private Button btnUserManagement;
+        private Button btnProductManagement;
+        private Button btnImportManagement;
+        private Button btnExportManagement;
+        private Button btnSupplierManagement;
+        private Button btnCustomerManagement;
+        private Button btnCategoryManagement;
+        private Button btnReport;
+        private Button btnLogout;
+        private Label lblUserName;
+        private Label lbRoleUser;
+        private Panel pnMainView;
     }
 }

@@ -1,108 +1,121 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LaptopShopProject.Forms;
+using LaptopShopProject.Models;
+using System;
 using System.Windows.Forms;
 
 namespace LaptopStoreApp.Forms
 {
-    public partial class MainForm: Form
+    public partial class MainForm : Form
     {
-        public MainForm()
+        private readonly User _currentUser;
+
+        public MainForm(User user)
         {
             InitializeComponent();
+            _currentUser = user;
+            InitializeForm();
         }
 
-        private void Product_Click(object sender, EventArgs e)
+        private void InitializeForm()
         {
-            panel1.Controls.Clear();
+            // Display username and role
+            lblUserName.Text = $"Username: {_currentUser.Username}";
+            lbRoleUser.Text = $"Role: {_currentUser.Role}";
 
-            ProductForm productForm = new ProductForm();
-
-            productForm.Dock = DockStyle.Fill;  
-
-            panel1.Controls.Add(productForm);
-
-            
+            // Enable/disable buttons based on role
+            if (_currentUser.Role.Equals("admin", StringComparison.OrdinalIgnoreCase))
+            {
+                // Admin has access to all features
+                btnUserManagement.Enabled = true;
+                btnProductManagement.Enabled = true;
+                btnImportManagement.Enabled = true;
+                btnExportManagement.Enabled = true;
+                btnSupplierManagement.Enabled = true;
+                btnCustomerManagement.Enabled = true;
+                btnCategoryManagement.Enabled = true;
+                btnReport.Enabled = true;
+            }
+            else if (_currentUser.Role.Equals("employee", StringComparison.OrdinalIgnoreCase))
+            {
+                // Employee has limited access (e.g., no user or report management)
+                btnUserManagement.Enabled = false;
+                btnProductManagement.Enabled = true;
+                btnImportManagement.Enabled = true;
+                btnExportManagement.Enabled = true;
+                btnSupplierManagement.Enabled = true;
+                btnCustomerManagement.Enabled = true;
+                btnCategoryManagement.Enabled = true;
+                btnReport.Enabled = false;
+            }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnUserManagement_Click(object sender, EventArgs e)
         {
-            panel1.Controls.Clear();
-
-            ImportForm importForm = new ImportForm();
-
-            importForm.Dock = DockStyle.Fill;
-
-            panel1.Controls.Add(importForm);
+            // Open User Management Form (to be implemented)
+            UserManagementForm userForm = new UserManagementForm(_currentUser);
+            userForm.ShowDialog();
         }
 
-        private void Export_Click(object sender, EventArgs e)
+        private void btnProductManagement_Click(object sender, EventArgs e)
         {
-            panel1.Controls.Clear();
-            ExportForm exportForm = new ExportForm();
-            exportForm.Dock = DockStyle.Fill;
-            panel1.Controls.Add(exportForm);
+            // Open Product Management Form (to be implemented)
+            ProductManagementForm productForm = new ProductManagementForm(_currentUser);
+            productForm.ShowDialog();
         }
 
-        private void Category_Click(object sender, EventArgs e)
+        private void btnImportManagement_Click(object sender, EventArgs e)
         {
-            panel1.Controls.Clear();
-            CategoryForm categoryForm = new CategoryForm();
-            categoryForm.Dock = DockStyle.Fill;
-            panel1.Controls.Add(categoryForm);
+            // Open Import Management Form (to be implemented)
+            ImportManagementForm importForm = new ImportManagementForm(_currentUser);
+            importForm.ShowDialog();
         }
 
-        private void Supplier_Click(object sender, EventArgs e)
+        private void btnExportManagement_Click(object sender, EventArgs e)
         {
-            panel1.Controls.Clear();
-            SupplierForm supplierForm = new SupplierForm();
-            supplierForm.Dock = DockStyle.Fill;
-            panel1.Controls.Add(supplierForm);
+            // Open Export Management Form (to be implemented)
+            ExportManagementForm exportForm = new ExportManagementForm(_currentUser);
+            exportForm.ShowDialog();
         }
 
-        private void Customer_Click(object sender, EventArgs e)
+        private void btnSupplierManagement_Click(object sender, EventArgs e)
         {
-            panel1.Controls.Clear();
-            CustomerForm customerForm = new CustomerForm();
-            customerForm.Dock = DockStyle.Fill;
-            panel1.Controls.Add(customerForm);
+            // Open Supplier Management Form (to be implemented)
+            SupplierManagementForm supplierForm = new SupplierManagementForm(_currentUser);
+            supplierForm.ShowDialog();
         }
 
-        private void Notification_Click(object sender, EventArgs e)
+        private void btnCustomerManagement_Click(object sender, EventArgs e)
         {
-            panel1.Controls.Clear();
-            NotificationForm notificationForm = new NotificationForm();
-            notificationForm.Dock = DockStyle.Fill;
-            panel1.Controls.Add(notificationForm);
+            // Open Customer Management Form (to be implemented)
+            CustomerManagementForm customerForm = new CustomerManagementForm(_currentUser);
+            customerForm.ShowDialog();
         }
 
-        private void Warehouse_Click(object sender, EventArgs e)
+        private void btnCategoryManagement_Click(object sender, EventArgs e)
         {
-            panel1.Controls.Clear();
-            WarehouseForm warehouseForm = new WarehouseForm();
-            warehouseForm.Dock = DockStyle.Fill;
-            panel1.Controls.Add(warehouseForm);
+            // Open Category Management Form (to be implemented)
+            CategoryManagementForm categoryForm = new CategoryManagementForm(_currentUser);
+            categoryForm.ShowDialog();
         }
 
-        private void Spec_Click(object sender, EventArgs e)
+        private void btnReport_Click(object sender, EventArgs e)
         {
-            panel1.Controls.Clear();
-            SpecForm specForm = new SpecForm();
-            specForm.Dock = DockStyle.Fill;
-            panel1.Controls.Add(specForm);
+            // Open Report Form (to be implemented)
+            ReportForm reportForm = new ReportForm(_currentUser);
+            reportForm.ShowDialog();
         }
 
-        private void Role_Click(object sender, EventArgs e)
+        private void btnLogout_Click(object sender, EventArgs e)
         {
-            panel1.Controls.Clear();
-            RoleForm roleForm = new RoleForm();
-            roleForm.Dock = DockStyle.Fill;
-            panel1.Controls.Add(roleForm);
+            // Confirm logout
+            DialogResult result = MessageBox.Show("Are you sure you want to log out?", "Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                // Close MainForm and show LoginForm
+                LoginForm loginForm = new LoginForm();
+                loginForm.Show();
+                this.Close();
+            }
         }
     }
 }

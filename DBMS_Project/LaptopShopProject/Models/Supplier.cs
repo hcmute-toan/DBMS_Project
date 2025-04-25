@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace LaptopShopProject.Models
 {
-    internal class Supplier
+    public class Supplier
     {
+        public int SupplierId { get; set; }
+        public string SupplierName { get; set; }
+        public string ContactInfo { get; set; }
     }
 }

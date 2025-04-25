@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace LaptopShopProject.Models
 {
-    internal class Import
+    public class Import
     {
+        public int ImportId { get; set; }
+        public int SupplierId { get; set; }
+        public string SupplierName { get; set; } // For vw_ImportDetails
+        public DateTime ImportDate { get; set; }
+        public decimal TotalAmount { get; set; }
     }
 }

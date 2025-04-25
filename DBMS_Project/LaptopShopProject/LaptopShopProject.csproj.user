@@ -1,19 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Compile Update="Form1.cs">
+    <Compile Update="Forms\CategoryManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\CategoryForm.cs">
-      <SubType>UserControl</SubType>
+    <Compile Update="Forms\CustomerManagementForm.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\CustomerForm.cs">
-      <SubType>UserControl</SubType>
+    <Compile Update="Forms\ExportManagementForm.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\ExportForm.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Forms\ImportForm.cs">
+    <Compile Update="Forms\ImportManagementForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Forms\LoginForm.cs">
@@ -22,22 +19,16 @@
     <Compile Update="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\NotificationForm.cs">
+    <Compile Update="Forms\ProductManagementForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Forms\ProductForm.cs">
+    <Compile Update="Forms\ReportForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Forms\RoleForm.cs">
+    <Compile Update="Forms\SupplierManagementForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Forms\SpecForm.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Forms\SupplierForm.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Forms\WarehouseForm.cs">
+    <Compile Update="Forms\UserManagementForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
