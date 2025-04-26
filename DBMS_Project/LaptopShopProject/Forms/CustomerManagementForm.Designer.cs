@@ -35,56 +35,58 @@
             txtContactInfo = new TextBox();
             txtCustomerName = new TextBox();
             dgvCustomers = new DataGridView();
+            lbCustomerName = new Label();
+            lbContactInfo = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvCustomers).BeginInit();
             SuspendLayout();
             // 
             // btnRefresh
             // 
-            btnRefresh.Location = new Point(877, 428);
+            btnRefresh.Location = new Point(903, 417);
             btnRefresh.Margin = new Padding(3, 4, 3, 4);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new Size(106, 31);
             btnRefresh.TabIndex = 24;
             btnRefresh.Text = "Refresh";
             btnRefresh.UseVisualStyleBackColor = true;
-            btnRefresh.Click += new EventHandler(btnRefresh_Click);
+            btnRefresh.Click += btnRefresh_Click;
             // 
             // btnUpdate
             // 
-            btnUpdate.Location = new Point(561, 428);
+            btnUpdate.Location = new Point(587, 417);
             btnUpdate.Margin = new Padding(3, 4, 3, 4);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(106, 31);
             btnUpdate.TabIndex = 23;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = true;
-            btnUpdate.Click += new EventHandler(btnUpdate_Click);
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(718, 428);
+            btnDelete.Location = new Point(744, 417);
             btnDelete.Margin = new Padding(3, 4, 3, 4);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(102, 31);
             btnDelete.TabIndex = 22;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
-            btnDelete.Click += new EventHandler(btnDelete_Click);
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(400, 428);
+            btnAdd.Location = new Point(426, 417);
             btnAdd.Margin = new Padding(3, 4, 3, 4);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(106, 31);
             btnAdd.TabIndex = 21;
             btnAdd.Text = "Add";
             btnAdd.UseVisualStyleBackColor = true;
-            btnAdd.Click += new EventHandler(btnAdd_Click);
+            btnAdd.Click += btnAdd_Click;
             // 
             // txtContactInfo
             // 
-            txtContactInfo.Location = new Point(46, 137);
+            txtContactInfo.Location = new Point(161, 139);
             txtContactInfo.Margin = new Padding(3, 4, 3, 4);
             txtContactInfo.Name = "txtContactInfo";
             txtContactInfo.Size = new Size(249, 27);
@@ -92,7 +94,7 @@
             // 
             // txtCustomerName
             // 
-            txtCustomerName.Location = new Point(46, 37);
+            txtCustomerName.Location = new Point(161, 39);
             txtCustomerName.Margin = new Padding(3, 4, 3, 4);
             txtCustomerName.Name = "txtCustomerName";
             txtCustomerName.Size = new Size(249, 27);
@@ -101,19 +103,39 @@
             // dgvCustomers
             // 
             dgvCustomers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvCustomers.Location = new Point(400, 37);
+            dgvCustomers.Location = new Point(447, 39);
             dgvCustomers.Margin = new Padding(3, 4, 3, 4);
             dgvCustomers.Name = "dgvCustomers";
             dgvCustomers.RowHeadersWidth = 51;
-            dgvCustomers.Size = new Size(583, 335);
+            dgvCustomers.Size = new Size(536, 288);
             dgvCustomers.TabIndex = 18;
-            dgvCustomers.SelectionChanged += new EventHandler(dgvCustomers_SelectionChanged);
+            dgvCustomers.SelectionChanged += dgvCustomers_SelectionChanged;
+            // 
+            // lbCustomerName
+            // 
+            lbCustomerName.AutoSize = true;
+            lbCustomerName.Location = new Point(3, 42);
+            lbCustomerName.Name = "lbCustomerName";
+            lbCustomerName.Size = new Size(123, 20);
+            lbCustomerName.TabIndex = 25;
+            lbCustomerName.Text = "Customer Name :";
+            // 
+            // lbContactInfo
+            // 
+            lbContactInfo.AutoSize = true;
+            lbContactInfo.Location = new Point(29, 142);
+            lbContactInfo.Name = "lbContactInfo";
+            lbContactInfo.Size = new Size(97, 20);
+            lbContactInfo.TabIndex = 26;
+            lbContactInfo.Text = "Contact Info :";
             // 
             // CustomerManagementForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightCyan;
+            Controls.Add(lbContactInfo);
+            Controls.Add(lbCustomerName);
             Controls.Add(btnRefresh);
             Controls.Add(btnUpdate);
             Controls.Add(btnDelete);
@@ -138,5 +160,7 @@
         private TextBox txtContactInfo;
         private TextBox txtCustomerName;
         private DataGridView dgvCustomers;
+        private Label lbCustomerName;
+        private Label lbContactInfo;
     }
 }

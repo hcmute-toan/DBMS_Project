@@ -118,7 +118,7 @@ namespace LaptopShopProject.DataAccess
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         cmd.Parameters.AddWithValue("@export_id", detail.ExportId);
-                        cmd.Parameters.AddWithValue("@product_id", detail.ProductId);
+                        cmd.Parameters.AddWithValue("@product_name", detail.ProductName); // Pass ProductName instead of ProductId
                         cmd.Parameters.AddWithValue("@quantity", detail.Quantity);
                         cmd.Parameters.AddWithValue("@unit_price", detail.UnitPrice);
                         await cmd.ExecuteNonQueryAsync();

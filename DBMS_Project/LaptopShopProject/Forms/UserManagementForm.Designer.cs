@@ -87,6 +87,7 @@
             btnAdd.TabIndex = 5;
             btnAdd.Text = "Add";
             btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += new EventHandler(btnAdd_Click);
             // 
             // btnDelete
             // 
@@ -96,6 +97,7 @@
             btnDelete.TabIndex = 6;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += new EventHandler(btnDelete_Click);   
             // 
             // btnUpdate
             // 
@@ -105,6 +107,7 @@
             btnUpdate.TabIndex = 7;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += new EventHandler(btnUpdate_Click);
             // 
             // btnRefresh
             // 
@@ -114,6 +117,7 @@
             btnRefresh.TabIndex = 8;
             btnRefresh.Text = "Refresh";
             btnRefresh.UseVisualStyleBackColor = true;
+            btnRefresh.Click += new EventHandler(btnRefresh_Click);
             // 
             // UserManagementForm
             // 

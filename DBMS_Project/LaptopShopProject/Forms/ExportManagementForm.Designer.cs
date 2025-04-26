@@ -40,13 +40,19 @@ namespace LaptopShopProject.Forms
             dgvExportDetails = new DataGridView();
             dgvExports = new DataGridView();
             lblTotalAmount = new Label();
+            lbQuantity = new Label();
+            lbUnitPrice = new Label();
+            lbCustomer = new Label();
+            lbExportDate = new Label();
+            lbProductName = new Label();
+            txtProductName = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvExportDetails).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvExports).BeginInit();
             SuspendLayout();
             // 
             // dtpExportDate
             // 
-            dtpExportDate.Location = new Point(46, 332);
+            dtpExportDate.Location = new Point(190, 425);
             dtpExportDate.Margin = new Padding(3, 4, 3, 4);
             dtpExportDate.Name = "dtpExportDate";
             dtpExportDate.Size = new Size(249, 27);
@@ -54,7 +60,7 @@ namespace LaptopShopProject.Forms
             // 
             // btnRefresh
             // 
-            btnRefresh.Location = new Point(877, 808);
+            btnRefresh.Location = new Point(898, 748);
             btnRefresh.Margin = new Padding(3, 4, 3, 4);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new Size(106, 31);
@@ -64,7 +70,7 @@ namespace LaptopShopProject.Forms
             // 
             // btnUpdate
             // 
-            btnUpdate.Location = new Point(560, 808);
+            btnUpdate.Location = new Point(581, 748);
             btnUpdate.Margin = new Padding(3, 4, 3, 4);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(106, 31);
@@ -74,7 +80,7 @@ namespace LaptopShopProject.Forms
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(719, 808);
+            btnDelete.Location = new Point(740, 748);
             btnDelete.Margin = new Padding(3, 4, 3, 4);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(102, 31);
@@ -84,7 +90,7 @@ namespace LaptopShopProject.Forms
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(400, 808);
+            btnAdd.Location = new Point(421, 748);
             btnAdd.Margin = new Padding(3, 4, 3, 4);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(106, 31);
@@ -95,7 +101,7 @@ namespace LaptopShopProject.Forms
             // cboCustomer
             // 
             cboCustomer.FormattingEnabled = true;
-            cboCustomer.Location = new Point(46, 229);
+            cboCustomer.Location = new Point(190, 322);
             cboCustomer.Margin = new Padding(3, 4, 3, 4);
             cboCustomer.Name = "cboCustomer";
             cboCustomer.Size = new Size(249, 28);
@@ -104,7 +110,7 @@ namespace LaptopShopProject.Forms
             // 
             // txtQuantity
             // 
-            txtQuantity.Location = new Point(46, 28);
+            txtQuantity.Location = new Point(190, 121);
             txtQuantity.Margin = new Padding(3, 4, 3, 4);
             txtQuantity.Name = "txtQuantity";
             txtQuantity.Size = new Size(249, 27);
@@ -112,7 +118,7 @@ namespace LaptopShopProject.Forms
             // 
             // txtUnitPrice
             // 
-            txtUnitPrice.Location = new Point(46, 124);
+            txtUnitPrice.Location = new Point(190, 217);
             txtUnitPrice.Margin = new Padding(3, 4, 3, 4);
             txtUnitPrice.Name = "txtUnitPrice";
             txtUnitPrice.Size = new Size(249, 27);
@@ -121,39 +127,97 @@ namespace LaptopShopProject.Forms
             // dgvExportDetails
             // 
             dgvExportDetails.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvExportDetails.Location = new Point(400, 403);
+            dgvExportDetails.Location = new Point(465, 403);
             dgvExportDetails.Margin = new Padding(3, 4, 3, 4);
             dgvExportDetails.Name = "dgvExportDetails";
             dgvExportDetails.RowHeadersWidth = 51;
-            dgvExportDetails.Size = new Size(583, 351);
+            dgvExportDetails.Size = new Size(518, 291);
             dgvExportDetails.TabIndex = 22;
             // 
             // dgvExports
             // 
             dgvExports.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvExports.Location = new Point(400, 28);
+            dgvExports.Location = new Point(465, 28);
             dgvExports.Margin = new Padding(3, 4, 3, 4);
             dgvExports.Name = "dgvExports";
             dgvExports.RowHeadersWidth = 51;
-            dgvExports.Size = new Size(583, 335);
+            dgvExports.Size = new Size(518, 282);
             dgvExports.TabIndex = 21;
             // 
             // lblTotalAmount
             // 
             lblTotalAmount.AutoSize = true;
             lblTotalAmount.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTotalAmount.Location = new Point(46, 427);
+            lblTotalAmount.Location = new Point(69, 569);
             lblTotalAmount.Name = "lblTotalAmount";
             lblTotalAmount.Size = new Size(135, 23);
             lblTotalAmount.TabIndex = 31;
             lblTotalAmount.Text = "Total Amount: ";
+            // 
+            // lbQuantity
+            // 
+            lbQuantity.AutoSize = true;
+            lbQuantity.Location = new Point(82, 124);
+            lbQuantity.Name = "lbQuantity";
+            lbQuantity.Size = new Size(72, 20);
+            lbQuantity.TabIndex = 32;
+            lbQuantity.Text = "Quantity :";
+            // 
+            // lbUnitPrice
+            // 
+            lbUnitPrice.AutoSize = true;
+            lbUnitPrice.Location = new Point(75, 220);
+            lbUnitPrice.Name = "lbUnitPrice";
+            lbUnitPrice.Size = new Size(79, 20);
+            lbUnitPrice.TabIndex = 33;
+            lbUnitPrice.Text = "Unit Price :";
+            // 
+            // lbCustomer
+            // 
+            lbCustomer.AutoSize = true;
+            lbCustomer.Location = new Point(75, 325);
+            lbCustomer.Name = "lbCustomer";
+            lbCustomer.Size = new Size(79, 20);
+            lbCustomer.TabIndex = 34;
+            lbCustomer.Text = "Customer :";
+            // 
+            // lbExportDate
+            // 
+            lbExportDate.AutoSize = true;
+            lbExportDate.Location = new Point(59, 430);
+            lbExportDate.Name = "lbExportDate";
+            lbExportDate.Size = new Size(95, 20);
+            lbExportDate.TabIndex = 35;
+            lbExportDate.Text = "Export Date :";
+            // 
+            // lbProductName
+            // 
+            lbProductName.AutoSize = true;
+            lbProductName.Location = new Point(43, 31);
+            lbProductName.Name = "lbProductName";
+            lbProductName.Size = new Size(111, 20);
+            lbProductName.TabIndex = 37;
+            lbProductName.Text = "Product Name :";
+            // 
+            // txtProductName
+            // 
+            txtProductName.Location = new Point(190, 28);
+            txtProductName.Margin = new Padding(3, 4, 3, 4);
+            txtProductName.Name = "txtProductName";
+            txtProductName.Size = new Size(249, 27);
+            txtProductName.TabIndex = 36;
             // 
             // ExportManagementForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightCyan;
-            ClientSize = new Size(1012, 821);
+            Controls.Add(lbProductName);
+            Controls.Add(txtProductName);
+            Controls.Add(lbExportDate);
+            Controls.Add(lbCustomer);
+            Controls.Add(lbUnitPrice);
+            Controls.Add(lbQuantity);
             Controls.Add(lblTotalAmount);
             Controls.Add(dtpExportDate);
             Controls.Add(btnRefresh);
@@ -167,6 +231,7 @@ namespace LaptopShopProject.Forms
             Controls.Add(dgvExports);
             Margin = new Padding(3, 4, 3, 4);
             Name = "ExportManagementForm";
+            Size = new Size(1012, 870);
             ((System.ComponentModel.ISupportInitialize)dgvExportDetails).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvExports).EndInit();
             ResumeLayout(false);
@@ -187,5 +252,11 @@ namespace LaptopShopProject.Forms
         private DataGridView dgvExportDetails;
         private DataGridView dgvExports;
         private Label lblTotalAmount;
+        private Label lbQuantity;
+        private Label lbUnitPrice;
+        private Label lbCustomer;
+        private Label lbExportDate;
+        private Label lbProductName;
+        private TextBox txtProductName;
     }
 }

@@ -28,108 +28,101 @@
         /// </summary>
         private void InitializeComponent()
         {
-            tabControl1 = new TabControl();
-            dgvInventory = new TabPage();
-            dgvImportReport = new TabPage();
-            dgvExportReport = new TabPage();
             btnRefresh = new Button();
             btnExportToExcel = new Button();
-            dgvChartReport = new TabPage();
+            dgvExportReport = new TabPage();
+            dgvImportReport = new TabPage();
+            dgvInventory = new TabPage();
+            tabControl1 = new TabControl();
             tabControl1.SuspendLayout();
             SuspendLayout();
             // 
-            // tabControl1
-            // 
-            tabControl1.Controls.Add(dgvInventory);
-            tabControl1.Controls.Add(dgvImportReport);
-            tabControl1.Controls.Add(dgvExportReport);
-            tabControl1.Controls.Add(dgvChartReport);
-            tabControl1.Location = new Point(3, 18);
-            tabControl1.Name = "tabControl1";
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(711, 303);
-            tabControl1.TabIndex = 0;
-            // 
-            // dgvInventory
-            // 
-            dgvInventory.Location = new Point(4, 24);
-            dgvInventory.Name = "dgvInventory";
-            dgvInventory.Padding = new Padding(3);
-            dgvInventory.Size = new Size(703, 275);
-            dgvInventory.TabIndex = 0;
-            dgvInventory.Text = "Tab Inventory";
-            dgvInventory.UseVisualStyleBackColor = true;
-            // 
-            // dgvImportReport
-            // 
-            dgvImportReport.Location = new Point(4, 24);
-            dgvImportReport.Name = "dgvImportReport";
-            dgvImportReport.Padding = new Padding(3);
-            dgvImportReport.Size = new Size(703, 275);
-            dgvImportReport.TabIndex = 1;
-            dgvImportReport.Text = "Tab Imports";
-            dgvImportReport.UseVisualStyleBackColor = true;
-            // 
-            // dgvExportReport
-            // 
-            dgvExportReport.Location = new Point(4, 24);
-            dgvExportReport.Name = "dgvExportReport";
-            dgvExportReport.Padding = new Padding(3);
-            dgvExportReport.Size = new Size(703, 275);
-            dgvExportReport.TabIndex = 2;
-            dgvExportReport.Text = "Tab Exports";
-            dgvExportReport.UseVisualStyleBackColor = true;
-            // 
             // btnRefresh
             // 
-            btnRefresh.Location = new Point(382, 362);
+            btnRefresh.Location = new Point(437, 483);
+            btnRefresh.Margin = new Padding(3, 4, 3, 4);
             btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(109, 27);
+            btnRefresh.Size = new Size(125, 36);
             btnRefresh.TabIndex = 1;
             btnRefresh.Text = "Refresh";
             btnRefresh.UseVisualStyleBackColor = true;
             // 
             // btnExportToExcel
             // 
-            btnExportToExcel.Location = new Point(545, 362);
+            btnExportToExcel.Location = new Point(623, 483);
+            btnExportToExcel.Margin = new Padding(3, 4, 3, 4);
             btnExportToExcel.Name = "btnExportToExcel";
-            btnExportToExcel.Size = new Size(165, 27);
+            btnExportToExcel.Size = new Size(189, 36);
             btnExportToExcel.TabIndex = 2;
             btnExportToExcel.Text = "Export to Excel";
             btnExportToExcel.UseVisualStyleBackColor = true;
             // 
-            // dgvChartReport
+            // dgvExportReport
             // 
-            dgvChartReport.Location = new Point(4, 24);
-            dgvChartReport.Name = "dgvChartReport";
-            dgvChartReport.Padding = new Padding(3);
-            dgvChartReport.Size = new Size(703, 275);
-            dgvChartReport.TabIndex = 3;
-            dgvChartReport.Text = "Tab Chart";
-            dgvChartReport.UseVisualStyleBackColor = true;
+            dgvExportReport.Location = new Point(4, 29);
+            dgvExportReport.Margin = new Padding(3, 4, 3, 4);
+            dgvExportReport.Name = "dgvExportReport";
+            dgvExportReport.Padding = new Padding(3, 4, 3, 4);
+            dgvExportReport.Size = new Size(805, 371);
+            dgvExportReport.TabIndex = 2;
+            dgvExportReport.Text = "Tab Exports";
+            dgvExportReport.UseVisualStyleBackColor = true;
+            // 
+            // dgvImportReport
+            // 
+            dgvImportReport.Location = new Point(4, 29);
+            dgvImportReport.Margin = new Padding(3, 4, 3, 4);
+            dgvImportReport.Name = "dgvImportReport";
+            dgvImportReport.Padding = new Padding(3, 4, 3, 4);
+            dgvImportReport.Size = new Size(805, 371);
+            dgvImportReport.TabIndex = 1;
+            dgvImportReport.Text = "Tab Imports";
+            dgvImportReport.UseVisualStyleBackColor = true;
+            // 
+            // dgvInventory
+            // 
+            dgvInventory.Location = new Point(4, 29);
+            dgvInventory.Margin = new Padding(3, 4, 3, 4);
+            dgvInventory.Name = "dgvInventory";
+            dgvInventory.Padding = new Padding(3, 4, 3, 4);
+            dgvInventory.Size = new Size(805, 371);
+            dgvInventory.TabIndex = 0;
+            dgvInventory.Text = "Tab Inventory";
+            dgvInventory.UseVisualStyleBackColor = true;
+            // 
+            // tabControl1
+            // 
+            tabControl1.Controls.Add(dgvInventory);
+            tabControl1.Controls.Add(dgvImportReport);
+            tabControl1.Controls.Add(dgvExportReport);
+            tabControl1.Location = new Point(3, 24);
+            tabControl1.Margin = new Padding(3, 4, 3, 4);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(813, 404);
+            tabControl1.TabIndex = 0;
             // 
             // ReportForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightCyan;
             Controls.Add(btnExportToExcel);
             Controls.Add(btnRefresh);
             Controls.Add(tabControl1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "ReportForm";
-            Size = new Size(730, 427);
+            Size = new Size(834, 569);
             tabControl1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-
-        private TabControl tabControl1;
-        private TabPage dgvInventory;
-        private TabPage dgvImportReport;
-        private TabPage dgvExportReport;
         private Button btnRefresh;
         private Button btnExportToExcel;
-        private TabPage dgvChartReport;
+        private TabPage dgvExportReport;
+        private TabPage dgvImportReport;
+        private TabPage dgvInventory;
+        private TabControl tabControl1;
     }
 }

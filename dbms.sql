@@ -7,8 +7,8 @@
  * stored procedures, and functions to ensure data integrity and usability.
  *
  * Key Features:
- * - Handles foreign key constraints with ON DELETE SET NULL for PermissionLog.user_id and ON DELETE NO ACTION for performed_by.
- * - Stores usernames in PermissionLog to maintain meaningful data when users are deleted.
+ * - Handles foreign key constraints with ON DELETE NO ACTION for PermissionLog.user_id and performed_by.
+ * - Manually manages PermissionLog references before deleting users.
  * - Prevents deletion of suppliers/customers with related imports/exports.
  * - Logs user actions and product deletions while maintaining data integrity.
  *
@@ -18,9 +18,9 @@
  */
 
 -- Tạo database
-CREATE DATABASE LaptopStoreDB;
+CREATE DATABASE LaptopStoreDB12;
 GO
-USE LaptopStoreDB;
+USE LaptopStoreDB12;
 GO
 
 -- Tạo bảng Users
@@ -230,14 +230,30 @@ BEGIN
             ROLLBACK;
             RETURN;
         END;
+
+        -- Variables for logging
         DECLARE @old_role NVARCHAR(50);
         DECLARE @deleted_username NVARCHAR(100);
         DECLARE @current_username NVARCHAR(100);
         SELECT @old_role = role, @deleted_username = username FROM Users WHERE user_id = @user_id;
         SELECT @current_username = username FROM Users WHERE user_id = @current_user_id;
-        DELETE FROM Users WHERE user_id = @user_id;
+
+        -- Set user_id and performed_by to NULL in PermissionLog for the user being deleted
+        UPDATE PermissionLog
+        SET user_id = NULL
+        WHERE user_id = @user_id;
+
+        UPDATE PermissionLog
+        SET performed_by = NULL
+        WHERE performed_by = @user_id;
+
+        -- Insert into PermissionLog before deletion
         INSERT INTO PermissionLog (user_id, username, action, old_role, new_role, action_date, performed_by, performed_by_username)
         VALUES (@user_id, @deleted_username, 'Delete User', @old_role, NULL, GETDATE(), @current_user_id, @current_username);
+
+        -- Now delete the user
+        DELETE FROM Users WHERE user_id = @user_id;
+
         COMMIT TRANSACTION;
     END TRY
     BEGIN CATCH
@@ -327,7 +343,10 @@ BEGIN
         END;
         UPDATE Users
         SET username = @username,
-            password = @password
+            password = CASE 
+                          WHEN @password IS NULL THEN password
+                          ELSE @password 
+                       END
         WHERE user_id = @user_id;
         COMMIT TRANSACTION;
     END TRY
@@ -810,15 +829,14 @@ GO
 CREATE PROCEDURE sp_InsertImport
     @current_user_id INT,
     @supplier_id INT,
-    @import_date DATE,
-    @total_amount DECIMAL(18,2)
+    @import_date DATE
 AS
 BEGIN
     SET NOCOUNT ON;
     BEGIN TRY
         BEGIN TRANSACTION;
         INSERT INTO Import (supplier_id, import_date, total_amount)
-        VALUES (@supplier_id, @import_date, @total_amount);
+        VALUES (@supplier_id, @import_date, 0);
         DECLARE @import_id INT = SCOPE_IDENTITY();
         COMMIT TRANSACTION;
         SELECT @import_id AS import_id;
@@ -902,6 +920,11 @@ BEGIN
         UPDATE Product
         SET stock_quantity = stock_quantity + @quantity
         WHERE product_id = @product_id;
+
+        -- Cập nhật total_amount trong bảng Import
+        UPDATE Import
+        SET total_amount = dbo.fn_GetImportTotal(@import_id)
+        WHERE import_id = @import_id;
 
         COMMIT TRANSACTION;
         SELECT @product_id AS product_id;
@@ -1014,7 +1037,7 @@ GO
 CREATE PROCEDURE sp_InsertExportDetail
     @current_user_id INT,
     @export_id INT,
-    @product_id INT,
+    @product_name NVARCHAR(100),
     @quantity INT,
     @unit_price DECIMAL(18,2)
 AS
@@ -1022,23 +1045,61 @@ BEGIN
     SET NOCOUNT ON;
     BEGIN TRY
         BEGIN TRANSACTION;
+        DECLARE @product_id INT;
+
+        -- Check if the export exists
         IF NOT EXISTS (SELECT 1 FROM Export WHERE export_id = @export_id)
         BEGIN
             RAISERROR ('Phiếu xuất không tồn tại!', 16, 1);
             ROLLBACK;
             RETURN;
         END;
-        IF NOT EXISTS (SELECT 1 FROM Product WHERE product_id = @product_id)
+
+        -- Check if quantity is valid
+        IF @quantity <= 0
+        BEGIN
+            RAISERROR ('Số lượng phải lớn hơn 0!', 16, 1);
+            ROLLBACK;
+            RETURN;
+        END;
+
+        -- Look up the product_id based on product_name
+        SELECT @product_id = product_id
+        FROM Product
+        WHERE product_name = @product_name;
+
+        -- If the product doesn't exist, raise an error
+        IF @product_id IS NULL
         BEGIN
             RAISERROR ('Sản phẩm không tồn tại!', 16, 1);
             ROLLBACK;
             RETURN;
         END;
+
+        -- Check stock quantity before exporting
+        DECLARE @stock INT;
+        SET @stock = dbo.fn_GetStockQuantity(@product_id);
+        IF @stock < @quantity
+        BEGIN
+            RAISERROR ('Số lượng xuất vượt quá tồn kho!', 16, 1);
+            ROLLBACK;
+            RETURN;
+        END;
+
+        -- Insert the export detail
         INSERT INTO ExportDetail (export_id, product_id, quantity, unit_price)
         VALUES (@export_id, @product_id, @quantity, @unit_price);
+
+        -- Update the stock quantity
         UPDATE Product
         SET stock_quantity = stock_quantity - @quantity
         WHERE product_id = @product_id;
+
+        -- Cập nhật total_amount trong bảng Export
+        UPDATE Export
+        SET total_amount = dbo.fn_GetExportTotal(@export_id)
+        WHERE export_id = @export_id;
+
         COMMIT TRANSACTION;
     END TRY
     BEGIN CATCH
@@ -1189,13 +1250,14 @@ END;
 GO
 
 -- Tạo view vw_ProductDetails
-CREATE VIEW vw_ProductDetails AS
+CREATE VIEW vw_ProductDetails
+AS
 SELECT 
     p.product_id,
     p.product_name,
     p.price,
     p.stock_quantity,
-    STRING_AGG(c.category_name, ', ') AS brands
+    STRING_AGG(c.category_name, ', ') AS category_name
 FROM Product p
 LEFT JOIN ProductCategory pc ON p.product_id = pc.product_id
 LEFT JOIN Category c ON pc.category_id = c.category_id
@@ -1244,8 +1306,12 @@ SELECT
     p.product_id,
     p.product_name,
     p.price,
-    p.stock_quantity
-FROM Product p;
+    p.stock_quantity,
+    STRING_AGG(c.category_name, ', ') AS brands
+FROM Product p
+LEFT JOIN ProductCategory pc ON p.product_id = pc.product_id
+LEFT JOIN Category c ON pc.category_id = c.category_id
+GROUP BY p.product_id, p.product_name, p.price, p.stock_quantity;
 GO
 
 -- Tạo view vw_UserDetails
@@ -1365,8 +1431,8 @@ VALUES ('John Doe', 'john.doe@email.com'),
 GO
 
 INSERT INTO Import (supplier_id, import_date, total_amount)
-VALUES (1, '2025-04-24', 36000.00),
-       (2, '2025-04-24', 40000.00);
+VALUES (1, '2025-04-24', 0),
+       (2, '2025-04-24', 0);
 GO
 
 INSERT INTO ImportDetail (import_id, product_id, quantity, unit_price)
@@ -1376,8 +1442,8 @@ VALUES (1, 1, 10, 1100.00),
 GO
 
 INSERT INTO Export (customer_id, export_date, total_amount)
-VALUES (1, '2025-04-24', 2400.00),
-       (2, '2025-04-24', 4500.00);
+VALUES (1, '2025-04-24', 0),
+       (2, '2025-04-24', 0);
 GO
 
 INSERT INTO ExportDetail (export_id, product_id, quantity, unit_price)

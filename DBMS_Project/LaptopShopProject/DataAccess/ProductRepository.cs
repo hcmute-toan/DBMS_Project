@@ -29,7 +29,7 @@ namespace LaptopShopProject.DataAccess
                                     ProductName = reader.GetString(1),
                                     Price = reader.GetDecimal(2),
                                     StockQuantity = reader.GetInt32(3),
-                                    Brands = reader.IsDBNull(4) ? null : reader.GetString(4)
+                                    Brands = reader.IsDBNull(4) ? null : reader.GetString(4) // Changed from Brands to CategoryName
                                 });
                             }
                         }
@@ -41,6 +41,27 @@ namespace LaptopShopProject.DataAccess
                 throw new Exception("Error retrieving products: " + ex.Message, ex);
             }
             return products;
+        }
+
+        public async Task<bool> ProductExistsAsync(string productName)
+        {
+            try
+            {
+                using (var conn = DatabaseConnection.GetConnection())
+                {
+                    await conn.OpenAsync();
+                    using (var cmd = new SqlCommand("SELECT COUNT(*) FROM Product WHERE product_name = @product_name", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@product_name", productName);
+                        int count = (int)await cmd.ExecuteScalarAsync();
+                        return count > 0;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error checking product existence: " + ex.Message, ex);
+            }
         }
 
         public async Task<int> InsertProductAsync(int currentUserId, Product product)

@@ -17,7 +17,10 @@ namespace LaptopShopProject.DataAccess
                 using (var conn = DatabaseConnection.GetConnection())
                 {
                     await conn.OpenAsync();
-                    using (var cmd = new SqlCommand("SELECT DISTINCT import_id, supplier_id, supplier_name, import_date, total_amount FROM vw_ImportDetails", conn))
+                    using (var cmd = new SqlCommand(
+                        "SELECT i.import_id, i.supplier_id, s.supplier_name, i.import_date, i.total_amount " +
+                        "FROM Import i " +
+                        "JOIN Supplier s ON i.supplier_id = s.supplier_id", conn))
                     {
                         using (var reader = await cmd.ExecuteReaderAsync())
                         {

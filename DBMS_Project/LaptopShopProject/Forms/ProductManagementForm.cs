@@ -62,7 +62,10 @@ namespace LaptopShopProject.Forms
         private void ConfigureProductDataGridView()
         {
             if (dgvProducts.Columns.Contains("ProductId"))
+            {
                 dgvProducts.Columns["ProductId"].HeaderText = "ID";
+                dgvProducts.Columns["ProductId"].Visible = false; // Ẩn cột ProductId
+            }
             if (dgvProducts.Columns.Contains("ProductName"))
                 dgvProducts.Columns["ProductName"].HeaderText = "Name";
             if (dgvProducts.Columns.Contains("Price"))
@@ -77,7 +80,10 @@ namespace LaptopShopProject.Forms
         private void ConfigureProductLogsDataGridView()
         {
             if (dgvProductLogs.Columns.Contains("LogId"))
+            {
                 dgvProductLogs.Columns["LogId"].HeaderText = "Log ID";
+                dgvProductLogs.Columns["LogId"].Visible = false; // Ẩn cột LogId
+            }
             if (dgvProductLogs.Columns.Contains("ProductId"))
                 dgvProductLogs.Columns["ProductId"].HeaderText = "Product ID";
             if (dgvProductLogs.Columns.Contains("ProductName"))
@@ -85,7 +91,10 @@ namespace LaptopShopProject.Forms
             if (dgvProductLogs.Columns.Contains("DeletedDate"))
                 dgvProductLogs.Columns["DeletedDate"].HeaderText = "Deleted Date";
             if (dgvProductLogs.Columns.Contains("DeletedBy"))
+            {
                 dgvProductLogs.Columns["DeletedBy"].HeaderText = "Deleted By";
+                dgvProductLogs.Columns["DeletedBy"].Visible = false; // Ẩn cột DeletedBy
+            }
             dgvProductLogs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
@@ -220,6 +229,7 @@ namespace LaptopShopProject.Forms
                 txtProductName.Text = selectedProduct.ProductName;
                 txtPrice.Text = selectedProduct.Price.ToString();
                 txtStockQuantity.Text = selectedProduct.StockQuantity.ToString();
+                txtBranch.Text = selectedProduct.Brands ?? string.Empty; // Đổ dữ liệu vào txtBranch
             }
         }
 
@@ -232,6 +242,8 @@ namespace LaptopShopProject.Forms
                 errorMessage = "Price must be a positive number.";
             else if (!int.TryParse(txtStockQuantity.Text.Trim(), out int stockQuantity) || stockQuantity < 0)
                 errorMessage = "Stock quantity must be a non-negative integer.";
+            else if (string.IsNullOrEmpty(txtBranch.Text.Trim()))
+                errorMessage = "Branch name is required.";
             return string.IsNullOrEmpty(errorMessage);
         }
 
@@ -240,7 +252,10 @@ namespace LaptopShopProject.Forms
             txtProductName.Clear();
             txtPrice.Clear();
             txtStockQuantity.Clear();
+            txtBranch.Clear();
             dgvProducts.ClearSelection();
         }
+
+
     }
 }

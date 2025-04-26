@@ -55,6 +55,12 @@ namespace LaptopShopProject.Forms
             try
             {
                 var exports = await _exportRepository.GetAllExportsAsync();
+                // Ensure TotalAmount is correct for each Export
+                foreach (var export in exports)
+                {
+                    export.TotalAmount = await _exportRepository.GetExportTotalAsync(export.ExportId);
+                }
+                dgvExports.DataSource = null; // Clear existing data
                 dgvExports.DataSource = exports;
                 ConfigureExportDataGridView();
                 if (exports.Any())
@@ -80,7 +86,7 @@ namespace LaptopShopProject.Forms
                 dgvExportDetails.DataSource = details;
                 ConfigureExportDetailsDataGridView();
                 decimal totalAmount = await _exportRepository.GetExportTotalAsync(exportId);
-                lblTotalAmount.Text = $"Total Amount: {totalAmount:C}";
+                lblTotalAmount.Text = $"Total Amount: {totalAmount:N0} đ"; // Format for Vietnamese Dong
             }
             catch (Exception ex)
             {
@@ -99,7 +105,10 @@ namespace LaptopShopProject.Forms
             if (dgvExports.Columns.Contains("ExportDate"))
                 dgvExports.Columns["ExportDate"].HeaderText = "Date";
             if (dgvExports.Columns.Contains("TotalAmount"))
+            {
                 dgvExports.Columns["TotalAmount"].HeaderText = "Total Amount";
+                dgvExports.Columns["TotalAmount"].DefaultCellStyle.Format = "N0"; // Format for Vietnamese Dong
+            }
             dgvExports.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
@@ -108,13 +117,16 @@ namespace LaptopShopProject.Forms
             if (dgvExportDetails.Columns.Contains("ExportId"))
                 dgvExportDetails.Columns["ExportId"].Visible = false;
             if (dgvExportDetails.Columns.Contains("ProductId"))
-                dgvExportDetails.Columns["ProductId"].HeaderText = "Product ID";
+                dgvExportDetails.Columns["ProductId"].Visible = false; // Hide ProductId since we're using ProductName
             if (dgvExportDetails.Columns.Contains("ProductName"))
                 dgvExportDetails.Columns["ProductName"].HeaderText = "Product";
             if (dgvExportDetails.Columns.Contains("Quantity"))
                 dgvExportDetails.Columns["Quantity"].HeaderText = "Quantity";
             if (dgvExportDetails.Columns.Contains("UnitPrice"))
+            {
                 dgvExportDetails.Columns["UnitPrice"].HeaderText = "Unit Price";
+                dgvExportDetails.Columns["UnitPrice"].DefaultCellStyle.Format = "N0"; // Format for Vietnamese Dong
+            }
             dgvExportDetails.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
@@ -128,42 +140,59 @@ namespace LaptopShopProject.Forms
 
             try
             {
+                string productName = txtProductName.Text.Trim();
+                bool productExists = await _productRepository.ProductExistsAsync(productName);
+
+                if (!productExists)
+                {
+                    var result = MessageBox.Show($"Product '{productName}' does not exist. Would you like to create it?", "Product Not Found", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        var product = new Product
+                        {
+                            ProductName = productName,
+                            Price = decimal.Parse(txtUnitPrice.Text.Trim()),
+                            StockQuantity = int.Parse(txtQuantity.Text.Trim())
+                        };
+                        await _productRepository.InsertProductAsync(_currentUser.UserId, product);
+                    }
+                    else
+                    {
+                        return; // User chose not to create the product
+                    }
+                }
+
+                // Insert the Export
                 var export = new Export
                 {
                     CustomerId = (int)cboCustomer.SelectedValue,
                     ExportDate = dtpExportDate.Value,
-                    TotalAmount = 0 // Will be calculated by details
+                    TotalAmount = 0
                 };
                 int exportId = await _exportRepository.InsertExportAsync(_currentUser.UserId, export);
 
+                // Insert the ExportDetail using ProductName
                 var detail = new ExportDetail
                 {
                     ExportId = exportId,
-                    ProductId = 1, // Placeholder; ideally, select from a product list
+                    ProductName = productName,
                     Quantity = int.Parse(txtQuantity.Text.Trim()),
                     UnitPrice = decimal.Parse(txtUnitPrice.Text.Trim())
                 };
                 await _exportRepository.InsertExportDetailAsync(_currentUser.UserId, detail);
 
+                // Update TotalAmount in Export
+                export.ExportId = exportId;
+                export.TotalAmount = await _exportRepository.GetExportTotalAsync(exportId);
+                await _exportRepository.UpdateExportAsync(_currentUser.UserId, export);
+
                 MessageBox.Show($"Export added successfully with ID: {exportId}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearInputs();
                 await LoadExportsAsync();
             }
-            catch (InvalidOperationException ex)
-            {
-                MessageBox.Show(ex.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                MessageBox.Show(ex.Message, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                MessageBox.Show(ex.Message, "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error adding export: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                HandleException(ex, "adding export");
             }
         }
 
@@ -183,6 +212,28 @@ namespace LaptopShopProject.Forms
 
             try
             {
+                string productName = txtProductName.Text.Trim();
+                bool productExists = await _productRepository.ProductExistsAsync(productName);
+
+                if (!productExists)
+                {
+                    var result = MessageBox.Show($"Product '{productName}' does not exist. Would you like to create it?", "Product Not Found", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        var product = new Product
+                        {
+                            ProductName = productName,
+                            Price = decimal.Parse(txtUnitPrice.Text.Trim()),
+                            StockQuantity = int.Parse(txtQuantity.Text.Trim())
+                        };
+                        await _productRepository.InsertProductAsync(_currentUser.UserId, product);
+                    }
+                    else
+                    {
+                        return; // User chose not to create the product
+                    }
+                }
+
                 var selectedExport = (Export)dgvExports.SelectedRows[0].DataBoundItem;
                 var export = new Export
                 {
@@ -192,25 +243,28 @@ namespace LaptopShopProject.Forms
                     TotalAmount = await _exportRepository.GetExportTotalAsync(selectedExport.ExportId)
                 };
                 await _exportRepository.UpdateExportAsync(_currentUser.UserId, export);
+
+                // Update or insert ExportDetail using ProductName
+                var detail = new ExportDetail
+                {
+                    ExportId = export.ExportId,
+                    ProductName = productName,
+                    Quantity = int.Parse(txtQuantity.Text.Trim()),
+                    UnitPrice = decimal.Parse(txtUnitPrice.Text.Trim())
+                };
+                await _exportRepository.InsertExportDetailAsync(_currentUser.UserId, detail);
+
+                // Recalculate TotalAmount
+                export.TotalAmount = await _exportRepository.GetExportTotalAsync(export.ExportId);
+                await _exportRepository.UpdateExportAsync(_currentUser.UserId, export);
+
                 MessageBox.Show("Export updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearInputs();
                 await LoadExportsAsync();
             }
-            catch (InvalidOperationException ex)
-            {
-                MessageBox.Show(ex.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                MessageBox.Show(ex.Message, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                MessageBox.Show(ex.Message, "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error updating export: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                HandleException(ex, "updating export");
             }
         }
 
@@ -232,17 +286,9 @@ namespace LaptopShopProject.Forms
                     ClearInputs();
                     await LoadExportsAsync();
                 }
-                catch (UnauthorizedAccessException ex)
-                {
-                    MessageBox.Show(ex.Message, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                catch (KeyNotFoundException ex)
-                {
-                    MessageBox.Show(ex.Message, "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error deleting export: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    HandleException(ex, "deleting export");
                 }
             }
         }
@@ -262,6 +308,22 @@ namespace LaptopShopProject.Forms
                 cboCustomer.SelectedValue = selectedExport.CustomerId;
                 dtpExportDate.Value = selectedExport.ExportDate;
                 await LoadExportDetailsAsync(selectedExport.ExportId);
+
+                // Populate text fields with the first ExportDetail (if any)
+                var details = await _exportRepository.GetExportDetailsAsync(selectedExport.ExportId);
+                if (details.Any())
+                {
+                    var firstDetail = details.First();
+                    txtProductName.Text = firstDetail.ProductName;
+                    txtQuantity.Text = firstDetail.Quantity.ToString();
+                    txtUnitPrice.Text = firstDetail.UnitPrice.ToString("N0"); // Format without currency symbol
+                }
+                else
+                {
+                    txtProductName.Clear();
+                    txtQuantity.Clear();
+                    txtUnitPrice.Clear();
+                }
             }
         }
 
@@ -270,6 +332,8 @@ namespace LaptopShopProject.Forms
             errorMessage = string.Empty;
             if (cboCustomer.SelectedValue == null)
                 errorMessage = "Please select a customer.";
+            else if (string.IsNullOrEmpty(txtProductName.Text.Trim()))
+                errorMessage = "Product name is required.";
             else if (!int.TryParse(txtQuantity.Text.Trim(), out int quantity) || quantity <= 0)
                 errorMessage = "Quantity must be a positive integer.";
             else if (!decimal.TryParse(txtUnitPrice.Text.Trim(), out decimal unitPrice) || unitPrice <= 0)
@@ -280,12 +344,46 @@ namespace LaptopShopProject.Forms
         private void ClearInputs()
         {
             cboCustomer.SelectedIndex = -1;
+            txtProductName.Clear();
             txtQuantity.Clear();
             txtUnitPrice.Clear();
             dtpExportDate.Value = DateTime.Now;
             lblTotalAmount.Text = "Total Amount: ";
             dgvExports.ClearSelection();
             dgvExportDetails.DataSource = null;
+        }
+
+        private void HandleException(Exception ex, string action)
+        {
+            string message;
+            string title;
+            MessageBoxIcon icon;
+
+            switch (ex)
+            {
+                case InvalidOperationException:
+                    message = ex.Message;
+                    title = "Operation Failed";
+                    icon = MessageBoxIcon.Warning;
+                    break;
+                case UnauthorizedAccessException:
+                    message = ex.Message;
+                    title = "Permission Denied";
+                    icon = MessageBoxIcon.Error;
+                    break;
+                case KeyNotFoundException:
+                    message = ex.Message;
+                    title = "Not Found";
+                    icon = MessageBoxIcon.Warning;
+                    break;
+                default:
+                    message = $"Error {action}: {ex.Message}";
+                    title = "Error";
+                    icon = MessageBoxIcon.Error;
+                    break;
+            }
+
+            MessageBox.Show(message, title, MessageBoxButtons.OK, icon);
         }
 
         private void cboCustomer_SelectedIndexChanged(object sender, EventArgs e)

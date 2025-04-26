@@ -24,10 +24,11 @@ namespace LaptopShopProject.DataAccess
                             {
                                 products.Add(new Product
                                 {
-                                    ProductId = reader.GetInt32(0),
-                                    ProductName = reader.GetString(1),
-                                    Price = reader.GetDecimal(2),
-                                    StockQuantity = reader.GetInt32(3)
+                                    ProductId = reader.GetInt32(0), // product_id
+                                    ProductName = reader.GetString(1), // product_name
+                                    Price = reader.GetDecimal(2), // price
+                                    StockQuantity = reader.GetInt32(3), // stock_quantity
+                                    Brands = reader.IsDBNull(4) ? null : reader.GetString(4) // brands (correct index)
                                 });
                             }
                         }
