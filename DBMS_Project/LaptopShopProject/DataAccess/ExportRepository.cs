@@ -118,7 +118,7 @@ namespace LaptopShopProject.DataAccess
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         cmd.Parameters.AddWithValue("@export_id", detail.ExportId);
-                        cmd.Parameters.AddWithValue("@product_name", detail.ProductName); // Pass ProductName instead of ProductId
+                        cmd.Parameters.AddWithValue("@product_name", detail.ProductName);
                         cmd.Parameters.AddWithValue("@quantity", detail.Quantity);
                         cmd.Parameters.AddWithValue("@unit_price", detail.UnitPrice);
                         await cmd.ExecuteNonQueryAsync();
@@ -140,6 +140,66 @@ namespace LaptopShopProject.DataAccess
             catch (SqlException ex)
             {
                 throw new Exception("Error inserting export detail: " + ex.Message, ex);
+            }
+        }
+
+        public async Task<bool> UpdateExportDetailAsync(int currentUserId, ExportDetail detail)
+        {
+            try
+            {
+                using (var conn = DatabaseConnection.GetConnection())
+                {
+                    await conn.OpenAsync();
+                    using (var cmd = new SqlCommand("sp_UpdateExport", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
+                        cmd.Parameters.AddWithValue("@export_id", detail.ExportId);
+                        cmd.Parameters.AddWithValue("@product_name", detail.ProductName);
+                        cmd.Parameters.AddWithValue("@new_quantity", detail.Quantity);
+                        cmd.Parameters.AddWithValue("@new_unit_price", detail.UnitPrice);
+
+                        // Thêm tham số đầu ra
+                        var isUpdatedParam = new SqlParameter("@is_updated", SqlDbType.Bit)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        cmd.Parameters.Add(isUpdatedParam);
+
+                        await cmd.ExecuteNonQueryAsync();
+
+                        // Trả về giá trị của tham số đầu ra
+                        return (bool)isUpdatedParam.Value;
+                    }
+                }
+            }
+            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
+            {
+                throw new UnauthorizedAccessException("Only admins can update export details.", ex);
+            }
+            catch (SqlException ex) when (ex.Message.Contains("Phiếu xuất không tồn tại"))
+            {
+                throw new KeyNotFoundException("Export does not exist.", ex);
+            }
+            catch (SqlException ex) when (ex.Message.Contains("Sản phẩm không tồn tại"))
+            {
+                throw new KeyNotFoundException("Product does not exist.", ex);
+            }
+            catch (SqlException ex) when (ex.Message.Contains("Chi tiết phiếu xuất không tồn tại"))
+            {
+                throw new KeyNotFoundException("Export detail does not exist.", ex);
+            }
+            catch (SqlException ex) when (ex.Message.Contains("Số lượng phải lớn hơn 0"))
+            {
+                throw new InvalidOperationException("Quantity must be greater than 0.", ex);
+            }
+            catch (SqlException ex) when (ex.Message.Contains("Số lượng xuất vượt quá số lượng tồn kho"))
+            {
+                throw new InvalidOperationException("Export quantity exceeds stock quantity.", ex);
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error updating export detail: " + ex.Message, ex);
             }
         }
 

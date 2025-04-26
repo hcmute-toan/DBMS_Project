@@ -1190,35 +1190,120 @@ BEGIN
 END;
 GO
 
+
 -- Tạo stored procedure sp_UpdateExport
 CREATE PROCEDURE sp_UpdateExport
     @current_user_id INT,
     @export_id INT,
-    @customer_id INT,
-    @export_date DATE,
-    @total_amount DECIMAL(18,2)
+    @product_name NVARCHAR(100),
+    @new_quantity INT,
+    @new_unit_price DECIMAL(18,2),
+    @is_updated BIT OUTPUT
 AS
 BEGIN
     SET NOCOUNT ON;
     BEGIN TRY
         BEGIN TRANSACTION;
+        SET @is_updated = 0; -- Khởi tạo biến đầu ra là 0 (không có thay đổi)
+
+        -- Kiểm tra quyền admin
         IF NOT EXISTS (SELECT 1 FROM Users WHERE user_id = @current_user_id AND role = 'admin')
         BEGIN
-            RAISERROR ('Chỉ admin mới có quyền cập nhật phiếu xuất!', 16, 1);
+            RAISERROR ('Chỉ admin mới có quyền cập nhật chi tiết phiếu xuất!', 16, 1);
             ROLLBACK;
             RETURN;
         END;
+
+        -- Kiểm tra phiếu xuất tồn tại
         IF NOT EXISTS (SELECT 1 FROM Export WHERE export_id = @export_id)
         BEGIN
             RAISERROR ('Phiếu xuất không tồn tại!', 16, 1);
             ROLLBACK;
             RETURN;
         END;
+
+        -- Lấy product_id từ product_name
+        DECLARE @product_id INT;
+        SELECT @product_id = product_id
+        FROM Product
+        WHERE product_name = @product_name;
+
+        IF @product_id IS NULL
+        BEGIN
+            RAISERROR ('Sản phẩm không tồn tại!', 16, 1);
+            ROLLBACK;
+            RETURN;
+        END;
+
+        -- Kiểm tra chi tiết phiếu xuất tồn tại
+        IF NOT EXISTS (SELECT 1 FROM ExportDetail WHERE export_id = @export_id AND product_id = @product_id)
+        BEGIN
+            RAISERROR ('Chi tiết phiếu xuất không tồn tại!', 16, 1);
+            ROLLBACK;
+            RETURN;
+        END;
+
+        -- Kiểm tra số lượng hợp lệ
+        IF @new_quantity <= 0
+        BEGIN
+            RAISERROR ('Số lượng phải lớn hơn 0!', 16, 1);
+            ROLLBACK;
+            RETURN;
+        END;
+
+        -- Kiểm tra stock_quantity đủ để xuất
+        DECLARE @stock_quantity INT;
+        SELECT @stock_quantity = stock_quantity
+        FROM Product
+        WHERE product_id = @product_id;
+
+        DECLARE @old_quantity INT;
+        SELECT @old_quantity = quantity
+        FROM ExportDetail
+        WHERE export_id = @export_id AND product_id = @product_id;
+
+        DECLARE @quantity_difference INT = @new_quantity - @old_quantity;
+        IF @stock_quantity - @quantity_difference < 0
+        BEGIN
+            RAISERROR ('Số lượng xuất vượt quá số lượng tồn kho!', 16, 1);
+            ROLLBACK;
+            RETURN;
+        END;
+
+        -- Lấy giá trị hiện tại của quantity và unit_price
+        DECLARE @old_unit_price DECIMAL(18,2);
+        SELECT @old_unit_price = unit_price
+        FROM ExportDetail
+        WHERE export_id = @export_id AND product_id = @product_id;
+
+        -- Kiểm tra xem có thay đổi không
+        IF @old_quantity = @new_quantity 
+           AND @old_unit_price = @new_unit_price
+        BEGIN
+            -- Không có thay đổi, đặt @is_updated = 0 và thoát
+            COMMIT TRANSACTION;
+            RETURN;
+        END;
+
+        -- Có thay đổi, đặt @is_updated = 1
+        SET @is_updated = 1;
+
+        -- Cập nhật chi tiết xuất hàng
+        UPDATE ExportDetail
+        SET quantity = @new_quantity,
+            unit_price = @new_unit_price
+        WHERE export_id = @export_id AND product_id = @product_id;
+
+        -- Cập nhật stock_quantity trong bảng Product
+        UPDATE Product
+        SET stock_quantity = stock_quantity - @quantity_difference
+        WHERE product_id = @product_id;
+
+        -- Cập nhật total_amount trong bảng Export
         UPDATE Export
-        SET customer_id = @customer_id,
-            export_date = @export_date,
-            total_amount = @total_amount
+        SET total_amount = dbo.fn_GetExportTotal(@export_id)
         WHERE export_id = @export_id;
+
         COMMIT TRANSACTION;
     END TRY
     BEGIN CATCH

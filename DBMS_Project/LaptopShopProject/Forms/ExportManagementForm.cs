@@ -204,6 +204,12 @@ namespace LaptopShopProject.Forms
                 return;
             }
 
+            if (dgvExportDetails.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select an export detail to update.", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (!ValidateExportInputs(out string errorMessage))
             {
                 MessageBox.Show(errorMessage, "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -212,6 +218,9 @@ namespace LaptopShopProject.Forms
 
             try
             {
+                var selectedExport = (Export)dgvExports.SelectedRows[0].DataBoundItem;
+                var selectedDetail = (ExportDetail)dgvExportDetails.SelectedRows[0].DataBoundItem;
+
                 string productName = txtProductName.Text.Trim();
                 bool productExists = await _productRepository.ProductExistsAsync(productName);
 
@@ -234,33 +243,44 @@ namespace LaptopShopProject.Forms
                     }
                 }
 
-                var selectedExport = (Export)dgvExports.SelectedRows[0].DataBoundItem;
-                var export = new Export
-                {
-                    ExportId = selectedExport.ExportId,
-                    CustomerId = (int)cboCustomer.SelectedValue,
-                    ExportDate = dtpExportDate.Value,
-                    TotalAmount = await _exportRepository.GetExportTotalAsync(selectedExport.ExportId)
-                };
-                await _exportRepository.UpdateExportAsync(_currentUser.UserId, export);
+                int newQuantity = int.Parse(txtQuantity.Text.Trim());
+                decimal newUnitPrice = decimal.Parse(txtUnitPrice.Text.Trim()); // Lấy UnitPrice mới từ txtUnitPrice
 
-                // Update or insert ExportDetail using ProductName
+                // Cập nhật ExportDetail
                 var detail = new ExportDetail
                 {
-                    ExportId = export.ExportId,
+                    ExportId = selectedExport.ExportId,
                     ProductName = productName,
-                    Quantity = int.Parse(txtQuantity.Text.Trim()),
-                    UnitPrice = decimal.Parse(txtUnitPrice.Text.Trim())
+                    Quantity = newQuantity,
+                    UnitPrice = newUnitPrice // Sử dụng giá trị mới từ txtUnitPrice
                 };
-                await _exportRepository.InsertExportDetailAsync(_currentUser.UserId, detail);
+                bool isUpdated = await _exportRepository.UpdateExportDetailAsync(_currentUser.UserId, detail);
 
-                // Recalculate TotalAmount
-                export.TotalAmount = await _exportRepository.GetExportTotalAsync(export.ExportId);
-                await _exportRepository.UpdateExportAsync(_currentUser.UserId, export);
+                // Hiển thị thông báo dựa trên kết quả từ stored procedure
+                if (isUpdated)
+                {
+                    MessageBox.Show("Export updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("No changes detected.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
 
-                MessageBox.Show("Export updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ClearInputs();
+                // Làm mới giao diện
                 await LoadExportsAsync();
+
+                // Tự động chọn lại dòng vừa cập nhật
+                foreach (DataGridViewRow row in dgvExports.Rows)
+                {
+                    var currentExport = (Export)row.DataBoundItem;
+                    if (currentExport.ExportId == selectedExport.ExportId)
+                    {
+                        row.Selected = true;
+                        await LoadExportDetailsAsync(selectedExport.ExportId);
+                        break;
+                    }
+                }
             }
             catch (Exception ex)
             {
