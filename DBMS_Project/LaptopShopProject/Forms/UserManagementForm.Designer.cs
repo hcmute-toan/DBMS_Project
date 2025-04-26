@@ -18,6 +18,7 @@
                 components.Dispose();
             }
             base.Dispose(disposing);
+            
         }
 
         #region Component Designer generated code
@@ -44,81 +45,94 @@
             // dgvUsers
             // 
             dgvUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvUsers.Location = new Point(345, 23);
+            dgvUsers.Location = new Point(394, 31);
+            dgvUsers.Margin = new Padding(3, 4, 3, 4);
             dgvUsers.Name = "dgvUsers";
-            dgvUsers.Size = new Size(510, 251);
+            dgvUsers.RowHeadersWidth = 51;
+            dgvUsers.Size = new Size(583, 335);
             dgvUsers.TabIndex = 0;
             dgvUsers.CellContentClick += dgvUsers_CellContentClick;
             // 
             // dgvPermisstionLogs
             // 
             dgvPermisstionLogs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvPermisstionLogs.Location = new Point(345, 304);
+            dgvPermisstionLogs.Location = new Point(394, 405);
+            dgvPermisstionLogs.Margin = new Padding(3, 4, 3, 4);
             dgvPermisstionLogs.Name = "dgvPermisstionLogs";
-            dgvPermisstionLogs.Size = new Size(510, 263);
+            dgvPermisstionLogs.RowHeadersWidth = 51;
+            dgvPermisstionLogs.Size = new Size(583, 351);
             dgvPermisstionLogs.TabIndex = 1;
             // 
             // txtUserName
             // 
-            txtUserName.Location = new Point(35, 23);
+            txtUserName.Location = new Point(40, 31);
+            txtUserName.Margin = new Padding(3, 4, 3, 4);
             txtUserName.Name = "txtUserName";
-            txtUserName.Size = new Size(218, 23);
+            txtUserName.Size = new Size(249, 27);
             txtUserName.TabIndex = 2;
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(35, 98);
+            txtPassword.Location = new Point(40, 131);
+            txtPassword.Margin = new Padding(3, 4, 3, 4);
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(218, 23);
+            txtPassword.Size = new Size(249, 27);
             txtPassword.TabIndex = 3;
             // 
             // cboRole
             // 
             cboRole.FormattingEnabled = true;
-            cboRole.Location = new Point(35, 181);
+            cboRole.Location = new Point(40, 241);
+            cboRole.Margin = new Padding(3, 4, 3, 4);
             cboRole.Name = "cboRole";
-            cboRole.Size = new Size(218, 23);
+            cboRole.Size = new Size(249, 28);
             cboRole.TabIndex = 4;
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(345, 608);
+            btnAdd.Location = new Point(394, 811);
+            btnAdd.Margin = new Padding(3, 4, 3, 4);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(93, 23);
+            btnAdd.Size = new Size(106, 31);
             btnAdd.TabIndex = 5;
             btnAdd.Text = "Add";
             btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(624, 608);
+            btnDelete.Location = new Point(713, 811);
+            btnDelete.Margin = new Padding(3, 4, 3, 4);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(89, 23);
+            btnDelete.Size = new Size(102, 31);
             btnDelete.TabIndex = 6;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnUpdate
             // 
-            btnUpdate.Location = new Point(485, 608);
+            btnUpdate.Location = new Point(554, 811);
+            btnUpdate.Margin = new Padding(3, 4, 3, 4);
             btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(93, 23);
+            btnUpdate.Size = new Size(106, 31);
             btnUpdate.TabIndex = 7;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = true;
             // 
             // btnRefresh
             // 
-            btnRefresh.Location = new Point(762, 608);
+            btnRefresh.Location = new Point(871, 811);
+            btnRefresh.Margin = new Padding(3, 4, 3, 4);
             btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(93, 23);
+            btnRefresh.Size = new Size(106, 31);
             btnRefresh.TabIndex = 8;
             btnRefresh.Text = "Refresh";
             btnRefresh.UseVisualStyleBackColor = true;
             // 
             // UserManagementForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightCyan;
             Controls.Add(btnRefresh);
@@ -130,8 +144,9 @@
             Controls.Add(txtUserName);
             Controls.Add(dgvPermisstionLogs);
             Controls.Add(dgvUsers);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "UserManagementForm";
-            Size = new Size(901, 651);
+            Size = new Size(1030, 868);
             ((System.ComponentModel.ISupportInitialize)dgvUsers).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvPermisstionLogs).EndInit();
             ResumeLayout(false);

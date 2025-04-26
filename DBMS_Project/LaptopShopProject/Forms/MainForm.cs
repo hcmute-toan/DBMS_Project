@@ -68,7 +68,7 @@ namespace LaptopStoreApp.Forms
         private void BtnUserManagement_Click(object sender, EventArgs e)
         {
             // Placeholder for UserManagementForm (as UserControl)
-            // ShowControl(new UserManagementForm(_currentUser));
+            ShowControl(new UserManagementForm(_currentUser.UserId));
             MessageBox.Show("User Management functionality not implemented yet.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

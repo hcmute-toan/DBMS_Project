@@ -42,15 +42,27 @@ namespace LaptopShopProject.DataAccess
         {
             using (var conn = DatabaseConnection.GetConnection())
             {
-                conn.Open();
-                using (var cmd = new SqlCommand("sp_InsertUser", conn))
+                try
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
-                    cmd.Parameters.AddWithValue("@username", username);
-                    cmd.Parameters.AddWithValue("@password", password);
-                    cmd.Parameters.AddWithValue("@role", role);
-                    cmd.ExecuteNonQuery();
+                    conn.Open();
+                    using (var cmd = new SqlCommand("sp_InsertUser", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
+                        cmd.Parameters.AddWithValue("@username", username);
+                        cmd.Parameters.AddWithValue("@password", password);
+                        cmd.Parameters.AddWithValue("@role", role);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    // Ném lại lỗi với thông báo từ cơ sở dữ liệu
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    conn.Close();
                 }
             }
         }
@@ -59,15 +71,26 @@ namespace LaptopShopProject.DataAccess
         {
             using (var conn = DatabaseConnection.GetConnection())
             {
-                conn.Open();
-                using (var cmd = new SqlCommand("sp_UpdateUser", conn))
+                try
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
-                    cmd.Parameters.AddWithValue("@user_id", userId);
-                    cmd.Parameters.AddWithValue("@username", username);
-                    cmd.Parameters.AddWithValue("@password", password);
-                    cmd.ExecuteNonQuery();
+                    conn.Open();
+                    using (var cmd = new SqlCommand("sp_UpdateUser", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
+                        cmd.Parameters.AddWithValue("@user_id", userId);
+                        cmd.Parameters.AddWithValue("@username", username);
+                        cmd.Parameters.AddWithValue("@password", password);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    conn.Close();
                 }
             }
         }
@@ -76,14 +99,25 @@ namespace LaptopShopProject.DataAccess
         {
             using (var conn = DatabaseConnection.GetConnection())
             {
-                conn.Open();
-                using (var cmd = new SqlCommand("sp_UpdateUserRole", conn))
+                try
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
-                    cmd.Parameters.AddWithValue("@user_id", userId);
-                    cmd.Parameters.AddWithValue("@role", role);
-                    cmd.ExecuteNonQuery();
+                    conn.Open();
+                    using (var cmd = new SqlCommand("sp_UpdateUserRole", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
+                        cmd.Parameters.AddWithValue("@user_id", userId);
+                        cmd.Parameters.AddWithValue("@role", role);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    conn.Close();
                 }
             }
         }
@@ -92,13 +126,24 @@ namespace LaptopShopProject.DataAccess
         {
             using (var conn = DatabaseConnection.GetConnection())
             {
-                conn.Open();
-                using (var cmd = new SqlCommand("sp_DeleteUser", conn))
+                try
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
-                    cmd.Parameters.AddWithValue("@user_id", userId);
-                    cmd.ExecuteNonQuery();
+                    conn.Open();
+                    using (var cmd = new SqlCommand("sp_DeleteUser", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
+                        cmd.Parameters.AddWithValue("@user_id", userId);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    conn.Close();
                 }
             }
         }
@@ -130,15 +175,17 @@ namespace LaptopShopProject.DataAccess
             return users;
         }
 
-        public List<PermissionLog> GetPermissionLogs()
+        public List<PermissionLog> GetPermissionLogs(int currentUserId)
         {
             var logs = new List<PermissionLog>();
             using (var conn = DatabaseConnection.GetConnection())
             {
                 conn.Open();
-                using (var cmd = new SqlCommand("SELECT * FROM PermissionLog", conn))
+                using (var cmd = new SqlCommand("sp_GetPermissionLogs", conn))
                 {
-                    using (var reader = cmd.ExecuteReader())
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
+                    using ( var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
