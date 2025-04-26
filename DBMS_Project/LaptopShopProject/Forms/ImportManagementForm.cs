@@ -227,6 +227,12 @@ namespace LaptopShopProject.Forms
                 return;
             }
 
+            if (dgvImportDetails.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select an import detail to update.", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (!ValidateImportInputs(out string errorMessage))
             {
                 MessageBox.Show(errorMessage, "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -236,17 +242,67 @@ namespace LaptopShopProject.Forms
             try
             {
                 var selectedImport = (Import)dgvImports.SelectedRows[0].DataBoundItem;
-                var import = new Import
+                var selectedDetail = (ImportDetail)dgvImportDetails.SelectedRows[0].DataBoundItem;
+
+                if (!int.TryParse(txtQuantity.Text, out int newQuantity))
+                {
+                    MessageBox.Show("Please enter a valid quantity.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (!decimal.TryParse(txtUnitPrice.Text, out decimal newUnitPrice))
+                {
+                    MessageBox.Show("Please enter a valid unit price.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                decimal newPrice;
+                if (!string.IsNullOrWhiteSpace(txtPrice.Text) && decimal.TryParse(txtPrice.Text, out decimal parsedPrice))
+                {
+                    newPrice = parsedPrice;
+                }
+                else
+                {
+                    // Nếu không nhập giá mới, lấy giá hiện tại từ sản phẩm
+                    var product = await GetProductByNameAsync(selectedDetail.ProductName);
+                    newPrice = product?.Price ?? selectedDetail.UnitPrice;
+                }
+
+                // Cập nhật ImportDetail và Price
+                var updatedDetail = new ImportDetail
                 {
                     ImportId = selectedImport.ImportId,
-                    SupplierId = (int)cboSupplier.SelectedValue,
-                    ImportDate = dtpImportDate.Value,
-                    TotalAmount = await _importRepository.GetImportTotalAsync(selectedImport.ImportId) // Cập nhật total_amount
+                    ProductName = selectedDetail.ProductName,
+                    Quantity = newQuantity,
+                    UnitPrice = newUnitPrice
                 };
-                await _importRepository.UpdateImportAsync(_currentUser.UserId, import);
-                MessageBox.Show("Import updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ClearInputs();
+                bool isUpdated = await _importRepository.UpdateImportAsync(_currentUser.UserId, updatedDetail, newPrice);
+
+                // Hiển thị thông báo dựa trên kết quả từ stored procedure
+                if (isUpdated)
+                {
+                    MessageBox.Show("Import updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("No changes detected.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                // Làm mới giao diện
                 await LoadImportsAsync();
+
+                // Tự động chọn lại dòng vừa cập nhật
+                foreach (DataGridViewRow row in dgvImports.Rows)
+                {
+                    var currentImport = (Import)row.DataBoundItem;
+                    if (currentImport.ImportId == selectedImport.ImportId)
+                    {
+                        row.Selected = true;
+                        await LoadImportDetailsAsync(selectedImport.ImportId);
+                        break;
+                    }
+                }
             }
             catch (Exception ex)
             {

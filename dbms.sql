@@ -18,9 +18,9 @@
  */
 
 -- Tạo database
-CREATE DATABASE LaptopStoreDB12;
+CREATE DATABASE LaptopStoreDB;
 GO
-USE LaptopStoreDB12;
+USE LaptopStoreDB;
 GO
 
 -- Tạo bảng Users
@@ -825,18 +825,22 @@ BEGIN
 END;
 GO
 
+
+
 -- Tạo stored procedure sp_InsertImport
 CREATE PROCEDURE sp_InsertImport
     @current_user_id INT,
     @supplier_id INT,
-    @import_date DATE
+    @import_date DATE,
+    @total_amount DECIMAL(18,2)
 AS
 BEGIN
     SET NOCOUNT ON;
     BEGIN TRY
         BEGIN TRANSACTION;
+        -- Bỏ tham số total_amount và khởi tạo bằng 0
         INSERT INTO Import (supplier_id, import_date, total_amount)
-        VALUES (@supplier_id, @import_date, 0);
+        VALUES (@supplier_id, @import_date, 0); -- Khởi tạo total_amount = 0
         DECLARE @import_id INT = SCOPE_IDENTITY();
         COMMIT TRANSACTION;
         SELECT @import_id AS import_id;
@@ -847,6 +851,7 @@ BEGIN
         RAISERROR (@ErrorMessage, 16, 1);
     END CATCH;
 END;
+GO
 GO
 
 -- Tạo stored procedure sp_InsertImportDetail
@@ -910,7 +915,7 @@ BEGIN
                 END;
 
                 INSERT INTO ProductCategory (product_id, category_id)
-                VALUES (@product_id, @category_id);
+VALUES (@product_id, @category_id);
             END;
         END;
 
@@ -941,31 +946,105 @@ GO
 CREATE PROCEDURE sp_UpdateImport
     @current_user_id INT,
     @import_id INT,
-    @supplier_id INT,
-    @import_date DATE,
-    @total_amount DECIMAL(18,2)
+    @product_name NVARCHAR(100),
+    @new_quantity INT,
+    @new_unit_price DECIMAL(18,2),
+    @new_price DECIMAL(18,2),
+    @is_updated BIT OUTPUT
 AS
 BEGIN
     SET NOCOUNT ON;
     BEGIN TRY
         BEGIN TRANSACTION;
+        SET @is_updated = 0; -- Khởi tạo biến đầu ra là 0 (không có thay đổi)
+
+        -- Kiểm tra quyền admin
         IF NOT EXISTS (SELECT 1 FROM Users WHERE user_id = @current_user_id AND role = 'admin')
         BEGIN
-            RAISERROR ('Chỉ admin mới có quyền cập nhật phiếu nhập!', 16, 1);
+            RAISERROR ('Chỉ admin mới có quyền cập nhật chi tiết phiếu nhập và giá sản phẩm!', 16, 1);
             ROLLBACK;
             RETURN;
         END;
+
+        -- Kiểm tra phiếu nhập tồn tại
         IF NOT EXISTS (SELECT 1 FROM Import WHERE import_id = @import_id)
         BEGIN
             RAISERROR ('Phiếu nhập không tồn tại!', 16, 1);
             ROLLBACK;
             RETURN;
         END;
+
+        -- Lấy product_id từ product_name
+        DECLARE @product_id INT;
+        SELECT @product_id = product_id
+        FROM Product
+        WHERE product_name = @product_name;
+
+        IF @product_id IS NULL
+        BEGIN
+            RAISERROR ('Sản phẩm không tồn tại!', 16, 1);
+            ROLLBACK;
+            RETURN;
+        END;
+
+        -- Kiểm tra chi tiết phiếu nhập tồn tại
+        IF NOT EXISTS (SELECT 1 FROM ImportDetail WHERE import_id = @import_id AND product_id = @product_id)
+        BEGIN
+            RAISERROR ('Chi tiết phiếu nhập không tồn tại!', 16, 1);
+            ROLLBACK;
+            RETURN;
+        END;
+
+        -- Kiểm tra số lượng hợp lệ
+        IF @new_quantity <= 0
+        BEGIN
+            RAISERROR ('Số lượng phải lớn hơn 0!', 16, 1);
+            ROLLBACK;
+            RETURN;
+        END;
+
+        -- Lấy giá trị hiện tại của quantity, unit_price và price
+        DECLARE @old_quantity INT;
+        DECLARE @old_unit_price DECIMAL(18,2);
+        DECLARE @old_price DECIMAL(18,2);
+        SELECT @old_quantity = quantity, @old_unit_price = unit_price
+        FROM ImportDetail
+        WHERE import_id = @import_id AND product_id = @product_id;
+
+        SELECT @old_price = price
+        FROM Product
+        WHERE product_id = @product_id;
+
+        -- Kiểm tra xem có thay đổi không
+        IF @old_quantity = @new_quantity 
+           AND @old_unit_price = @new_unit_price 
+           AND @old_price = @new_price
+        BEGIN
+            -- Không có thay đổi, đặt @is_updated = 0 và thoát
+            COMMIT TRANSACTION;
+            RETURN;
+        END;
+
+        -- Có thay đổi, đặt @is_updated = 1
+        SET @is_updated = 1;
+
+        -- Cập nhật chi tiết nhập hàng
+        UPDATE ImportDetail
+        SET quantity = @new_quantity,
+            unit_price = @new_unit_price
+        WHERE import_id = @import_id AND product_id = @product_id;
+
+        -- Cập nhật stock_quantity trong bảng Product
+        UPDATE Product
+        SET stock_quantity = stock_quantity - @old_quantity + @new_quantity,
+            price = @new_price
+        WHERE product_id = @product_id;
+
+        -- Cập nhật total_amount trong bảng Import
         UPDATE Import
-        SET supplier_id = @supplier_id,
-            import_date = @import_date,
-            total_amount = @total_amount
+        SET total_amount = dbo.fn_GetImportTotal(@import_id)
         WHERE import_id = @import_id;
+
         COMMIT TRANSACTION;
     END TRY
     BEGIN CATCH
@@ -974,6 +1053,7 @@ BEGIN
         RAISERROR (@ErrorMessage, 16, 1);
     END CATCH;
 END;
+GO
 GO
 
 -- Tạo stored procedure sp_DeleteImport

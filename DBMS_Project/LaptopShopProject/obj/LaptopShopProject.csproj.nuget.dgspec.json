@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\LaptopShopProject.csproj": {}
+    "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\LaptopShopProject.csproj": {}
   },
   "projects": {
-    "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\LaptopShopProject.csproj": {
+    "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\LaptopShopProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\LaptopShopProject.csproj",
+        "projectUniqueName": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\LaptopShopProject.csproj",
         "projectName": "LaptopShopProject",
-        "projectPath": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\LaptopShopProject.csproj",
-        "packagesPath": "C:\\Users\\vanco\\.nuget\\packages\\",
-        "outputPath": "D:\\HK2-N3-2024\\DBMS\\FinalLaptopShop\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\obj\\",
+        "projectPath": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\LaptopShopProject.csproj",
+        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+        "outputPath": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\vanco\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -78,7 +78,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

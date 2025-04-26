@@ -94,7 +94,6 @@ namespace LaptopShopProject.DataAccess
                         cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         cmd.Parameters.AddWithValue("@supplier_id", import.SupplierId);
                         cmd.Parameters.AddWithValue("@import_date", import.ImportDate);
-                        cmd.Parameters.AddWithValue("@total_amount", import.TotalAmount);
                         return (int)await cmd.ExecuteScalarAsync();
                     }
                 }
@@ -149,7 +148,7 @@ namespace LaptopShopProject.DataAccess
             }
         }
 
-        public async Task UpdateImportAsync(int currentUserId, Import import)
+        public async Task<bool> UpdateImportAsync(int currentUserId, ImportDetail detail, decimal newPrice)
         {
             try
             {
@@ -160,25 +159,45 @@ namespace LaptopShopProject.DataAccess
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
-                        cmd.Parameters.AddWithValue("@import_id", import.ImportId);
-                        cmd.Parameters.AddWithValue("@supplier_id", import.SupplierId);
-                        cmd.Parameters.AddWithValue("@import_date", import.ImportDate);
-                        cmd.Parameters.AddWithValue("@total_amount", import.TotalAmount);
+                        cmd.Parameters.AddWithValue("@import_id", detail.ImportId);
+                        cmd.Parameters.AddWithValue("@product_name", detail.ProductName);
+                        cmd.Parameters.AddWithValue("@new_quantity", detail.Quantity);
+                        cmd.Parameters.AddWithValue("@new_unit_price", detail.UnitPrice);
+                        cmd.Parameters.AddWithValue("@new_price", newPrice);
+
+                        // Thêm tham số đầu ra
+                        var isUpdatedParam = new SqlParameter("@is_updated", SqlDbType.Bit)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        cmd.Parameters.Add(isUpdatedParam);
+
                         await cmd.ExecuteNonQueryAsync();
+
+                        // Trả về giá trị của tham số đầu ra
+                        return (bool)isUpdatedParam.Value;
                     }
                 }
             }
             catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
             {
-                throw new UnauthorizedAccessException("Only admins can update imports.", ex);
+                throw new UnauthorizedAccessException("Only admins can update import details and product price.", ex);
             }
             catch (SqlException ex) when (ex.Message.Contains("Phiếu nhập không tồn tại"))
             {
                 throw new KeyNotFoundException("Import does not exist.", ex);
             }
-            catch (SqlException ex) when (ex.Number == 547)
+            catch (SqlException ex) when (ex.Message.Contains("Sản phẩm không tồn tại"))
             {
-                throw new InvalidOperationException("Invalid supplier ID.", ex);
+                throw new KeyNotFoundException("Product does not exist.", ex);
+            }
+            catch (SqlException ex) when (ex.Message.Contains("Chi tiết phiếu nhập không tồn tại"))
+            {
+                throw new KeyNotFoundException("Import detail does not exist.", ex);
+            }
+            catch (SqlException ex) when (ex.Message.Contains("Số lượng phải lớn hơn 0"))
+            {
+                throw new InvalidOperationException("Quantity must be greater than 0.", ex);
             }
             catch (SqlException ex)
             {
