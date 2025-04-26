@@ -48,7 +48,6 @@
             dgvUsers.Name = "dgvUsers";
             dgvUsers.Size = new Size(510, 251);
             dgvUsers.TabIndex = 0;
-            dgvUsers.CellContentClick += dgvUsers_CellContentClick;
             // 
             // dgvPermisstionLogs
             // 

@@ -9,11 +9,13 @@ namespace LaptopShopProject.Models
     public class PermissionLog
     {
         public int LogId { get; set; }
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
+        public string Username { get; set; }
         public string Action { get; set; }
         public string OldRole { get; set; }
         public string NewRole { get; set; }
         public DateTime ActionDate { get; set; }
-        public int PerformedBy { get; set; }
+        public int? PerformedBy { get; set; }
+        public string PerformedByUsername { get; set; }
     }
 }

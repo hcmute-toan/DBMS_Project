@@ -1,160 +1,265 @@
 ﻿using LaptopShopProject.Models;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
-using Microsoft.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LaptopShopProject.DataAccess
 {
     public class UserRepository
     {
-        public User Login(string username, string password)
+        public async Task<User> LoginAsync(string username, string password)
         {
-            using (var conn = DatabaseConnection.GetConnection())
+            try
             {
-                conn.Open();
-                using (var cmd = new SqlCommand("sp_Login", conn))
+                using (var conn = DatabaseConnection.GetConnection())
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@username", username);
-                    cmd.Parameters.AddWithValue("@password", password);
-                    using (var reader = cmd.ExecuteReader())
+                    await conn.OpenAsync();
+                    using (var cmd = new SqlCommand("sp_Login", conn))
                     {
-                        if (reader.Read())
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@username", username);
+                        cmd.Parameters.AddWithValue("@password", password);
+                        using (var reader = await cmd.ExecuteReaderAsync())
                         {
-                            return new User
+                            if (await reader.ReadAsync())
                             {
-                                UserId = reader.GetInt32(0),
-                                Username = reader.GetString(1),
-                                Role = reader.GetString(2)
-                            };
+                                return new User
+                                {
+                                    UserId = reader.GetInt32(0),
+                                    Username = reader.GetString(1),
+                                    Role = reader.GetString(2)
+                                };
+                            }
                         }
                     }
                 }
+                return null;
             }
-            return null;
+            catch (SqlException ex)
+            {
+                throw new Exception("Error during login: " + ex.Message, ex);
+            }
         }
 
-        public void InsertUser(int currentUserId, string username, string password, string role)
+        public async Task<int> InsertUserAsync(int currentUserId, string username, string password, string role)
         {
-            using (var conn = DatabaseConnection.GetConnection())
+            try
             {
-                conn.Open();
-                using (var cmd = new SqlCommand("sp_InsertUser", conn))
+                using (var conn = DatabaseConnection.GetConnection())
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
-                    cmd.Parameters.AddWithValue("@username", username);
-                    cmd.Parameters.AddWithValue("@password", password);
-                    cmd.Parameters.AddWithValue("@role", role);
-                    cmd.ExecuteNonQuery();
+                    await conn.OpenAsync();
+                    using (var cmd = new SqlCommand("sp_InsertUser", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
+                        cmd.Parameters.AddWithValue("@username", username);
+                        cmd.Parameters.AddWithValue("@password", password);
+                        cmd.Parameters.AddWithValue("@role", role);
+                        return (int)await cmd.ExecuteScalarAsync();
+                    }
                 }
             }
-        }
-
-        public void UpdateUser(int currentUserId, int userId, string username, string password)
-        {
-            using (var conn = DatabaseConnection.GetConnection())
+            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601)
             {
-                conn.Open();
-                using (var cmd = new SqlCommand("sp_UpdateUser", conn))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
-                    cmd.Parameters.AddWithValue("@user_id", userId);
-                    cmd.Parameters.AddWithValue("@username", username);
-                    cmd.Parameters.AddWithValue("@password", password);
-                    cmd.ExecuteNonQuery();
-                }
+                throw new InvalidOperationException("A user with this username already exists.", ex);
+            }
+            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
+            {
+                throw new UnauthorizedAccessException("Only admins can create users.", ex);
+            }
+            catch (SqlException ex) when (ex.Message.Contains("Vai trò không hợp lệ"))
+            {
+                throw new InvalidOperationException("Invalid role. Must be 'admin' or 'employee'.", ex);
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error inserting user: " + ex.Message, ex);
             }
         }
 
-        public void UpdateUserRole(int currentUserId, int userId, string role)
+        public async Task UpdateUserAsync(int currentUserId, int userId, string username, string password)
         {
-            using (var conn = DatabaseConnection.GetConnection())
+            try
             {
-                conn.Open();
-                using (var cmd = new SqlCommand("sp_UpdateUserRole", conn))
+                using (var conn = DatabaseConnection.GetConnection())
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
-                    cmd.Parameters.AddWithValue("@user_id", userId);
-                    cmd.Parameters.AddWithValue("@role", role);
-                    cmd.ExecuteNonQuery();
+                    await conn.OpenAsync();
+                    using (var cmd = new SqlCommand("sp_UpdateUser", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
+                        cmd.Parameters.AddWithValue("@user_id", userId);
+                        cmd.Parameters.AddWithValue("@username", username);
+                        cmd.Parameters.AddWithValue("@password", password);
+                        await cmd.ExecuteNonQueryAsync();
+                    }
                 }
+            }
+            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601)
+            {
+                throw new InvalidOperationException("A user with this username already exists.", ex);
+            }
+            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
+            {
+                throw new UnauthorizedAccessException("Only admins can update users.", ex);
+            }
+            catch (SqlException ex) when (ex.Message.Contains("Tài khoản không tồn tại"))
+            {
+                throw new KeyNotFoundException("User does not exist.", ex);
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error updating user: " + ex.Message, ex);
             }
         }
 
-        public void DeleteUser(int currentUserId, int userId)
+        public async Task UpdateUserRoleAsync(int currentUserId, int userId, string role)
         {
-            using (var conn = DatabaseConnection.GetConnection())
+            try
             {
-                conn.Open();
-                using (var cmd = new SqlCommand("sp_DeleteUser", conn))
+                using (var conn = DatabaseConnection.GetConnection())
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
-                    cmd.Parameters.AddWithValue("@user_id", userId);
-                    cmd.ExecuteNonQuery();
+                    await conn.OpenAsync();
+                    using (var cmd = new SqlCommand("sp_UpdateUserRole", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
+                        cmd.Parameters.AddWithValue("@user_id", userId);
+                        cmd.Parameters.AddWithValue("@role", role);
+                        await cmd.ExecuteNonQueryAsync();
+                    }
                 }
+            }
+            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
+            {
+                throw new UnauthorizedAccessException("Only admins can update user roles.", ex);
+            }
+            catch (SqlException ex) when (ex.Message.Contains("Tài khoản không tồn tại"))
+            {
+                throw new KeyNotFoundException("User does not exist.", ex);
+            }
+            catch (SqlException ex) when (ex.Message.Contains("Vai trò không hợp lệ"))
+            {
+                throw new InvalidOperationException("Invalid role. Must be 'admin' or 'employee'.", ex);
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error updating user role: " + ex.Message, ex);
             }
         }
 
-        public List<User> GetAllUsers(int currentUserId)
+        public async Task DeleteUserAsync(int currentUserId, int userId)
+        {
+            try
+            {
+                using (var conn = DatabaseConnection.GetConnection())
+                {
+                    await conn.OpenAsync();
+                    using (var cmd = new SqlCommand("sp_DeleteUser", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
+                        cmd.Parameters.AddWithValue("@user_id", userId);
+                        await cmd.ExecuteNonQueryAsync();
+                    }
+                }
+            }
+            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
+            {
+                throw new UnauthorizedAccessException("Only admins can delete users.", ex);
+            }
+            catch (SqlException ex) when (ex.Message.Contains("Tài khoản không tồn tại"))
+            {
+                throw new KeyNotFoundException("User does not exist.", ex);
+            }
+            catch (SqlException ex) when (ex.Message.Contains("Không thể xóa chính tài khoản"))
+            {
+                throw new InvalidOperationException("Cannot delete your own account.", ex);
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error deleting user: " + ex.Message, ex);
+            }
+        }
+
+        public async Task<List<User>> GetAllUsersAsync(int currentUserId)
         {
             var users = new List<User>();
-            using (var conn = DatabaseConnection.GetConnection())
+            try
             {
-                conn.Open();
-                using (var cmd = new SqlCommand("sp_GetAllUsers", conn))
+                using (var conn = DatabaseConnection.GetConnection())
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
-                    using (var reader = cmd.ExecuteReader())
+                    await conn.OpenAsync();
+                    using (var cmd = new SqlCommand("sp_GetAllUsers", conn))
                     {
-                        while (reader.Read())
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
+                        using (var reader = await cmd.ExecuteReaderAsync())
                         {
-                            users.Add(new User
+                            while (await reader.ReadAsync())
                             {
-                                UserId = reader.GetInt32(0),
-                                Username = reader.GetString(1),
-                                Role = reader.GetString(2)
-                            });
+                                users.Add(new User
+                                {
+                                    UserId = reader.GetInt32(0),
+                                    Username = reader.GetString(1),
+                                    Role = reader.GetString(2)
+                                });
+                            }
                         }
                     }
                 }
+            }
+            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
+            {
+                throw new UnauthorizedAccessException("Only admins can view user list.", ex);
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error retrieving users: " + ex.Message, ex);
             }
             return users;
         }
 
-        public List<PermissionLog> GetPermissionLogs()
+        public async Task<List<PermissionLog>> GetPermissionLogsAsync(int currentUserId)
         {
             var logs = new List<PermissionLog>();
-            using (var conn = DatabaseConnection.GetConnection())
+            try
             {
-                conn.Open();
-                using (var cmd = new SqlCommand("SELECT * FROM PermissionLog", conn))
+                using (var conn = DatabaseConnection.GetConnection())
                 {
-                    using (var reader = cmd.ExecuteReader())
+                    await conn.OpenAsync();
+                    using (var cmd = new SqlCommand("sp_GetPermissionLogs", conn))
                     {
-                        while (reader.Read())
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
+                        using (var reader = await cmd.ExecuteReaderAsync())
                         {
-                            logs.Add(new PermissionLog
+                            while (await reader.ReadAsync())
                             {
-                                LogId = reader.GetInt32(0),
-                                UserId = reader.GetInt32(1),
-                                Action = reader.GetString(2),
-                                OldRole = reader.IsDBNull(3) ? null : reader.GetString(3),
-                                NewRole = reader.IsDBNull(4) ? null : reader.GetString(4),
-                                ActionDate = reader.GetDateTime(5),
-                                PerformedBy = reader.GetInt32(6)
-                            });
+                                logs.Add(new PermissionLog
+                                {
+                                    LogId = reader.GetInt32(0),
+                                    Username = reader.GetString(1),
+                                    Action = reader.GetString(2),
+                                    OldRole = reader.IsDBNull(3) ? null : reader.GetString(3),
+                                    NewRole = reader.IsDBNull(4) ? null : reader.GetString(4),
+                                    ActionDate = reader.GetDateTime(5),
+                                    PerformedByUsername = reader.GetString(6)
+                                });
+                            }
                         }
                     }
                 }
+            }
+            catch (SqlException ex) when (ex.Message.Contains("Only admin"))
+            {
+                throw new UnauthorizedAccessException("Only admins can view permission logs.", ex);
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error retrieving permission logs: " + ex.Message, ex);
             }
             return logs;
         }

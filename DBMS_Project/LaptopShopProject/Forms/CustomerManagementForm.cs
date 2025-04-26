@@ -1,188 +1,194 @@
 ﻿using LaptopShopProject.DataAccess;
 using LaptopShopProject.Models;
 using System;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LaptopShopProject.Forms
 {
     public partial class CustomerManagementForm : UserControl
     {
-        private readonly User _currentUser;
         private readonly CustomerRepository _customerRepository;
-        private int _selectedCustomerId = 0;
+        private readonly User _currentUser;
 
         public CustomerManagementForm(User currentUser)
         {
             InitializeComponent();
-            _currentUser = currentUser;
             _customerRepository = new CustomerRepository();
-            LoadCustomers();
+            _currentUser = currentUser;
+            LoadCustomersAsync(); // Non-awaited call in constructor
         }
 
-        private void LoadCustomers()
+        private async Task LoadCustomersAsync()
         {
             try
             {
-                var customers = _customerRepository.GetAllCustomers(_currentUser.UserId);
+                var customers = await _customerRepository.GetAllCustomersAsync(_currentUser.UserId);
                 dgvCustomers.DataSource = customers;
+                ConfigureDataGridView();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading customers: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
-                // Configure DataGridView columns
+        private void ConfigureDataGridView()
+        {
+            if (dgvCustomers.Columns.Contains("CustomerId"))
                 dgvCustomers.Columns["CustomerId"].HeaderText = "ID";
-                dgvCustomers.Columns["CustomerName"].HeaderText = "Customer Name";
+            if (dgvCustomers.Columns.Contains("CustomerName"))
+                dgvCustomers.Columns["CustomerName"].HeaderText = "Name";
+            if (dgvCustomers.Columns.Contains("ContactInfo"))
                 dgvCustomers.Columns["ContactInfo"].HeaderText = "Contact Info";
+            dgvCustomers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
 
-                // Clear selection
-                dgvCustomers.ClearSelection();
+        private async void btnAdd_Click(object sender, EventArgs e)
+        {
+            string customerName = txtCustomerName.Text.Trim();
+            string contactInfo = txtContactInfo.Text.Trim();
+
+            if (string.IsNullOrEmpty(customerName) || string.IsNullOrEmpty(contactInfo))
+            {
+                MessageBox.Show("Customer name and contact info are required.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                var customer = new Customer
+                {
+                    CustomerName = customerName,
+                    ContactInfo = contactInfo
+                };
+                int customerId = await _customerRepository.InsertCustomerAsync(_currentUser.UserId, customer);
+                MessageBox.Show($"Customer added successfully with ID: {customerId}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearInputs();
+                await LoadCustomersAsync();
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                MessageBox.Show(ex.Message, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading customers: {ex.Message}", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error adding customer: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void ClearInputs()
+        private async void btnUpdate_Click(object sender, EventArgs e)
         {
-            txtCustomerName.Text = string.Empty;
-            txtContactInfo.Text = string.Empty;
-            _selectedCustomerId = 0;
-        }
+            if (dgvCustomers.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a customer to update.", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
+            string customerName = txtCustomerName.Text.Trim();
+            string contactInfo = txtContactInfo.Text.Trim();
+
+            if (string.IsNullOrEmpty(customerName) || string.IsNullOrEmpty(contactInfo))
+            {
+                MessageBox.Show("Customer name and contact info are required.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             try
             {
-                if (string.IsNullOrWhiteSpace(txtCustomerName.Text))
-                {
-                    MessageBox.Show("Customer name is required.", "Validation Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                if (string.IsNullOrWhiteSpace(txtContactInfo.Text))
-                {
-                    MessageBox.Show("Contact information is required.", "Validation Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
+                var selectedCustomer = (Customer)dgvCustomers.SelectedRows[0].DataBoundItem;
                 var customer = new Customer
                 {
-                    CustomerName = txtCustomerName.Text.Trim(),
-                    ContactInfo = txtContactInfo.Text.Trim()
+                    CustomerId = selectedCustomer.CustomerId,
+                    CustomerName = customerName,
+                    ContactInfo = contactInfo
                 };
-
-                _customerRepository.InsertCustomer(_currentUser.UserId, customer);
-                MessageBox.Show("Customer added successfully!", "Success",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                LoadCustomers();
+                await _customerRepository.UpdateCustomerAsync(_currentUser.UserId, customer);
+                MessageBox.Show("Customer updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ClearInputs();
+                await LoadCustomersAsync();
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                MessageBox.Show(ex.Message, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                MessageBox.Show(ex.Message, "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error adding customer: {ex.Message}", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error updating customer: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private async void btnDelete_Click(object sender, EventArgs e)
         {
-            try
+            if (dgvCustomers.SelectedRows.Count == 0)
             {
-                if (_selectedCustomerId == 0)
-                {
-                    MessageBox.Show("Please select a customer to update.", "Validation Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                if (string.IsNullOrWhiteSpace(txtCustomerName.Text))
-                {
-                    MessageBox.Show("Customer name is required.", "Validation Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                if (string.IsNullOrWhiteSpace(txtContactInfo.Text))
-                {
-                    MessageBox.Show("Contact information is required.", "Validation Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                var customer = new Customer
-                {
-                    CustomerId = _selectedCustomerId,
-                    CustomerName = txtCustomerName.Text.Trim(),
-                    ContactInfo = txtContactInfo.Text.Trim()
-                };
-
-                _customerRepository.UpdateCustomer(_currentUser.UserId, customer);
-                MessageBox.Show("Customer updated successfully!", "Success",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                LoadCustomers();
+                MessageBox.Show("Please select a customer to delete.", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            catch (Exception ex)
+
+            if (MessageBox.Show("Are you sure you want to delete this customer?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                MessageBox.Show($"Error updating customer: {ex.Message}", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                try
+                {
+                    var selectedCustomer = (Customer)dgvCustomers.SelectedRows[0].DataBoundItem;
+                    await _customerRepository.DeleteCustomerAsync(_currentUser.UserId, selectedCustomer.CustomerId);
+                    MessageBox.Show("Customer deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ClearInputs();
+                    await LoadCustomersAsync();
+                }
+                catch (InvalidOperationException ex)
+                {
+                    MessageBox.Show(ex.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    MessageBox.Show(ex.Message, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (KeyNotFoundException ex)
+                {
+                    MessageBox.Show(ex.Message, "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error deleting customer: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private async void btnRefresh_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (_selectedCustomerId == 0)
-                {
-                    MessageBox.Show("Please select a customer to delete.", "Validation Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                DialogResult result = MessageBox.Show(
-                    "Are you sure you want to delete this customer?",
-                    "Confirm Delete",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-
-                if (result == DialogResult.Yes)
-                {
-                    _customerRepository.DeleteCustomer(_currentUser.UserId, _selectedCustomerId);
-                    MessageBox.Show("Customer deleted successfully!", "Success",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    LoadCustomers();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error deleting customer: {ex.Message}", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            LoadCustomers();
+            ClearInputs();
+            await LoadCustomersAsync();
         }
 
         private void dgvCustomers_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvCustomers.SelectedRows.Count > 0)
             {
-                var selectedRow = dgvCustomers.SelectedRows[0];
-                var customer = selectedRow.DataBoundItem as Customer;
-
-                if (customer != null)
-                {
-                    _selectedCustomerId = customer.CustomerId;
-                    txtCustomerName.Text = customer.CustomerName;
-                    txtContactInfo.Text = customer.ContactInfo;
-                }
+                var selectedCustomer = (Customer)dgvCustomers.SelectedRows[0].DataBoundItem;
+                txtCustomerName.Text = selectedCustomer.CustomerName;
+                txtContactInfo.Text = selectedCustomer.ContactInfo;
             }
+        }
+
+        private void ClearInputs()
+        {
+            txtCustomerName.Clear();
+            txtContactInfo.Clear();
+            dgvCustomers.ClearSelection();
         }
     }
 }

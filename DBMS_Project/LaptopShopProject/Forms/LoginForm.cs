@@ -2,6 +2,7 @@
 using LaptopShopProject.Models;
 using System;
 using System.Windows.Forms;
+using System.Threading.Tasks; // Add this for Task support
 
 namespace LaptopStoreApp.Forms
 {
@@ -17,7 +18,7 @@ namespace LaptopStoreApp.Forms
             txtPassword.UseSystemPasswordChar = true;
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private async void btnLogin_Click(object sender, EventArgs e) // Make the event handler async
         {
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text.Trim();
@@ -31,8 +32,8 @@ namespace LaptopStoreApp.Forms
 
             try
             {
-                // Attempt to log in using UserRepository
-                User user = _userRepository.Login(username, password);
+                // Attempt to log in using UserRepository asynchronously
+                User user = await _userRepository.LoginAsync(username, password); // Use LoginAsync with await
 
                 if (user != null)
                 {

@@ -8,7 +8,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Forms\ExportManagementForm.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Forms\ImportManagementForm.cs">
       <SubType>UserControl</SubType>

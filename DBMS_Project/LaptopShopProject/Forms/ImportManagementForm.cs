@@ -1,7 +1,8 @@
 ﻿using LaptopShopProject.DataAccess;
 using LaptopShopProject.Models;
 using System;
-using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LaptopShopProject.Forms
@@ -10,54 +11,33 @@ namespace LaptopShopProject.Forms
     {
         private readonly ImportRepository _importRepository;
         private readonly SupplierRepository _supplierRepository;
-        private readonly ProductRepository _productRepository;
-        private int _currentUserId; // Set this based on logged-in user
-        private int _selectedImportId = -1;
+        private readonly User _currentUser;
 
-        public ImportManagementForm(int currentUserId)
+        public ImportManagementForm(User currentUser)
         {
             InitializeComponent();
             _importRepository = new ImportRepository();
             _supplierRepository = new SupplierRepository();
-            _productRepository = new ProductRepository();
-            _currentUserId = currentUserId;
-            InitializeForm();
+            _currentUser = currentUser;
+            LoadSuppliersAsync(); // Non-awaited in constructor
+            LoadImportsAsync(); // Non-awaited in constructor
+            ConfigureEventHandlers();
         }
 
-        private void InitializeForm()
+        private void ConfigureEventHandlers()
         {
-            LoadSuppliers();
-            LoadImports();
-            ConfigureDataGridViews();
-            ClearInputFields();
-            btnUpdate.Enabled = false;
-            btnDelete.Enabled = false;
+            btnAdd.Click += btnAdd_Click;
+            btnUpdate.Click += btnUpdate_Click;
+            btnDelete.Click += btnDelete_Click;
+            btnRefresh.Click += btnRefresh_Click;
+            dgvImports.SelectionChanged += dgvImports_SelectionChanged;
         }
 
-        private void ConfigureDataGridViews()
-        {
-            // Configure dgvImports
-            dgvImports.AutoGenerateColumns = false;
-            dgvImports.Columns.Clear();
-            dgvImports.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "ImportId", HeaderText = "Import ID" });
-            dgvImports.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "SupplierName", HeaderText = "Supplier" });
-            dgvImports.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "ImportDate", HeaderText = "Import Date" });
-            dgvImports.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "TotalAmount", HeaderText = "Total Amount" });
-
-            // Configure dgvImportDetails
-            dgvImportDetails.AutoGenerateColumns = false;
-            dgvImportDetails.Columns.Clear();
-            dgvImportDetails.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "ProductId", HeaderText = "Product ID" });
-            dgvImportDetails.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "ProductName", HeaderText = "Product Name" });
-            dgvImportDetails.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Quantity", HeaderText = "Quantity" });
-            dgvImportDetails.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "UnitPrice", HeaderText = "Unit Price" });
-        }
-
-        private void LoadSuppliers()
+        private async Task LoadSuppliersAsync()
         {
             try
             {
-                var suppliers = _supplierRepository.GetAllSuppliers(_currentUserId);
+                var suppliers = await _supplierRepository.GetAllSuppliersAsync(_currentUser.UserId);
                 cboSupplier.DataSource = suppliers;
                 cboSupplier.DisplayMember = "SupplierName";
                 cboSupplier.ValueMember = "SupplierId";
@@ -68,21 +48,20 @@ namespace LaptopShopProject.Forms
             }
         }
 
-        private void LoadImports()
+        private async Task LoadImportsAsync()
         {
             try
             {
-                var imports = _importRepository.GetAllImports();
+                var imports = await _importRepository.GetAllImportsAsync();
                 dgvImports.DataSource = imports;
-                if (imports.Count > 0)
+                ConfigureImportDataGridView();
+                if (imports.Any())
                 {
-                    _selectedImportId = imports[0].ImportId;
-                    LoadImportDetails(_selectedImportId);
+                    await LoadImportDetailsAsync(imports.First().ImportId);
                 }
                 else
                 {
                     dgvImportDetails.DataSource = null;
-                    lblTotalAmount.Text = "Total Amount: 0";
                 }
             }
             catch (Exception ex)
@@ -91,13 +70,14 @@ namespace LaptopShopProject.Forms
             }
         }
 
-        private void LoadImportDetails(int importId)
+        private async Task LoadImportDetailsAsync(int importId)
         {
             try
             {
-                var details = _importRepository.GetImportDetails(importId);
+                var details = await _importRepository.GetImportDetailsAsync(importId);
                 dgvImportDetails.DataSource = details;
-                decimal totalAmount = _importRepository.GetImportTotal(importId);
+                ConfigureImportDetailsDataGridView();
+                decimal totalAmount = await _importRepository.GetImportTotalAsync(importId);
                 lblTotalAmount.Text = $"Total Amount: {totalAmount:C}";
             }
             catch (Exception ex)
@@ -106,93 +86,79 @@ namespace LaptopShopProject.Forms
             }
         }
 
-        private void ClearInputFields()
+        private void ConfigureImportDataGridView()
         {
-            txtProductName.Text = "";
-            txtQuantity.Text = "";
-            txtUnitPrice.Text = "";
-            txtPrice.Text = "";
-            dtpImportDate.Value = DateTime.Now;
-            cboSupplier.SelectedIndex = -1;
-            btnAdd.Enabled = true;
-            btnUpdate.Enabled = false;
-            btnDelete.Enabled = false;
+            if (dgvImports.Columns.Contains("ImportId"))
+                dgvImports.Columns["ImportId"].HeaderText = "ID";
+            if (dgvImports.Columns.Contains("SupplierId"))
+                dgvImports.Columns["SupplierId"].Visible = false;
+            if (dgvImports.Columns.Contains("SupplierName"))
+                dgvImports.Columns["SupplierName"].HeaderText = "Supplier";
+            if (dgvImports.Columns.Contains("ImportDate"))
+                dgvImports.Columns["ImportDate"].HeaderText = "Date";
+            if (dgvImports.Columns.Contains("TotalAmount"))
+                dgvImports.Columns["TotalAmount"].HeaderText = "Total Amount";
+            dgvImports.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void ConfigureImportDetailsDataGridView()
         {
+            if (dgvImportDetails.Columns.Contains("ImportId"))
+                dgvImportDetails.Columns["ImportId"].Visible = false;
+            if (dgvImportDetails.Columns.Contains("ProductId"))
+                dgvImportDetails.Columns["ProductId"].HeaderText = "Product ID";
+            if (dgvImportDetails.Columns.Contains("ProductName"))
+                dgvImportDetails.Columns["ProductName"].HeaderText = "Product";
+            if (dgvImportDetails.Columns.Contains("Quantity"))
+                dgvImportDetails.Columns["Quantity"].HeaderText = "Quantity";
+            if (dgvImportDetails.Columns.Contains("UnitPrice"))
+                dgvImportDetails.Columns["UnitPrice"].HeaderText = "Unit Price";
+            dgvImportDetails.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+        private async void btnAdd_Click(object sender, EventArgs e)
+        {
+            if (!ValidateImportInputs(out string errorMessage))
+            {
+                MessageBox.Show(errorMessage, "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             try
             {
-                // Validate inputs
-                if (string.IsNullOrWhiteSpace(txtProductName.Text))
+                var import = new Import
                 {
-                    MessageBox.Show("Product name is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                if (!int.TryParse(txtQuantity.Text, out int quantity) || quantity <= 0)
-                {
-                    MessageBox.Show("Quantity must be a positive number.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                if (!decimal.TryParse(txtUnitPrice.Text, out decimal unitPrice) || unitPrice <= 0)
-                {
-                    MessageBox.Show("Unit price must be a positive number.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                if (cboSupplier.SelectedValue == null)
-                {
-                    MessageBox.Show("Please select a supplier.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                decimal? price = null;
-                if (!string.IsNullOrWhiteSpace(txtPrice.Text))
-                {
-                    if (!decimal.TryParse(txtPrice.Text, out decimal parsedPrice) || parsedPrice <= 0)
-                    {
-                        MessageBox.Show("Price must be a positive number if provided.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-                    price = parsedPrice;
-                }
-
-                // Create new import if no import is selected or create a new one
-                if (_selectedImportId == -1)
-                {
-                    var import = new Import
-                    {
-                        SupplierId = (int)cboSupplier.SelectedValue,
-                        ImportDate = dtpImportDate.Value,
-                        TotalAmount = 0 // Will be updated after adding details
-                    };
-                    _selectedImportId = _importRepository.InsertImport(_currentUserId, import);
-                }
-
-                // Add import detail
-                var detail = new ImportDetail
-                {
-                    ImportId = _selectedImportId,
-                    ProductName = txtProductName.Text.Trim(),
-                    Quantity = quantity,
-                    UnitPrice = unitPrice
-                };
-                _importRepository.InsertImportDetail(_currentUserId, detail, price);
-
-                // Update total amount
-                decimal totalAmount = _importRepository.GetImportTotal(_selectedImportId);
-                var updatedImport = new Import
-                {
-                    ImportId = _selectedImportId,
                     SupplierId = (int)cboSupplier.SelectedValue,
                     ImportDate = dtpImportDate.Value,
-                    TotalAmount = totalAmount
+                    TotalAmount = 0 // Will be calculated by details
                 };
-                _importRepository.UpdateImport(_currentUserId, updatedImport);
+                int importId = await _importRepository.InsertImportAsync(_currentUser.UserId, import);
 
-                MessageBox.Show("Import detail added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadImports();
-                LoadImportDetails(_selectedImportId);
-                ClearInputFields();
+                var detail = new ImportDetail
+                {
+                    ImportId = importId,
+                    ProductName = txtProductName.Text.Trim(),
+                    Quantity = int.Parse(txtQuantity.Text.Trim()),
+                    UnitPrice = decimal.Parse(txtUnitPrice.Text.Trim())
+                };
+                decimal? price = string.IsNullOrEmpty(txtPrice.Text.Trim()) ? (decimal?)null : decimal.Parse(txtPrice.Text.Trim());
+                int productId = await _importRepository.InsertImportDetailAsync(_currentUser.UserId, detail, price);
+
+                MessageBox.Show($"Import added successfully with ID: {importId}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ClearInputs();
+                await LoadImportsAsync();
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                MessageBox.Show(ex.Message, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                MessageBox.Show(ex.Message, "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (Exception ex)
             {
@@ -200,33 +166,46 @@ namespace LaptopShopProject.Forms
             }
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private async void btnUpdate_Click(object sender, EventArgs e)
         {
+            if (dgvImports.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select an import to update.", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!ValidateImportInputs(out string errorMessage))
+            {
+                MessageBox.Show(errorMessage, "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             try
             {
-                if (_selectedImportId == -1)
-                {
-                    MessageBox.Show("Please select an import to update.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                if (cboSupplier.SelectedValue == null)
-                {
-                    MessageBox.Show("Please select a supplier.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
+                var selectedImport = (Import)dgvImports.SelectedRows[0].DataBoundItem;
                 var import = new Import
                 {
-                    ImportId = _selectedImportId,
+                    ImportId = selectedImport.ImportId,
                     SupplierId = (int)cboSupplier.SelectedValue,
                     ImportDate = dtpImportDate.Value,
-                    TotalAmount = _importRepository.GetImportTotal(_selectedImportId)
+                    TotalAmount = await _importRepository.GetImportTotalAsync(selectedImport.ImportId)
                 };
-                _importRepository.UpdateImport(_currentUserId, import);
-
+                await _importRepository.UpdateImportAsync(_currentUser.UserId, import);
                 MessageBox.Show("Import updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadImports();
-                ClearInputFields();
+                ClearInputs();
+                await LoadImportsAsync();
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                MessageBox.Show(ex.Message, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                MessageBox.Show(ex.Message, "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (Exception ex)
             {
@@ -234,57 +213,84 @@ namespace LaptopShopProject.Forms
             }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private async void btnDelete_Click(object sender, EventArgs e)
         {
-            try
+            if (dgvImports.SelectedRows.Count == 0)
             {
-                if (_selectedImportId == -1)
-                {
-                    MessageBox.Show("Please select an import to delete.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
+                MessageBox.Show("Please select an import to delete.", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-                if (MessageBox.Show("Are you sure you want to delete this import?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Are you sure you want to delete this import?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                try
                 {
-                    _importRepository.DeleteImport(_currentUserId, _selectedImportId);
+                    var selectedImport = (Import)dgvImports.SelectedRows[0].DataBoundItem;
+                    await _importRepository.DeleteImportAsync(_currentUser.UserId, selectedImport.ImportId);
                     MessageBox.Show("Import deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    _selectedImportId = -1;
-                    LoadImports();
-                    ClearInputFields();
+                    ClearInputs();
+                    await LoadImportsAsync();
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    MessageBox.Show(ex.Message, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (KeyNotFoundException ex)
+                {
+                    MessageBox.Show(ex.Message, "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error deleting import: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error deleting import: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
-        private void btnRefresh_Click(object sender, EventArgs e)
+        private async void btnRefresh_Click(object sender, EventArgs e)
         {
-            LoadSuppliers();
-            LoadImports();
-            ClearInputFields();
-            _selectedImportId = -1;
+            ClearInputs();
+            await LoadSuppliersAsync();
+            await LoadImportsAsync();
         }
 
-        private void dgvImports_SelectionChanged(object sender, EventArgs e)
+        private async void dgvImports_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvImports.SelectedRows.Count > 0)
             {
                 var selectedImport = (Import)dgvImports.SelectedRows[0].DataBoundItem;
-                _selectedImportId = selectedImport.ImportId;
                 cboSupplier.SelectedValue = selectedImport.SupplierId;
                 dtpImportDate.Value = selectedImport.ImportDate;
-                LoadImportDetails(_selectedImportId);
-                btnUpdate.Enabled = true;
-                btnDelete.Enabled = true;
+                await LoadImportDetailsAsync(selectedImport.ImportId);
             }
-            else
-            {
-                _selectedImportId = -1;
-                btnUpdate.Enabled = false;
-                btnDelete.Enabled = false;
-            }
+        }
+
+        private bool ValidateImportInputs(out string errorMessage)
+        {
+            errorMessage = string.Empty;
+            if (cboSupplier.SelectedValue == null)
+                errorMessage = "Please select a supplier.";
+            else if (string.IsNullOrEmpty(txtProductName.Text.Trim()))
+                errorMessage = "Product name is required.";
+            else if (!int.TryParse(txtQuantity.Text.Trim(), out int quantity) || quantity <= 0)
+                errorMessage = "Quantity must be a positive integer.";
+            else if (!decimal.TryParse(txtUnitPrice.Text.Trim(), out decimal unitPrice) || unitPrice <= 0)
+                errorMessage = "Unit price must be a positive number.";
+            else if (!string.IsNullOrEmpty(txtPrice.Text.Trim()) && (!decimal.TryParse(txtPrice.Text.Trim(), out decimal price) || price <= 0))
+                errorMessage = "Price must be a positive number or empty.";
+            return string.IsNullOrEmpty(errorMessage);
+        }
+
+        private void ClearInputs()
+        {
+            cboSupplier.SelectedIndex = -1;
+            txtProductName.Clear();
+            txtQuantity.Clear();
+            txtUnitPrice.Clear();
+            txtPrice.Clear();
+            dtpImportDate.Value = DateTime.Now;
+            lblTotalAmount.Text = "Total Amount: ";
+            dgvImports.ClearSelection();
+            dgvImportDetails.DataSource = null;
         }
     }
 }

@@ -2,90 +2,109 @@
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LaptopShopProject.DataAccess
 {
     public class ReportRepository
     {
-        public List<Product> GetInventoryReport()
+        public async Task<List<Product>> GetInventoryReportAsync()
         {
             var products = new List<Product>();
-            using (var conn = DatabaseConnection.GetConnection())
+            try
             {
-                conn.Open();
-                using (var cmd = new SqlCommand("SELECT * FROM vw_Inventory", conn))
+                using (var conn = DatabaseConnection.GetConnection())
                 {
-                    using (var reader = cmd.ExecuteReader())
+                    await conn.OpenAsync();
+                    using (var cmd = new SqlCommand("SELECT * FROM vw_Inventory", conn))
                     {
-                        while (reader.Read())
+                        using (var reader = await cmd.ExecuteReaderAsync())
                         {
-                            products.Add(new Product
+                            while (await reader.ReadAsync())
                             {
-                                ProductId = reader.GetInt32(0),
-                                ProductName = reader.GetString(1),
-                                Price = reader.GetDecimal(2),
-                                StockQuantity = reader.GetInt32(3)
-                            });
+                                products.Add(new Product
+                                {
+                                    ProductId = reader.GetInt32(0),
+                                    ProductName = reader.GetString(1),
+                                    Price = reader.GetDecimal(2),
+                                    StockQuantity = reader.GetInt32(3)
+                                });
+                            }
                         }
                     }
                 }
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error retrieving inventory report: " + ex.Message, ex);
             }
             return products;
         }
 
-        public List<Import> GetImportReport()
+        public async Task<List<Import>> GetImportReportAsync()
         {
             var imports = new List<Import>();
-            using (var conn = DatabaseConnection.GetConnection())
+            try
             {
-                conn.Open();
-                using (var cmd = new SqlCommand("SELECT DISTINCT import_id, supplier_id, supplier_name, import_date, total_amount FROM vw_ImportDetails", conn))
+                using (var conn = DatabaseConnection.GetConnection())
                 {
-                    using (var reader = cmd.ExecuteReader())
+                    await conn.OpenAsync();
+                    using (var cmd = new SqlCommand("SELECT DISTINCT import_id, supplier_id, supplier_name, import_date, total_amount FROM vw_ImportDetails", conn))
                     {
-                        while (reader.Read())
+                        using (var reader = await cmd.ExecuteReaderAsync())
                         {
-                            imports.Add(new Import
+                            while (await reader.ReadAsync())
                             {
-                                ImportId = reader.GetInt32(0),
-                                SupplierId = reader.GetInt32(1),
-                                SupplierName = reader.GetString(2),
-                                ImportDate = reader.GetDateTime(3),
-                                TotalAmount = reader.GetDecimal(4)
-                            });
+                                imports.Add(new Import
+                                {
+                                    ImportId = reader.GetInt32(0),
+                                    SupplierId = reader.GetInt32(1),
+                                    SupplierName = reader.GetString(2),
+                                    ImportDate = reader.GetDateTime(3),
+                                    TotalAmount = reader.GetDecimal(4)
+                                });
+                            }
                         }
                     }
                 }
             }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error retrieving import report: " + ex.Message, ex);
+            }
             return imports;
         }
 
-        public List<Export> GetExportReport()
+        public async Task<List<Export>> GetExportReportAsync()
         {
             var exports = new List<Export>();
-            using (var conn = DatabaseConnection.GetConnection())
+            try
             {
-                conn.Open();
-                using (var cmd = new SqlCommand("SELECT DISTINCT export_id, customer_id, customer_name, export_date, total_amount FROM vw_ExportDetails", conn))
+                using (var conn = DatabaseConnection.GetConnection())
                 {
-                    using (var reader = cmd.ExecuteReader())
+                    await conn.OpenAsync();
+                    using (var cmd = new SqlCommand("SELECT DISTINCT export_id, customer_id, customer_name, export_date, total_amount FROM vw_ExportDetails", conn))
                     {
-                        while (reader.Read())
+                        using (var reader = await cmd.ExecuteReaderAsync())
                         {
-                            exports.Add(new Export
+                            while (await reader.ReadAsync())
                             {
-                                ExportId = reader.GetInt32(0),
-                                CustomerId = reader.GetInt32(1),
-                                CustomerName = reader.GetString(2),
-                                ExportDate = reader.GetDateTime(3),
-                                TotalAmount = reader.GetDecimal(4)
-                            });
+                                exports.Add(new Export
+                                {
+                                    ExportId = reader.GetInt32(0),
+                                    CustomerId = reader.GetInt32(1),
+                                    CustomerName = reader.GetString(2),
+                                    ExportDate = reader.GetDateTime(3),
+                                    TotalAmount = reader.GetDecimal(4)
+                                });
+                            }
                         }
                     }
                 }
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error retrieving export report: " + ex.Message, ex);
             }
             return exports;
         }

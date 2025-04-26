@@ -3,127 +3,195 @@ using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LaptopShopProject.DataAccess
 {
     public class ProductRepository
     {
-        public List<Product> GetAllProducts(int currentUserId)
+        public async Task<List<Product>> GetAllProductsAsync(int currentUserId)
         {
             var products = new List<Product>();
-            using (var conn = DatabaseConnection.GetConnection())
+            try
             {
-                conn.Open();
-                using (var cmd = new SqlCommand("SELECT * FROM vw_ProductDetails", conn))
+                using (var conn = DatabaseConnection.GetConnection())
                 {
-                    using (var reader = cmd.ExecuteReader())
+                    await conn.OpenAsync();
+                    using (var cmd = new SqlCommand("SELECT * FROM vw_ProductDetails", conn))
                     {
-                        while (reader.Read())
+                        using (var reader = await cmd.ExecuteReaderAsync())
                         {
-                            products.Add(new Product
+                            while (await reader.ReadAsync())
                             {
-                                ProductId = reader.GetInt32(0),
-                                ProductName = reader.GetString(1),
-                                Price = reader.GetDecimal(2),
-                                StockQuantity = reader.GetInt32(3),
-                                Brands = reader.IsDBNull(4) ? "" : reader.GetString(4)
-                            });
+                                products.Add(new Product
+                                {
+                                    ProductId = reader.GetInt32(0),
+                                    ProductName = reader.GetString(1),
+                                    Price = reader.GetDecimal(2),
+                                    StockQuantity = reader.GetInt32(3),
+                                    Brands = reader.IsDBNull(4) ? null : reader.GetString(4)
+                                });
+                            }
                         }
                     }
                 }
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error retrieving products: " + ex.Message, ex);
             }
             return products;
         }
 
-        public void InsertProduct(int currentUserId, Product product)
+        public async Task<int> InsertProductAsync(int currentUserId, Product product)
         {
-            using (var conn = DatabaseConnection.GetConnection())
+            try
             {
-                conn.Open();
-                using (var cmd = new SqlCommand("sp_InsertProduct", conn))
+                using (var conn = DatabaseConnection.GetConnection())
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
-                    cmd.Parameters.AddWithValue("@product_name", product.ProductName);
-                    cmd.Parameters.AddWithValue("@price", product.Price);
-                    cmd.Parameters.AddWithValue("@stock_quantity", product.StockQuantity);
-                    cmd.ExecuteNonQuery();
+                    await conn.OpenAsync();
+                    using (var cmd = new SqlCommand("sp_InsertProduct", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
+                        cmd.Parameters.AddWithValue("@product_name", product.ProductName);
+                        cmd.Parameters.AddWithValue("@price", product.Price);
+                        cmd.Parameters.AddWithValue("@stock_quantity", product.StockQuantity);
+                        return (int)await cmd.ExecuteScalarAsync();
+                    }
                 }
+            }
+            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601)
+            {
+                throw new InvalidOperationException("A product with this name already exists.", ex);
+            }
+            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
+            {
+                throw new UnauthorizedAccessException("Only admins can insert products.", ex);
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error inserting product: " + ex.Message, ex);
             }
         }
 
-        public void UpdateProduct(int currentUserId, Product product)
+        public async Task UpdateProductAsync(int currentUserId, Product product)
         {
-            using (var conn = DatabaseConnection.GetConnection())
+            try
             {
-                conn.Open();
-                using (var cmd = new SqlCommand("sp_UpdateProduct", conn))
+                using (var conn = DatabaseConnection.GetConnection())
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
-                    cmd.Parameters.AddWithValue("@product_id", product.ProductId);
-                    cmd.Parameters.AddWithValue("@product_name", product.ProductName);
-                    cmd.Parameters.AddWithValue("@price", product.Price);
-                    cmd.Parameters.AddWithValue("@stock_quantity", product.StockQuantity);
-                    cmd.ExecuteNonQuery();
+                    await conn.OpenAsync();
+                    using (var cmd = new SqlCommand("sp_UpdateProduct", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
+                        cmd.Parameters.AddWithValue("@product_id", product.ProductId);
+                        cmd.Parameters.AddWithValue("@product_name", product.ProductName);
+                        cmd.Parameters.AddWithValue("@price", product.Price);
+                        cmd.Parameters.AddWithValue("@stock_quantity", product.StockQuantity);
+                        await cmd.ExecuteNonQueryAsync();
+                    }
                 }
+            }
+            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601)
+            {
+                throw new InvalidOperationException("A product with this name already exists.", ex);
+            }
+            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
+            {
+                throw new UnauthorizedAccessException("Only admins can update products.", ex);
+            }
+            catch (SqlException ex) when (ex.Message.Contains("Sản phẩm không tồn tại"))
+            {
+                throw new KeyNotFoundException("Product does not exist.", ex);
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error updating product: " + ex.Message, ex);
             }
         }
 
-        public void DeleteProduct(int currentUserId, int productId)
+        public async Task DeleteProductAsync(int currentUserId, int productId)
         {
-            using (var conn = DatabaseConnection.GetConnection())
+            try
             {
-                conn.Open();
-                using (var cmd = new SqlCommand("sp_DeleteProduct", conn))
+                using (var conn = DatabaseConnection.GetConnection())
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
-                    cmd.Parameters.AddWithValue("@product_id", productId);
-                    cmd.ExecuteNonQuery();
+                    await conn.OpenAsync();
+                    using (var cmd = new SqlCommand("sp_DeleteProduct", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
+                        cmd.Parameters.AddWithValue("@product_id", productId);
+                        await cmd.ExecuteNonQueryAsync();
+                    }
                 }
+            }
+            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
+            {
+                throw new UnauthorizedAccessException("Only admins can delete products.", ex);
+            }
+            catch (SqlException ex) when (ex.Message.Contains("Sản phẩm không tồn tại"))
+            {
+                throw new KeyNotFoundException("Product does not exist.", ex);
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error deleting product: " + ex.Message, ex);
             }
         }
 
-        public int GetStockQuantity(int productId)
+        public async Task<int> GetStockQuantityAsync(int productId)
         {
-            using (var conn = DatabaseConnection.GetConnection())
+            try
             {
-                conn.Open();
-                using (var cmd = new SqlCommand("SELECT dbo.fn_GetStockQuantity(@product_id)", conn))
+                using (var conn = DatabaseConnection.GetConnection())
                 {
-                    cmd.Parameters.AddWithValue("@product_id", productId);
-                    return (int)cmd.ExecuteScalar();
+                    await conn.OpenAsync();
+                    using (var cmd = new SqlCommand("SELECT dbo.fn_GetStockQuantity(@product_id)", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@product_id", productId);
+                        return (int)await cmd.ExecuteScalarAsync();
+                    }
                 }
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error retrieving stock quantity: " + ex.Message, ex);
             }
         }
 
-        public List<ProductLog> GetProductLogs()
+        public async Task<List<ProductLog>> GetProductLogsAsync()
         {
             var logs = new List<ProductLog>();
-            using (var conn = DatabaseConnection.GetConnection())
+            try
             {
-                conn.Open();
-                using (var cmd = new SqlCommand("SELECT * FROM ProductLog", conn))
+                using (var conn = DatabaseConnection.GetConnection())
                 {
-                    using (var reader = cmd.ExecuteReader())
+                    await conn.OpenAsync();
+                    using (var cmd = new SqlCommand("SELECT * FROM ProductLog", conn))
                     {
-                        while (reader.Read())
+                        using (var reader = await cmd.ExecuteReaderAsync())
                         {
-                            logs.Add(new ProductLog
+                            while (await reader.ReadAsync())
                             {
-                                LogId = reader.GetInt32(0),
-                                ProductId = reader.GetInt32(1),
-                                ProductName = reader.GetString(2),
-                                DeletedDate = reader.GetDateTime(3),
-                                DeletedBy = reader.IsDBNull(4) ? null : reader.GetString(4)
-                            });
+                                logs.Add(new ProductLog
+                                {
+                                    LogId = reader.GetInt32(0),
+                                    ProductId = reader.GetInt32(1),
+                                    ProductName = reader.GetString(2),
+                                    DeletedDate = reader.GetDateTime(3),
+                                    DeletedBy = reader.IsDBNull(4) ? null : reader.GetString(4)
+                                });
+                            }
                         }
                     }
                 }
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error retrieving product logs: " + ex.Message, ex);
             }
             return logs;
         }

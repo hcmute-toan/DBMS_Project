@@ -69,35 +69,35 @@ namespace LaptopStoreApp.Forms
         {
             // Placeholder for UserManagementForm (as UserControl)
             // ShowControl(new UserManagementForm(_currentUser));
-            MessageBox.Show("User Management functionality not implemented yet.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            ShowControl(new UserManagementForm(_currentUser));
         }
 
         private void BtnProductManagement_Click(object sender, EventArgs e)
         {
             // Placeholder for ProductManagementForm (as UserControl)
             // ShowControl(new ProductManagementForm(_currentUser));
-            MessageBox.Show("Product Management functionality not implemented yet.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            ShowControl(new ProductManagementForm(_currentUser));
         }
 
         private void BtnImportManagement_Click(object sender, EventArgs e)
         {
             // Placeholder for ImportManagementForm (as UserControl)
             // ShowControl(new ImportManagementForm(_currentUser));
-            MessageBox.Show("Import Management functionality not implemented yet.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            ShowControl(new ImportManagementForm(_currentUser));
         }
 
         private void BtnExportManagement_Click(object sender, EventArgs e)
         {
             // Placeholder for ExportManagementForm (as UserControl)
             // ShowControl(new ExportManagementForm(_currentUser));
-            MessageBox.Show("Export Management functionality not implemented yet.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            ShowControl(new ExportManagementForm(_currentUser));
         }
 
         private void BtnSupplierManagement_Click(object sender, EventArgs e)
         {
             // Placeholder for SupplierManagementForm (as UserControl)
             // ShowControl(new SupplierManagementForm(_currentUser));
-            MessageBox.Show("Supplier Management functionality not implemented yet.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            ShowControl(new SupplierManagementForm(_currentUser));
         }
 
         private void BtnCustomerManagement_Click(object sender, EventArgs e)
@@ -114,7 +114,7 @@ namespace LaptopStoreApp.Forms
         {
             // Placeholder for ReportForm (as UserControl)
             // ShowControl(new ReportForm(_currentUser));
-            MessageBox.Show("Report functionality not implemented yet.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            ShowControl(new ReportForm(_currentUser));
         }
 
         private void BtnLogout_Click(object sender, EventArgs e)
