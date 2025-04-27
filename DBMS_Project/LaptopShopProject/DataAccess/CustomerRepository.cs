@@ -9,7 +9,7 @@ namespace LaptopShopProject.DataAccess
 {
     public class CustomerRepository
     {
-        public async Task<List<Customer>> GetAllCustomersAsync(int currentUserId)
+        public async Task<List<Customer>> GetAllCustomersAsync()
         {
             var customers = new List<Customer>();
             try
@@ -17,10 +17,8 @@ namespace LaptopShopProject.DataAccess
                 using (var conn = DatabaseConnection.GetConnection())
                 {
                     await conn.OpenAsync();
-                    using (var cmd = new SqlCommand("sp_GetAllCustomers", conn))
+                    using (var cmd = new SqlCommand("SELECT customer_id, customer_name, contact_info FROM vw_Customers", conn))
                     {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         using (var reader = await cmd.ExecuteReaderAsync())
                         {
                             while (await reader.ReadAsync())

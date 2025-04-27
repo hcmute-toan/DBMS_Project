@@ -1346,35 +1346,6 @@ BEGIN
 END;
 GO
 
--- Tạo stored procedure sp_GetAllProducts
-CREATE PROCEDURE sp_GetAllProducts
-    @current_user_id INT
-AS
-BEGIN
-    SELECT product_id, product_name, price, stock_quantity
-    FROM Product;
-END;
-GO
-
--- Tạo stored procedure sp_GetAllSuppliers
-CREATE PROCEDURE sp_GetAllSuppliers
-    @current_user_id INT
-AS
-BEGIN
-    SELECT supplier_id, supplier_name, contact_info
-    FROM Supplier;
-END;
-GO
-
--- Tạo stored procedure sp_GetAllCustomers
-CREATE PROCEDURE sp_GetAllCustomers
-    @current_user_id INT
-AS
-BEGIN
-    SELECT customer_id, customer_name, contact_info
-    FROM Customer;
-END;
-GO
 
 -- Tạo stored procedure sp_GetAllUsers
 CREATE PROCEDURE sp_GetAllUsers
@@ -1479,14 +1450,17 @@ LEFT JOIN Category c ON pc.category_id = c.category_id
 GROUP BY p.product_id, p.product_name, p.price, p.stock_quantity;
 GO
 
--- Tạo view vw_UserDetails
-CREATE VIEW vw_UserDetails AS
-SELECT 
-    user_id,
-    username,
-    role
-FROM Users;
-GO
+
+
+
+CREATE VIEW vw_Suppliers AS
+SELECT supplier_id, supplier_name, contact_info
+FROM Supplier;
+
+
+CREATE VIEW vw_Customers AS
+SELECT customer_id, customer_name, contact_info
+FROM Customer;
 
 -- Tạo function fn_GetStockQuantity
 CREATE FUNCTION fn_GetStockQuantity (@product_id INT)

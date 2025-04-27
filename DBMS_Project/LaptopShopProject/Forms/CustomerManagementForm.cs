@@ -24,7 +24,7 @@ namespace LaptopShopProject.Forms
         {
             try
             {
-                var customers = await _customerRepository.GetAllCustomersAsync(_currentUser.UserId);
+                var customers = await _customerRepository.GetAllCustomersAsync();
                 dgvCustomers.DataSource = customers;
                 ConfigureDataGridView();
             }

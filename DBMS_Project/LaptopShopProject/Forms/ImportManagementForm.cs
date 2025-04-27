@@ -39,7 +39,7 @@ namespace LaptopShopProject.Forms
         {
             try
             {
-                var suppliers = await _supplierRepository.GetAllSuppliersAsync(_currentUser.UserId);
+                var suppliers = await _supplierRepository.GetAllSuppliersAsync();
                 cboSupplier.DataSource = suppliers;
                 cboSupplier.DisplayMember = "SupplierName";
                 cboSupplier.ValueMember = "SupplierId";

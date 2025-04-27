@@ -39,7 +39,8 @@ namespace LaptopStoreApp.Forms
             else if (_currentUser.Role.Equals("employee", StringComparison.OrdinalIgnoreCase))
             {
                 // Employee has limited access (e.g., no user or report management)
-                btnUserManagement.Enabled = false;
+                //btnUserManagement.Enabled = false;
+                btnUserManagement.Enabled = true;
                 btnProductManagement.Enabled = true;
                 btnImportManagement.Enabled = true;
                 btnExportManagement.Enabled = true;

@@ -34,7 +34,7 @@ namespace LaptopShopProject.Forms
         {
             try
             {
-                var suppliers = await _supplierRepository.GetAllSuppliersAsync(_currentUser.UserId);
+                var suppliers = await _supplierRepository.GetAllSuppliersAsync();
                 dgvSuppliers.DataSource = suppliers;
                 ConfigureDataGridView();
             }
