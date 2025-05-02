@@ -27,12 +27,16 @@ namespace LaptopShopProject.DataAccess
                                 {
                                     CustomerId = reader.GetInt32(0),
                                     CustomerName = reader.GetString(1),
-                                    ContactInfo = reader.GetString(2)
+                                    ContactInfo = reader.IsDBNull(2) ? null : reader.GetString(2)
                                 });
                             }
                         }
                     }
                 }
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to view customers.", ex);
             }
             catch (SqlException ex)
             {
@@ -41,7 +45,7 @@ namespace LaptopShopProject.DataAccess
             return customers;
         }
 
-        public async Task<int> InsertCustomerAsync(int currentUserId, Customer customer)
+        public async Task<int> InsertCustomerAsync(Customer customer)
         {
             try
             {
@@ -51,20 +55,19 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_InsertCustomer", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         cmd.Parameters.AddWithValue("@customer_name", customer.CustomerName);
-                        cmd.Parameters.AddWithValue("@contact_info", customer.ContactInfo);
+                        cmd.Parameters.AddWithValue("@contact_info", customer.ContactInfo ?? (object)DBNull.Value);
                         return (int)await cmd.ExecuteScalarAsync();
                     }
                 }
             }
-            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601)
+            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601 || ex.Message.Contains("Khách hàng đã tồn tại"))
             {
                 throw new InvalidOperationException("A customer with this name already exists.", ex);
             }
-            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
+            catch (SqlException ex) when (ex.Number == 229)
             {
-                throw new UnauthorizedAccessException("Only admins can insert customers.", ex);
+                throw new UnauthorizedAccessException("You do not have permission to insert customers.", ex);
             }
             catch (SqlException ex)
             {
@@ -72,7 +75,7 @@ namespace LaptopShopProject.DataAccess
             }
         }
 
-        public async Task UpdateCustomerAsync(int currentUserId, Customer customer)
+        public async Task UpdateCustomerAsync(Customer customer)
         {
             try
             {
@@ -82,25 +85,24 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_UpdateCustomer", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         cmd.Parameters.AddWithValue("@customer_id", customer.CustomerId);
                         cmd.Parameters.AddWithValue("@customer_name", customer.CustomerName);
-                        cmd.Parameters.AddWithValue("@contact_info", customer.ContactInfo);
+                        cmd.Parameters.AddWithValue("@contact_info", customer.ContactInfo ?? (object)DBNull.Value);
                         await cmd.ExecuteNonQueryAsync();
                     }
                 }
             }
-            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601)
+            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601 || ex.Message.Contains("Khách hàng đã tồn tại"))
             {
                 throw new InvalidOperationException("A customer with this name already exists.", ex);
-            }
-            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
-            {
-                throw new UnauthorizedAccessException("Only admins can update customers.", ex);
             }
             catch (SqlException ex) when (ex.Message.Contains("Khách hàng không tồn tại"))
             {
                 throw new KeyNotFoundException("Customer does not exist.", ex);
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to update customers.", ex);
             }
             catch (SqlException ex)
             {
@@ -108,7 +110,7 @@ namespace LaptopShopProject.DataAccess
             }
         }
 
-        public async Task DeleteCustomerAsync(int currentUserId, int customerId)
+        public async Task DeleteCustomerAsync(int customerId)
         {
             try
             {
@@ -118,21 +120,20 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_DeleteCustomer", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         cmd.Parameters.AddWithValue("@customer_id", customerId);
                         await cmd.ExecuteNonQueryAsync();
                     }
                 }
             }
-            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
-            {
-                throw new UnauthorizedAccessException("Only admins can delete customers.", ex);
-            }
             catch (SqlException ex) when (ex.Message.Contains("Khách hàng không tồn tại"))
             {
                 throw new KeyNotFoundException("Customer does not exist.", ex);
             }
-            catch (SqlException ex) when (ex.Message.Contains("phiếu xuất liên quan"))
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to delete customers.", ex);
+            }
+            catch (SqlException ex) when (ex.Message.Contains("FOREIGN KEY"))
             {
                 throw new InvalidOperationException("Cannot delete customer due to related export records.", ex);
             }

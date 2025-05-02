@@ -83,6 +83,7 @@
             btnLogin.Text = "Log in";
             btnLogin.UseVisualStyleBackColor = false;
             btnLogin.Click += btnLogin_Click;
+            btnLogin.KeyDown += btnLogin_KeyDown;
             // 
             // pictureBox1
             // 
@@ -109,6 +110,7 @@
             Controls.Add(label1);
             Margin = new Padding(5, 4, 5, 4);
             Name = "LoginForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "LoginForm";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);

@@ -24,16 +24,20 @@ namespace LaptopShopProject.DataAccess
                             {
                                 products.Add(new Product
                                 {
-                                    ProductId = reader.GetInt32(0), // product_id
-                                    ProductName = reader.GetString(1), // product_name
-                                    Price = reader.GetDecimal(2), // price
-                                    StockQuantity = reader.GetInt32(3), // stock_quantity
-                                    Brands = reader.IsDBNull(4) ? null : reader.GetString(4) // brands (correct index)
+                                    ProductId = reader.GetInt32(0),
+                                    ProductName = reader.GetString(1),
+                                    Price = reader.GetDecimal(2),
+                                    StockQuantity = reader.GetInt32(3),
+                                    Brands = reader.IsDBNull(4) ? null : reader.GetString(4)
                                 });
                             }
                         }
                     }
                 }
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to view inventory report.", ex);
             }
             catch (SqlException ex)
             {
@@ -59,8 +63,8 @@ namespace LaptopShopProject.DataAccess
                                 imports.Add(new Import
                                 {
                                     ImportId = reader.GetInt32(0),
-                                    SupplierId = reader.GetInt32(1),
-                                    SupplierName = reader.GetString(2),
+                                    SupplierId = reader.IsDBNull(1) ? (int?)null : reader.GetInt32(1),
+                                    SupplierName = reader.IsDBNull(2) ? null : reader.GetString(2),
                                     ImportDate = reader.GetDateTime(3),
                                     TotalAmount = reader.GetDecimal(4)
                                 });
@@ -68,6 +72,10 @@ namespace LaptopShopProject.DataAccess
                         }
                     }
                 }
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to view import report.", ex);
             }
             catch (SqlException ex)
             {
@@ -93,8 +101,8 @@ namespace LaptopShopProject.DataAccess
                                 exports.Add(new Export
                                 {
                                     ExportId = reader.GetInt32(0),
-                                    CustomerId = reader.GetInt32(1),
-                                    CustomerName = reader.GetString(2),
+                                    CustomerId = reader.IsDBNull(1) ? (int?)null : reader.GetInt32(1),
+                                    CustomerName = reader.IsDBNull(2) ? null : reader.GetString(2),
                                     ExportDate = reader.GetDateTime(3),
                                     TotalAmount = reader.GetDecimal(4)
                                 });
@@ -102,6 +110,10 @@ namespace LaptopShopProject.DataAccess
                         }
                     }
                 }
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to view export report.", ex);
             }
             catch (SqlException ex)
             {

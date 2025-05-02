@@ -9,8 +9,8 @@ namespace LaptopShopProject.Models
     public class Import
     {
         public int ImportId { get; set; }
-        public int SupplierId { get; set; }
-        public string SupplierName { get; set; } // For vw_ImportDetails
+        public int? SupplierId { get; set; } // Nullable to match database (ON DELETE SET NULL)
+        public string? SupplierName { get; set; } // Nullable for vw_ImportDetails
         public DateTime ImportDate { get; set; }
         public decimal TotalAmount { get; set; }
     }

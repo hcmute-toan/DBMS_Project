@@ -49,6 +49,7 @@ namespace LaptopStoreApp.Forms
                 btnCategoryManagement.Enabled = true;
                 btnReport.Enabled = false;
             }
+            ShowControl(new UserManagementForm(_currentUser));
         }
 
         private void ShowControl(Control control)

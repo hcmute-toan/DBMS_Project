@@ -34,14 +34,18 @@ namespace LaptopShopProject.DataAccess
                     }
                 }
             }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to view categories.", ex);
+            }
             catch (SqlException ex)
             {
-                throw new Exception("Error retrieving categories from the database: " + ex.Message, ex);
+                throw new Exception("Error retrieving categories: " + ex.Message, ex);
             }
             return categories;
         }
 
-        public async Task<int> InsertCategoryAsync(int currentUserId, Category category)
+        public async Task<int> InsertCategoryAsync(Category category)
         {
             try
             {
@@ -51,20 +55,19 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_InsertCategory", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         cmd.Parameters.AddWithValue("@category_name", category.CategoryName);
                         cmd.Parameters.AddWithValue("@description", category.Description ?? (object)DBNull.Value);
                         return (int)await cmd.ExecuteScalarAsync();
                     }
                 }
             }
-            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601)
+            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601 || ex.Message.Contains("Thương hiệu đã tồn tại"))
             {
                 throw new InvalidOperationException("A category with this name already exists.", ex);
             }
-            catch (SqlException ex) when (ex.Message.Contains("Người dùng không tồn tại"))
+            catch (SqlException ex) when (ex.Number == 229)
             {
-                throw new UnauthorizedAccessException("User does not exist.", ex);
+                throw new UnauthorizedAccessException("You do not have permission to insert categories.", ex);
             }
             catch (SqlException ex)
             {
@@ -72,7 +75,7 @@ namespace LaptopShopProject.DataAccess
             }
         }
 
-        public async Task UpdateCategoryAsync(int currentUserId, Category category)
+        public async Task UpdateCategoryAsync(Category category)
         {
             try
             {
@@ -82,7 +85,6 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_UpdateCategory", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         cmd.Parameters.AddWithValue("@category_id", category.CategoryId);
                         cmd.Parameters.AddWithValue("@category_name", category.CategoryName);
                         cmd.Parameters.AddWithValue("@description", category.Description ?? (object)DBNull.Value);
@@ -90,17 +92,17 @@ namespace LaptopShopProject.DataAccess
                     }
                 }
             }
-            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601)
+            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601 || ex.Message.Contains("Thương hiệu đã tồn tại"))
             {
                 throw new InvalidOperationException("A category with this name already exists.", ex);
-            }
-            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
-            {
-                throw new UnauthorizedAccessException("Only admins can update categories.", ex);
             }
             catch (SqlException ex) when (ex.Message.Contains("Thương hiệu không tồn tại"))
             {
                 throw new KeyNotFoundException("Category does not exist.", ex);
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to update categories.", ex);
             }
             catch (SqlException ex)
             {
@@ -108,7 +110,7 @@ namespace LaptopShopProject.DataAccess
             }
         }
 
-        public async Task DeleteCategoryAsync(int currentUserId, int categoryId)
+        public async Task DeleteCategoryAsync(int categoryId)
         {
             try
             {
@@ -118,19 +120,18 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_DeleteCategory", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         cmd.Parameters.AddWithValue("@category_id", categoryId);
                         await cmd.ExecuteNonQueryAsync();
                     }
                 }
             }
-            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
-            {
-                throw new UnauthorizedAccessException("Only admins can delete categories.", ex);
-            }
             catch (SqlException ex) when (ex.Message.Contains("Thương hiệu không tồn tại"))
             {
                 throw new KeyNotFoundException("Category does not exist.", ex);
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to delete categories.", ex);
             }
             catch (SqlException ex)
             {

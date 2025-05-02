@@ -9,7 +9,7 @@ namespace LaptopShopProject.DataAccess
 {
     public class ProductRepository
     {
-        public async Task<List<Product>> GetAllProductsAsync(int currentUserId)
+        public async Task<List<Product>> GetAllProductsAsync()
         {
             var products = new List<Product>();
             try
@@ -29,12 +29,16 @@ namespace LaptopShopProject.DataAccess
                                     ProductName = reader.GetString(1),
                                     Price = reader.GetDecimal(2),
                                     StockQuantity = reader.GetInt32(3),
-                                    Brands = reader.IsDBNull(4) ? null : reader.GetString(4) // Changed from Brands to CategoryName
+                                    Brands = reader.IsDBNull(4) ? null : reader.GetString(4)
                                 });
                             }
                         }
                     }
                 }
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to view products.", ex);
             }
             catch (SqlException ex)
             {
@@ -58,13 +62,17 @@ namespace LaptopShopProject.DataAccess
                     }
                 }
             }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to check product existence.", ex);
+            }
             catch (SqlException ex)
             {
                 throw new Exception("Error checking product existence: " + ex.Message, ex);
             }
         }
 
-        public async Task<int> InsertProductAsync(int currentUserId, Product product)
+        public async Task<int> InsertProductAsync(Product product)
         {
             try
             {
@@ -74,7 +82,6 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_InsertProduct", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         cmd.Parameters.AddWithValue("@product_name", product.ProductName);
                         cmd.Parameters.AddWithValue("@price", product.Price);
                         cmd.Parameters.AddWithValue("@stock_quantity", product.StockQuantity);
@@ -82,13 +89,13 @@ namespace LaptopShopProject.DataAccess
                     }
                 }
             }
-            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601)
+            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601 || ex.Message.Contains("Sản phẩm đã tồn tại"))
             {
                 throw new InvalidOperationException("A product with this name already exists.", ex);
             }
-            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
+            catch (SqlException ex) when (ex.Number == 229)
             {
-                throw new UnauthorizedAccessException("Only admins can insert products.", ex);
+                throw new UnauthorizedAccessException("You do not have permission to insert products.", ex);
             }
             catch (SqlException ex)
             {
@@ -96,7 +103,7 @@ namespace LaptopShopProject.DataAccess
             }
         }
 
-        public async Task UpdateProductAsync(int currentUserId, Product product)
+        public async Task UpdateProductAsync(Product product)
         {
             try
             {
@@ -106,7 +113,6 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_UpdateProduct", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         cmd.Parameters.AddWithValue("@product_id", product.ProductId);
                         cmd.Parameters.AddWithValue("@product_name", product.ProductName);
                         cmd.Parameters.AddWithValue("@price", product.Price);
@@ -115,17 +121,17 @@ namespace LaptopShopProject.DataAccess
                     }
                 }
             }
-            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601)
+            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601 || ex.Message.Contains("Sản phẩm đã tồn tại"))
             {
                 throw new InvalidOperationException("A product with this name already exists.", ex);
-            }
-            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
-            {
-                throw new UnauthorizedAccessException("Only admins can update products.", ex);
             }
             catch (SqlException ex) when (ex.Message.Contains("Sản phẩm không tồn tại"))
             {
                 throw new KeyNotFoundException("Product does not exist.", ex);
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to update products.", ex);
             }
             catch (SqlException ex)
             {
@@ -133,7 +139,7 @@ namespace LaptopShopProject.DataAccess
             }
         }
 
-        public async Task DeleteProductAsync(int currentUserId, int productId)
+        public async Task DeleteProductAsync(int productId)
         {
             try
             {
@@ -143,19 +149,18 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_DeleteProduct", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         cmd.Parameters.AddWithValue("@product_id", productId);
                         await cmd.ExecuteNonQueryAsync();
                     }
                 }
             }
-            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
-            {
-                throw new UnauthorizedAccessException("Only admins can delete products.", ex);
-            }
             catch (SqlException ex) when (ex.Message.Contains("Sản phẩm không tồn tại"))
             {
                 throw new KeyNotFoundException("Product does not exist.", ex);
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to delete products.", ex);
             }
             catch (SqlException ex)
             {
@@ -173,9 +178,14 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("SELECT dbo.fn_GetStockQuantity(@product_id)", conn))
                     {
                         cmd.Parameters.AddWithValue("@product_id", productId);
-                        return (int)await cmd.ExecuteScalarAsync();
+                        var result = await cmd.ExecuteScalarAsync();
+                        return result == DBNull.Value ? 0 : (int)result;
                     }
                 }
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to view stock quantity.", ex);
             }
             catch (SqlException ex)
             {
@@ -200,15 +210,21 @@ namespace LaptopShopProject.DataAccess
                                 logs.Add(new ProductLog
                                 {
                                     LogId = reader.GetInt32(0),
-                                    ProductId = reader.GetInt32(1),
+                                    ProductId = reader.IsDBNull(1) ? (int?)null : reader.GetInt32(1),
                                     ProductName = reader.GetString(2),
-                                    DeletedDate = reader.GetDateTime(3),
-                                    DeletedBy = reader.IsDBNull(4) ? null : reader.GetString(4)
+                                    Price = reader.GetDecimal(3),
+                                    StockQuantity = reader.GetInt32(4),
+                                    DeletedDate = reader.GetDateTime(5),
+                                    DeletedBy = reader.IsDBNull(6) ? null : reader.GetString(6)
                                 });
                             }
                         }
                     }
                 }
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to view product logs.", ex);
             }
             catch (SqlException ex)
             {

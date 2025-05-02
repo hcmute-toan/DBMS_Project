@@ -37,13 +37,17 @@ namespace LaptopShopProject.DataAccess
                 }
                 return null;
             }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to login.", ex);
+            }
             catch (SqlException ex)
             {
                 throw new Exception("Error during login: " + ex.Message, ex);
             }
         }
 
-        public async Task<int> InsertUserAsync(int currentUserId, string username, string password, string role)
+        public async Task<int> InsertUserAsync(string username, string password, string role)
         {
             try
             {
@@ -53,7 +57,6 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_InsertUser", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         cmd.Parameters.AddWithValue("@username", username);
                         cmd.Parameters.AddWithValue("@password", password);
                         cmd.Parameters.AddWithValue("@role", role);
@@ -61,17 +64,17 @@ namespace LaptopShopProject.DataAccess
                     }
                 }
             }
-            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601)
+            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601 || ex.Message.Contains("Tài khoản đã tồn tại"))
             {
                 throw new InvalidOperationException("A user with this username already exists.", ex);
             }
-            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
+            catch (SqlException ex) when (ex.Number == 229)
             {
-                throw new UnauthorizedAccessException("Only admins can create users.", ex);
+                throw new UnauthorizedAccessException("You do not have permission to create users.", ex);
             }
             catch (SqlException ex) when (ex.Message.Contains("Vai trò không hợp lệ"))
             {
-                throw new InvalidOperationException("Invalid role. Must be 'admin' or 'employee'.", ex);
+                throw new InvalidOperationException("Invalid role. Must be 'admin_role' or 'employee_role'.", ex);
             }
             catch (SqlException ex)
             {
@@ -79,7 +82,7 @@ namespace LaptopShopProject.DataAccess
             }
         }
 
-        public async Task UpdateUserAsync(int currentUserId, int userId, string username, string password)
+        public async Task UpdateUserAsync(int userId, string username, string password)
         {
             try
             {
@@ -89,7 +92,6 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_UpdateUser", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         cmd.Parameters.AddWithValue("@user_id", userId);
                         cmd.Parameters.AddWithValue("@username", username);
                         cmd.Parameters.AddWithValue("@password", password);
@@ -97,13 +99,13 @@ namespace LaptopShopProject.DataAccess
                     }
                 }
             }
-            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601)
+            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601 || ex.Message.Contains("Tài khoản đã tồn tại"))
             {
                 throw new InvalidOperationException("A user with this username already exists.", ex);
             }
-            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
+            catch (SqlException ex) when (ex.Number == 229)
             {
-                throw new UnauthorizedAccessException("Only admins can update users.", ex);
+                throw new UnauthorizedAccessException("You do not have permission to update users.", ex);
             }
             catch (SqlException ex) when (ex.Message.Contains("Tài khoản không tồn tại"))
             {
@@ -115,7 +117,7 @@ namespace LaptopShopProject.DataAccess
             }
         }
 
-        public async Task UpdateUserRoleAsync(int currentUserId, int userId, string role)
+        public async Task UpdateUserRoleAsync(int userId, string role)
         {
             try
             {
@@ -125,16 +127,15 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_UpdateUserRole", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         cmd.Parameters.AddWithValue("@user_id", userId);
                         cmd.Parameters.AddWithValue("@role", role);
                         await cmd.ExecuteNonQueryAsync();
                     }
                 }
             }
-            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
+            catch (SqlException ex) when (ex.Number == 229)
             {
-                throw new UnauthorizedAccessException("Only admins can update user roles.", ex);
+                throw new UnauthorizedAccessException("You do not have permission to update user roles.", ex);
             }
             catch (SqlException ex) when (ex.Message.Contains("Tài khoản không tồn tại"))
             {
@@ -142,7 +143,7 @@ namespace LaptopShopProject.DataAccess
             }
             catch (SqlException ex) when (ex.Message.Contains("Vai trò không hợp lệ"))
             {
-                throw new InvalidOperationException("Invalid role. Must be 'admin' or 'employee'.", ex);
+                throw new InvalidOperationException("Invalid role. Must be 'admin_role' or 'employee_role'.", ex);
             }
             catch (SqlException ex)
             {
@@ -150,7 +151,7 @@ namespace LaptopShopProject.DataAccess
             }
         }
 
-        public async Task DeleteUserAsync(int currentUserId, int userId)
+        public async Task DeleteUserAsync(int userId)
         {
             try
             {
@@ -160,15 +161,14 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_DeleteUser", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         cmd.Parameters.AddWithValue("@user_id", userId);
                         await cmd.ExecuteNonQueryAsync();
                     }
                 }
             }
-            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
+            catch (SqlException ex) when (ex.Number == 229)
             {
-                throw new UnauthorizedAccessException("Only admins can delete users.", ex);
+                throw new UnauthorizedAccessException("You do not have permission to delete users.", ex);
             }
             catch (SqlException ex) when (ex.Message.Contains("Tài khoản không tồn tại"))
             {
@@ -184,7 +184,7 @@ namespace LaptopShopProject.DataAccess
             }
         }
 
-        public async Task<List<User>> GetAllUsersAsync(int currentUserId)
+        public async Task<List<User>> GetAllUsersAsync()
         {
             var users = new List<User>();
             try
@@ -195,7 +195,6 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_GetAllUsers", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         using (var reader = await cmd.ExecuteReaderAsync())
                         {
                             while (await reader.ReadAsync())
@@ -211,9 +210,9 @@ namespace LaptopShopProject.DataAccess
                     }
                 }
             }
-            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
+            catch (SqlException ex) when (ex.Number == 229)
             {
-                throw new UnauthorizedAccessException("Only admins can view user list.", ex);
+                throw new UnauthorizedAccessException("You do not have permission to view user list.", ex);
             }
             catch (SqlException ex)
             {
@@ -222,7 +221,7 @@ namespace LaptopShopProject.DataAccess
             return users;
         }
 
-        public async Task<List<PermissionLog>> GetPermissionLogsAsync(int currentUserId)
+        public async Task<List<PermissionLog>> GetPermissionLogsAsync()
         {
             var logs = new List<PermissionLog>();
             try
@@ -233,7 +232,6 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_GetPermissionLogs", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         using (var reader = await cmd.ExecuteReaderAsync())
                         {
                             while (await reader.ReadAsync())
@@ -241,21 +239,19 @@ namespace LaptopShopProject.DataAccess
                                 logs.Add(new PermissionLog
                                 {
                                     LogId = reader.GetInt32(0),
-                                    Username = reader.GetString(1),
-                                    Action = reader.GetString(2),
-                                    OldRole = reader.IsDBNull(3) ? null : reader.GetString(3),
-                                    NewRole = reader.IsDBNull(4) ? null : reader.GetString(4),
-                                    ActionDate = reader.GetDateTime(5),
-                                    PerformedByUsername = reader.GetString(6)
+                                    Action = reader.GetString(1),
+                                    ActionDate = reader.GetDateTime(2),
+                                    PerformedBy = reader.GetString(3),
+                                    TargetRole = reader.IsDBNull(4) ? null : reader.GetString(4)
                                 });
                             }
                         }
                     }
                 }
             }
-            catch (SqlException ex) when (ex.Message.Contains("Only admin"))
+            catch (SqlException ex) when (ex.Number == 229)
             {
-                throw new UnauthorizedAccessException("Only admins can view permission logs.", ex);
+                throw new UnauthorizedAccessException("You do not have permission to view permission logs.", ex);
             }
             catch (SqlException ex)
             {

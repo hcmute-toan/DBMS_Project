@@ -17,10 +17,7 @@ namespace LaptopShopProject.DataAccess
                 using (var conn = DatabaseConnection.GetConnection())
                 {
                     await conn.OpenAsync();
-                    using (var cmd = new SqlCommand(
-                        "SELECT i.import_id, i.supplier_id, s.supplier_name, i.import_date, i.total_amount " +
-                        "FROM Import i " +
-                        "JOIN Supplier s ON i.supplier_id = s.supplier_id", conn))
+                    using (var cmd = new SqlCommand("SELECT DISTINCT import_id, supplier_id, supplier_name, import_date, total_amount FROM vw_ImportDetails", conn))
                     {
                         using (var reader = await cmd.ExecuteReaderAsync())
                         {
@@ -29,8 +26,8 @@ namespace LaptopShopProject.DataAccess
                                 imports.Add(new Import
                                 {
                                     ImportId = reader.GetInt32(0),
-                                    SupplierId = reader.GetInt32(1),
-                                    SupplierName = reader.GetString(2),
+                                    SupplierId = reader.IsDBNull(1) ? (int?)null : reader.GetInt32(1),
+                                    SupplierName = reader.IsDBNull(2) ? null : reader.GetString(2),
                                     ImportDate = reader.GetDateTime(3),
                                     TotalAmount = reader.GetDecimal(4)
                                 });
@@ -38,6 +35,10 @@ namespace LaptopShopProject.DataAccess
                         }
                     }
                 }
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to view imports.", ex);
             }
             catch (SqlException ex)
             {
@@ -74,6 +75,10 @@ namespace LaptopShopProject.DataAccess
                     }
                 }
             }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to view import details.", ex);
+            }
             catch (SqlException ex)
             {
                 throw new Exception("Error retrieving import details: " + ex.Message, ex);
@@ -81,7 +86,7 @@ namespace LaptopShopProject.DataAccess
             return details;
         }
 
-        public async Task<int> InsertImportAsync(int currentUserId, Import import)
+        public async Task<int> InsertImportAsync(Import import)
         {
             try
             {
@@ -91,16 +96,19 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_InsertImport", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
-                        cmd.Parameters.AddWithValue("@supplier_id", import.SupplierId);
+                        cmd.Parameters.AddWithValue("@supplier_id", import.SupplierId ?? (object)DBNull.Value);
                         cmd.Parameters.AddWithValue("@import_date", import.ImportDate);
                         return (int)await cmd.ExecuteScalarAsync();
                     }
                 }
             }
-            catch (SqlException ex) when (ex.Number == 547)
+            catch (SqlException ex) when (ex.Number == 547 || ex.Message.Contains("Nhà cung cấp không tồn tại"))
             {
                 throw new InvalidOperationException("Invalid supplier ID.", ex);
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to insert imports.", ex);
             }
             catch (SqlException ex)
             {
@@ -108,7 +116,7 @@ namespace LaptopShopProject.DataAccess
             }
         }
 
-        public async Task<int> InsertImportDetailAsync(int currentUserId, ImportDetail detail, decimal? price = null, string categoryName = null, string categoryDescription = null)
+        public async Task<int> InsertImportDetailAsync(ImportDetail detail, decimal? price = null, string categoryName = null, string categoryDescription = null)
         {
             try
             {
@@ -118,14 +126,13 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_InsertImportDetail", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         cmd.Parameters.AddWithValue("@import_id", detail.ImportId);
                         cmd.Parameters.AddWithValue("@product_name", detail.ProductName);
                         cmd.Parameters.AddWithValue("@quantity", detail.Quantity);
                         cmd.Parameters.AddWithValue("@unit_price", detail.UnitPrice);
-                        cmd.Parameters.AddWithValue("@price", (object)price ?? DBNull.Value);
-                        cmd.Parameters.AddWithValue("@category_name", (object)categoryName ?? DBNull.Value);
-                        cmd.Parameters.AddWithValue("@category_description", (object)categoryDescription ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@price", price ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@category_name", categoryName ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@category_description", categoryDescription ?? (object)DBNull.Value);
                         return (int)await cmd.ExecuteScalarAsync();
                     }
                 }
@@ -138,9 +145,13 @@ namespace LaptopShopProject.DataAccess
             {
                 throw new InvalidOperationException("Quantity must be greater than 0.", ex);
             }
-            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601)
+            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601 || ex.Message.Contains("Sản phẩm đã tồn tại") || ex.Message.Contains("Thương hiệu đã tồn tại"))
             {
                 throw new InvalidOperationException("A product or category with this name already exists.", ex);
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to insert import details.", ex);
             }
             catch (SqlException ex)
             {
@@ -148,7 +159,7 @@ namespace LaptopShopProject.DataAccess
             }
         }
 
-        public async Task<bool> UpdateImportAsync(int currentUserId, ImportDetail detail, decimal newPrice)
+        public async Task<bool> UpdateImportAsync(ImportDetail detail, decimal newPrice)
         {
             try
             {
@@ -158,14 +169,12 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_UpdateImport", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         cmd.Parameters.AddWithValue("@import_id", detail.ImportId);
                         cmd.Parameters.AddWithValue("@product_name", detail.ProductName);
                         cmd.Parameters.AddWithValue("@new_quantity", detail.Quantity);
                         cmd.Parameters.AddWithValue("@new_unit_price", detail.UnitPrice);
                         cmd.Parameters.AddWithValue("@new_price", newPrice);
 
-                        // Thêm tham số đầu ra
                         var isUpdatedParam = new SqlParameter("@is_updated", SqlDbType.Bit)
                         {
                             Direction = ParameterDirection.Output
@@ -174,14 +183,9 @@ namespace LaptopShopProject.DataAccess
 
                         await cmd.ExecuteNonQueryAsync();
 
-                        // Trả về giá trị của tham số đầu ra
                         return (bool)isUpdatedParam.Value;
                     }
                 }
-            }
-            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
-            {
-                throw new UnauthorizedAccessException("Only admins can update import details and product price.", ex);
             }
             catch (SqlException ex) when (ex.Message.Contains("Phiếu nhập không tồn tại"))
             {
@@ -199,13 +203,17 @@ namespace LaptopShopProject.DataAccess
             {
                 throw new InvalidOperationException("Quantity must be greater than 0.", ex);
             }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to update import details.", ex);
+            }
             catch (SqlException ex)
             {
                 throw new Exception("Error updating import: " + ex.Message, ex);
             }
         }
 
-        public async Task DeleteImportAsync(int currentUserId, int importId)
+        public async Task DeleteImportAsync(int importId)
         {
             try
             {
@@ -215,19 +223,18 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_DeleteImport", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         cmd.Parameters.AddWithValue("@import_id", importId);
                         await cmd.ExecuteNonQueryAsync();
                     }
                 }
             }
-            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
-            {
-                throw new UnauthorizedAccessException("Only admins can delete imports.", ex);
-            }
             catch (SqlException ex) when (ex.Message.Contains("Phiếu nhập không tồn tại"))
             {
                 throw new KeyNotFoundException("Import does not exist.", ex);
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to delete imports.", ex);
             }
             catch (SqlException ex)
             {
@@ -245,9 +252,14 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("SELECT dbo.fn_GetImportTotal(@import_id)", conn))
                     {
                         cmd.Parameters.AddWithValue("@import_id", importId);
-                        return (decimal)await cmd.ExecuteScalarAsync();
+                        var result = await cmd.ExecuteScalarAsync();
+                        return result == DBNull.Value ? 0m : (decimal)result;
                     }
                 }
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to calculate import total.", ex);
             }
             catch (SqlException ex)
             {

@@ -27,12 +27,16 @@ namespace LaptopShopProject.DataAccess
                                 {
                                     SupplierId = reader.GetInt32(0),
                                     SupplierName = reader.GetString(1),
-                                    ContactInfo = reader.GetString(2)
+                                    ContactInfo = reader.IsDBNull(2) ? null : reader.GetString(2)
                                 });
                             }
                         }
                     }
                 }
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to view suppliers.", ex);
             }
             catch (SqlException ex)
             {
@@ -41,7 +45,7 @@ namespace LaptopShopProject.DataAccess
             return suppliers;
         }
 
-        public async Task<int> InsertSupplierAsync(int currentUserId, Supplier supplier)
+        public async Task<int> InsertSupplierAsync(Supplier supplier)
         {
             try
             {
@@ -51,20 +55,19 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_InsertSupplier", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         cmd.Parameters.AddWithValue("@supplier_name", supplier.SupplierName);
-                        cmd.Parameters.AddWithValue("@contact_info", supplier.ContactInfo);
+                        cmd.Parameters.AddWithValue("@contact_info", supplier.ContactInfo ?? (object)DBNull.Value);
                         return (int)await cmd.ExecuteScalarAsync();
                     }
                 }
             }
-            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601)
+            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601 || ex.Message.Contains("Nhà cung cấp đã tồn tại"))
             {
                 throw new InvalidOperationException("A supplier with this name already exists.", ex);
             }
-            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
+            catch (SqlException ex) when (ex.Number == 229)
             {
-                throw new UnauthorizedAccessException("Only admins can insert suppliers.", ex);
+                throw new UnauthorizedAccessException("You do not have permission to insert suppliers.", ex);
             }
             catch (SqlException ex)
             {
@@ -72,7 +75,7 @@ namespace LaptopShopProject.DataAccess
             }
         }
 
-        public async Task UpdateSupplierAsync(int currentUserId, Supplier supplier)
+        public async Task UpdateSupplierAsync(Supplier supplier)
         {
             try
             {
@@ -82,25 +85,24 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_UpdateSupplier", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         cmd.Parameters.AddWithValue("@supplier_id", supplier.SupplierId);
                         cmd.Parameters.AddWithValue("@supplier_name", supplier.SupplierName);
-                        cmd.Parameters.AddWithValue("@contact_info", supplier.ContactInfo);
+                        cmd.Parameters.AddWithValue("@contact_info", supplier.ContactInfo ?? (object)DBNull.Value);
                         await cmd.ExecuteNonQueryAsync();
                     }
                 }
             }
-            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601)
+            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601 || ex.Message.Contains("Nhà cung cấp đã tồn tại"))
             {
                 throw new InvalidOperationException("A supplier with this name already exists.", ex);
-            }
-            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
-            {
-                throw new UnauthorizedAccessException("Only admins can update suppliers.", ex);
             }
             catch (SqlException ex) when (ex.Message.Contains("Nhà cung cấp không tồn tại"))
             {
                 throw new KeyNotFoundException("Supplier does not exist.", ex);
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to update suppliers.", ex);
             }
             catch (SqlException ex)
             {
@@ -108,7 +110,7 @@ namespace LaptopShopProject.DataAccess
             }
         }
 
-        public async Task DeleteSupplierAsync(int currentUserId, int supplierId)
+        public async Task DeleteSupplierAsync(int supplierId)
         {
             try
             {
@@ -118,21 +120,20 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_DeleteSupplier", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         cmd.Parameters.AddWithValue("@supplier_id", supplierId);
                         await cmd.ExecuteNonQueryAsync();
                     }
                 }
             }
-            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
-            {
-                throw new UnauthorizedAccessException("Only admins can delete suppliers.", ex);
-            }
             catch (SqlException ex) when (ex.Message.Contains("Nhà cung cấp không tồn tại"))
             {
                 throw new KeyNotFoundException("Supplier does not exist.", ex);
             }
-            catch (SqlException ex) when (ex.Message.Contains("phiếu nhập liên quan"))
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to delete suppliers.", ex);
+            }
+            catch (SqlException ex) when (ex.Message.Contains("FOREIGN KEY"))
             {
                 throw new InvalidOperationException("Cannot delete supplier due to related import records.", ex);
             }

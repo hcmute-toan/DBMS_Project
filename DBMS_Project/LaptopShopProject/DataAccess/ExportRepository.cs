@@ -26,8 +26,8 @@ namespace LaptopShopProject.DataAccess
                                 exports.Add(new Export
                                 {
                                     ExportId = reader.GetInt32(0),
-                                    CustomerId = reader.GetInt32(1),
-                                    CustomerName = reader.GetString(2),
+                                    CustomerId = reader.IsDBNull(1) ? (int?)null : reader.GetInt32(1),
+                                    CustomerName = reader.IsDBNull(2) ? null : reader.GetString(2),
                                     ExportDate = reader.GetDateTime(3),
                                     TotalAmount = reader.GetDecimal(4)
                                 });
@@ -35,6 +35,10 @@ namespace LaptopShopProject.DataAccess
                         }
                     }
                 }
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to view exports.", ex);
             }
             catch (SqlException ex)
             {
@@ -71,6 +75,10 @@ namespace LaptopShopProject.DataAccess
                     }
                 }
             }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to view export details.", ex);
+            }
             catch (SqlException ex)
             {
                 throw new Exception("Error retrieving export details: " + ex.Message, ex);
@@ -78,7 +86,7 @@ namespace LaptopShopProject.DataAccess
             return details;
         }
 
-        public async Task<int> InsertExportAsync(int currentUserId, Export export)
+        public async Task<int> InsertExportAsync(Export export)
         {
             try
             {
@@ -88,17 +96,19 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_InsertExport", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
-                        cmd.Parameters.AddWithValue("@customer_id", export.CustomerId);
+                        cmd.Parameters.AddWithValue("@customer_id", export.CustomerId ?? (object)DBNull.Value);
                         cmd.Parameters.AddWithValue("@export_date", export.ExportDate);
-                        cmd.Parameters.AddWithValue("@total_amount", export.TotalAmount);
                         return (int)await cmd.ExecuteScalarAsync();
                     }
                 }
             }
-            catch (SqlException ex) when (ex.Number == 547)
+            catch (SqlException ex) when (ex.Number == 547 || ex.Message.Contains("Khách hàng không tồn tại"))
             {
                 throw new InvalidOperationException("Invalid customer ID.", ex);
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to insert exports.", ex);
             }
             catch (SqlException ex)
             {
@@ -106,7 +116,7 @@ namespace LaptopShopProject.DataAccess
             }
         }
 
-        public async Task InsertExportDetailAsync(int currentUserId, ExportDetail detail)
+        public async Task InsertExportDetailAsync(ExportDetail detail)
         {
             try
             {
@@ -116,7 +126,6 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_InsertExportDetail", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         cmd.Parameters.AddWithValue("@export_id", detail.ExportId);
                         cmd.Parameters.AddWithValue("@product_name", detail.ProductName);
                         cmd.Parameters.AddWithValue("@quantity", detail.Quantity);
@@ -137,13 +146,17 @@ namespace LaptopShopProject.DataAccess
             {
                 throw new KeyNotFoundException("Product does not exist.", ex);
             }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to insert export details.", ex);
+            }
             catch (SqlException ex)
             {
                 throw new Exception("Error inserting export detail: " + ex.Message, ex);
             }
         }
 
-        public async Task<bool> UpdateExportDetailAsync(int currentUserId, ExportDetail detail)
+        public async Task<bool> UpdateExportDetailAsync(ExportDetail detail)
         {
             try
             {
@@ -153,13 +166,11 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_UpdateExport", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         cmd.Parameters.AddWithValue("@export_id", detail.ExportId);
                         cmd.Parameters.AddWithValue("@product_name", detail.ProductName);
                         cmd.Parameters.AddWithValue("@new_quantity", detail.Quantity);
                         cmd.Parameters.AddWithValue("@new_unit_price", detail.UnitPrice);
 
-                        // Thêm tham số đầu ra
                         var isUpdatedParam = new SqlParameter("@is_updated", SqlDbType.Bit)
                         {
                             Direction = ParameterDirection.Output
@@ -168,14 +179,9 @@ namespace LaptopShopProject.DataAccess
 
                         await cmd.ExecuteNonQueryAsync();
 
-                        // Trả về giá trị của tham số đầu ra
                         return (bool)isUpdatedParam.Value;
                     }
                 }
-            }
-            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
-            {
-                throw new UnauthorizedAccessException("Only admins can update export details.", ex);
             }
             catch (SqlException ex) when (ex.Message.Contains("Phiếu xuất không tồn tại"))
             {
@@ -197,50 +203,17 @@ namespace LaptopShopProject.DataAccess
             {
                 throw new InvalidOperationException("Export quantity exceeds stock quantity.", ex);
             }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to update export details.", ex);
+            }
             catch (SqlException ex)
             {
                 throw new Exception("Error updating export detail: " + ex.Message, ex);
             }
         }
 
-        public async Task UpdateExportAsync(int currentUserId, Export export)
-        {
-            try
-            {
-                using (var conn = DatabaseConnection.GetConnection())
-                {
-                    await conn.OpenAsync();
-                    using (var cmd = new SqlCommand("sp_UpdateExport", conn))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
-                        cmd.Parameters.AddWithValue("@export_id", export.ExportId);
-                        cmd.Parameters.AddWithValue("@customer_id", export.CustomerId);
-                        cmd.Parameters.AddWithValue("@export_date", export.ExportDate);
-                        cmd.Parameters.AddWithValue("@total_amount", export.TotalAmount);
-                        await cmd.ExecuteNonQueryAsync();
-                    }
-                }
-            }
-            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
-            {
-                throw new UnauthorizedAccessException("Only admins can update exports.", ex);
-            }
-            catch (SqlException ex) when (ex.Message.Contains("Phiếu xuất không tồn tại"))
-            {
-                throw new KeyNotFoundException("Export does not exist.", ex);
-            }
-            catch (SqlException ex) when (ex.Number == 547)
-            {
-                throw new InvalidOperationException("Invalid customer ID.", ex);
-            }
-            catch (SqlException ex)
-            {
-                throw new Exception("Error updating export: " + ex.Message, ex);
-            }
-        }
-
-        public async Task DeleteExportAsync(int currentUserId, int exportId)
+        public async Task DeleteExportAsync(int exportId)
         {
             try
             {
@@ -250,19 +223,18 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("sp_DeleteExport", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@current_user_id", currentUserId);
                         cmd.Parameters.AddWithValue("@export_id", exportId);
                         await cmd.ExecuteNonQueryAsync();
                     }
                 }
             }
-            catch (SqlException ex) when (ex.Message.Contains("Chỉ admin"))
-            {
-                throw new UnauthorizedAccessException("Only admins can delete exports.", ex);
-            }
             catch (SqlException ex) when (ex.Message.Contains("Phiếu xuất không tồn tại"))
             {
                 throw new KeyNotFoundException("Export does not exist.", ex);
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to delete exports.", ex);
             }
             catch (SqlException ex)
             {
@@ -280,9 +252,14 @@ namespace LaptopShopProject.DataAccess
                     using (var cmd = new SqlCommand("SELECT dbo.fn_GetExportTotal(@export_id)", conn))
                     {
                         cmd.Parameters.AddWithValue("@export_id", exportId);
-                        return (decimal)await cmd.ExecuteScalarAsync();
+                        var result = await cmd.ExecuteScalarAsync();
+                        return result == DBNull.Value ? 0m : (decimal)result;
                     }
                 }
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to calculate export total.", ex);
             }
             catch (SqlException ex)
             {

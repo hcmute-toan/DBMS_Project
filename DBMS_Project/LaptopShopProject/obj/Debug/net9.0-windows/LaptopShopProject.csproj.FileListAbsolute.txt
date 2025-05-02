@@ -258,3 +258,4 @@ D:\HK2-N3-2024\DBMS\FinalDBMS\DBMS_Project\DBMS_Project\LaptopShopProject\obj\De
 D:\HK2-N3-2024\DBMS\FinalDBMS\DBMS_Project\DBMS_Project\LaptopShopProject\obj\Debug\net9.0-windows\LaptopShopProject.pdb
 D:\HK2-N3-2024\DBMS\FinalDBMS\DBMS_Project\DBMS_Project\LaptopShopProject\obj\Debug\net9.0-windows\LaptopShopProject.genruntimeconfig.cache
 D:\HK2-N3-2024\DBMS\FinalDBMS\DBMS_Project\DBMS_Project\LaptopShopProject\obj\Debug\net9.0-windows\ref\LaptopShopProject.dll
+D:\HK2-N3-2024\DBMS\FinalDBMS\DBMS_Project\DBMS_Project\LaptopShopProject\obj\Debug\net9.0-windows\LaptopShopProject.sourcelink.json

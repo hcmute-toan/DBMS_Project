@@ -71,5 +71,10 @@ namespace LaptopStoreApp.Forms
             base.OnFormClosing(e);
             Application.Exit();
         }
+
+        private void btnLogin_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
     }
 }

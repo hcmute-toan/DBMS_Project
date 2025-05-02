@@ -10,6 +10,6 @@ namespace LaptopShopProject.Models
     {
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
-        public string ContactInfo { get; set; }
+        public string? ContactInfo { get; set; } // Nullable to match database
     }
 }

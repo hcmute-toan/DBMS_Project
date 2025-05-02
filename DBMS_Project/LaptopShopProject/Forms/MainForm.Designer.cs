@@ -203,6 +203,7 @@
             Controls.Add(pictureBox1);
             Margin = new Padding(5, 4, 5, 4);
             Name = "MainForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "MainForm";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);

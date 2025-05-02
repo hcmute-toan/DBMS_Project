@@ -10,7 +10,7 @@ namespace LaptopShopProject.Models
     {
         public int ExportId { get; set; }
         public int ProductId { get; set; }
-        public string ProductName { get; set; } // For vw_ExportDetails
+        public string ProductName { get; set; } // Non-nullable in vw_ExportDetails
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
     }

@@ -12,6 +12,6 @@ namespace LaptopShopProject.Models
         public string ProductName { get; set; }
         public decimal Price { get; set; }
         public int StockQuantity { get; set; }
-        public string Brands { get; set; } // For vw_ProductDetails
+        public string? Brands { get; set; } // Nullable for vw_ProductDetails
     }
 }

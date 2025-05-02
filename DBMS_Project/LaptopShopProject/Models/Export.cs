@@ -9,8 +9,8 @@ namespace LaptopShopProject.Models
     public class Export
     {
         public int ExportId { get; set; }
-        public int CustomerId { get; set; }
-        public string CustomerName { get; set; } // For vw_ExportDetails
+        public int? CustomerId { get; set; } // Nullable to match database (ON DELETE SET NULL)
+        public string? CustomerName { get; set; } // Nullable for vw_ExportDetails
         public DateTime ExportDate { get; set; }
         public decimal TotalAmount { get; set; }
     }

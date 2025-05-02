@@ -10,6 +10,6 @@ namespace LaptopShopProject.Models
     {
         public int UserId { get; set; }
         public string Username { get; set; }
-        public string Role { get; set; } // "admin" or "employee"
+        public string Role { get; set; } // "admin_role" or "employee_role" to match database roles
     }
 }
