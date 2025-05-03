@@ -15,75 +15,102 @@
 
         private void InitializeComponent()
         {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabInventory = new System.Windows.Forms.TabPage();
-            this.tabImports = new System.Windows.Forms.TabPage();
-            this.tabExports = new System.Windows.Forms.TabPage();
-            this.tabRevenue = new System.Windows.Forms.TabPage();
-            this.btnRefresh = new System.Windows.Forms.Button();
-            this.btnExportToExcel = new System.Windows.Forms.Button();
-            this.tabControl1.SuspendLayout();
-            this.SuspendLayout();
-
+            tabControl1 = new TabControl();
+            tabInventory = new TabPage();
+            tabImports = new TabPage();
+            tabExports = new TabPage();
+            tabRevenue = new TabPage();
+            btnRefresh = new Button();
+            btnExportToExcel = new Button();
+            tabControl1.SuspendLayout();
+            SuspendLayout();
+            // 
             // tabControl1
-            this.tabControl1.Controls.Add(this.tabInventory);
-            this.tabControl1.Controls.Add(this.tabImports);
-            this.tabControl1.Controls.Add(this.tabExports);
-            this.tabControl1.Controls.Add(this.tabRevenue);
-            this.tabControl1.Location = new System.Drawing.Point(10, 10);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(760, 400);
-            this.tabControl1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Bottom;
-
+            // 
+            tabControl1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tabControl1.Controls.Add(tabInventory);
+            tabControl1.Controls.Add(tabImports);
+            tabControl1.Controls.Add(tabExports);
+            tabControl1.Controls.Add(tabRevenue);
+            tabControl1.Location = new Point(13, 15);
+            tabControl1.Margin = new Padding(4, 5, 4, 5);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(1013, 512);
+            tabControl1.TabIndex = 0;
+            // 
             // tabInventory
-            this.tabInventory.Location = new System.Drawing.Point(4, 22);
-            this.tabInventory.Name = "tabInventory";
-            this.tabInventory.Text = "Inventory Report";
-            this.tabInventory.UseVisualStyleBackColor = true;
-
+            // 
+            tabInventory.Location = new Point(4, 29);
+            tabInventory.Margin = new Padding(4, 5, 4, 5);
+            tabInventory.Name = "tabInventory";
+            tabInventory.Size = new Size(1005, 479);
+            tabInventory.TabIndex = 0;
+            tabInventory.Text = "Inventory Report";
+            tabInventory.UseVisualStyleBackColor = true;
+            // 
             // tabImports
-            this.tabImports.Location = new System.Drawing.Point(4, 22);
-            this.tabImports.Name = "tabImports";
-            this.tabImports.Text = "Import Report";
-            this.tabImports.UseVisualStyleBackColor = true;
-
+            // 
+            tabImports.Location = new Point(4, 29);
+            tabImports.Margin = new Padding(4, 5, 4, 5);
+            tabImports.Name = "tabImports";
+            tabImports.Size = new Size(1005, 582);
+            tabImports.TabIndex = 1;
+            tabImports.Text = "Import Report";
+            tabImports.UseVisualStyleBackColor = true;
+            // 
             // tabExports
-            this.tabExports.Location = new System.Drawing.Point(4, 22);
-            this.tabExports.Name = "tabExports";
-            this.tabExports.Text = "Export Report";
-            this.tabExports.UseVisualStyleBackColor = true;
-
+            // 
+            tabExports.Location = new Point(4, 29);
+            tabExports.Margin = new Padding(4, 5, 4, 5);
+            tabExports.Name = "tabExports";
+            tabExports.Size = new Size(1005, 582);
+            tabExports.TabIndex = 2;
+            tabExports.Text = "Export Report";
+            tabExports.UseVisualStyleBackColor = true;
+            // 
             // tabRevenue
-            this.tabRevenue.Location = new System.Drawing.Point(4, 22);
-            this.tabRevenue.Name = "tabRevenue";
-            this.tabRevenue.Text = "Revenue Report";
-            this.tabRevenue.UseVisualStyleBackColor = true;
-
+            // 
+            tabRevenue.Location = new Point(4, 29);
+            tabRevenue.Margin = new Padding(4, 5, 4, 5);
+            tabRevenue.Name = "tabRevenue";
+            tabRevenue.Size = new Size(1005, 582);
+            tabRevenue.TabIndex = 3;
+            tabRevenue.Text = "Revenue Report";
+            tabRevenue.UseVisualStyleBackColor = true;
+            // 
             // btnRefresh
-            this.btnRefresh.Location = new System.Drawing.Point(10, 420);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(100, 30);
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = true;
-
+            // 
+            btnRefresh.Location = new Point(13, 646);
+            btnRefresh.Margin = new Padding(4, 5, 4, 5);
+            btnRefresh.Name = "btnRefresh";
+            btnRefresh.Size = new Size(133, 46);
+            btnRefresh.TabIndex = 1;
+            btnRefresh.Text = "Refresh";
+            btnRefresh.UseVisualStyleBackColor = true;
+            // 
             // btnExportToExcel
-            this.btnExportToExcel.Location = new System.Drawing.Point(120, 420);
-            this.btnExportToExcel.Name = "btnExportToExcel";
-            this.btnExportToExcel.Size = new System.Drawing.Size(100, 30);
-            this.btnExportToExcel.Text = "Export to Excel";
-            this.btnExportToExcel.UseVisualStyleBackColor = true;
-
+            // 
+            btnExportToExcel.Location = new Point(160, 646);
+            btnExportToExcel.Margin = new Padding(4, 5, 4, 5);
+            btnExportToExcel.Name = "btnExportToExcel";
+            btnExportToExcel.Size = new Size(133, 46);
+            btnExportToExcel.TabIndex = 2;
+            btnExportToExcel.Text = "Export to Excel";
+            btnExportToExcel.UseVisualStyleBackColor = true;
+            // 
             // ReportForm
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.btnRefresh);
-            this.Controls.Add(this.btnExportToExcel);
-            this.Name = "ReportForm";
-            this.Size = new System.Drawing.Size(780, 460);
-            this.tabControl1.ResumeLayout(false);
-            this.ResumeLayout(false);
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(tabControl1);
+            Controls.Add(btnRefresh);
+            Controls.Add(btnExportToExcel);
+            Margin = new Padding(4, 5, 4, 5);
+            Name = "ReportForm";
+            Size = new Size(1040, 708);
+            tabControl1.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         private System.Windows.Forms.TabControl tabControl1;

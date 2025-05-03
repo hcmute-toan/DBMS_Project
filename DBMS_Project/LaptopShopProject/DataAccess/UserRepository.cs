@@ -20,8 +20,8 @@ namespace LaptopShopProject.DataAccess
 
         private SqlConnection GetConnection()
         {
-            string connectionString = $"Server=TonyNyan\\TONYNYAN;Database=LaptopStoreDBMS4;User Id={_username};Password={_password};";
-            return new SqlConnection(connectionString);
+            string connectionString = $"Data Source=TWELVE-T\\TWELVETI;Initial Catalog=LaptopStoreDBMS4;User Id= {_username} ;Password= {_password} ;Integrated Security=True;Trust Server Certificate=True";
+                return new SqlConnection(connectionString);
         }
 
         public async Task<User> LoginAsync(string username, string password)

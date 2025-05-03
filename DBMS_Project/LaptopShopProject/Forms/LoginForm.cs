@@ -7,7 +7,7 @@ namespace LaptopStoreApp.Forms
 {
     public partial class LoginForm : Form
     {
-        private readonly string connectionString = "Server=TonyNyan\\TONYNYAN;Database=LaptopStoreDBMS4;Trusted_Connection=True;";
+        private readonly string connectionString = "Server=TWELVE-T\\TWELVETI;Database=LaptopStoreDBMS4;Trusted_Connection=True;";
 
         public LoginForm()
         {
@@ -28,7 +28,7 @@ namespace LaptopStoreApp.Forms
 
             try
             {
-                string userConnectionString = $"Server=TonyNyan\\TONYNYAN;Database=LaptopStoreDBMS4;User Id={username};Password={password};";
+                string userConnectionString = $"Data Source=TWELVE-T\\TWELVETI;Initial Catalog=LaptopStoreDBMS4;User Id={username};Password={password};Integrated Security=True;Trust Server Certificate=True";
 
                 using (SqlConnection connection = new SqlConnection(userConnectionString))
                 {
@@ -89,4 +89,4 @@ namespace LaptopStoreApp.Forms
             Application.Exit();
         }
     }
-}
+} 

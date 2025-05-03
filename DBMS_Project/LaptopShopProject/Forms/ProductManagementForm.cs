@@ -14,12 +14,12 @@ namespace LaptopShopProject.Forms
         private readonly string _role;
         private readonly string _password;
 
-        public ProductManagementForm(string username, string role)
+        public ProductManagementForm(string username, string role, string password)
         {
             InitializeComponent();
             _username = username;
             _role = role;
-            _password = username == "admin_user" ? "Admin123!" : "Employee123!";
+            _password =password;
             _productRepository = new ProductRepository(_username, _password);
             ConfigurePermissions();
             InitializeSearchComboBox();

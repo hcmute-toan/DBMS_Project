@@ -367,21 +367,7 @@ namespace LaptopShopProject.Forms
 
         private async void dgvImportDetails_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvImportDetails.SelectedRows.Count > 0)
-            {
-                var selectedDetail = (ImportDetail)dgvImportDetails.SelectedRows[0].DataBoundItem;
-                txtProductName.Text = selectedDetail.ProductName;
-                txtQuantity.Text = selectedDetail.Quantity.ToString();
-                txtUnitPrice.Text = selectedDetail.UnitPrice.ToString("N0");
-                var product = await _productRepository.GetProductByNameAsync(selectedDetail.ProductName);
-                txtPrice.Text = product != null ? product.Price.ToString("N0") : string.Empty;
-                txtCategory.Text = product != null ? product.CategoryName : string.Empty;
-                txtCategoryDescription.Text = product != null ? (await _productRepository.GetCategoryDescriptionAsync(product.CategoryName)) : string.Empty;
-            }
-            else
-            {
-                ClearDetailInputs();
-            }
+            
         }
 
         private bool ValidateImportInputs(out string errorMessage)

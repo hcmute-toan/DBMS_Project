@@ -13,13 +13,13 @@ namespace LaptopShopProject.Forms
         private readonly string _role;
         private readonly string _password; // Temporary; replace with secure password handling
 
-        public CustomerManagementForm(string username, string role)
+        public CustomerManagementForm(string username, string role, string password)
         {
             InitializeComponent();
             _username = username;
             _role = role;
             // Temporary password; in production, use secure storage or prompt
-            _password = username == "admin_user" ? "Admin123!" : "Employee123!";
+            _password = password;
             _customerRepository = new CustomerRepository(_username, _password);
             ConfigurePermissions();
             LoadCustomersAsync(); // Non-awaited call in constructor
