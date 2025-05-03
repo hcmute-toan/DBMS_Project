@@ -1,20 +1,35 @@
-﻿using LaptopShopProject.Models;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
+using LaptopShopProject.Models;
 
 namespace LaptopShopProject.DataAccess
 {
     public class SupplierRepository
     {
+        private readonly string _username;
+        private readonly string _password;
+
+        public SupplierRepository(string username, string password)
+        {
+            _username = username;
+            _password = password;
+        }
+
+        private SqlConnection GetConnection()
+        {
+            string connectionString = $"Server=TonyNyan\\TONYNYAN;Database=LaptopStoreDBMS4;User Id={_username};Password={_password};";
+            return new SqlConnection(connectionString);
+        }
+
         public async Task<List<Supplier>> GetAllSuppliersAsync()
         {
             var suppliers = new List<Supplier>();
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("SELECT supplier_id, supplier_name, contact_info FROM vw_Suppliers", conn))
@@ -49,7 +64,7 @@ namespace LaptopShopProject.DataAccess
         {
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("sp_InsertSupplier", conn))
@@ -79,7 +94,7 @@ namespace LaptopShopProject.DataAccess
         {
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("sp_UpdateSupplier", conn))
@@ -114,7 +129,7 @@ namespace LaptopShopProject.DataAccess
         {
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("sp_DeleteSupplier", conn))

@@ -108,7 +108,6 @@ namespace LaptopShopProject.Forms
             cboCustomer.Name = "cboCustomer";
             cboCustomer.Size = new Size(249, 28);
             cboCustomer.TabIndex = 25;
-            cboCustomer.SelectedIndexChanged += cboCustomer_SelectedIndexChanged;
             // 
             // txtQuantity
             // 

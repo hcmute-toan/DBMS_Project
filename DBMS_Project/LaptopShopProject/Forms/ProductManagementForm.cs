@@ -10,16 +10,38 @@ namespace LaptopShopProject.Forms
     public partial class ProductManagementForm : UserControl
     {
         private readonly ProductRepository _productRepository;
-        private readonly User _currentUser;
+        private readonly string _username;
+        private readonly string _role;
+        private readonly string _password;
 
-        public ProductManagementForm(User currentUser)
+        public ProductManagementForm(string username, string role)
         {
             InitializeComponent();
-            _productRepository = new ProductRepository();
-            _currentUser = currentUser;
-            LoadProductsAsync(); // Non-awaited in constructor
-            LoadProductLogsAsync(); // Non-awaited in constructor
+            _username = username;
+            _role = role;
+            _password = username == "admin_user" ? "Admin123!" : "Employee123!";
+            _productRepository = new ProductRepository(_username, _password);
+            ConfigurePermissions();
+            InitializeSearchComboBox();
+            LoadProductsAsync();
+            LoadProductLogsAsync();
             ConfigureEventHandlers();
+        }
+
+        private void ConfigurePermissions()
+        {
+            if (_role.Equals("employee_role", StringComparison.OrdinalIgnoreCase))
+            {
+                btnAdd.Enabled = false;
+                btnUpdate.Enabled = false;
+                btnDelete.Enabled = false;
+            }
+        }
+
+        private void InitializeSearchComboBox()
+        {
+            cbChooseSearchByNameOrCategory.Items.AddRange(new object[] { "Name", "Category" });
+            cbChooseSearchByNameOrCategory.SelectedIndex = 0;
         }
 
         private void ConfigureEventHandlers()
@@ -29,15 +51,21 @@ namespace LaptopShopProject.Forms
             btnDelete.Click += btnDelete_Click;
             btnRefresh.Click += btnRefresh_Click;
             dgvProducts.SelectionChanged += dgvProducts_SelectionChanged;
+            searchByNameOrCategory.Click += searchByNameOrCategory_Click;
         }
 
         private async Task LoadProductsAsync()
         {
             try
             {
-                var products = await _productRepository.GetAllProductsAsync(_currentUser.UserId);
+                var products = await _productRepository.GetAllProductsAsync();
                 dgvProducts.DataSource = products;
                 ConfigureProductDataGridView();
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                MessageBox.Show(ex.Message, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -53,6 +81,11 @@ namespace LaptopShopProject.Forms
                 dgvProductLogs.DataSource = logs;
                 ConfigureProductLogsDataGridView();
             }
+            catch (UnauthorizedAccessException ex)
+            {
+                MessageBox.Show(ex.Message, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                dgvProductLogs.DataSource = null;
+            }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error loading product logs: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -64,12 +97,15 @@ namespace LaptopShopProject.Forms
             if (dgvProducts.Columns.Contains("ProductId"))
             {
                 dgvProducts.Columns["ProductId"].HeaderText = "ID";
-                dgvProducts.Columns["ProductId"].Visible = false; // Ẩn cột ProductId
+                dgvProducts.Columns["ProductId"].Visible = false;
             }
             if (dgvProducts.Columns.Contains("ProductName"))
                 dgvProducts.Columns["ProductName"].HeaderText = "Name";
             if (dgvProducts.Columns.Contains("Price"))
+            {
                 dgvProducts.Columns["Price"].HeaderText = "Price";
+                dgvProducts.Columns["Price"].DefaultCellStyle.Format = "N0";
+            }
             if (dgvProducts.Columns.Contains("StockQuantity"))
                 dgvProducts.Columns["StockQuantity"].HeaderText = "Stock Quantity";
             if (dgvProducts.Columns.Contains("Brands"))
@@ -82,18 +118,25 @@ namespace LaptopShopProject.Forms
             if (dgvProductLogs.Columns.Contains("LogId"))
             {
                 dgvProductLogs.Columns["LogId"].HeaderText = "Log ID";
-                dgvProductLogs.Columns["LogId"].Visible = false; // Ẩn cột LogId
+                dgvProductLogs.Columns["LogId"].Visible = false;
             }
             if (dgvProductLogs.Columns.Contains("ProductId"))
                 dgvProductLogs.Columns["ProductId"].HeaderText = "Product ID";
             if (dgvProductLogs.Columns.Contains("ProductName"))
                 dgvProductLogs.Columns["ProductName"].HeaderText = "Product Name";
+            if (dgvProductLogs.Columns.Contains("Price"))
+            {
+                dgvProductLogs.Columns["Price"].HeaderText = "Price";
+                dgvProductLogs.Columns["Price"].DefaultCellStyle.Format = "N0";
+            }
+            if (dgvProductLogs.Columns.Contains("StockQuantity"))
+                dgvProductLogs.Columns["StockQuantity"].HeaderText = "Stock Quantity";
             if (dgvProductLogs.Columns.Contains("DeletedDate"))
                 dgvProductLogs.Columns["DeletedDate"].HeaderText = "Deleted Date";
             if (dgvProductLogs.Columns.Contains("DeletedBy"))
             {
                 dgvProductLogs.Columns["DeletedBy"].HeaderText = "Deleted By";
-                dgvProductLogs.Columns["DeletedBy"].Visible = false; // Ẩn cột DeletedBy
+                dgvProductLogs.Columns["DeletedBy"].Visible = false;
             }
             dgvProductLogs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -112,24 +155,26 @@ namespace LaptopShopProject.Forms
                 {
                     ProductName = txtProductName.Text.Trim(),
                     Price = decimal.Parse(txtPrice.Text.Trim()),
-                    StockQuantity = int.Parse(txtStockQuantity.Text.Trim())
+                    StockQuantity = int.Parse(txtStockQuantity.Text.Trim()),
+                    Brands = txtBranch.Text.Trim() != "" ? txtBranch.Text.Trim() : null
                 };
-                int productId = await _productRepository.InsertProductAsync(_currentUser.UserId, product);
+                int productId = await _productRepository.InsertProductAsync(product);
                 MessageBox.Show($"Product added successfully with ID: {productId}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearInputs();
                 await LoadProductsAsync();
-            }
-            catch (InvalidOperationException ex)
-            {
-                MessageBox.Show(ex.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                MessageBox.Show(ex.Message, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                foreach (DataGridViewRow row in dgvProducts.Rows)
+                {
+                    var productRow = (Product)row.DataBoundItem;
+                    if (productRow.ProductId == productId)
+                    {
+                        row.Selected = true;
+                        break;
+                    }
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error adding product: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                HandleException(ex, "adding product");
             }
         }
 
@@ -155,28 +200,26 @@ namespace LaptopShopProject.Forms
                     ProductId = selectedProduct.ProductId,
                     ProductName = txtProductName.Text.Trim(),
                     Price = decimal.Parse(txtPrice.Text.Trim()),
-                    StockQuantity = int.Parse(txtStockQuantity.Text.Trim())
+                    StockQuantity = int.Parse(txtStockQuantity.Text.Trim()),
+                    Brands = txtBranch.Text.Trim() != "" ? txtBranch.Text.Trim() : null
                 };
-                await _productRepository.UpdateProductAsync(_currentUser.UserId, product);
+                await _productRepository.UpdateProductAsync(product);
                 MessageBox.Show("Product updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearInputs();
                 await LoadProductsAsync();
-            }
-            catch (InvalidOperationException ex)
-            {
-                MessageBox.Show(ex.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                MessageBox.Show(ex.Message, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                MessageBox.Show(ex.Message, "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                foreach (DataGridViewRow row in dgvProducts.Rows)
+                {
+                    var productRow = (Product)row.DataBoundItem;
+                    if (productRow.ProductId == selectedProduct.ProductId)
+                    {
+                        row.Selected = true;
+                        break;
+                    }
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error updating product: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                HandleException(ex, "updating product");
             }
         }
 
@@ -193,23 +236,15 @@ namespace LaptopShopProject.Forms
                 try
                 {
                     var selectedProduct = (Product)dgvProducts.SelectedRows[0].DataBoundItem;
-                    await _productRepository.DeleteProductAsync(_currentUser.UserId, selectedProduct.ProductId);
+                    await _productRepository.DeleteProductAsync(selectedProduct.ProductId);
                     MessageBox.Show("Product deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ClearInputs();
                     await LoadProductsAsync();
                     await LoadProductLogsAsync();
                 }
-                catch (UnauthorizedAccessException ex)
-                {
-                    MessageBox.Show(ex.Message, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                catch (KeyNotFoundException ex)
-                {
-                    MessageBox.Show(ex.Message, "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error deleting product: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    HandleException(ex, "deleting product");
                 }
             }
         }
@@ -217,8 +252,51 @@ namespace LaptopShopProject.Forms
         private async void btnRefresh_Click(object sender, EventArgs e)
         {
             ClearInputs();
+            txtNameOrCategory.Clear();
+            cbChooseSearchByNameOrCategory.SelectedIndex = 0;
             await LoadProductsAsync();
             await LoadProductLogsAsync();
+        }
+
+        private async void searchByNameOrCategory_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtNameOrCategory.Text))
+            {
+                await LoadProductsAsync();
+                return;
+            }
+
+            try
+            {
+                var searchText = txtNameOrCategory.Text.Trim();
+                var searchType = cbChooseSearchByNameOrCategory.SelectedItem?.ToString();
+
+                List<Product> products = null;
+                if (searchType == "Name")
+                {
+                    products = await _productRepository.SearchProductByNameAsync(searchText);
+                }
+                else if (searchType == "Category")
+                {
+                    products = await _productRepository.SearchProductByCategoryAsync(searchText);
+                }
+                else
+                {
+                    MessageBox.Show("Please select a valid search type.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                dgvProducts.DataSource = products;
+                ConfigureProductDataGridView();
+                if (!products.Any())
+                {
+                    MessageBox.Show("No products found.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex, "searching products");
+            }
         }
 
         private void dgvProducts_SelectionChanged(object sender, EventArgs e)
@@ -227,9 +305,13 @@ namespace LaptopShopProject.Forms
             {
                 var selectedProduct = (Product)dgvProducts.SelectedRows[0].DataBoundItem;
                 txtProductName.Text = selectedProduct.ProductName;
-                txtPrice.Text = selectedProduct.Price.ToString();
+                txtPrice.Text = selectedProduct.Price.ToString("N0");
                 txtStockQuantity.Text = selectedProduct.StockQuantity.ToString();
-                txtBranch.Text = selectedProduct.Brands ?? string.Empty; // Đổ dữ liệu vào txtBranch
+                txtBranch.Text = selectedProduct.Brands ?? string.Empty;
+            }
+            else
+            {
+                ClearInputs();
             }
         }
 
@@ -242,8 +324,6 @@ namespace LaptopShopProject.Forms
                 errorMessage = "Price must be a positive number.";
             else if (!int.TryParse(txtStockQuantity.Text.Trim(), out int stockQuantity) || stockQuantity < 0)
                 errorMessage = "Stock quantity must be a non-negative integer.";
-            else if (string.IsNullOrEmpty(txtBranch.Text.Trim()))
-                errorMessage = "Branch name is required.";
             return string.IsNullOrEmpty(errorMessage);
         }
 
@@ -256,9 +336,37 @@ namespace LaptopShopProject.Forms
             dgvProducts.ClearSelection();
         }
 
-        private void searchByNameOrCategory_Click(object sender, EventArgs e)
+        private void HandleException(Exception ex, string action)
         {
+            string message;
+            string title;
+            MessageBoxIcon icon;
 
+            switch (ex)
+            {
+                case InvalidOperationException:
+                    message = ex.Message;
+                    title = "Operation Failed";
+                    icon = MessageBoxIcon.Warning;
+                    break;
+                case UnauthorizedAccessException:
+                    message = ex.Message;
+                    title = "Permission Denied";
+                    icon = MessageBoxIcon.Error;
+                    break;
+                case KeyNotFoundException:
+                    message = ex.Message;
+                    title = "Not Found";
+                    icon = MessageBoxIcon.Warning;
+                    break;
+                default:
+                    message = $"Error {action}: {ex.Message}";
+                    title = "Error";
+                    icon = MessageBoxIcon.Error;
+                    break;
+            }
+
+            MessageBox.Show(message, title, MessageBoxButtons.OK, icon);
         }
     }
 }

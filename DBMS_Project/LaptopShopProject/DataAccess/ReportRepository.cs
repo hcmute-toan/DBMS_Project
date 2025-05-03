@@ -1,19 +1,34 @@
-﻿using LaptopShopProject.Models;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using LaptopShopProject.Models;
 
 namespace LaptopShopProject.DataAccess
 {
     public class ReportRepository
     {
+        private readonly string _username;
+        private readonly string _password;
+
+        public ReportRepository(string username, string password)
+        {
+            _username = username;
+            _password = password;
+        }
+
+        private SqlConnection GetConnection()
+        {
+            string connectionString = $"Server=TonyNyan\\TONYNYAN;Database=LaptopStoreDBMS4;User Id={_username};Password={_password};";
+            return new SqlConnection(connectionString);
+        }
+
         public async Task<List<Product>> GetInventoryReportAsync()
         {
             var products = new List<Product>();
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("SELECT * FROM vw_Inventory", conn))
@@ -51,7 +66,7 @@ namespace LaptopShopProject.DataAccess
             var imports = new List<Import>();
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("SELECT DISTINCT import_id, supplier_id, supplier_name, import_date, total_amount FROM vw_ImportDetails", conn))
@@ -89,7 +104,7 @@ namespace LaptopShopProject.DataAccess
             var exports = new List<Export>();
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("SELECT DISTINCT export_id, customer_id, customer_name, export_date, total_amount FROM vw_ExportDetails", conn))
@@ -121,5 +136,86 @@ namespace LaptopShopProject.DataAccess
             }
             return exports;
         }
+
+        public async Task<List<RevenueReport>> GetRevenueByMonthAsync(int year)
+        {
+            var revenueReports = new List<RevenueReport>();
+            try
+            {
+                using (var conn = GetConnection())
+                {
+                    await conn.OpenAsync();
+                    using (var cmd = new SqlCommand("sp_GetRevenueByMonth", conn))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@year", year);
+                        using (var reader = await cmd.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                revenueReports.Add(new RevenueReport
+                                {
+                                    Month = reader.GetInt32(0),
+                                    TotalRevenue = reader.GetDecimal(1)
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to view revenue by month report.", ex);
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error retrieving revenue by month report: " + ex.Message, ex);
+            }
+            return revenueReports;
+        }
+
+        public async Task<List<RevenueReport>> GetRevenueByDayAsync(DateTime date)
+        {
+            var revenueReports = new List<RevenueReport>();
+            try
+            {
+                using (var conn = GetConnection())
+                {
+                    await conn.OpenAsync();
+                    using (var cmd = new SqlCommand("sp_GetRevenueByDay", conn))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@date", date);
+                        using (var reader = await cmd.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                revenueReports.Add(new RevenueReport
+                                {
+                                    Date = reader.GetDateTime(0),
+                                    TotalRevenue = reader.GetDecimal(1)
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to view revenue by day report.", ex);
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error retrieving revenue by day report: " + ex.Message, ex);
+            }
+            return revenueReports;
+        }
+    }
+
+    public class RevenueReport
+    {
+        public int? Month { get; set; }
+        public DateTime? Date { get; set; }
+        public decimal TotalRevenue { get; set; }
     }
 }

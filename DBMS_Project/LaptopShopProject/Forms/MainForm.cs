@@ -1,5 +1,4 @@
 ﻿using LaptopShopProject.Forms;
-using LaptopShopProject.Models;
 using System;
 using System.Windows.Forms;
 
@@ -7,26 +6,27 @@ namespace LaptopStoreApp.Forms
 {
     public partial class MainForm : Form
     {
-        private readonly User _currentUser;
-        private Control _currentControl; // To keep track of the currently displayed control
+        private readonly string _username;
+        private readonly string _role;
+        private readonly string _password;
+        private Control _currentControl;
 
-        public MainForm(User user)
+        public MainForm(string username, string role, string password)
         {
             InitializeComponent();
-            _currentUser = user;
+            _username = username;
+            _role = role;
+            _password = password;
             InitializeForm();
         }
 
         private void InitializeForm()
         {
-            // Display username and role
-            lblUserName.Text = $"Username: {_currentUser.Username}";
-            lbRoleUser.Text = $"Role: {_currentUser.Role}";
+            lblUserName.Text = $"Username: {_username}";
+            lbRoleUser.Text = $"Role: {_role}";
 
-            // Enable/disable buttons based on role
-            if (_currentUser.Role.Equals("admin", StringComparison.OrdinalIgnoreCase))
+            if (_role.Equals("admin_role", StringComparison.OrdinalIgnoreCase))
             {
-                // Admin has access to all features
                 btnUserManagement.Enabled = true;
                 btnProductManagement.Enabled = true;
                 btnImportManagement.Enabled = true;
@@ -36,11 +36,9 @@ namespace LaptopStoreApp.Forms
                 btnCategoryManagement.Enabled = true;
                 btnReport.Enabled = true;
             }
-            else if (_currentUser.Role.Equals("employee", StringComparison.OrdinalIgnoreCase))
+            else if (_role.Equals("employee_role", StringComparison.OrdinalIgnoreCase))
             {
-                // Employee has limited access (e.g., no user or report management)
-                //btnUserManagement.Enabled = false;
-                btnUserManagement.Enabled = true;
+                btnUserManagement.Enabled = false;
                 btnProductManagement.Enabled = true;
                 btnImportManagement.Enabled = true;
                 btnExportManagement.Enabled = true;
@@ -49,19 +47,30 @@ namespace LaptopStoreApp.Forms
                 btnCategoryManagement.Enabled = true;
                 btnReport.Enabled = false;
             }
-            ShowControl(new UserManagementForm(_currentUser));
+            else
+            {
+                btnUserManagement.Enabled = false;
+                btnProductManagement.Enabled = false;
+                btnImportManagement.Enabled = false;
+                btnExportManagement.Enabled = false;
+                btnSupplierManagement.Enabled = false;
+                btnCustomerManagement.Enabled = false;
+                btnCategoryManagement.Enabled = false;
+                btnReport.Enabled = false;
+                MessageBox.Show("Unknown role assigned. Access restricted.", "Role Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            ShowControl(new ProductManagementForm(_username, _role, _password));
         }
 
         private void ShowControl(Control control)
         {
-            // Clear the current control from the panel
             if (_currentControl != null)
             {
                 pnMainView.Controls.Remove(_currentControl);
                 _currentControl.Dispose();
             }
 
-            // Add the new control to the panel
             control.Dock = DockStyle.Fill;
             pnMainView.Controls.Add(control);
             _currentControl = control;
@@ -69,63 +78,49 @@ namespace LaptopStoreApp.Forms
 
         private void BtnUserManagement_Click(object sender, EventArgs e)
         {
-            // Placeholder for UserManagementForm (as UserControl)
-            // ShowControl(new UserManagementForm(_currentUser));
-            ShowControl(new UserManagementForm(_currentUser));
+            ShowControl(new UserManagementForm(_username, _role, _password));
         }
 
         private void BtnProductManagement_Click(object sender, EventArgs e)
         {
-            // Placeholder for ProductManagementForm (as UserControl)
-            // ShowControl(new ProductManagementForm(_currentUser));
-            ShowControl(new ProductManagementForm(_currentUser));
+            ShowControl(new ProductManagementForm(_username, _role, _password));
         }
 
         private void BtnImportManagement_Click(object sender, EventArgs e)
         {
-            // Placeholder for ImportManagementForm (as UserControl)
-            // ShowControl(new ImportManagementForm(_currentUser));
-            ShowControl(new ImportManagementForm(_currentUser));
+            ShowControl(new ImportManagementForm(_username, _role, _password));
         }
 
         private void BtnExportManagement_Click(object sender, EventArgs e)
         {
-            // Placeholder for ExportManagementForm (as UserControl)
-            // ShowControl(new ExportManagementForm(_currentUser));
-            ShowControl(new ExportManagementForm(_currentUser));
+            ShowControl(new ExportManagementForm(_username, _role, _password));
         }
 
         private void BtnSupplierManagement_Click(object sender, EventArgs e)
         {
-            // Placeholder for SupplierManagementForm (as UserControl)
-            // ShowControl(new SupplierManagementForm(_currentUser));
-            ShowControl(new SupplierManagementForm(_currentUser));
+            ShowControl(new SupplierManagementForm(_username, _role, _password));
         }
 
         private void BtnCustomerManagement_Click(object sender, EventArgs e)
         {
-            ShowControl(new CustomerManagementForm(_currentUser));
+            ShowControl(new CustomerManagementForm(_username, _role, _password));
         }
 
         private void BtnCategoryManagement_Click(object sender, EventArgs e)
         {
-            ShowControl(new CategoryManagementForm(_currentUser));
+            ShowControl(new CategoryManagementForm(_username, _role, _password));
         }
 
         private void BtnReport_Click(object sender, EventArgs e)
         {
-            // Placeholder for ReportForm (as UserControl)
-            // ShowControl(new ReportForm(_currentUser));
-            ShowControl(new ReportForm(_currentUser));
+            ShowControl(new ReportForm(_username, _role, _password));
         }
 
         private void BtnLogout_Click(object sender, EventArgs e)
         {
-            // Confirm logout
             DialogResult result = MessageBox.Show("Are you sure you want to log out?", "Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                // Close MainForm and show LoginForm
                 LoginForm loginForm = new LoginForm();
                 loginForm.Show();
                 this.Close();
@@ -135,7 +130,7 @@ namespace LaptopStoreApp.Forms
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             base.OnFormClosing(e);
-            Application.Exit(); // Ensure the application exits completely
+            Application.Exit();
         }
     }
 }

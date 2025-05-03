@@ -1,7 +1,6 @@
 ﻿using LaptopShopProject.DataAccess;
 using LaptopShopProject.Models;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -10,14 +9,43 @@ namespace LaptopShopProject.Forms
     public partial class CustomerManagementForm : UserControl
     {
         private readonly CustomerRepository _customerRepository;
-        private readonly User _currentUser;
+        private readonly string _username;
+        private readonly string _role;
+        private readonly string _password; // Temporary; replace with secure password handling
 
-        public CustomerManagementForm(User currentUser)
+        public CustomerManagementForm(string username, string role)
         {
             InitializeComponent();
-            _customerRepository = new CustomerRepository();
-            _currentUser = currentUser;
+            _username = username;
+            _role = role;
+            // Temporary password; in production, use secure storage or prompt
+            _password = username == "admin_user" ? "Admin123!" : "Employee123!";
+            _customerRepository = new CustomerRepository(_username, _password);
+            ConfigurePermissions();
             LoadCustomersAsync(); // Non-awaited call in constructor
+            ConfigureEventHandlers();
+        }
+
+        private void ConfigurePermissions()
+        {
+            if (_role.Equals("employee_role", StringComparison.OrdinalIgnoreCase))
+            {
+                // Disable buttons for employee_role since they only have SELECT permission
+                btnAdd.Enabled = false;
+                btnUpdate.Enabled = false;
+                btnDelete.Enabled = false;
+                txtCustomerName.ReadOnly = true;
+                txtContactInfo.ReadOnly = true;
+            }
+        }
+
+        private void ConfigureEventHandlers()
+        {
+            btnAdd.Click += btnAdd_Click;
+            btnUpdate.Click += btnUpdate_Click;
+            btnDelete.Click += btnDelete_Click;
+            btnRefresh.Click += btnRefresh_Click;
+            dgvCustomers.SelectionChanged += dgvCustomers_SelectionChanged;
         }
 
         private async Task LoadCustomersAsync()
@@ -27,6 +55,11 @@ namespace LaptopShopProject.Forms
                 var customers = await _customerRepository.GetAllCustomersAsync();
                 dgvCustomers.DataSource = customers;
                 ConfigureDataGridView();
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                MessageBox.Show(ex.Message, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Enabled = false; // Disable the entire form if no permission
             }
             catch (Exception ex)
             {
@@ -63,7 +96,7 @@ namespace LaptopShopProject.Forms
                     CustomerName = customerName,
                     ContactInfo = contactInfo
                 };
-                int customerId = await _customerRepository.InsertCustomerAsync(_currentUser.UserId, customer);
+                int customerId = await _customerRepository.InsertCustomerAsync(customer);
                 MessageBox.Show($"Customer added successfully with ID: {customerId}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearInputs();
                 await LoadCustomersAsync();
@@ -108,7 +141,7 @@ namespace LaptopShopProject.Forms
                     CustomerName = customerName,
                     ContactInfo = contactInfo
                 };
-                await _customerRepository.UpdateCustomerAsync(_currentUser.UserId, customer);
+                await _customerRepository.UpdateCustomerAsync(customer);
                 MessageBox.Show("Customer updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearInputs();
                 await LoadCustomersAsync();
@@ -144,7 +177,7 @@ namespace LaptopShopProject.Forms
                 try
                 {
                     var selectedCustomer = (Customer)dgvCustomers.SelectedRows[0].DataBoundItem;
-                    await _customerRepository.DeleteCustomerAsync(_currentUser.UserId, selectedCustomer.CustomerId);
+                    await _customerRepository.DeleteCustomerAsync(selectedCustomer.CustomerId);
                     MessageBox.Show("Customer deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ClearInputs();
                     await LoadCustomersAsync();
@@ -180,7 +213,7 @@ namespace LaptopShopProject.Forms
             {
                 var selectedCustomer = (Customer)dgvCustomers.SelectedRows[0].DataBoundItem;
                 txtCustomerName.Text = selectedCustomer.CustomerName;
-                txtContactInfo.Text = selectedCustomer.ContactInfo;
+                txtContactInfo.Text = selectedCustomer.ContactInfo ?? string.Empty;
             }
         }
 
@@ -190,6 +223,5 @@ namespace LaptopShopProject.Forms
             txtContactInfo.Clear();
             dgvCustomers.ClearSelection();
         }
-
     }
 }

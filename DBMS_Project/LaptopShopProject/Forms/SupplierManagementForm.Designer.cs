@@ -2,15 +2,8 @@
 {
     partial class SupplierManagementForm
     {
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,109 +13,113 @@
             base.Dispose(disposing);
         }
 
-        #region Component Designer generated code
-
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            btnRefresh = new Button();
-            btnUpdate = new Button();
-            btnDelete = new Button();
-            btnAdd = new Button();
-            txtContactInfo = new TextBox();
-            txtSupplierName = new TextBox();
-            dgvSuppliers = new DataGridView();
-            ((System.ComponentModel.ISupportInitialize)dgvSuppliers).BeginInit();
-            SuspendLayout();
-            // 
-            // btnRefresh
-            // 
-            btnRefresh.Location = new Point(767, 321);
-            btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(93, 23);
-            btnRefresh.TabIndex = 24;
-            btnRefresh.Text = "Refresh";
-            btnRefresh.UseVisualStyleBackColor = true;
-            // 
-            // btnUpdate
-            // 
-            btnUpdate.Location = new Point(491, 321);
-            btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(93, 23);
-            btnUpdate.TabIndex = 23;
-            btnUpdate.Text = "Update";
-            btnUpdate.UseVisualStyleBackColor = true;
-            // 
-            // btnDelete
-            // 
-            btnDelete.Location = new Point(628, 321);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(89, 23);
-            btnDelete.TabIndex = 22;
-            btnDelete.Text = "Delete";
-            btnDelete.UseVisualStyleBackColor = true;
-            // 
-            // btnAdd
-            // 
-            btnAdd.Location = new Point(350, 321);
-            btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(93, 23);
-            btnAdd.TabIndex = 21;
-            btnAdd.Text = "Add";
-            btnAdd.UseVisualStyleBackColor = true;
-            // 
-            // txtContactInfo
-            // 
-            txtContactInfo.Location = new Point(40, 103);
-            txtContactInfo.Name = "txtContactInfo";
-            txtContactInfo.Size = new Size(218, 23);
-            txtContactInfo.TabIndex = 20;
-            // 
+            this.txtSupplierName = new System.Windows.Forms.TextBox();
+            this.txtContactInfo = new System.Windows.Forms.TextBox();
+            this.dgvSuppliers = new System.Windows.Forms.DataGridView();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.lblSupplierName = new System.Windows.Forms.Label();
+            this.lblContactInfo = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSuppliers)).BeginInit();
+            this.SuspendLayout();
+
             // txtSupplierName
-            // 
-            txtSupplierName.Location = new Point(40, 28);
-            txtSupplierName.Name = "txtSupplierName";
-            txtSupplierName.Size = new Size(218, 23);
-            txtSupplierName.TabIndex = 19;
-            // 
+            this.txtSupplierName.Location = new System.Drawing.Point(120, 20);
+            this.txtSupplierName.Name = "txtSupplierName";
+            this.txtSupplierName.Size = new System.Drawing.Size(200, 20);
+            this.txtSupplierName.TabIndex = 0;
+
+            // txtContactInfo
+            this.txtContactInfo.Location = new System.Drawing.Point(120, 50);
+            this.txtContactInfo.Name = "txtContactInfo";
+            this.txtContactInfo.Size = new System.Drawing.Size(200, 20);
+            this.txtContactInfo.TabIndex = 1;
+
+            // lblSupplierName
+            this.lblSupplierName.AutoSize = true;
+            this.lblSupplierName.Location = new System.Drawing.Point(20, 23);
+            this.lblSupplierName.Name = "lblSupplierName";
+            this.lblSupplierName.Size = new System.Drawing.Size(80, 13);
+            this.lblSupplierName.Text = "Supplier Name:";
+
+            // lblContactInfo
+            this.lblContactInfo.AutoSize = true;
+            this.lblContactInfo.Location = new System.Drawing.Point(20, 53);
+            this.lblContactInfo.Name = "lblContactInfo";
+            this.lblContactInfo.Size = new System.Drawing.Size(80, 13);
+            this.lblContactInfo.Text = "Contact Info:";
+
             // dgvSuppliers
-            // 
-            dgvSuppliers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvSuppliers.Location = new Point(350, 28);
-            dgvSuppliers.Name = "dgvSuppliers";
-            dgvSuppliers.Size = new Size(510, 251);
-            dgvSuppliers.TabIndex = 18;
-            // 
+            this.dgvSuppliers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSuppliers.Location = new System.Drawing.Point(20, 100);
+            this.dgvSuppliers.Name = "dgvSuppliers";
+            this.dgvSuppliers.Size = new System.Drawing.Size(740, 300);
+            this.dgvSuppliers.TabIndex = 2;
+            this.dgvSuppliers.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Bottom;
+
+            // btnAdd
+            this.btnAdd.Location = new System.Drawing.Point(20, 410);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(75, 30);
+            this.btnAdd.TabIndex = 3;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
+
+            // btnUpdate
+            this.btnUpdate.Location = new System.Drawing.Point(105, 410);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(75, 30);
+            this.btnUpdate.TabIndex = 4;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+
+            // btnDelete
+            this.btnDelete.Location = new System.Drawing.Point(190, 410);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 30);
+            this.btnDelete.TabIndex = 5;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+
+            // btnRefresh
+            this.btnRefresh.Location = new System.Drawing.Point(275, 410);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(75, 30);
+            this.btnRefresh.TabIndex = 6;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+
             // SupplierManagementForm
-            // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.LightCyan;
-            Controls.Add(btnRefresh);
-            Controls.Add(btnUpdate);
-            Controls.Add(btnDelete);
-            Controls.Add(btnAdd);
-            Controls.Add(txtContactInfo);
-            Controls.Add(txtSupplierName);
-            Controls.Add(dgvSuppliers);
-            Name = "SupplierManagementForm";
-            Size = new Size(901, 372);
-            ((System.ComponentModel.ISupportInitialize)dgvSuppliers).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnRefresh);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnUpdate);
+            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.dgvSuppliers);
+            this.Controls.Add(this.lblContactInfo);
+            this.Controls.Add(this.lblSupplierName);
+            this.Controls.Add(this.txtContactInfo);
+            this.Controls.Add(this.txtSupplierName);
+            this.Name = "SupplierManagementForm";
+            this.Size = new System.Drawing.Size(780, 460);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSuppliers)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
         }
 
-        #endregion
-
-        private Button btnRefresh;
-        private Button btnUpdate;
-        private Button btnDelete;
-        private Button btnAdd;
-        private TextBox txtContactInfo;
-        private TextBox txtSupplierName;
-        private DataGridView dgvSuppliers;
+        private System.Windows.Forms.TextBox txtSupplierName;
+        private System.Windows.Forms.TextBox txtContactInfo;
+        private System.Windows.Forms.DataGridView dgvSuppliers;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Label lblSupplierName;
+        private System.Windows.Forms.Label lblContactInfo;
     }
 }

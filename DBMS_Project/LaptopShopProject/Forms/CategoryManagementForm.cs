@@ -10,15 +10,32 @@ namespace LaptopShopProject.Forms
     public partial class CategoryManagementForm : UserControl
     {
         private readonly CategoryRepository _categoryRepository;
-        private readonly User _currentUser;
+        private readonly string _username;
+        private readonly string _role;
+        private readonly string _password;
 
-        public CategoryManagementForm(User currentUser)
+        public CategoryManagementForm(string username, string role, string password)
         {
             InitializeComponent();
-            _categoryRepository = new CategoryRepository();
-            _currentUser = currentUser;
-            LoadCategoriesAsync(); // Non-awaited call in constructor
+            _username = username;
+            _role = role;
+            _password = password; // Nhận mật khẩu từ LoginForm hoặc MainForm
+            _categoryRepository = new CategoryRepository(_username, _password);
+            ConfigurePermissions();
+            LoadCategoriesAsync();
             ConfigureEventHandlers();
+        }
+
+        private void ConfigurePermissions()
+        {
+            if (_role.Equals("employee_role", StringComparison.OrdinalIgnoreCase))
+            {
+                btnAdd.Enabled = false;
+                btnUpdate.Enabled = false;
+                btnDelete.Enabled = false;
+                txtCategoryName.ReadOnly = true;
+                txtDescription.ReadOnly = true;
+            }
         }
 
         private void ConfigureEventHandlers()
@@ -37,6 +54,11 @@ namespace LaptopShopProject.Forms
                 var categories = await _categoryRepository.GetAllCategoriesAsync();
                 dgvCategories.DataSource = categories;
                 ConfigureDataGridView();
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                MessageBox.Show(ex.Message, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -73,7 +95,7 @@ namespace LaptopShopProject.Forms
                     CategoryName = categoryName,
                     Description = string.IsNullOrEmpty(description) ? null : description
                 };
-                int categoryId = await _categoryRepository.InsertCategoryAsync(_currentUser.UserId, category);
+                int categoryId = await _categoryRepository.InsertCategoryAsync(category);
                 MessageBox.Show($"Category added successfully with ID: {categoryId}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearInputs();
                 await LoadCategoriesAsync();
@@ -118,7 +140,7 @@ namespace LaptopShopProject.Forms
                     CategoryName = categoryName,
                     Description = string.IsNullOrEmpty(description) ? null : description
                 };
-                await _categoryRepository.UpdateCategoryAsync(_currentUser.UserId, category);
+                await _categoryRepository.UpdateCategoryAsync(category);
                 MessageBox.Show("Category updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearInputs();
                 await LoadCategoriesAsync();
@@ -154,7 +176,7 @@ namespace LaptopShopProject.Forms
                 try
                 {
                     var selectedCategory = (Category)dgvCategories.SelectedRows[0].DataBoundItem;
-                    await _categoryRepository.DeleteCategoryAsync(_currentUser.UserId, selectedCategory.CategoryId);
+                    await _categoryRepository.DeleteCategoryAsync(selectedCategory.CategoryId);
                     MessageBox.Show("Category deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ClearInputs();
                     await LoadCategoriesAsync();

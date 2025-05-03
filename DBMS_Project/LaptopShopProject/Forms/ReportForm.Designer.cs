@@ -2,15 +2,8 @@
 {
     partial class ReportForm
     {
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,109 +13,85 @@
             base.Dispose(disposing);
         }
 
-        #region Component Designer generated code
-
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            btnRefresh = new Button();
-            btnExportToExcel = new Button();
-            dgvExportReport = new TabPage();
-            dgvImportReport = new TabPage();
-            dgvInventory = new TabPage();
-            tabControl1 = new TabControl();
-            tabControl1.SuspendLayout();
-            SuspendLayout();
-            // 
-            // btnRefresh
-            // 
-            btnRefresh.Location = new Point(437, 483);
-            btnRefresh.Margin = new Padding(3, 4, 3, 4);
-            btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(125, 36);
-            btnRefresh.TabIndex = 1;
-            btnRefresh.Text = "Refresh";
-            btnRefresh.UseVisualStyleBackColor = true;
-            // 
-            // btnExportToExcel
-            // 
-            btnExportToExcel.Location = new Point(623, 483);
-            btnExportToExcel.Margin = new Padding(3, 4, 3, 4);
-            btnExportToExcel.Name = "btnExportToExcel";
-            btnExportToExcel.Size = new Size(189, 36);
-            btnExportToExcel.TabIndex = 2;
-            btnExportToExcel.Text = "Export to Excel";
-            btnExportToExcel.UseVisualStyleBackColor = true;
-            // 
-            // dgvExportReport
-            // 
-            dgvExportReport.Location = new Point(4, 29);
-            dgvExportReport.Margin = new Padding(3, 4, 3, 4);
-            dgvExportReport.Name = "dgvExportReport";
-            dgvExportReport.Padding = new Padding(3, 4, 3, 4);
-            dgvExportReport.Size = new Size(805, 371);
-            dgvExportReport.TabIndex = 2;
-            dgvExportReport.Text = "Tab Exports";
-            dgvExportReport.UseVisualStyleBackColor = true;
-            // 
-            // dgvImportReport
-            // 
-            dgvImportReport.Location = new Point(4, 29);
-            dgvImportReport.Margin = new Padding(3, 4, 3, 4);
-            dgvImportReport.Name = "dgvImportReport";
-            dgvImportReport.Padding = new Padding(3, 4, 3, 4);
-            dgvImportReport.Size = new Size(805, 371);
-            dgvImportReport.TabIndex = 1;
-            dgvImportReport.Text = "Tab Imports";
-            dgvImportReport.UseVisualStyleBackColor = true;
-            // 
-            // dgvInventory
-            // 
-            dgvInventory.Location = new Point(4, 29);
-            dgvInventory.Margin = new Padding(3, 4, 3, 4);
-            dgvInventory.Name = "dgvInventory";
-            dgvInventory.Padding = new Padding(3, 4, 3, 4);
-            dgvInventory.Size = new Size(805, 371);
-            dgvInventory.TabIndex = 0;
-            dgvInventory.Text = "Tab Inventory";
-            dgvInventory.UseVisualStyleBackColor = true;
-            // 
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabInventory = new System.Windows.Forms.TabPage();
+            this.tabImports = new System.Windows.Forms.TabPage();
+            this.tabExports = new System.Windows.Forms.TabPage();
+            this.tabRevenue = new System.Windows.Forms.TabPage();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnExportToExcel = new System.Windows.Forms.Button();
+            this.tabControl1.SuspendLayout();
+            this.SuspendLayout();
+
             // tabControl1
-            // 
-            tabControl1.Controls.Add(dgvInventory);
-            tabControl1.Controls.Add(dgvImportReport);
-            tabControl1.Controls.Add(dgvExportReport);
-            tabControl1.Location = new Point(3, 24);
-            tabControl1.Margin = new Padding(3, 4, 3, 4);
-            tabControl1.Name = "tabControl1";
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(813, 404);
-            tabControl1.TabIndex = 0;
-            // 
+            this.tabControl1.Controls.Add(this.tabInventory);
+            this.tabControl1.Controls.Add(this.tabImports);
+            this.tabControl1.Controls.Add(this.tabExports);
+            this.tabControl1.Controls.Add(this.tabRevenue);
+            this.tabControl1.Location = new System.Drawing.Point(10, 10);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(760, 400);
+            this.tabControl1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Bottom;
+
+            // tabInventory
+            this.tabInventory.Location = new System.Drawing.Point(4, 22);
+            this.tabInventory.Name = "tabInventory";
+            this.tabInventory.Text = "Inventory Report";
+            this.tabInventory.UseVisualStyleBackColor = true;
+
+            // tabImports
+            this.tabImports.Location = new System.Drawing.Point(4, 22);
+            this.tabImports.Name = "tabImports";
+            this.tabImports.Text = "Import Report";
+            this.tabImports.UseVisualStyleBackColor = true;
+
+            // tabExports
+            this.tabExports.Location = new System.Drawing.Point(4, 22);
+            this.tabExports.Name = "tabExports";
+            this.tabExports.Text = "Export Report";
+            this.tabExports.UseVisualStyleBackColor = true;
+
+            // tabRevenue
+            this.tabRevenue.Location = new System.Drawing.Point(4, 22);
+            this.tabRevenue.Name = "tabRevenue";
+            this.tabRevenue.Text = "Revenue Report";
+            this.tabRevenue.UseVisualStyleBackColor = true;
+
+            // btnRefresh
+            this.btnRefresh.Location = new System.Drawing.Point(10, 420);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(100, 30);
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+
+            // btnExportToExcel
+            this.btnExportToExcel.Location = new System.Drawing.Point(120, 420);
+            this.btnExportToExcel.Name = "btnExportToExcel";
+            this.btnExportToExcel.Size = new System.Drawing.Size(100, 30);
+            this.btnExportToExcel.Text = "Export to Excel";
+            this.btnExportToExcel.UseVisualStyleBackColor = true;
+
             // ReportForm
-            // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.LightCyan;
-            Controls.Add(btnExportToExcel);
-            Controls.Add(btnRefresh);
-            Controls.Add(tabControl1);
-            Margin = new Padding(3, 4, 3, 4);
-            Name = "ReportForm";
-            Size = new Size(834, 569);
-            tabControl1.ResumeLayout(false);
-            ResumeLayout(false);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.btnRefresh);
+            this.Controls.Add(this.btnExportToExcel);
+            this.Name = "ReportForm";
+            this.Size = new System.Drawing.Size(780, 460);
+            this.tabControl1.ResumeLayout(false);
+            this.ResumeLayout(false);
         }
 
-        #endregion
-        private Button btnRefresh;
-        private Button btnExportToExcel;
-        private TabPage dgvExportReport;
-        private TabPage dgvImportReport;
-        private TabPage dgvInventory;
-        private TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabInventory;
+        private System.Windows.Forms.TabPage tabImports;
+        private System.Windows.Forms.TabPage tabExports;
+        private System.Windows.Forms.TabPage tabRevenue;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnExportToExcel;
     }
 }

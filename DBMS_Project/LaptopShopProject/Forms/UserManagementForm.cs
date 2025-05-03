@@ -9,48 +9,56 @@ namespace LaptopShopProject.Forms
 {
     public partial class UserManagementForm : UserControl
     {
-        private readonly User _currentUser;
+        private readonly string _username;
+        private readonly string _role;
+        private readonly string _password;
         private readonly UserRepository _userRepository;
-        private User _selectedUser; // Lưu người dùng được chọn từ DataGridView
+        private User _selectedUser;
 
-        public UserManagementForm(User currentUser)
+        public UserManagementForm(string username, string role, string password)
         {
             InitializeComponent();
-            _currentUser = currentUser;
-            _userRepository = new UserRepository();
+            _username = username;
+            _role = role;
+            _password = password;
+            _userRepository = new UserRepository(_username, _password);
             InitializeControls();
-            // Không gọi LoadDataAsync trực tiếp trong constructor
-            this.Load += UserManagementForm_Load; // Gắn sự kiện Load
+            ConfigurePermissions();
+            this.Load += UserManagementForm_Load;
         }
 
         private async void UserManagementForm_Load(object sender, EventArgs e)
         {
-            await LoadDataAsync(); // Tải dữ liệu bất đồng bộ khi form được load
+            await LoadDataAsync();
+        }
+
+        private void ConfigurePermissions()
+        {
+            if (_role.Equals("employee_role", StringComparison.OrdinalIgnoreCase))
+            {
+                btnAdd.Enabled = false;
+                btnUpdate.Enabled = false;
+                btnDelete.Enabled = false;
+            }
         }
 
         private void InitializeControls()
         {
-            // Thiết lập ComboBox cho vai trò
-            cboRole.Items.AddRange(new string[] { "admin", "employee" });
-            cboRole.SelectedIndex = 0; // Mặc định chọn "admin"
+            cboRole.Items.AddRange(new string[] { "admin_role", "employee_role" });
+            cboRole.SelectedIndex = 0;
 
-            // Thiết lập DataGridView cho người dùng
             dgvUsers.AutoGenerateColumns = false;
             dgvUsers.Columns.Add(new DataGridViewTextBoxColumn { Name = "UserId", HeaderText = "ID", DataPropertyName = "UserId" });
             dgvUsers.Columns.Add(new DataGridViewTextBoxColumn { Name = "Username", HeaderText = "Username", DataPropertyName = "Username" });
             dgvUsers.Columns.Add(new DataGridViewTextBoxColumn { Name = "Role", HeaderText = "Role", DataPropertyName = "Role" });
 
-            // Thiết lập DataGridView cho nhật ký quyền
             dgvPermisstionLogs.AutoGenerateColumns = false;
             dgvPermisstionLogs.Columns.Add(new DataGridViewTextBoxColumn { Name = "LogId", HeaderText = "Log ID", DataPropertyName = "LogId" });
-            dgvPermisstionLogs.Columns.Add(new DataGridViewTextBoxColumn { Name = "Username", HeaderText = "Username", DataPropertyName = "Username" });
             dgvPermisstionLogs.Columns.Add(new DataGridViewTextBoxColumn { Name = "Action", HeaderText = "Action", DataPropertyName = "Action" });
-            dgvPermisstionLogs.Columns.Add(new DataGridViewTextBoxColumn { Name = "OldRole", HeaderText = "Old Role", DataPropertyName = "OldRole" });
-            dgvPermisstionLogs.Columns.Add(new DataGridViewTextBoxColumn { Name = "NewRole", HeaderText = "New Role", DataPropertyName = "NewRole" });
             dgvPermisstionLogs.Columns.Add(new DataGridViewTextBoxColumn { Name = "ActionDate", HeaderText = "Action Date", DataPropertyName = "ActionDate" });
-            dgvPermisstionLogs.Columns.Add(new DataGridViewTextBoxColumn { Name = "PerformedByUsername", HeaderText = "Performed By", DataPropertyName = "PerformedByUsername" });
+            dgvPermisstionLogs.Columns.Add(new DataGridViewTextBoxColumn { Name = "PerformedBy", HeaderText = "Performed By", DataPropertyName = "PerformedBy" });
+            dgvPermisstionLogs.Columns.Add(new DataGridViewTextBoxColumn { Name = "TargetRole", HeaderText = "Target Role", DataPropertyName = "TargetRole" });
 
-            // Gắn sự kiện chọn dòng trên DataGridView
             dgvUsers.SelectionChanged += DgvUsers_SelectionChanged;
         }
 
@@ -58,24 +66,17 @@ namespace LaptopShopProject.Forms
         {
             try
             {
-                // Tải danh sách người dùng
-                var users = await _userRepository.GetAllUsersAsync(_currentUser.UserId);
+                var users = await _userRepository.GetAllUsersAsync();
                 dgvUsers.DataSource = users;
 
-                // Tải nhật ký quyền
-                var logs = await _userRepository.GetPermissionLogsAsync(_currentUser.UserId);
+                var logs = await _userRepository.GetPermissionLogsAsync();
                 dgvPermisstionLogs.DataSource = logs;
 
-                // Xóa lựa chọn và làm sạch form
                 ClearForm();
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                MessageBox.Show(ex.Message, "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                HandleException(ex, "loading data");
             }
         }
 
@@ -97,7 +98,7 @@ namespace LaptopShopProject.Forms
                 {
                     txtUserName.Text = _selectedUser.Username;
                     cboRole.SelectedItem = _selectedUser.Role;
-                    txtPassword.Clear(); // Không hiển thị mật khẩu để bảo mật
+                    txtPassword.Clear();
                 }
             }
         }
@@ -119,21 +120,13 @@ namespace LaptopShopProject.Forms
                     return;
                 }
 
-                int newUserId = await _userRepository.InsertUserAsync(_currentUser.UserId, txtUserName.Text, txtPassword.Text, role);
+                int newUserId = await _userRepository.InsertUserAsync(txtUserName.Text, txtPassword.Text, role);
                 MessageBox.Show($"User added successfully with ID: {newUserId}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 await LoadDataAsync();
             }
-            catch (InvalidOperationException ex)
-            {
-                MessageBox.Show(ex.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                MessageBox.Show(ex.Message, "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error adding user: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                HandleException(ex, "adding user");
             }
         }
 
@@ -160,33 +153,19 @@ namespace LaptopShopProject.Forms
                     return;
                 }
 
-                // Cập nhật thông tin người dùng
-                await _userRepository.UpdateUserAsync(_currentUser.UserId, _selectedUser.UserId, txtUserName.Text, string.IsNullOrEmpty(txtPassword.Text) ? null : txtPassword.Text);
+                await _userRepository.UpdateUserAsync(_selectedUser.UserId, txtUserName.Text, string.IsNullOrEmpty(txtPassword.Text) ? null : txtPassword.Text);
 
-                // Cập nhật vai trò nếu thay đổi
                 if (role != _selectedUser.Role)
                 {
-                    await _userRepository.UpdateUserRoleAsync(_currentUser.UserId, _selectedUser.UserId, role);
+                    await _userRepository.UpdateUserRoleAsync(_selectedUser.UserId, role);
                 }
 
                 MessageBox.Show("User updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 await LoadDataAsync();
             }
-            catch (InvalidOperationException ex)
-            {
-                MessageBox.Show(ex.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                MessageBox.Show(ex.Message, "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                MessageBox.Show(ex.Message, "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error updating user: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                HandleException(ex, "updating user");
             }
         }
 
@@ -203,44 +182,62 @@ namespace LaptopShopProject.Forms
                 DialogResult result = MessageBox.Show($"Are you sure you want to delete user '{_selectedUser.Username}'?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    await _userRepository.DeleteUserAsync(_currentUser.UserId, _selectedUser.UserId);
+                    await _userRepository.DeleteUserAsync(_selectedUser.UserId);
                     MessageBox.Show("User deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     await LoadDataAsync();
                 }
             }
-            catch (InvalidOperationException ex)
-            {
-                MessageBox.Show(ex.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                MessageBox.Show(ex.Message, "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                MessageBox.Show(ex.Message, "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error deleting user: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                HandleException(ex, "deleting user");
             }
         }
 
-        private void btnRefresh_Click(object sender, EventArgs e)
+        private async void btnRefresh_Click(object sender, EventArgs e)
         {
-            LoadDataAsync().GetAwaiter().GetResult(); // Gọi đồng bộ trong sự kiện đồng bộ
+            await LoadDataAsync();
+        }
+
+        private void HandleException(Exception ex, string action)
+        {
+            string message;
+            string title;
+            MessageBoxIcon icon;
+
+            switch (ex)
+            {
+                case UnauthorizedAccessException:
+                    message = ex.Message;
+                    title = "Permission Denied";
+                    icon = MessageBoxIcon.Error;
+                    break;
+                case InvalidOperationException:
+                    message = ex.Message;
+                    title = "Operation Failed";
+                    icon = MessageBoxIcon.Warning;
+                    break;
+                case KeyNotFoundException:
+                    message = ex.Message;
+                    title = "Not Found";
+                    icon = MessageBoxIcon.Warning;
+                    break;
+                default:
+                    message = $"Error {action}: {ex.Message}";
+                    title = "Error";
+                    icon = MessageBoxIcon.Error;
+                    break;
+            }
+
+            MessageBox.Show(message, title, MessageBoxButtons.OK, icon);
         }
     }
 
-    // Định nghĩa lớp PermissionLog để sử dụng trong GetPermissionLogs
     public class PermissionLog
     {
         public int LogId { get; set; }
-        public string Username { get; set; }
         public string Action { get; set; }
-        public string OldRole { get; set; }
-        public string NewRole { get; set; }
         public DateTime ActionDate { get; set; }
-        public string PerformedByUsername { get; set; }
+        public string PerformedBy { get; set; }
+        public string TargetRole { get; set; }
     }
 }

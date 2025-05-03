@@ -1,20 +1,35 @@
-﻿using LaptopShopProject.Models;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
+using LaptopShopProject.Models;
 
 namespace LaptopShopProject.DataAccess
 {
     public class ImportRepository
     {
+        private readonly string _username;
+        private readonly string _password;
+
+        public ImportRepository(string username, string password)
+        {
+            _username = username;
+            _password = password;
+        }
+
+        private SqlConnection GetConnection()
+        {
+            string connectionString = $"Server=TonyNyan\\TONYNYAN;Database=LaptopStoreDBMS4;User Id={_username};Password={_password};";
+            return new SqlConnection(connectionString);
+        }
+
         public async Task<List<Import>> GetAllImportsAsync()
         {
             var imports = new List<Import>();
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("SELECT DISTINCT import_id, supplier_id, supplier_name, import_date, total_amount FROM vw_ImportDetails", conn))
@@ -52,7 +67,7 @@ namespace LaptopShopProject.DataAccess
             var details = new List<ImportDetail>();
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("SELECT import_id, product_id, product_name, quantity, unit_price FROM vw_ImportDetails WHERE import_id = @import_id", conn))
@@ -90,7 +105,7 @@ namespace LaptopShopProject.DataAccess
         {
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("sp_InsertImport", conn))
@@ -120,7 +135,7 @@ namespace LaptopShopProject.DataAccess
         {
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("sp_InsertImportDetail", conn))
@@ -163,7 +178,7 @@ namespace LaptopShopProject.DataAccess
         {
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("sp_UpdateImport", conn))
@@ -217,7 +232,7 @@ namespace LaptopShopProject.DataAccess
         {
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("sp_DeleteImport", conn))
@@ -246,7 +261,7 @@ namespace LaptopShopProject.DataAccess
         {
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("SELECT dbo.fn_GetImportTotal(@import_id)", conn))

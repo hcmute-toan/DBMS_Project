@@ -1,19 +1,34 @@
-﻿using LaptopShopProject.Models;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
+using LaptopShopProject.Models;
 
 namespace LaptopShopProject.DataAccess
 {
     public class UserRepository
     {
+        private readonly string _username;
+        private readonly string _password;
+
+        public UserRepository(string username, string password)
+        {
+            _username = username;
+            _password = password;
+        }
+
+        private SqlConnection GetConnection()
+        {
+            string connectionString = $"Server=TonyNyan\\TONYNYAN;Database=LaptopStoreDBMS4;User Id={_username};Password={_password};";
+            return new SqlConnection(connectionString);
+        }
+
         public async Task<User> LoginAsync(string username, string password)
         {
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("sp_Login", conn))
@@ -51,7 +66,7 @@ namespace LaptopShopProject.DataAccess
         {
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("sp_InsertUser", conn))
@@ -86,7 +101,7 @@ namespace LaptopShopProject.DataAccess
         {
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("sp_UpdateUser", conn))
@@ -94,7 +109,7 @@ namespace LaptopShopProject.DataAccess
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@user_id", userId);
                         cmd.Parameters.AddWithValue("@username", username);
-                        cmd.Parameters.AddWithValue("@password", password);
+                        cmd.Parameters.AddWithValue("@password", password ?? (object)DBNull.Value);
                         await cmd.ExecuteNonQueryAsync();
                     }
                 }
@@ -121,7 +136,7 @@ namespace LaptopShopProject.DataAccess
         {
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("sp_UpdateUserRole", conn))
@@ -155,7 +170,7 @@ namespace LaptopShopProject.DataAccess
         {
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("sp_DeleteUser", conn))
@@ -189,7 +204,7 @@ namespace LaptopShopProject.DataAccess
             var users = new List<User>();
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("sp_GetAllUsers", conn))
@@ -226,7 +241,7 @@ namespace LaptopShopProject.DataAccess
             var logs = new List<PermissionLog>();
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("sp_GetPermissionLogs", conn))

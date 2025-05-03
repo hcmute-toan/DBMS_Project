@@ -1,20 +1,36 @@
-﻿using LaptopShopProject.Models;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
+using LaptopShopProject.Models;
 
 namespace LaptopShopProject.DataAccess
 {
     public class CustomerRepository
     {
+        private readonly string _username;
+        private readonly string _password;
+
+        public CustomerRepository(string username, string password)
+        {
+            _username = username;
+            _password = password;
+        }
+
+        private SqlConnection GetConnection()
+        {
+            // Construct connection string with user credentials
+            string connectionString = $"Server=TonyNyan\\TONYNYAN;Database=LaptopStoreDBMS4;User Id={_username};Password={_password};";
+            return new SqlConnection(connectionString);
+        }
+
         public async Task<List<Customer>> GetAllCustomersAsync()
         {
             var customers = new List<Customer>();
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("SELECT customer_id, customer_name, contact_info FROM vw_Customers", conn))
@@ -49,7 +65,7 @@ namespace LaptopShopProject.DataAccess
         {
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("sp_InsertCustomer", conn))
@@ -79,7 +95,7 @@ namespace LaptopShopProject.DataAccess
         {
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("sp_UpdateCustomer", conn))
@@ -114,7 +130,7 @@ namespace LaptopShopProject.DataAccess
         {
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("sp_DeleteCustomer", conn))

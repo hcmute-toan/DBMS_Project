@@ -83,7 +83,6 @@
             btnLogin.Text = "Log in";
             btnLogin.UseVisualStyleBackColor = false;
             btnLogin.Click += btnLogin_Click;
-            btnLogin.KeyDown += btnLogin_KeyDown;
             // 
             // pictureBox1
             // 

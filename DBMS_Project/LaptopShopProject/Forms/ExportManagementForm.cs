@@ -12,18 +12,34 @@ namespace LaptopShopProject.Forms
         private readonly ExportRepository _exportRepository;
         private readonly CustomerRepository _customerRepository;
         private readonly ProductRepository _productRepository;
-        private readonly User _currentUser;
+        private readonly string _username;
+        private readonly string _role;
+        private readonly string _password; // Temporary; replace with secure password handling
 
-        public ExportManagementForm(User currentUser)
+        public ExportManagementForm(string username, string role)
         {
             InitializeComponent();
-            _exportRepository = new ExportRepository();
-            _customerRepository = new CustomerRepository();
-            _productRepository = new ProductRepository();
-            _currentUser = currentUser;
+            _username = username;
+            _role = role;
+            // Temporary password; in production, use secure storage or prompt
+            _password = username == "admin_user" ? "Admin123!" : "Employee123!";
+            _exportRepository = new ExportRepository(_username, _password);
+            _customerRepository = new CustomerRepository(_username, _password);
+            _productRepository = new ProductRepository(_username, _password);
+            ConfigurePermissions();
             LoadCustomersAsync(); // Non-awaited in constructor
             LoadExportsAsync(); // Non-awaited in constructor
             ConfigureEventHandlers();
+        }
+
+        private void ConfigurePermissions()
+        {
+            if (_role.Equals("employee_role", StringComparison.OrdinalIgnoreCase))
+            {
+                // Disable buttons for employee_role since they only have INSERT permissions
+                btnUpdate.Enabled = false;
+                btnDelete.Enabled = false;
+            }
         }
 
         private void ConfigureEventHandlers()
@@ -71,6 +87,11 @@ namespace LaptopShopProject.Forms
                 {
                     dgvExportDetails.DataSource = null;
                 }
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                MessageBox.Show(ex.Message, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Enabled = false; // Disable the entire form if no permission
             }
             catch (Exception ex)
             {
@@ -145,21 +166,8 @@ namespace LaptopShopProject.Forms
 
                 if (!productExists)
                 {
-                    var result = MessageBox.Show($"Product '{productName}' does not exist. Would you like to create it?", "Product Not Found", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (result == DialogResult.Yes)
-                    {
-                        var product = new Product
-                        {
-                            ProductName = productName,
-                            Price = decimal.Parse(txtUnitPrice.Text.Trim()),
-                            StockQuantity = int.Parse(txtQuantity.Text.Trim())
-                        };
-                        await _productRepository.InsertProductAsync(_currentUser.UserId, product);
-                    }
-                    else
-                    {
-                        return; // User chose not to create the product
-                    }
+                    MessageBox.Show($"Product '{productName}' does not exist. Please add the product first.", "Product Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
 
                 // Insert the Export
@@ -169,7 +177,7 @@ namespace LaptopShopProject.Forms
                     ExportDate = dtpExportDate.Value,
                     TotalAmount = 0
                 };
-                int exportId = await _exportRepository.InsertExportAsync(_currentUser.UserId, export);
+                int exportId = await _exportRepository.InsertExportAsync(export);
 
                 // Insert the ExportDetail using ProductName
                 var detail = new ExportDetail
@@ -179,12 +187,7 @@ namespace LaptopShopProject.Forms
                     Quantity = int.Parse(txtQuantity.Text.Trim()),
                     UnitPrice = decimal.Parse(txtUnitPrice.Text.Trim())
                 };
-                await _exportRepository.InsertExportDetailAsync(_currentUser.UserId, detail);
-
-                // Update TotalAmount in Export
-                export.ExportId = exportId;
-                export.TotalAmount = await _exportRepository.GetExportTotalAsync(exportId);
-                await _exportRepository.UpdateExportAsync(_currentUser.UserId, export);
+                await _exportRepository.InsertExportDetailAsync(detail);
 
                 MessageBox.Show($"Export added successfully with ID: {exportId}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearInputs();
@@ -226,37 +229,23 @@ namespace LaptopShopProject.Forms
 
                 if (!productExists)
                 {
-                    var result = MessageBox.Show($"Product '{productName}' does not exist. Would you like to create it?", "Product Not Found", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (result == DialogResult.Yes)
-                    {
-                        var product = new Product
-                        {
-                            ProductName = productName,
-                            Price = decimal.Parse(txtUnitPrice.Text.Trim()),
-                            StockQuantity = int.Parse(txtQuantity.Text.Trim())
-                        };
-                        await _productRepository.InsertProductAsync(_currentUser.UserId, product);
-                    }
-                    else
-                    {
-                        return; // User chose not to create the product
-                    }
+                    MessageBox.Show($"Product '{productName}' does not exist. Please add the product first.", "Product Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
 
                 int newQuantity = int.Parse(txtQuantity.Text.Trim());
-                decimal newUnitPrice = decimal.Parse(txtUnitPrice.Text.Trim()); // Lấy UnitPrice mới từ txtUnitPrice
+                decimal newUnitPrice = decimal.Parse(txtUnitPrice.Text.Trim());
 
-                // Cập nhật ExportDetail
+                // Update ExportDetail
                 var detail = new ExportDetail
                 {
                     ExportId = selectedExport.ExportId,
                     ProductName = productName,
                     Quantity = newQuantity,
-                    UnitPrice = newUnitPrice // Sử dụng giá trị mới từ txtUnitPrice
+                    UnitPrice = newUnitPrice
                 };
-                bool isUpdated = await _exportRepository.UpdateExportDetailAsync(_currentUser.UserId, detail);
+                bool isUpdated = await _exportRepository.UpdateExportDetailAsync(detail);
 
-                // Hiển thị thông báo dựa trên kết quả từ stored procedure
                 if (isUpdated)
                 {
                     MessageBox.Show("Export updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -267,10 +256,10 @@ namespace LaptopShopProject.Forms
                     return;
                 }
 
-                // Làm mới giao diện
+                // Refresh UI
                 await LoadExportsAsync();
 
-                // Tự động chọn lại dòng vừa cập nhật
+                // Reselect the updated row
                 foreach (DataGridViewRow row in dgvExports.Rows)
                 {
                     var currentExport = (Export)row.DataBoundItem;
@@ -301,7 +290,7 @@ namespace LaptopShopProject.Forms
                 try
                 {
                     var selectedExport = (Export)dgvExports.SelectedRows[0].DataBoundItem;
-                    await _exportRepository.DeleteExportAsync(_currentUser.UserId, selectedExport.ExportId);
+                    await _exportRepository.DeleteExportAsync(selectedExport.ExportId);
                     MessageBox.Show("Export deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ClearInputs();
                     await LoadExportsAsync();
@@ -404,11 +393,6 @@ namespace LaptopShopProject.Forms
             }
 
             MessageBox.Show(message, title, MessageBoxButtons.OK, icon);
-        }
-
-        private void cboCustomer_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Handle customer selection if needed
         }
     }
 }

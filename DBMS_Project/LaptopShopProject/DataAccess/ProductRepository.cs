@@ -1,20 +1,35 @@
-﻿using LaptopShopProject.Models;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
+using LaptopShopProject.Models;
 
 namespace LaptopShopProject.DataAccess
 {
     public class ProductRepository
     {
+        private readonly string _username;
+        private readonly string _password;
+
+        public ProductRepository(string username, string password)
+        {
+            _username = username;
+            _password = password;
+        }
+
+        private SqlConnection GetConnection()
+        {
+            string connectionString = $"Server=TonyNyan\\TONYNYAN;Database=LaptopStoreDBMS4;User Id={_username};Password={_password};";
+            return new SqlConnection(connectionString);
+        }
+
         public async Task<List<Product>> GetAllProductsAsync()
         {
             var products = new List<Product>();
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("SELECT * FROM vw_ProductDetails", conn))
@@ -47,11 +62,91 @@ namespace LaptopShopProject.DataAccess
             return products;
         }
 
+        public async Task<List<Product>> SearchProductByNameAsync(string productName)
+        {
+            var products = new List<Product>();
+            try
+            {
+                using (var conn = GetConnection())
+                {
+                    await conn.OpenAsync();
+                    using (var cmd = new SqlCommand("sp_SearchProductByName", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@product_name", productName);
+                        using (var reader = await cmd.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                products.Add(new Product
+                                {
+                                    ProductId = reader.GetInt32(0),
+                                    ProductName = reader.GetString(1),
+                                    Price = reader.GetDecimal(2),
+                                    StockQuantity = reader.GetInt32(3),
+                                    Brands = reader.IsDBNull(4) ? null : reader.GetString(4)
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to search products by name.", ex);
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error searching products by name: " + ex.Message, ex);
+            }
+            return products;
+        }
+
+        public async Task<List<Product>> SearchProductByCategoryAsync(string categoryName)
+        {
+            var products = new List<Product>();
+            try
+            {
+                using (var conn = GetConnection())
+                {
+                    await conn.OpenAsync();
+                    using (var cmd = new SqlCommand("sp_SearchProductByCategory", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@category_name", categoryName);
+                        using (var reader = await cmd.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                products.Add(new Product
+                                {
+                                    ProductId = reader.GetInt32(0),
+                                    ProductName = reader.GetString(1),
+                                    Price = reader.GetDecimal(2),
+                                    StockQuantity = reader.GetInt32(3),
+                                    Brands = reader.IsDBNull(4) ? null : reader.GetString(4)
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to search products by category.", ex);
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error searching products by category: " + ex.Message, ex);
+            }
+            return products;
+        }
+
         public async Task<bool> ProductExistsAsync(string productName)
         {
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("SELECT COUNT(*) FROM Product WHERE product_name = @product_name", conn))
@@ -72,11 +167,48 @@ namespace LaptopShopProject.DataAccess
             }
         }
 
+        public async Task<Product> GetProductByNameAsync(string productName)
+        {
+            try
+            {
+                using (var conn = GetConnection())
+                {
+                    await conn.OpenAsync();
+                    using (var cmd = new SqlCommand("SELECT product_id, product_name, price, stock_quantity FROM Product WHERE product_name = @productName", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@productName", productName);
+                        using (var reader = await cmd.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                return new Product
+                                {
+                                    ProductId = reader.GetInt32(0),
+                                    ProductName = reader.GetString(1),
+                                    Price = reader.GetDecimal(2),
+                                    StockQuantity = reader.GetInt32(3)
+                                };
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex) when (ex.Number == 229)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to view products.", ex);
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error retrieving product: " + ex.Message, ex);
+            }
+            return null;
+        }
+
         public async Task<int> InsertProductAsync(Product product)
         {
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("sp_InsertProduct", conn))
@@ -107,7 +239,7 @@ namespace LaptopShopProject.DataAccess
         {
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("sp_UpdateProduct", conn))
@@ -143,7 +275,7 @@ namespace LaptopShopProject.DataAccess
         {
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("sp_DeleteProduct", conn))
@@ -172,7 +304,7 @@ namespace LaptopShopProject.DataAccess
         {
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("SELECT dbo.fn_GetStockQuantity(@product_id)", conn))
@@ -198,7 +330,7 @@ namespace LaptopShopProject.DataAccess
             var logs = new List<ProductLog>();
             try
             {
-                using (var conn = DatabaseConnection.GetConnection())
+                using (var conn = GetConnection())
                 {
                     await conn.OpenAsync();
                     using (var cmd = new SqlCommand("SELECT * FROM ProductLog", conn))
