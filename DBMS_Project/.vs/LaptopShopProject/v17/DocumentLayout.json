@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\laptopshopproject\\forms\\reportform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\final\\dbms_project\\dbms_project\\laptopshopproject\\forms\\reportform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\reportform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -272,8 +272,7 @@
               "RelativeToolTip": "LaptopShopProject\\DataAccess\\UserRepository.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAuwBYAAADLAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:53:51.879Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T06:53:51.879Z"
             },
             {
               "$type": "Document",
@@ -284,8 +283,7 @@
               "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ProductManagementForm.cs [Design]",
               "RelativeToolTip": "LaptopShopProject\\Forms\\ProductManagementForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T18:33:03.968Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-04-24T18:33:03.968Z"
             },
             {
               "$type": "Document",
@@ -297,8 +295,7 @@
               "RelativeToolTip": "LaptopShopProject\\Forms\\ProductManagementForm.cs",
               "ViewState": "AgIAABcAAAAAAAAAAAASwCQAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T18:35:02.238Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T18:35:02.238Z"
             },
             {
               "$type": "Document",
@@ -334,8 +331,7 @@
               "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\MainForm.cs [Design]",
               "RelativeToolTip": "LaptopShopProject\\Forms\\MainForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T17:48:53.965Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-04-24T17:48:53.965Z"
             },
             {
               "$type": "Document",
@@ -359,8 +355,7 @@
               "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\LoginForm.cs [Design]",
               "RelativeToolTip": "LaptopShopProject\\Forms\\LoginForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T17:48:59.297Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-04-24T17:48:59.297Z"
             },
             {
               "$type": "Document",
@@ -372,8 +367,7 @@
               "RelativeToolTip": "LaptopShopProject\\DataAccess\\ImportRepository.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAA7wBYAAADJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:54:32.205Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T06:54:32.205Z"
             },
             {
               "$type": "Document",
@@ -385,8 +379,7 @@
               "RelativeToolTip": "LaptopShopProject\\DataAccess\\SupplierRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAADLAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:54:46.977Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T06:54:46.977Z"
             },
             {
               "$type": "Document",
@@ -398,8 +391,7 @@
               "RelativeToolTip": "LaptopShopProject\\DataAccess\\ReportRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAADJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T08:15:56.166Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T08:15:56.166Z"
             },
             {
               "$type": "Document",
@@ -411,8 +403,7 @@
               "RelativeToolTip": "LaptopShopProject\\DataAccess\\ProductRepository.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAA7wBYAAADJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:54:22.342Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T06:54:22.342Z"
             },
             {
               "$type": "Document",
@@ -424,8 +415,7 @@
               "RelativeToolTip": "LaptopShopProject\\DataAccess\\ExportRepository.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAABcAAADJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:54:39.946Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T06:54:39.946Z"
             },
             {
               "$type": "Document",
@@ -437,8 +427,7 @@
               "RelativeToolTip": "LaptopShopProject\\DataAccess\\DatabaseConnection.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-23T12:21:46.304Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-23T12:21:46.304Z"
             },
             {
               "$type": "Document",
@@ -450,8 +439,7 @@
               "RelativeToolTip": "LaptopShopProject\\DataAccess\\CustomerRepository.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAnwBgAAADJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:54:54.195Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T06:54:54.195Z"
             },
             {
               "$type": "Document",
@@ -463,8 +451,7 @@
               "RelativeToolTip": "LaptopShopProject\\DataAccess\\CategoryRepository.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAiwBgAAADJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:55:11.054Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T06:55:11.054Z"
             },
             {
               "$type": "Document",
@@ -488,8 +475,7 @@
               "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\CategoryManagementForm.cs [Design]",
               "RelativeToolTip": "LaptopShopProject\\Forms\\CategoryManagementForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T17:48:48.486Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-04-24T17:48:48.486Z"
             },
             {
               "$type": "Document",
@@ -500,8 +486,7 @@
               "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ImportManagementForm.cs [Design]",
               "RelativeToolTip": "LaptopShopProject\\Forms\\ImportManagementForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T18:11:37.806Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-04-24T18:11:37.806Z"
             },
             {
               "$type": "Document",
@@ -539,8 +524,7 @@
               "RelativeToolTip": "LaptopShopProject\\Forms\\CategoryManagementForm.cs",
               "ViewState": "AgIAAHEAAAAAAAAAAADwv90AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-25T03:15:10.881Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-25T03:15:10.881Z"
             },
             {
               "$type": "Document",
@@ -552,8 +536,7 @@
               "RelativeToolTip": "LaptopShopProject\\Forms\\ImportManagementForm.Designer.cs",
               "ViewState": "AgIAAAIBAAAAAAAAAAAUwC4BAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T18:07:07.415Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T18:07:07.415Z"
             },
             {
               "$type": "Document",
@@ -591,8 +574,7 @@
               "RelativeToolTip": "LaptopShopProject\\Forms\\ReportForm.cs",
               "ViewState": "AgIAABECAAAAAAAAAAAIwDwCAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-26T08:55:04.918Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-26T08:55:04.918Z"
             },
             {
               "$type": "Document",
@@ -604,8 +586,7 @@
               "RelativeToolTip": "LaptopShopProject\\Forms\\CustomerManagementForm.Designer.cs",
               "ViewState": "AgIAAIgAAAAAAAAAAAAUwLQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T18:03:30.151Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T18:03:30.151Z"
             },
             {
               "$type": "Document",
@@ -617,8 +598,7 @@
               "RelativeToolTip": "LaptopShopProject\\Forms\\CategoryManagementForm.Designer.cs",
               "ViewState": "AgIAAIUAAAAAAAAAAAAUwLEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T17:59:21.528Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T17:59:21.528Z"
             },
             {
               "$type": "Document",
@@ -630,8 +610,7 @@
               "RelativeToolTip": "LaptopShopProject\\Forms\\LoginForm.Designer.cs",
               "ViewState": "AgIAAD4AAAAAAAAAAAAmwFUAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T17:49:04.619Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T17:49:04.619Z"
             },
             {
               "$type": "Document",
@@ -643,8 +622,7 @@
               "RelativeToolTip": "LaptopShopProject\\Forms\\ExportManagementForm.Designer.cs",
               "ViewState": "AgIAAH4AAAAAAAAAAAAmwG4AAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T18:04:43.622Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T18:04:43.622Z"
             },
             {
               "$type": "Document",
@@ -656,8 +634,7 @@
               "RelativeToolTip": "LaptopShopProject\\Forms\\UserManagementForm.Designer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAALIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-26T08:55:37.535Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-26T08:55:37.535Z"
             },
             {
               "$type": "Document",
@@ -680,8 +657,7 @@
               "RelativeToolTip": "LaptopShopProject\\Forms\\SupplierManagementForm.Designer.cs",
               "ViewState": "AgIAAFAAAAAAAAAAAAAUwHwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-26T08:57:30.549Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-26T08:57:30.549Z"
             },
             {
               "$type": "Document",
@@ -706,8 +682,7 @@
               "RelativeToolTip": "LaptopShopProject\\Forms\\ProductManagementForm.Designer.cs",
               "ViewState": "AgIAAAEAAAAAAAAAAADwvwMBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T18:32:25.756Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T18:32:25.756Z"
             },
             {
               "$type": "Document",
@@ -719,8 +694,7 @@
               "RelativeToolTip": "LaptopShopProject\\Forms\\MainForm.Designer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAOUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T17:49:58.2Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T17:49:58.2Z"
             },
             {
               "$type": "Document",
@@ -731,8 +705,7 @@
               "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\CustomerManagementForm.resx",
               "RelativeToolTip": "LaptopShopProject\\Forms\\CustomerManagementForm.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-05-03T12:57:37.527Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-03T12:57:37.527Z"
             },
             {
               "$type": "Document",
@@ -766,8 +739,7 @@
               "RelativeToolTip": "LaptopShopProject\\Models\\User.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:51:12.845Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T06:51:12.845Z"
             },
             {
               "$type": "Document",
@@ -779,8 +751,7 @@
               "RelativeToolTip": "LaptopShopProject\\Models\\Supplier.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:51:25.278Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T06:51:25.278Z"
             },
             {
               "$type": "Document",
@@ -792,8 +763,7 @@
               "RelativeToolTip": "LaptopShopProject\\Models\\ProductLog.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T14:56:35.643Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T14:56:35.643Z"
             },
             {
               "$type": "Document",
@@ -805,8 +775,7 @@
               "RelativeToolTip": "LaptopShopProject\\Models\\Product.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:52:22.073Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T06:52:22.073Z"
             },
             {
               "$type": "Document",
@@ -818,8 +787,7 @@
               "RelativeToolTip": "LaptopShopProject\\Models\\PermissionLog.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T14:57:01.68Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T14:57:01.68Z"
             },
             {
               "$type": "Document",
@@ -831,8 +799,7 @@
               "RelativeToolTip": "LaptopShopProject\\Models\\ImportDetail.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:52:39.691Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T06:52:39.691Z"
             },
             {
               "$type": "Document",
@@ -844,8 +811,7 @@
               "RelativeToolTip": "LaptopShopProject\\Models\\Import.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:52:30.71Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T06:52:30.71Z"
             },
             {
               "$type": "Document",
@@ -857,8 +823,7 @@
               "RelativeToolTip": "LaptopShopProject\\Models\\ExportDetail.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:52:56.126Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T06:52:56.126Z"
             },
             {
               "$type": "Document",
@@ -870,8 +835,7 @@
               "RelativeToolTip": "LaptopShopProject\\Models\\Export.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:52:49.062Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T06:52:49.062Z"
             },
             {
               "$type": "Document",
@@ -883,8 +847,7 @@
               "RelativeToolTip": "LaptopShopProject\\Models\\Customer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:51:58.284Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T06:51:58.284Z"
             },
             {
               "$type": "Document",
@@ -896,8 +859,7 @@
               "RelativeToolTip": "LaptopShopProject\\Models\\Category.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:52:09.119Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T06:52:09.119Z"
             },
             {
               "$type": "Document",
@@ -920,8 +882,7 @@
               "RelativeToolTip": "LaptopShopProject\\App.config",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2025-04-25T02:08:40.072Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-25T02:08:40.072Z"
             },
             {
               "$type": "Document",
@@ -932,8 +893,7 @@
               "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Properties\\Settings.settings",
               "RelativeToolTip": "LaptopShopProject\\Properties\\Settings.settings",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002767|",
-              "WhenOpened": "2025-04-27T08:10:22.695Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T08:10:22.695Z"
             },
             {
               "$type": "Document",
@@ -974,8 +934,7 @@
               "RelativeToolTip": "LaptopShopProject\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T15:14:12.187Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T15:14:12.187Z"
             },
             {
               "$type": "Document",
@@ -986,8 +945,7 @@
               "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\LoginForm.resx",
               "RelativeToolTip": "LaptopShopProject\\Forms\\LoginForm.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-04-24T18:40:10.768Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T18:40:10.768Z"
             },
             {
               "$type": "Document",
@@ -999,8 +957,7 @@
               "RelativeToolTip": "LaptopShopProject\\Properties\\Resources.Designer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAABNAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T17:57:05.394Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T17:57:05.394Z"
             },
             {
               "$type": "Document",
@@ -1011,8 +968,7 @@
               "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Properties\\Resources.resx",
               "RelativeToolTip": "LaptopShopProject\\Properties\\Resources.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-04-24T17:52:30.46Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T17:52:30.46Z"
             },
             {
               "$type": "Document",
@@ -1024,8 +980,7 @@
               "RelativeToolTip": "LaptopShopProject\\Utilities\\Logger.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:55:37.676Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T06:55:37.676Z"
             },
             {
               "$type": "Document",
@@ -1037,8 +992,7 @@
               "RelativeToolTip": "LaptopShopProject\\Utilities\\Helper.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:55:44.253Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T06:55:44.253Z"
             },
             {
               "$type": "Document",

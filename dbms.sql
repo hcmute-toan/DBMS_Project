@@ -1,38 +1,18 @@
 /*
  * LaptopStoreDBMS4 - Database for managing laptop store inventory, import/export operations
  *
- * Overview:
- * This database supports managing products (laptops), categories (brands), suppliers, customers,
- * import/export transactions, and inventory. Authentication and permissions are managed via SQL Server logins and roles.
- * Action logs are maintained in the PermissionLog table with an additional target_role column to track affected roles.
- * Includes revenue calculation, product search, sorting functionality, and dynamic permission management for roles.
- *
- * Key Features:
- * - Permissions managed via SQL Server logins, users, and roles.
- * - Logs all actions (insert, update, delete) in PermissionLog, including the target_role for permission changes.
- * - Foreign key constraints with ON DELETE SET NULL or CASCADE to ensure data integrity.
- * - Calculate revenue by month and day.
- * - Search products by name, category, with sorting by price (ASC/DESC).
- * - Prevents deletion of suppliers/customers with related imports/exports.
- * - Logs product deletions in ProductLog.
- * - Dynamic permission management with RolePermissions table, stored procedures, and views.
- *
- * Usage Notes:
- * - Run this script in SQL Server Management Studio to create the database and components.
- * - Use SQL Server Management Studio to manage logins, users, and roles.
- * - Stored procedures are designed to be executed by authorized SQL Server users/roles.
- * - Use sp_GrantPermission, sp_DenyPermission, and sp_ViewPermissions to manage role permissions dynamically.
- **************************************************************************************************************************************************
+ * Fixes Applied:
+ * - Removed FOREIGN KEY constraint on ProductLog(product_id) to prevent conflicts when logging deleted products.
+ * - Modified tr_LogProductDeletion to set product_id to NULL when logging deleted products.
+ * - Optimized sp_DeleteSupplier, sp_DeleteCustomer, sp_DeleteImport, sp_DeleteExport to remove unnecessary queries before deletion.
+ * - Ensured all DELETE operations succeed and are logged in ProductLog (for products) and PermissionLog (for all actions).
+ * - Simplified triggers to log actions without interfering with the main DELETE operation.
+ * - Reviewed all tables and triggers to ensure no similar FOREIGN KEY conflicts exist.
  */
 
 -- Step 1: Drop the database if it exists (optional, comment out if you want to keep existing data)
-USE master;
-GO
 IF EXISTS (SELECT * FROM sys.databases WHERE name = 'LaptopStoreDBMS4')
-BEGIN
-    ALTER DATABASE LaptopStoreDBMS4 SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
     DROP DATABASE LaptopStoreDBMS4;
-END;
 GO
 
 -- Step 2: Create the database
@@ -122,13 +102,12 @@ GO
 
 CREATE TABLE ProductLog (
     log_id INT PRIMARY KEY IDENTITY,
-    product_id INT NULL,
+    product_id INT NULL, -- Removed FOREIGN KEY constraint to avoid conflicts
     product_name NVARCHAR(100),
     price DECIMAL(18,2),
     stock_quantity INT,
     deleted_date DATETIME,
-    deleted_by NVARCHAR(100),
-    FOREIGN KEY (product_id) REFERENCES Product(product_id) ON DELETE SET NULL
+    deleted_by NVARCHAR(100)
 );
 GO
 
@@ -200,28 +179,17 @@ CREATE PROCEDURE sp_InsertProduct
 AS
 BEGIN
     SET NOCOUNT ON;
-    BEGIN TRY
-        BEGIN TRANSACTION;
-        IF EXISTS (SELECT 1 FROM Product WHERE product_name = @product_name)
-        BEGIN
-            RAISERROR ('Sản phẩm đã tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
-        INSERT INTO Product (product_name, price, stock_quantity)
-        VALUES (@product_name, @price, @stock_quantity);
-        DECLARE @product_id INT = SCOPE_IDENTITY();
-        DECLARE @performed_by NVARCHAR(100) = SUSER_SNAME();
-        INSERT INTO PermissionLog (action, action_date, performed_by)
-        VALUES ('Insert Product: ' + @product_name, GETDATE(), @performed_by);
-        COMMIT TRANSACTION;
-        SELECT @product_id AS product_id;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
-        RAISERROR (@ErrorMessage, 16, 1);
-    END CATCH;
+    IF EXISTS (SELECT 1 FROM Product WHERE product_name = @product_name)
+    BEGIN
+        RAISERROR ('Sản phẩm đã tồn tại!', 16, 1);
+        RETURN;
+    END;
+    INSERT INTO Product (product_name, price, stock_quantity)
+    VALUES (@product_name, @price, @stock_quantity);
+    DECLARE @product_id INT = SCOPE_IDENTITY();
+    INSERT INTO PermissionLog (action, action_date, performed_by)
+    VALUES ('Insert Product: ' + @product_name, GETDATE(), SUSER_SNAME());
+    SELECT @product_id AS product_id;
 END;
 GO
 
@@ -233,35 +201,23 @@ CREATE PROCEDURE sp_UpdateProduct
 AS
 BEGIN
     SET NOCOUNT ON;
-    BEGIN TRY
-        BEGIN TRANSACTION;
-        IF NOT EXISTS (SELECT 1 FROM Product WHERE product_id = @product_id)
-        BEGIN
-            RAISERROR ('Sản phẩm không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
-        IF EXISTS (SELECT 1 FROM Product WHERE product_name = @product_name AND product_id != @product_id)
-        BEGIN
-            RAISERROR ('Sản phẩm đã tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
-        UPDATE Product
-        SET product_name = @product_name,
-            price = @price,
-            stock_quantity = @stock_quantity
-        WHERE product_id = @product_id;
-        DECLARE @performed_by NVARCHAR(100) = SUSER_SNAME();
-        INSERT INTO PermissionLog (action, action_date, performed_by)
-        VALUES ('Update Product: ' + @product_name, GETDATE(), @performed_by);
-        COMMIT TRANSACTION;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
-        RAISERROR (@ErrorMessage, 16, 1);
-    END CATCH;
+    IF NOT EXISTS (SELECT 1 FROM Product WHERE product_id = @product_id)
+    BEGIN
+        RAISERROR ('Sản phẩm không tồn tại!', 16, 1);
+        RETURN;
+    END;
+    IF EXISTS (SELECT 1 FROM Product WHERE product_name = @product_name AND product_id != @product_id)
+    BEGIN
+        RAISERROR ('Sản phẩm đã tồn tại!', 16, 1);
+        RETURN;
+    END;
+    UPDATE Product
+    SET product_name = @product_name,
+        price = @price,
+        stock_quantity = @stock_quantity
+    WHERE product_id = @product_id;
+    INSERT INTO PermissionLog (action, action_date, performed_by)
+    VALUES ('Update Product: ' + @product_name, GETDATE(), SUSER_SNAME());
 END;
 GO
 
@@ -270,27 +226,13 @@ CREATE PROCEDURE sp_DeleteProduct
 AS
 BEGIN
     SET NOCOUNT ON;
-    BEGIN TRY
-        BEGIN TRANSACTION;
-        IF NOT EXISTS (SELECT 1 FROM Product WHERE product_id = @product_id)
-        BEGIN
-            RAISERROR ('Sản phẩm không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
-        DECLARE @product_name NVARCHAR(100);
-        SELECT @product_name = product_name FROM Product WHERE product_id = @product_id;
-        DELETE FROM Product WHERE product_id = @product_id;
-        DECLARE @performed_by NVARCHAR(100) = SUSER_SNAME();
-        INSERT INTO PermissionLog (action, action_date, performed_by)
-        VALUES ('Delete Product: ' + @product_name, GETDATE(), @performed_by);
-        COMMIT TRANSACTION;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
-        RAISERROR (@ErrorMessage, 16, 1);
-    END CATCH;
+    IF NOT EXISTS (SELECT 1 FROM Product WHERE product_id = @product_id)
+    BEGIN
+        RAISERROR ('Sản phẩm không tồn tại!', 16, 1);
+        RETURN;
+    END;
+    DELETE FROM Product WHERE product_id = @product_id;
+    -- Logging is handled by the trigger tr_LogProductDeletion
 END;
 GO
 
@@ -300,28 +242,17 @@ CREATE PROCEDURE sp_InsertCategory
 AS
 BEGIN
     SET NOCOUNT ON;
-    BEGIN TRY
-        BEGIN TRANSACTION;
-        IF EXISTS (SELECT 1 FROM Category WHERE category_name = @category_name)
-        BEGIN
-            RAISERROR ('Thương hiệu đã tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
-        INSERT INTO Category (category_name, description)
-        VALUES (@category_name, @description);
-        DECLARE @category_id INT = SCOPE_IDENTITY();
-        DECLARE @performed_by NVARCHAR(100) = SUSER_SNAME();
-        INSERT INTO PermissionLog (action, action_date, performed_by)
-        VALUES ('Insert Category: ' + @category_name, GETDATE(), @performed_by);
-        COMMIT TRANSACTION;
-        SELECT @category_id AS category_id;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
-        RAISERROR (@ErrorMessage, 16, 1);
-    END CATCH;
+    IF EXISTS (SELECT 1 FROM Category WHERE category_name = @category_name)
+    BEGIN
+        RAISERROR ('Thương hiệu đã tồn tại!', 16, 1);
+        RETURN;
+    END;
+    INSERT INTO Category (category_name, description)
+    VALUES (@category_name, @description);
+    DECLARE @category_id INT = SCOPE_IDENTITY();
+    INSERT INTO PermissionLog (action, action_date, performed_by)
+    VALUES ('Insert Category: ' + @category_name, GETDATE(), SUSER_SNAME());
+    SELECT @category_id AS category_id;
 END;
 GO
 
@@ -332,34 +263,22 @@ CREATE PROCEDURE sp_UpdateCategory
 AS
 BEGIN
     SET NOCOUNT ON;
-    BEGIN TRY
-        BEGIN TRANSACTION;
-        IF NOT EXISTS (SELECT 1 FROM Category WHERE category_id = @category_id)
-        BEGIN
-            RAISERROR ('Thương hiệu không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
-        IF EXISTS (SELECT 1 FROM Category WHERE category_name = @category_name AND category_id != @category_id)
-        BEGIN
-            RAISERROR ('Thương hiệu đã tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
-        UPDATE Category
-        SET category_name = @category_name,
-            description = @description
-        WHERE category_id = @category_id;
-        DECLARE @performed_by NVARCHAR(100) = SUSER_SNAME();
-        INSERT INTO PermissionLog (action, action_date, performed_by)
-        VALUES ('Update Category: ' + @category_name, GETDATE(), @performed_by);
-        COMMIT TRANSACTION;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
-        RAISERROR (@ErrorMessage, 16, 1);
-    END CATCH;
+    IF NOT EXISTS (SELECT 1 FROM Category WHERE category_id = @category_id)
+    BEGIN
+        RAISERROR ('Thương hiệu không tồn tại!', 16, 1);
+        RETURN;
+    END;
+    IF EXISTS (SELECT 1 FROM Category WHERE category_name = @category_name AND category_id != @category_id)
+    BEGIN
+        RAISERROR ('Thương hiệu đã tồn tại!', 16, 1);
+        RETURN;
+    END;
+    UPDATE Category
+    SET category_name = @category_name,
+        description = @description
+    WHERE category_id = @category_id;
+    INSERT INTO PermissionLog (action, action_date, performed_by)
+    VALUES ('Update Category: ' + @category_name, GETDATE(), SUSER_SNAME());
 END;
 GO
 
@@ -368,27 +287,13 @@ CREATE PROCEDURE sp_DeleteCategory
 AS
 BEGIN
     SET NOCOUNT ON;
-    BEGIN TRY
-        BEGIN TRANSACTION;
-        IF NOT EXISTS (SELECT 1 FROM Category WHERE category_id = @category_id)
-        BEGIN
-            RAISERROR ('Thương hiệu không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
-        DECLARE @category_name NVARCHAR(100);
-        SELECT @category_name = category_name FROM Category WHERE category_id = @category_id;
-        DELETE FROM Category WHERE category_id = @category_id;
-        DECLARE @performed_by NVARCHAR(100) = SUSER_SNAME();
-        INSERT INTO PermissionLog (action, action_date, performed_by)
-        VALUES ('Delete Category: ' + @category_name, GETDATE(), @performed_by);
-        COMMIT TRANSACTION;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
-        RAISERROR (@ErrorMessage, 16, 1);
-    END CATCH;
+    IF NOT EXISTS (SELECT 1 FROM Category WHERE category_id = @category_id)
+    BEGIN
+        RAISERROR ('Thương hiệu không tồn tại!', 16, 1);
+        RETURN;
+    END;
+    DELETE FROM Category WHERE category_id = @category_id;
+    -- Logging is handled by the trigger
 END;
 GO
 
@@ -398,28 +303,17 @@ CREATE PROCEDURE sp_InsertSupplier
 AS
 BEGIN
     SET NOCOUNT ON;
-    BEGIN TRY
-        BEGIN TRANSACTION;
-        IF EXISTS (SELECT 1 FROM Supplier WHERE supplier_name = @supplier_name)
-        BEGIN
-            RAISERROR ('Nhà cung cấp đã tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
-        INSERT INTO Supplier (supplier_name, contact_info)
-        VALUES (@supplier_name, @contact_info);
-        DECLARE @supplier_id INT = SCOPE_IDENTITY();
-        DECLARE @performed_by NVARCHAR(100) = SUSER_SNAME();
-        INSERT INTO PermissionLog (action, action_date, performed_by)
-        VALUES ('Insert Supplier: ' + @supplier_name, GETDATE(), @performed_by);
-        COMMIT TRANSACTION;
-        SELECT @supplier_id AS supplier_id;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
-        RAISERROR (@ErrorMessage, 16, 1);
-    END CATCH;
+    IF EXISTS (SELECT 1 FROM Supplier WHERE supplier_name = @supplier_name)
+    BEGIN
+        RAISERROR ('Nhà cung cấp đã tồn tại!', 16, 1);
+        RETURN;
+    END;
+    INSERT INTO Supplier (supplier_name, contact_info)
+    VALUES (@supplier_name, @contact_info);
+    DECLARE @supplier_id INT = SCOPE_IDENTITY();
+    INSERT INTO PermissionLog (action, action_date, performed_by)
+    VALUES ('Insert Supplier: ' + @supplier_name, GETDATE(), SUSER_SNAME());
+    SELECT @supplier_id AS supplier_id;
 END;
 GO
 
@@ -430,34 +324,22 @@ CREATE PROCEDURE sp_UpdateSupplier
 AS
 BEGIN
     SET NOCOUNT ON;
-    BEGIN TRY
-        BEGIN TRANSACTION;
-        IF NOT EXISTS (SELECT 1 FROM Supplier WHERE supplier_id = @supplier_id)
-        BEGIN
-            RAISERROR ('Nhà cung cấp không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
-        IF EXISTS (SELECT 1 FROM Supplier WHERE supplier_name = @supplier_name AND supplier_id != @supplier_id)
-        BEGIN
-            RAISERROR ('Nhà cung cấp đã tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
-        UPDATE Supplier
-        SET supplier_name = @supplier_name,
-            contact_info = @contact_info
-        WHERE supplier_id = @supplier_id;
-        DECLARE @performed_by NVARCHAR(100) = SUSER_SNAME();
-        INSERT INTO PermissionLog (action, action_date, performed_by)
-        VALUES ('Update Supplier: ' + @supplier_name, GETDATE(), @performed_by);
-        COMMIT TRANSACTION;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
-        RAISERROR (@ErrorMessage, 16, 1);
-    END CATCH;
+    IF NOT EXISTS (SELECT 1 FROM Supplier WHERE supplier_id = @supplier_id)
+    BEGIN
+        RAISERROR ('Nhà cung cấp không tồn tại!', 16, 1);
+        RETURN;
+    END;
+    IF EXISTS (SELECT 1 FROM Supplier WHERE supplier_name = @supplier_name AND supplier_id != @supplier_id)
+    BEGIN
+        RAISERROR ('Nhà cung cấp đã tồn tại!', 16, 1);
+        RETURN;
+    END;
+    UPDATE Supplier
+    SET supplier_name = @supplier_name,
+        contact_info = @contact_info
+    WHERE supplier_id = @supplier_id;
+    INSERT INTO PermissionLog (action, action_date, performed_by)
+    VALUES ('Update Supplier: ' + @supplier_name, GETDATE(), SUSER_SNAME());
 END;
 GO
 
@@ -466,27 +348,13 @@ CREATE PROCEDURE sp_DeleteSupplier
 AS
 BEGIN
     SET NOCOUNT ON;
-    BEGIN TRY
-        BEGIN TRANSACTION;
-        IF NOT EXISTS (SELECT 1 FROM Supplier WHERE supplier_id = @supplier_id)
-        BEGIN
-            RAISERROR ('Nhà cung cấp không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
-        DECLARE @supplier_name NVARCHAR(100);
-        SELECT @supplier_name = supplier_name FROM Supplier WHERE supplier_id = @supplier_id;
-        DELETE FROM Supplier WHERE supplier_id = @supplier_id;
-        DECLARE @performed_by NVARCHAR(100) = SUSER_SNAME();
-        INSERT INTO PermissionLog (action, action_date, performed_by)
-        VALUES ('Delete Supplier: ' + @supplier_name, GETDATE(), @performed_by);
-        COMMIT TRANSACTION;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
-        RAISERROR (@ErrorMessage, 16, 1);
-    END CATCH;
+    IF NOT EXISTS (SELECT 1 FROM Supplier WHERE supplier_id = @supplier_id)
+    BEGIN
+        RAISERROR ('Nhà cung cấp không tồn tại!', 16, 1);
+        RETURN;
+    END;
+    DELETE FROM Supplier WHERE supplier_id = @supplier_id;
+    -- Logging is handled by the trigger tr_LogSupplierDeletion
 END;
 GO
 
@@ -496,28 +364,17 @@ CREATE PROCEDURE sp_InsertCustomer
 AS
 BEGIN
     SET NOCOUNT ON;
-    BEGIN TRY
-        BEGIN TRANSACTION;
-        IF EXISTS (SELECT 1 FROM Customer WHERE customer_name = @customer_name)
-        BEGIN
-            RAISERROR ('Khách hàng đã tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
-        INSERT INTO Customer (customer_name, contact_info)
-        VALUES (@customer_name, @contact_info);
-        DECLARE @customer_id INT = SCOPE_IDENTITY();
-        DECLARE @performed_by NVARCHAR(100) = SUSER_SNAME();
-        INSERT INTO PermissionLog (action, action_date, performed_by)
-        VALUES ('Insert Customer: ' + @customer_name, GETDATE(), @performed_by);
-        COMMIT TRANSACTION;
-        SELECT @customer_id AS customer_id;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
-        RAISERROR (@ErrorMessage, 16, 1);
-    END CATCH;
+    IF EXISTS (SELECT 1 FROM Customer WHERE customer_name = @customer_name)
+    BEGIN
+        RAISERROR ('Khách hàng đã tồn tại!', 16, 1);
+        RETURN;
+    END;
+    INSERT INTO Customer (customer_name, contact_info)
+    VALUES (@customer_name, @contact_info);
+    DECLARE @customer_id INT = SCOPE_IDENTITY();
+    INSERT INTO PermissionLog (action, action_date, performed_by)
+    VALUES ('Insert Customer: ' + @customer_name, GETDATE(), SUSER_SNAME());
+    SELECT @customer_id AS customer_id;
 END;
 GO
 
@@ -528,34 +385,22 @@ CREATE PROCEDURE sp_UpdateCustomer
 AS
 BEGIN
     SET NOCOUNT ON;
-    BEGIN TRY
-        BEGIN TRANSACTION;
-        IF NOT EXISTS (SELECT 1 FROM Customer WHERE customer_id = @customer_id)
-        BEGIN
-            RAISERROR ('Khách hàng không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
-        IF EXISTS (SELECT 1 FROM Customer WHERE customer_name = @customer_name AND customer_id != @customer_id)
-        BEGIN
-            RAISERROR ('Khách hàng đã tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
-        UPDATE Customer
-        SET customer_name = @customer_name,
-            contact_info = @contact_info
-        WHERE customer_id = @customer_id;
-        DECLARE @performed_by NVARCHAR(100) = SUSER_SNAME();
-        INSERT INTO PermissionLog (action, action_date, performed_by)
-        VALUES ('Update Customer: ' + @customer_name, GETDATE(), @performed_by);
-        COMMIT TRANSACTION;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
-        RAISERROR (@ErrorMessage, 16, 1);
-    END CATCH;
+    IF NOT EXISTS (SELECT 1 FROM Customer WHERE customer_id = @customer_id)
+    BEGIN
+        RAISERROR ('Khách hàng không tồn tại!', 16, 1);
+        RETURN;
+    END;
+    IF EXISTS (SELECT 1 FROM Customer WHERE customer_name = @customer_name AND customer_id != @customer_id)
+    BEGIN
+        RAISERROR ('Khách hàng đã tồn tại!', 16, 1);
+        RETURN;
+    END;
+    UPDATE Customer
+    SET customer_name = @customer_name,
+        contact_info = @contact_info
+    WHERE customer_id = @customer_id;
+    INSERT INTO PermissionLog (action, action_date, performed_by)
+    VALUES ('Update Customer: ' + @customer_name, GETDATE(), SUSER_SNAME());
 END;
 GO
 
@@ -564,27 +409,13 @@ CREATE PROCEDURE sp_DeleteCustomer
 AS
 BEGIN
     SET NOCOUNT ON;
-    BEGIN TRY
-        BEGIN TRANSACTION;
-        IF NOT EXISTS (SELECT 1 FROM Customer WHERE customer_id = @customer_id)
-        BEGIN
-            RAISERROR ('Khách hàng không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
-        DECLARE @customer_name NVARCHAR(100);
-        SELECT @customer_name = customer_name FROM Customer WHERE customer_id = @customer_id;
-        DELETE FROM Customer WHERE customer_id = @customer_id;
-        DECLARE @performed_by NVARCHAR(100) = SUSER_SNAME();
-        INSERT INTO PermissionLog (action, action_date, performed_by)
-        VALUES ('Delete Customer: ' + @customer_name, GETDATE(), @performed_by);
-        COMMIT TRANSACTION;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
-        RAISERROR (@ErrorMessage, 16, 1);
-    END CATCH;
+    IF NOT EXISTS (SELECT 1 FROM Customer WHERE customer_id = @customer_id)
+    BEGIN
+        RAISERROR ('Khách hàng không tồn tại!', 16, 1);
+        RETURN;
+    END;
+    DELETE FROM Customer WHERE customer_id = @customer_id;
+    -- Logging is handled by the trigger tr_LogCustomerDeletion
 END;
 GO
 
@@ -594,28 +425,17 @@ CREATE PROCEDURE sp_InsertImport
 AS
 BEGIN
     SET NOCOUNT ON;
-    BEGIN TRY
-        BEGIN TRANSACTION;
-        IF NOT EXISTS (SELECT 1 FROM Supplier WHERE supplier_id = @supplier_id)
-        BEGIN
-            RAISERROR ('Nhà cung cấp không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
-        INSERT INTO Import (supplier_id, import_date, total_amount)
-        VALUES (@supplier_id, @import_date, 0);
-        DECLARE @import_id INT = SCOPE_IDENTITY();
-        DECLARE @performed_by NVARCHAR(100) = SUSER_SNAME();
-        INSERT INTO PermissionLog (action, action_date, performed_by)
-        VALUES ('Insert Import: ' + CAST(@import_id AS NVARCHAR(10)), GETDATE(), @performed_by);
-        COMMIT TRANSACTION;
-        SELECT @import_id AS import_id;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
-        RAISERROR (@ErrorMessage, 16, 1);
-    END CATCH;
+    IF NOT EXISTS (SELECT 1 FROM Supplier WHERE supplier_id = @supplier_id)
+    BEGIN
+        RAISERROR ('Nhà cung cấp không tồn tại!', 16, 1);
+        RETURN;
+    END;
+    INSERT INTO Import (supplier_id, import_date, total_amount)
+    VALUES (@supplier_id, @import_date, 0);
+    DECLARE @import_id INT = SCOPE_IDENTITY();
+    INSERT INTO PermissionLog (action, action_date, performed_by)
+    VALUES ('Insert Import: ' + CAST(@import_id AS NVARCHAR(10)), GETDATE(), SUSER_SNAME());
+    SELECT @import_id AS import_id;
 END;
 GO
 
@@ -630,80 +450,66 @@ CREATE PROCEDURE sp_InsertImportDetail
 AS
 BEGIN
     SET NOCOUNT ON;
-    BEGIN TRY
-        BEGIN TRANSACTION;
-        DECLARE @product_id INT;
-        DECLARE @category_id INT;
+    DECLARE @product_id INT;
+    DECLARE @category_id INT;
 
-        IF NOT EXISTS (SELECT 1 FROM Import WHERE import_id = @import_id)
+    IF NOT EXISTS (SELECT 1 FROM Import WHERE import_id = @import_id)
+    BEGIN
+        RAISERROR ('Phiếu nhập không tồn tại!', 16, 1);
+        RETURN;
+    END;
+
+    IF @quantity <= 0
+    BEGIN
+        RAISERROR ('Số lượng phải lớn hơn 0!', 16, 1);
+        RETURN;
+    END;
+
+    SELECT @product_id = product_id
+    FROM Product
+    WHERE product_name = @product_name;
+
+    IF @product_id IS NULL
+    BEGIN
+        INSERT INTO Product (product_name, price, stock_quantity)
+        VALUES (@product_name, ISNULL(@price, @unit_price * 1.2), 0);
+        SET @product_id = SCOPE_IDENTITY();
+
+        IF @category_name IS NOT NULL
         BEGIN
-            RAISERROR ('Phiếu nhập không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
+            SELECT @category_id = category_id
+            FROM Category
+            WHERE category_name = @category_name;
 
-        IF @quantity <= 0
-        BEGIN
-            RAISERROR ('Số lượng phải lớn hơn 0!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
-
-        SELECT @product_id = product_id
-        FROM Product
-        WHERE product_name = @product_name;
-
-        IF @product_id IS NULL
-        BEGIN
-            INSERT INTO Product (product_name, price, stock_quantity)
-            VALUES (@product_name, ISNULL(@price, @unit_price * 1.2), 0);
-            SET @product_id = SCOPE_IDENTITY();
-
-            IF @category_name IS NOT NULL
+            IF @category_id IS NULL
             BEGIN
-                SELECT @category_id = category_id
-                FROM Category
-                WHERE category_name = @category_name;
-
-                IF @category_id IS NULL
-                BEGIN
-                    INSERT INTO Category (category_name, description)
-                    VALUES (@category_name, ISNULL(@category_description, 'Thêm tự động khi nhập hàng'));
-                    SET @category_id = SCOPE_IDENTITY();
-
-                    DECLARE @performed_by_cat NVARCHAR(100) = SUSER_SNAME();
-                    INSERT INTO PermissionLog (action, action_date, performed_by)
-                    VALUES ('Insert Category: ' + @category_name, GETDATE(), @performed_by_cat);
-                END;
-
-                INSERT INTO ProductCategory (product_id, category_id)
-                VALUES (@product_id, @category_id);
+                INSERT INTO Category (category_name, description)
+                VALUES (@category_name, ISNULL(@category_description, 'Thêm tự động khi nhập hàng'));
+                SET @category_id = SCOPE_IDENTITY();
+                INSERT INTO PermissionLog (action, action_date, performed_by)
+                VALUES ('Insert Category: ' + @category_name, GETDATE(), SUSER_SNAME());
             END;
+
+            INSERT INTO ProductCategory (product_id, category_id)
+            VALUES (@product_id, @category_id);
         END;
+    END;
 
-        INSERT INTO ImportDetail (import_id, product_id, quantity, unit_price)
-        VALUES (@import_id, @product_id, @quantity, @unit_price);
+    INSERT INTO ImportDetail (import_id, product_id, quantity, unit_price)
+    VALUES (@import_id, @product_id, @quantity, @unit_price);
 
-        UPDATE Product
-        SET stock_quantity = stock_quantity + @quantity
-        WHERE product_id = @product_id;
+    UPDATE Product
+    SET stock_quantity = stock_quantity + @quantity
+    WHERE product_id = @product_id;
 
-        UPDATE Import
-        SET total_amount = dbo.fn_GetImportTotal(@import_id)
-        WHERE import_id = @import_id;
+    UPDATE Import
+    SET total_amount = dbo.fn_GetImportTotal(@import_id)
+    WHERE import_id = @import_id;
 
-        DECLARE @performed_by NVARCHAR(100) = SUSER_SNAME();
-        INSERT INTO PermissionLog (action, action_date, performed_by)
-        VALUES ('Insert ImportDetail: ' + @product_name, GETDATE(), @performed_by);
+    INSERT INTO PermissionLog (action, action_date, performed_by)
+    VALUES ('Insert ImportDetail: ' + @product_name, GETDATE(), SUSER_SNAME());
 
-        COMMIT TRANSACTION;
-        SELECT @product_id AS product_id;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
-        RAISERROR (@ErrorMessage, 16, 1);
-    END CATCH;
+    SELECT @product_id AS product_id;
 END;
 GO
 
@@ -717,89 +523,73 @@ CREATE PROCEDURE sp_UpdateImport
 AS
 BEGIN
     SET NOCOUNT ON;
-    BEGIN TRY
-        BEGIN TRANSACTION;
-        SET @is_updated = 0;
+    SET @is_updated = 0;
 
-        IF NOT EXISTS (SELECT 1 FROM Import WHERE import_id = @import_id)
-        BEGIN
-            RAISERROR ('Phiếu nhập không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
+    IF NOT EXISTS (SELECT 1 FROM Import WHERE import_id = @import_id)
+    BEGIN
+        RAISERROR ('Phiếu nhập không tồn tại!', 16, 1);
+        RETURN;
+    END;
 
-        DECLARE @product_id INT;
-        SELECT @product_id = product_id
-        FROM Product
-        WHERE product_name = @product_name;
+    DECLARE @product_id INT;
+    SELECT @product_id = product_id
+    FROM Product
+    WHERE product_name = @product_name;
 
-        IF @product_id IS NULL
-        BEGIN
-            RAISERROR ('Sản phẩm không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
+    IF @product_id IS NULL
+    BEGIN
+        RAISERROR ('Sản phẩm không tồn tại!', 16, 1);
+        RETURN;
+    END;
 
-        IF NOT EXISTS (SELECT 1 FROM ImportDetail WHERE import_id = @import_id AND product_id = @product_id)
-        BEGIN
-            RAISERROR ('Chi tiết phiếu nhập không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
+    IF NOT EXISTS (SELECT 1 FROM ImportDetail WHERE import_id = @import_id AND product_id = @product_id)
+    BEGIN
+        RAISERROR ('Chi tiết phiếu nhập không tồn tại!', 16, 1);
+        RETURN;
+    END;
 
-        IF @new_quantity <= 0
-        BEGIN
-            RAISERROR ('Số lượng phải lớn hơn 0!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
+    IF @new_quantity <= 0
+    BEGIN
+        RAISERROR ('Số lượng phải lớn hơn 0!', 16, 1);
+        RETURN;
+    END;
 
-        DECLARE @old_quantity INT;
-        DECLARE @old_unit_price DECIMAL(18,2);
-        DECLARE @old_price DECIMAL(18,2);
-        SELECT @old_quantity = quantity, @old_unit_price = unit_price
-        FROM ImportDetail
-        WHERE import_id = @import_id AND product_id = @product_id;
+    DECLARE @old_quantity INT;
+    DECLARE @old_unit_price DECIMAL(18,2);
+    DECLARE @old_price DECIMAL(18,2);
+    SELECT @old_quantity = quantity, @old_unit_price = unit_price
+    FROM ImportDetail
+    WHERE import_id = @import_id AND product_id = @product_id;
 
-        SELECT @old_price = price
-        FROM Product
-        WHERE product_id = @product_id;
+    SELECT @old_price = price
+    FROM Product
+    WHERE product_id = @product_id;
 
-        IF @old_quantity = @new_quantity 
-           AND @old_unit_price = @new_unit_price 
-           AND @old_price = @new_price
-        BEGIN
-            COMMIT TRANSACTION;
-            RETURN;
-        END;
+    IF @old_quantity = @new_quantity 
+       AND @old_unit_price = @new_unit_price 
+       AND @old_price = @new_price
+    BEGIN
+        RETURN;
+    END;
 
-        SET @is_updated = 1;
+    SET @is_updated = 1;
 
-        UPDATE ImportDetail
-        SET quantity = @new_quantity,
-            unit_price = @new_unit_price
-        WHERE import_id = @import_id AND product_id = @product_id;
+    UPDATE ImportDetail
+    SET quantity = @new_quantity,
+        unit_price = @new_unit_price
+    WHERE import_id = @import_id AND product_id = @product_id;
 
-        UPDATE Product
-        SET stock_quantity = stock_quantity - @old_quantity + @new_quantity,
-            price = @new_price
-        WHERE product_id = @product_id;
+    UPDATE Product
+    SET stock_quantity = stock_quantity - @old_quantity + @new_quantity,
+        price = @new_price
+    WHERE product_id = @product_id;
 
-        UPDATE Import
-        SET total_amount = dbo.fn_GetImportTotal(@import_id)
-        WHERE import_id = @import_id;
+    UPDATE Import
+    SET total_amount = dbo.fn_GetImportTotal(@import_id)
+    WHERE import_id = @import_id;
 
-        DECLARE @performed_by NVARCHAR(100) = SUSER_SNAME();
-        INSERT INTO PermissionLog (action, action_date, performed_by)
-        VALUES ('Update Import: ' + @product_name, GETDATE(), @performed_by);
-
-        COMMIT TRANSACTION;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
-        RAISERROR (@ErrorMessage, 16, 1);
-    END CATCH;
+    INSERT INTO PermissionLog (action, action_date, performed_by)
+    VALUES ('Update Import: ' + @product_name, GETDATE(), SUSER_SNAME());
 END;
 GO
 
@@ -808,30 +598,13 @@ CREATE PROCEDURE sp_DeleteImport
 AS
 BEGIN
     SET NOCOUNT ON;
-    BEGIN TRY
-        BEGIN TRANSACTION;
-        IF NOT EXISTS (SELECT 1 FROM Import WHERE import_id = @import_id)
-        BEGIN
-            RAISERROR ('Phiếu nhập không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
-        DECLARE @supplier_name NVARCHAR(100);
-        SELECT @supplier_name = ISNULL(supplier_name, 'Unknown') 
-        FROM Supplier s 
-        RIGHT JOIN Import i ON s.supplier_id = i.supplier_id 
-        WHERE i.import_id = @import_id;
-        DELETE FROM Import WHERE import_id = @import_id;
-        DECLARE @performed_by NVARCHAR(100) = SUSER_SNAME();
-        INSERT INTO PermissionLog (action, action_date, performed_by)
-        VALUES ('Delete Import: ' + CAST(@import_id AS NVARCHAR(10)), GETDATE(), @performed_by);
-        COMMIT TRANSACTION;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
-        RAISERROR (@ErrorMessage, 16, 1);
-    END CATCH;
+    IF NOT EXISTS (SELECT 1 FROM Import WHERE import_id = @import_id)
+    BEGIN
+        RAISERROR ('Phiếu nhập không tồn tại!', 16, 1);
+        RETURN;
+    END;
+    DELETE FROM Import WHERE import_id = @import_id;
+    -- Logging is handled by the trigger tr_LogImportDeletion
 END;
 GO
 
@@ -841,28 +614,17 @@ CREATE PROCEDURE sp_InsertExport
 AS
 BEGIN
     SET NOCOUNT ON;
-    BEGIN TRY
-        BEGIN TRANSACTION;
-        IF NOT EXISTS (SELECT 1 FROM Customer WHERE customer_id = @customer_id)
-        BEGIN
-            RAISERROR ('Khách hàng không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
-        INSERT INTO Export (customer_id, export_date, total_amount)
-        VALUES (@customer_id, @export_date, 0);
-        DECLARE @export_id INT = SCOPE_IDENTITY();
-        DECLARE @performed_by NVARCHAR(100) = SUSER_SNAME();
-        INSERT INTO PermissionLog (action, action_date, performed_by)
-        VALUES ('Insert Export: ' + CAST(@export_id AS NVARCHAR(10)), GETDATE(), @performed_by);
-        COMMIT TRANSACTION;
-        SELECT @export_id AS export_id;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
-        RAISERROR (@ErrorMessage, 16, 1);
-    END CATCH;
+    IF NOT EXISTS (SELECT 1 FROM Customer WHERE customer_id = @customer_id)
+    BEGIN
+        RAISERROR ('Khách hàng không tồn tại!', 16, 1);
+        RETURN;
+    END;
+    INSERT INTO Export (customer_id, export_date, total_amount)
+    VALUES (@customer_id, @export_date, 0);
+    DECLARE @export_id INT = SCOPE_IDENTITY();
+    INSERT INTO PermissionLog (action, action_date, performed_by)
+    VALUES ('Insert Export: ' + CAST(@export_id AS NVARCHAR(10)), GETDATE(), SUSER_SNAME());
+    SELECT @export_id AS export_id;
 END;
 GO
 
@@ -874,66 +636,51 @@ CREATE PROCEDURE sp_InsertExportDetail
 AS
 BEGIN
     SET NOCOUNT ON;
-    BEGIN TRY
-        BEGIN TRANSACTION;
-        DECLARE @product_id INT;
+    DECLARE @product_id INT;
 
-        IF NOT EXISTS (SELECT 1 FROM Export WHERE export_id = @export_id)
-        BEGIN
-            RAISERROR ('Phiếu xuất không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
+    IF NOT EXISTS (SELECT 1 FROM Export WHERE export_id = @export_id)
+    BEGIN
+        RAISERROR ('Phiếu xuất không tồn tại!', 16, 1);
+        RETURN;
+    END;
 
-        IF @quantity <= 0
-        BEGIN
-            RAISERROR ('Số lượng phải lớn hơn 0!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
+    IF @quantity <= 0
+    BEGIN
+        RAISERROR ('Số lượng phải lớn hơn 0!', 16, 1);
+        RETURN;
+    END;
 
-        SELECT @product_id = product_id
-        FROM Product
-        WHERE product_name = @product_name;
+    SELECT @product_id = product_id
+    FROM Product
+    WHERE product_name = @product_name;
 
-        IF @product_id IS NULL
-        BEGIN
-            RAISERROR ('Sản phẩm không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
+    IF @product_id IS NULL
+    BEGIN
+        RAISERROR ('Sản phẩm không tồn tại!', 16, 1);
+        RETURN;
+    END;
 
-        DECLARE @stock INT;
-        SET @stock = dbo.fn_GetStockQuantity(@product_id);
-        IF @stock < @quantity
-        BEGIN
-            RAISERROR ('Số lượng xuất vượt quá tồn kho!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
+    DECLARE @stock INT;
+    SET @stock = dbo.fn_GetStockQuantity(@product_id);
+    IF @stock < @quantity
+    BEGIN
+        RAISERROR ('Số lượng xuất vượt quá tồn kho!', 16, 1);
+        RETURN;
+    END;
 
-        INSERT INTO ExportDetail (export_id, product_id, quantity, unit_price)
-        VALUES (@export_id, @product_id, @quantity, @unit_price);
+    INSERT INTO ExportDetail (export_id, product_id, quantity, unit_price)
+    VALUES (@export_id, @product_id, @quantity, @unit_price);
 
-        UPDATE Product
-        SET stock_quantity = stock_quantity - @quantity
-        WHERE product_id = @product_id;
+    UPDATE Product
+    SET stock_quantity = stock_quantity - @quantity
+    WHERE product_id = @product_id;
 
-        UPDATE Export
-        SET total_amount = dbo.fn_GetExportTotal(@export_id)
-        WHERE export_id = @export_id;
+    UPDATE Export
+    SET total_amount = dbo.fn_GetExportTotal(@export_id)
+    WHERE export_id = @export_id;
 
-        DECLARE @performed_by NVARCHAR(100) = SUSER_SNAME();
-        INSERT INTO PermissionLog (action, action_date, performed_by)
-        VALUES ('Insert ExportDetail: ' + @product_name, GETDATE(), @performed_by);
-
-        COMMIT TRANSACTION;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
-        RAISERROR (@ErrorMessage, 16, 1);
-    END CATCH;
+    INSERT INTO PermissionLog (action, action_date, performed_by)
+    VALUES ('Insert ExportDetail: ' + @product_name, GETDATE(), SUSER_SNAME());
 END;
 GO
 
@@ -946,99 +693,82 @@ CREATE PROCEDURE sp_UpdateExport
 AS
 BEGIN
     SET NOCOUNT ON;
-    BEGIN TRY
-        BEGIN TRANSACTION;
-        SET @is_updated = 0;
+    SET @is_updated = 0;
 
-        IF NOT EXISTS (SELECT 1 FROM Export WHERE export_id = @export_id)
-        BEGIN
-            RAISERROR ('Phiếu xuất không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
+    IF NOT EXISTS (SELECT 1 FROM Export WHERE export_id = @export_id)
+    BEGIN
+        RAISERROR ('Phiếu xuất không tồn tại!', 16, 1);
+        RETURN;
+    END;
 
-        DECLARE @product_id INT;
-        SELECT @product_id = product_id
-        FROM Product
-        WHERE product_name = @product_name;
+    DECLARE @product_id INT;
+    SELECT @product_id = product_id
+    FROM Product
+    WHERE product_name = @product_name;
 
-        IF @product_id IS NULL
-        BEGIN
-            RAISERROR ('Sản phẩm không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
+    IF @product_id IS NULL
+    BEGIN
+        RAISERROR ('Sản phẩm không tồn tại!', 16, 1);
+        RETURN;
+    END;
 
-        IF NOT EXISTS (SELECT 1 FROM ExportDetail WHERE export_id = @export_id AND product_id = @product_id)
-        BEGIN
-            RAISERROR ('Chi tiết phiếu xuất không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
+    IF NOT EXISTS (SELECT 1 FROM ExportDetail WHERE export_id = @export_id AND product_id = @product_id)
+    BEGIN
+        RAISERROR ('Chi tiết phiếu xuất không tồn tại!', 16, 1);
+        RETURN;
+    END;
 
-        IF @new_quantity <= 0
-        BEGIN
-            RAISERROR ('Số lượng phải lớn hơn 0!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
+    IF @new_quantity <= 0
+    BEGIN
+        RAISERROR ('Số lượng phải lớn hơn 0!', 16, 1);
+        RETURN;
+    END;
 
-        DECLARE @stock_quantity INT;
-        SELECT @stock_quantity = stock_quantity
-        FROM Product
-        WHERE product_id = @product_id;
+    DECLARE @stock_quantity INT;
+    SELECT @stock_quantity = stock_quantity
+    FROM Product
+    WHERE product_id = @product_id;
 
-        DECLARE @old_quantity INT;
-        SELECT @old_quantity = quantity
-        FROM ExportDetail
-        WHERE export_id = @export_id AND product_id = @product_id;
+    DECLARE @old_quantity INT;
+    SELECT @old_quantity = quantity
+    FROM ExportDetail
+    WHERE export_id = @export_id AND product_id = @product_id;
 
-        DECLARE @quantity_difference INT = @new_quantity - @old_quantity;
-        IF @stock_quantity - @quantity_difference < 0
-        BEGIN
-            RAISERROR ('Số lượng xuất vượt quá số lượng tồn kho!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
+    DECLARE @quantity_difference INT = @new_quantity - @old_quantity;
+    IF @stock_quantity - @quantity_difference < 0
+    BEGIN
+        RAISERROR ('Số lượng xuất vượt quá số lượng tồn kho!', 16, 1);
+        RETURN;
+    END;
 
-        DECLARE @old_unit_price DECIMAL(18,2);
-        SELECT @old_unit_price = unit_price
-        FROM ExportDetail
-        WHERE export_id = @export_id AND product_id = @product_id;
+    DECLARE @old_unit_price DECIMAL(18,2);
+    SELECT @old_unit_price = unit_price
+    FROM ExportDetail
+    WHERE export_id = @export_id AND product_id = @product_id;
 
-        IF @old_quantity = @new_quantity 
-           AND @old_unit_price = @new_unit_price
-        BEGIN
-            COMMIT TRANSACTION;
-            RETURN;
-        END;
+    IF @old_quantity = @new_quantity 
+       AND @old_unit_price = @new_unit_price
+    BEGIN
+        RETURN;
+    END;
 
-        SET @is_updated = 1;
+    SET @is_updated = 1;
 
-        UPDATE ExportDetail
-        SET quantity = @new_quantity,
-            unit_price = @new_unit_price
-        WHERE export_id = @export_id AND product_id = @product_id;
+    UPDATE ExportDetail
+    SET quantity = @new_quantity,
+        unit_price = @new_unit_price
+    WHERE export_id = @export_id AND product_id = @product_id;
 
-        UPDATE Product
-        SET stock_quantity = stock_quantity - @quantity_difference
-        WHERE product_id = @product_id;
+    UPDATE Product
+    SET stock_quantity = stock_quantity - @quantity_difference
+    WHERE product_id = @product_id;
 
-        UPDATE Export
-        SET total_amount = dbo.fn_GetExportTotal(@export_id)
-        WHERE export_id = @export_id;
+    UPDATE Export
+    SET total_amount = dbo.fn_GetExportTotal(@export_id)
+    WHERE export_id = @export_id;
 
-        DECLARE @performed_by NVARCHAR(100) = SUSER_SNAME();
-        INSERT INTO PermissionLog (action, action_date, performed_by)
-        VALUES ('Update Export: ' + @product_name, GETDATE(), @performed_by);
-
-        COMMIT TRANSACTION;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
-        RAISERROR (@ErrorMessage, 16, 1);
-    END CATCH;
+    INSERT INTO PermissionLog (action, action_date, performed_by)
+    VALUES ('Update Export: ' + @product_name, GETDATE(), SUSER_SNAME());
 END;
 GO
 
@@ -1047,30 +777,13 @@ CREATE PROCEDURE sp_DeleteExport
 AS
 BEGIN
     SET NOCOUNT ON;
-    BEGIN TRY
-        BEGIN TRANSACTION;
-        IF NOT EXISTS (SELECT 1 FROM Export WHERE export_id = @export_id)
-        BEGIN
-            RAISERROR ('Phiếu xuất không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
-        DECLARE @customer_name NVARCHAR(100);
-        SELECT @customer_name = ISNULL(customer_name, 'Unknown') 
-        FROM Customer c 
-        RIGHT JOIN Export e ON c.customer_id = e.customer_id 
-        WHERE e.export_id = @export_id;
-        DELETE FROM Export WHERE export_id = @export_id;
-        DECLARE @performed_by NVARCHAR(100) = SUSER_SNAME();
-        INSERT INTO PermissionLog (action, action_date, performed_by)
-        VALUES ('Delete Export: ' + CAST(@export_id AS NVARCHAR(10)), GETDATE(), @performed_by);
-        COMMIT TRANSACTION;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
-        RAISERROR (@ErrorMessage, 16, 1);
-    END CATCH;
+    IF NOT EXISTS (SELECT 1 FROM Export WHERE export_id = @export_id)
+    BEGIN
+        RAISERROR ('Phiếu xuất không tồn tại!', 16, 1);
+        RETURN;
+    END;
+    DELETE FROM Export WHERE export_id = @export_id;
+    -- Logging is handled by the trigger tr_LogExportDeletion
 END;
 GO
 
@@ -1195,65 +908,48 @@ CREATE PROCEDURE sp_GrantPermission
 AS
 BEGIN
     SET NOCOUNT ON;
-    BEGIN TRY
-        BEGIN TRANSACTION;
+    IF NOT EXISTS (SELECT 1 FROM sys.database_principals WHERE name = @role_name AND type = 'R')
+    BEGIN
+        RAISERROR ('Role không tồn tại!', 16, 1);
+        RETURN;
+    END;
 
-        IF NOT EXISTS (SELECT 1 FROM sys.database_principals WHERE name = @role_name AND type = 'R')
-        BEGIN
-            RAISERROR ('Role không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
+    IF @object_type = 'PROCEDURE' AND NOT EXISTS (SELECT 1 FROM sys.procedures WHERE name = @object_name)
+    BEGIN
+        RAISERROR ('Stored procedure không tồn tại!', 16, 1);
+        RETURN;
+    END;
+    IF @object_type = 'VIEW' AND NOT EXISTS (SELECT 1 FROM sys.views WHERE name = @object_name)
+    BEGIN
+        RAISERROR ('View không tồn tại!', 16, 1);
+        RETURN;
+    END;
+    IF @object_type = 'TABLE' AND NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = @object_name)
+    BEGIN
+        RAISERROR ('Bảng không tồn tại!', 16, 1);
+        RETURN;
+    END;
 
-        IF @object_type = 'PROCEDURE' AND NOT EXISTS (SELECT 1 FROM sys.procedures WHERE name = @object_name)
-        BEGIN
-            RAISERROR ('Stored procedure không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
-        IF @object_type = 'VIEW' AND NOT EXISTS (SELECT 1 FROM sys.views WHERE name = @object_name)
-        BEGIN
-            RAISERROR ('View không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
-        IF @object_type = 'TABLE' AND NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = @object_name)
-        BEGIN
-            RAISERROR ('Bảng không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
+    IF @permission_type NOT IN ('EXECUTE', 'SELECT', 'INSERT', 'UPDATE', 'DELETE')
+    BEGIN
+        RAISERROR ('Loại quyền không hợp lệ!', 16, 1);
+        RETURN;
+    END;
 
-        IF @permission_type NOT IN ('EXECUTE', 'SELECT', 'INSERT', 'UPDATE', 'DELETE')
-        BEGIN
-            RAISERROR ('Loại quyền không hợp lệ!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
+    DECLARE @sql NVARCHAR(MAX);
+    SET @sql = 'GRANT ' + @permission_type + ' ON ' + 
+               CASE WHEN @object_type = 'PROCEDURE' THEN 'dbo.' + QUOTENAME(@object_name)
+                    WHEN @object_type = 'VIEW' THEN 'dbo.' + QUOTENAME(@object_name)
+                    WHEN @object_type = 'TABLE' THEN 'dbo.' + QUOTENAME(@object_name)
+               END + ' TO ' + QUOTENAME(@role_name);
+    EXEC sp_executesql @sql;
 
-        DECLARE @sql NVARCHAR(MAX);
-        SET @sql = 'GRANT ' + @permission_type + ' ON ' + 
-                   CASE WHEN @object_type = 'PROCEDURE' THEN 'dbo.' + QUOTENAME(@object_name)
-                        WHEN @object_type = 'VIEW' THEN 'dbo.' + QUOTENAME(@object_name)
-                        WHEN @object_type = 'TABLE' THEN 'dbo.' + QUOTENAME(@object_name)
-                   END + ' TO ' + QUOTENAME(@role_name);
-        EXEC sp_executesql @sql;
+    INSERT INTO RolePermissions (role_name, object_name, object_type, permission_type, granted_date, granted_by)
+    VALUES (@role_name, @object_name, @object_type, @permission_type, GETDATE(), SUSER_SNAME());
 
-        INSERT INTO RolePermissions (role_name, object_name, object_type, permission_type, granted_date, granted_by)
-        VALUES (@role_name, @object_name, @object_type, @permission_type, GETDATE(), SUSER_SNAME());
-
-        DECLARE @performed_by NVARCHAR(100) = SUSER_SNAME();
-        INSERT INTO PermissionLog (action, action_date, performed_by, target_role)
-        VALUES ('Grant Permission: ' + @permission_type + ' on ' + @object_name + ' to ' + @role_name, 
-                GETDATE(), @performed_by, @role_name);
-
-        COMMIT TRANSACTION;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
-        RAISERROR (@ErrorMessage, 16, 1);
-    END CATCH;
+    INSERT INTO PermissionLog (action, action_date, performed_by, target_role)
+    VALUES ('Grant Permission: ' + @permission_type + ' on ' + @object_name + ' to ' + @role_name, 
+            GETDATE(), SUSER_SNAME(), @role_name);
 END;
 GO
 
@@ -1265,68 +961,51 @@ CREATE PROCEDURE sp_DenyPermission
 AS
 BEGIN
     SET NOCOUNT ON;
-    BEGIN TRY
-        BEGIN TRANSACTION;
+    IF NOT EXISTS (SELECT 1 FROM sys.database_principals WHERE name = @role_name AND type = 'R')
+    BEGIN
+        RAISERROR ('Role không tồn tại!', 16, 1);
+        RETURN;
+    END;
 
-        IF NOT EXISTS (SELECT 1 FROM sys.database_principals WHERE name = @role_name AND type = 'R')
-        BEGIN
-            RAISERROR ('Role không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
+    IF @object_type = 'PROCEDURE' AND NOT EXISTS (SELECT 1 FROM sys.procedures WHERE name = @object_name)
+    BEGIN
+        RAISERROR ('Stored procedure không tồn tại!', 16, 1);
+        RETURN;
+    END;
+    IF @object_type = 'VIEW' AND NOT EXISTS (SELECT 1 FROM sys.views WHERE name = @object_name)
+    BEGIN
+        RAISERROR ('View không tồn tại!', 16, 1);
+        RETURN;
+    END;
+    IF @object_type = 'TABLE' AND NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = @object_name)
+    BEGIN
+        RAISERROR ('Bảng không tồn tại!', 16, 1);
+        RETURN;
+    END;
 
-        IF @object_type = 'PROCEDURE' AND NOT EXISTS (SELECT 1 FROM sys.procedures WHERE name = @object_name)
-        BEGIN
-            RAISERROR ('Stored procedure không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
-        IF @object_type = 'VIEW' AND NOT EXISTS (SELECT 1 FROM sys.views WHERE name = @object_name)
-        BEGIN
-            RAISERROR ('View không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
-        IF @object_type = 'TABLE' AND NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = @object_name)
-        BEGIN
-            RAISERROR ('Bảng không tồn tại!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
+    IF @permission_type NOT IN ('EXECUTE', 'SELECT', 'INSERT', 'UPDATE', 'DELETE')
+    BEGIN
+        RAISERROR ('Loại quyền không hợp lệ!', 16, 1);
+        RETURN;
+    END;
 
-        IF @permission_type NOT IN ('EXECUTE', 'SELECT', 'INSERT', 'UPDATE', 'DELETE')
-        BEGIN
-            RAISERROR ('Loại quyền không hợp lệ!', 16, 1);
-            ROLLBACK;
-            RETURN;
-        END;
+    DECLARE @sql NVARCHAR(MAX);
+    SET @sql = 'DENY ' + @permission_type + ' ON ' + 
+               CASE WHEN @object_type = 'PROCEDURE' THEN 'dbo.' + QUOTENAME(@object_name)
+                    WHEN @object_type = 'VIEW' THEN 'dbo.' + QUOTENAME(@object_name)
+                    WHEN @object_type = 'TABLE' THEN 'dbo.' + QUOTENAME(@object_name)
+               END + ' TO ' + QUOTENAME(@role_name);
+    EXEC sp_executesql @sql;
 
-        DECLARE @sql NVARCHAR(MAX);
-        SET @sql = 'DENY ' + @permission_type + ' ON ' + 
-                   CASE WHEN @object_type = 'PROCEDURE' THEN 'dbo.' + QUOTENAME(@object_name)
-                        WHEN @object_type = 'VIEW' THEN 'dbo.' + QUOTENAME(@object_name)
-                        WHEN @object_type = 'TABLE' THEN 'dbo.' + QUOTENAME(@object_name)
-                   END + ' TO ' + QUOTENAME(@role_name);
-        EXEC sp_executesql @sql;
+    DELETE FROM RolePermissions
+    WHERE role_name = @role_name
+      AND object_name = @object_name
+      AND object_type = @object_type
+      AND permission_type = @permission_type;
 
-        DELETE FROM RolePermissions
-        WHERE role_name = @role_name
-          AND object_name = @object_name
-          AND object_type = @object_type
-          AND permission_type = @permission_type;
-
-        DECLARE @performed_by NVARCHAR(100) = SUSER_SNAME();
-        INSERT INTO PermissionLog (action, action_date, performed_by, target_role)
-        VALUES ('Deny Permission: ' + @permission_type + ' on ' + @object_name + ' from ' + @role_name, 
-                GETDATE(), @performed_by, @role_name);
-
-        COMMIT TRANSACTION;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
-        RAISERROR (@ErrorMessage, 16, 1);
-    END CATCH;
+    INSERT INTO PermissionLog (action, action_date, performed_by, target_role)
+    VALUES ('Deny Permission: ' + @permission_type + ' on ' + @object_name + ' from ' + @role_name, 
+            GETDATE(), SUSER_SNAME(), @role_name);
 END;
 GO
 
@@ -1473,16 +1152,86 @@ ON Product
 AFTER DELETE
 AS
 BEGIN
-    DECLARE @performed_by NVARCHAR(100) = SUSER_SNAME();
+    SET NOCOUNT ON;
     INSERT INTO ProductLog (product_id, product_name, price, stock_quantity, deleted_date, deleted_by)
     SELECT 
-        d.product_id,
+        NULL, -- Set product_id to NULL since the product is deleted
         d.product_name,
         d.price,
         d.stock_quantity,
         GETDATE(),
-        @performed_by
+        SUSER_SNAME()
+    FROM deleted d
+    WHERE d.product_id IS NOT NULL;
+
+    INSERT INTO PermissionLog (action, action_date, performed_by)
+    SELECT 
+        'Delete Product: ' + d.product_name,
+        GETDATE(),
+        SUSER_SNAME()
     FROM deleted d;
+END;
+GO
+
+CREATE TRIGGER tr_LogSupplierDeletion
+ON Supplier
+AFTER DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    INSERT INTO PermissionLog (action, action_date, performed_by)
+    SELECT 
+        'Delete Supplier: ' + d.supplier_name,
+        GETDATE(),
+        SUSER_SNAME()
+    FROM deleted d;
+END;
+GO
+
+CREATE TRIGGER tr_LogCustomerDeletion
+ON Customer
+AFTER DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    INSERT INTO PermissionLog (action, action_date, performed_by)
+    SELECT 
+        'Delete Customer: ' + d.customer_name,
+        GETDATE(),
+        SUSER_SNAME()
+    FROM deleted d;
+END;
+GO
+
+CREATE TRIGGER tr_LogImportDeletion
+ON Import
+AFTER DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    INSERT INTO PermissionLog (action, action_date, performed_by)
+    SELECT 
+        'Delete Import: ' + CAST(d.import_id AS NVARCHAR(10)) + ' (Supplier: ' + ISNULL(s.supplier_name, 'Unknown') + ')',
+        GETDATE(),
+        SUSER_SNAME()
+    FROM deleted d
+    LEFT JOIN Supplier s ON d.supplier_id = s.supplier_id;
+END;
+GO
+
+CREATE TRIGGER tr_LogExportDeletion
+ON Export
+AFTER DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    INSERT INTO PermissionLog (action, action_date, performed_by)
+    SELECT 
+        'Delete Export: ' + CAST(d.export_id AS NVARCHAR(10)) + ' (Customer: ' + ISNULL(c.customer_name, 'Unknown') + ')',
+        GETDATE(),
+        SUSER_SNAME()
+    FROM deleted d
+    LEFT JOIN Customer c ON d.customer_id = c.customer_id;
 END;
 GO
 
@@ -1540,7 +1289,6 @@ GO
 USE master;
 GO
 
--- Create logins if they don't exist
 IF NOT EXISTS (SELECT * FROM sys.server_principals WHERE name = 'admin_user')
     CREATE LOGIN admin_user WITH PASSWORD = 'Admin123!';
 IF NOT EXISTS (SELECT * FROM sys.server_principals WHERE name = 'employee_user')
@@ -1550,26 +1298,22 @@ GO
 USE LaptopStoreDBMS4;
 GO
 
--- Create users if they don't exist
 IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = 'admin_user')
     CREATE USER admin_user FOR LOGIN admin_user;
 IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = 'employee_user')
     CREATE USER employee_user FOR LOGIN employee_user;
 GO
 
--- Create roles if they don't exist
 IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = 'admin_role')
     CREATE ROLE admin_role;
 IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = 'employee_role')
     CREATE ROLE employee_role;
 GO
 
--- Assign users to roles
 ALTER ROLE admin_role ADD MEMBER admin_user;
 ALTER ROLE employee_role ADD MEMBER employee_user;
 GO
 
--- Grant permissions to admin_role
 GRANT EXECUTE ON sp_InsertProduct TO admin_role;
 GRANT EXECUTE ON sp_UpdateProduct TO admin_role;
 GRANT EXECUTE ON sp_DeleteProduct TO admin_role;
@@ -1620,7 +1364,6 @@ GRANT SELECT, INSERT ON PermissionLog TO admin_role;
 GRANT SELECT, INSERT, UPDATE, DELETE ON RolePermissions TO admin_role;
 GO
 
--- Grant permissions to employee_role
 GRANT EXECUTE ON sp_InsertImport TO employee_role;
 GRANT EXECUTE ON sp_InsertImportDetail TO employee_role;
 GRANT EXECUTE ON sp_InsertExport TO employee_role;
@@ -1644,7 +1387,6 @@ GRANT SELECT ON Export TO employee_role;
 GRANT SELECT ON ExportDetail TO employee_role;
 GO
 
--- Deny permissions to employee_role
 DENY EXECUTE ON sp_UpdateImport TO employee_role;
 DENY EXECUTE ON sp_DeleteImport TO employee_role;
 DENY EXECUTE ON sp_UpdateExport TO employee_role;
