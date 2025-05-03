@@ -47,8 +47,10 @@
             lbPrice = new Label();
             lbSupplier = new Label();
             lbImportDate = new Label();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dgvImportDetails).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvImports).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // btnRefresh
@@ -224,11 +226,22 @@
             lbImportDate.TabIndex = 27;
             lbImportDate.Text = "Import Date :";
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.ImportExport1;
+            pictureBox1.Location = new Point(39, 715);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(120, 124);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 28;
+            pictureBox1.TabStop = false;
+            // 
             // ImportManagementForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightCyan;
+            Controls.Add(pictureBox1);
             Controls.Add(lbImportDate);
             Controls.Add(lbSupplier);
             Controls.Add(lbPrice);
@@ -253,6 +266,7 @@
             Size = new Size(1030, 868);
             ((System.ComponentModel.ISupportInitialize)dgvImportDetails).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvImports).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -278,5 +292,6 @@
         private Label lbPrice;
         private Label lbSupplier;
         private Label lbImportDate;
+        private PictureBox pictureBox1;
     }
 }

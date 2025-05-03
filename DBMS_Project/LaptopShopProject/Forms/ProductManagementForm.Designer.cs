@@ -42,8 +42,12 @@
             lbPrice = new Label();
             lbStockQuantity = new Label();
             lbBranch = new Label();
+            cbChooseSearchByNameOrCategory = new ComboBox();
+            txtNameOrCategory = new TextBox();
+            searchByNameOrCategory = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dgvProductLogs).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvProducts).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)searchByNameOrCategory).BeginInit();
             SuspendLayout();
             // 
             // btnRefresh
@@ -174,11 +178,40 @@
             lbBranch.TabIndex = 23;
             lbBranch.Text = "Branch :";
             // 
+            // cbChooseSearchByNameOrCategory
+            // 
+            cbChooseSearchByNameOrCategory.FormattingEnabled = true;
+            cbChooseSearchByNameOrCategory.Location = new Point(515, 729);
+            cbChooseSearchByNameOrCategory.Name = "cbChooseSearchByNameOrCategory";
+            cbChooseSearchByNameOrCategory.Size = new Size(151, 28);
+            cbChooseSearchByNameOrCategory.TabIndex = 24;
+            // 
+            // txtNameOrCategory
+            // 
+            txtNameOrCategory.Location = new Point(672, 729);
+            txtNameOrCategory.Name = "txtNameOrCategory";
+            txtNameOrCategory.Size = new Size(311, 27);
+            txtNameOrCategory.TabIndex = 25;
+            // 
+            // searchByNameOrCategory
+            // 
+            searchByNameOrCategory.Image = Properties.Resources.search;
+            searchByNameOrCategory.Location = new Point(457, 728);
+            searchByNameOrCategory.Name = "searchByNameOrCategory";
+            searchByNameOrCategory.Size = new Size(29, 28);
+            searchByNameOrCategory.SizeMode = PictureBoxSizeMode.Zoom;
+            searchByNameOrCategory.TabIndex = 26;
+            searchByNameOrCategory.TabStop = false;
+            searchByNameOrCategory.Click += searchByNameOrCategory_Click;
+            // 
             // ProductManagementForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightCyan;
+            Controls.Add(searchByNameOrCategory);
+            Controls.Add(txtNameOrCategory);
+            Controls.Add(cbChooseSearchByNameOrCategory);
             Controls.Add(lbBranch);
             Controls.Add(lbStockQuantity);
             Controls.Add(lbPrice);
@@ -198,6 +231,7 @@
             Size = new Size(1030, 868);
             ((System.ComponentModel.ISupportInitialize)dgvProductLogs).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvProducts).EndInit();
+            ((System.ComponentModel.ISupportInitialize)searchByNameOrCategory).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -218,5 +252,8 @@
         private Label lbPrice;
         private Label lbStockQuantity;
         private Label lbBranch;
+        private ComboBox cbChooseSearchByNameOrCategory;
+        private TextBox txtNameOrCategory;
+        private PictureBox searchByNameOrCategory;
     }
 }

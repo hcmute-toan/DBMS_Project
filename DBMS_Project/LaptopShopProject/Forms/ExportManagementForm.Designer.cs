@@ -46,8 +46,10 @@ namespace LaptopShopProject.Forms
             lbExportDate = new Label();
             lbProductName = new Label();
             txtProductName = new TextBox();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dgvExportDetails).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvExports).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // dtpExportDate
@@ -207,11 +209,22 @@ namespace LaptopShopProject.Forms
             txtProductName.Size = new Size(249, 27);
             txtProductName.TabIndex = 36;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.ImportExport1;
+            pictureBox1.Location = new Point(34, 655);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(120, 124);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 38;
+            pictureBox1.TabStop = false;
+            // 
             // ExportManagementForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightCyan;
+            Controls.Add(pictureBox1);
             Controls.Add(lbProductName);
             Controls.Add(txtProductName);
             Controls.Add(lbExportDate);
@@ -234,6 +247,7 @@ namespace LaptopShopProject.Forms
             Size = new Size(1012, 870);
             ((System.ComponentModel.ISupportInitialize)dgvExportDetails).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvExports).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -258,5 +272,6 @@ namespace LaptopShopProject.Forms
         private Label lbExportDate;
         private Label lbProductName;
         private TextBox txtProductName;
+        private PictureBox pictureBox1;
     }
 }

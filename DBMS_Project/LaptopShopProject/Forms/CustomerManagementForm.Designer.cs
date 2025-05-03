@@ -37,7 +37,9 @@
             dgvCustomers = new DataGridView();
             lbCustomerName = new Label();
             lbContactInfo = new Label();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dgvCustomers).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // btnRefresh
@@ -129,11 +131,22 @@
             lbContactInfo.TabIndex = 26;
             lbContactInfo.Text = "Contact Info :";
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.supplier_customer;
+            pictureBox1.Location = new Point(6, 324);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(120, 124);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 27;
+            pictureBox1.TabStop = false;
+            // 
             // CustomerManagementForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightCyan;
+            Controls.Add(pictureBox1);
             Controls.Add(lbContactInfo);
             Controls.Add(lbCustomerName);
             Controls.Add(btnRefresh);
@@ -147,6 +160,7 @@
             Name = "CustomerManagementForm";
             Size = new Size(1030, 496);
             ((System.ComponentModel.ISupportInitialize)dgvCustomers).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -162,5 +176,6 @@
         private DataGridView dgvCustomers;
         private Label lbCustomerName;
         private Label lbContactInfo;
+        private PictureBox pictureBox1;
     }
 }

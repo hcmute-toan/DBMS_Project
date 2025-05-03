@@ -190,5 +190,6 @@ namespace LaptopShopProject.Forms
             txtContactInfo.Clear();
             dgvCustomers.ClearSelection();
         }
+
     }
 }

@@ -37,7 +37,9 @@
             dgvCategories = new DataGridView();
             lbCategoryName = new Label();
             lbDescription = new Label();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dgvCategories).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // btnRefresh
@@ -100,7 +102,7 @@
             // dgvCategories
             // 
             dgvCategories.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvCategories.Location = new Point(440, 28);
+            dgvCategories.Location = new Point(442, 29);
             dgvCategories.Margin = new Padding(3, 4, 3, 4);
             dgvCategories.Name = "dgvCategories";
             dgvCategories.RowHeadersWidth = 51;
@@ -125,11 +127,22 @@
             lbDescription.TabIndex = 19;
             lbDescription.Text = "Description :";
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.category;
+            pictureBox1.Location = new Point(13, 311);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(120, 124);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 20;
+            pictureBox1.TabStop = false;
+            // 
             // CategoryManagementForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightCyan;
+            Controls.Add(pictureBox1);
             Controls.Add(lbDescription);
             Controls.Add(lbCategoryName);
             Controls.Add(btnRefresh);
@@ -143,6 +156,7 @@
             Name = "CategoryManagementForm";
             Size = new Size(1030, 496);
             ((System.ComponentModel.ISupportInitialize)dgvCategories).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -158,5 +172,6 @@
         private DataGridView dgvCategories;
         private Label lbCategoryName;
         private Label lbDescription;
+        private PictureBox pictureBox1;
     }
 }

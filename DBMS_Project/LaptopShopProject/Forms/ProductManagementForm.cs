@@ -256,6 +256,9 @@ namespace LaptopShopProject.Forms
             dgvProducts.ClearSelection();
         }
 
+        private void searchByNameOrCategory_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

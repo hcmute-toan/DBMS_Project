@@ -168,7 +168,7 @@
             // 
             lbRoleUser.AutoSize = true;
             lbRoleUser.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbRoleUser.Location = new Point(273, 64);
+            lbRoleUser.Location = new Point(273, 57);
             lbRoleUser.Name = "lbRoleUser";
             lbRoleUser.Size = new Size(56, 23);
             lbRoleUser.TabIndex = 23;
