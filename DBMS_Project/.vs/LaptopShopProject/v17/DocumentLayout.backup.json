@@ -3,7 +3,27 @@
   "WorkspaceRootPath": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\laptopshopproject\\forms\\reportform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\final\\dbms_project\\dbms_project\\laptopshopproject\\dataaccess\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\dataaccess\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\final\\dbms_project\\dbms_project\\laptopshopproject\\dataaccess\\reportrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\dataaccess\\reportrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\final\\dbms_project\\dbms_project\\laptopshopproject\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\final\\dbms_project\\dbms_project\\laptopshopproject\\forms\\productmanagementform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\productmanagementform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\laptopshopproject\\forms\\productmanagementform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\productmanagementform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\final\\dbms_project\\dbms_project\\laptopshopproject\\forms\\reportform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\reportform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -39,14 +59,6 @@
       "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\suppliermanagementform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\final\\dbms_project\\dbms_project\\laptopshopproject\\forms\\productmanagementform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\productmanagementform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\laptopshopproject\\forms\\productmanagementform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\productmanagementform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\final\\dbms_project\\dbms_project\\laptopshopproject\\forms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\forms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -57,14 +69,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\final\\dbms_project\\dbms_project\\laptopshopproject\\dataaccess\\supplierrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\dataaccess\\supplierrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\final\\dbms_project\\dbms_project\\laptopshopproject\\dataaccess\\reportrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\dataaccess\\reportrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\final\\dbms_project\\dbms_project\\laptopshopproject\\dataaccess\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\dataaccess\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\final\\dbms_project\\dbms_project\\laptopshopproject\\dataaccess\\importrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -175,10 +179,6 @@
       "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\models\\productlog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\final\\dbms_project\\dbms_project\\laptopshopproject\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|d:\\dbms\\final\\dbms_project\\dbms_project\\laptopshopproject\\models\\permissionlog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C41A1BC2-114E-4FB1-A9F0-4572FBD7F1DD}|LaptopShopProject\\LaptopShopProject.csproj|solutionrelative:laptopshopproject\\models\\permissionlog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -259,12 +259,123 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedHeight": 230,
-          "SelectedChildIndex": 3,
+          "DockedHeight": 251,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ProductManagementForm.cs",
+              "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ProductManagementForm.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\ProductManagementForm.cs",
+              "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ProductManagementForm.cs",
+              "RelativeToolTip": "LaptopShopProject\\Forms\\ProductManagementForm.cs",
+              "ViewState": "AgIAAI8AAAAAAAAAAAD4v6AAAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T18:35:02.238Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ProductRepository.cs",
+              "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\ProductRepository.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\ProductRepository.cs",
+              "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\ProductRepository.cs*",
+              "RelativeToolTip": "LaptopShopProject\\DataAccess\\ProductRepository.cs*",
+              "ViewState": "AgIAANcAAAAAAAAAAAAowN0AAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T06:54:22.342Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Product.cs",
+              "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Models\\Product.cs",
+              "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Models\\Product.cs",
+              "RelativeToolTip": "LaptopShopProject\\Models\\Product.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T06:52:22.073Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ReportRepository.cs",
+              "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\ReportRepository.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\ReportRepository.cs",
+              "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\ReportRepository.cs",
+              "RelativeToolTip": "LaptopShopProject\\DataAccess\\ReportRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAADJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T08:15:56.166Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ProductManagementForm.cs [Design]",
+              "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ProductManagementForm.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\ProductManagementForm.cs",
+              "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ProductManagementForm.cs [Design]",
+              "RelativeToolTip": "LaptopShopProject\\Forms\\ProductManagementForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T18:33:03.968Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ReportForm.cs [Design]",
+              "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ReportForm.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\ReportForm.cs",
+              "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ReportForm.cs [Design]",
+              "RelativeToolTip": "LaptopShopProject\\Forms\\ReportForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-26T15:18:21.528Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ReportForm.cs",
+              "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ReportForm.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\ReportForm.cs",
+              "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ReportForm.cs",
+              "RelativeToolTip": "LaptopShopProject\\Forms\\ReportForm.cs",
+              "ViewState": "AgIAADECAAAAAAAAAAAowDwCAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-26T08:55:04.918Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 7,
+              "Title": "MainForm.cs",
+              "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\MainForm.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\MainForm.cs",
+              "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\MainForm.cs",
+              "RelativeToolTip": "LaptopShopProject\\Forms\\MainForm.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAowFUAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T18:26:47.655Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "MainForm.cs [Design]",
+              "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\MainForm.cs",
+              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\MainForm.cs",
+              "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\MainForm.cs [Design]",
+              "RelativeToolTip": "LaptopShopProject\\Forms\\MainForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T17:48:53.965Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "User.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Models\\User.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Models\\User.cs",
@@ -276,57 +387,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MainForm.cs [Design]",
-              "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\MainForm.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\MainForm.cs",
-              "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\MainForm.cs [Design]",
-              "RelativeToolTip": "LaptopShopProject\\Forms\\MainForm.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T17:48:53.965Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MainForm.cs",
-              "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\MainForm.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\MainForm.cs",
-              "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\MainForm.cs",
-              "RelativeToolTip": "LaptopShopProject\\Forms\\MainForm.cs",
-              "ViewState": "AgIAADsAAAAAAAAAAAAowFUAAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T18:26:47.655Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ReportForm.cs [Design]",
-              "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ReportForm.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\ReportForm.cs",
-              "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ReportForm.cs [Design]*",
-              "RelativeToolTip": "LaptopShopProject\\Forms\\ReportForm.cs [Design]*",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-26T15:18:21.528Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ReportForm.cs",
-              "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ReportForm.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\ReportForm.cs",
-              "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ReportForm.cs*",
-              "RelativeToolTip": "LaptopShopProject\\Forms\\ReportForm.cs*",
-              "ViewState": "AgIAADECAAAAAAAAAAAowDwCAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-26T08:55:04.918Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 11,
               "Title": "UserRepository.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\UserRepository.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\UserRepository.cs",
@@ -338,7 +399,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "UserManagementForm.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\UserManagementForm.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\UserManagementForm.cs",
@@ -351,19 +412,18 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
               "Title": "UserManagementForm.cs [Design]",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\UserManagementForm.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\UserManagementForm.cs",
               "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\UserManagementForm.cs [Design]",
               "RelativeToolTip": "LaptopShopProject\\Forms\\UserManagementForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-26T08:54:34.099Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-04-26T08:54:34.099Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 13,
               "Title": "SupplierManagementForm.cs [Design]",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\SupplierManagementForm.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\SupplierManagementForm.cs",
@@ -374,31 +434,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ProductManagementForm.cs",
-              "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ProductManagementForm.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\ProductManagementForm.cs",
-              "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ProductManagementForm.cs",
-              "RelativeToolTip": "LaptopShopProject\\Forms\\ProductManagementForm.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAASwCQAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T18:35:02.238Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "ProductManagementForm.cs [Design]",
-              "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ProductManagementForm.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\ProductManagementForm.cs",
-              "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ProductManagementForm.cs [Design]",
-              "RelativeToolTip": "LaptopShopProject\\Forms\\ProductManagementForm.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T18:33:03.968Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 14,
               "Title": "LoginForm.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\LoginForm.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\LoginForm.cs",
@@ -411,7 +447,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 15,
               "Title": "LoginForm.cs [Design]",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\LoginForm.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\LoginForm.cs",
@@ -422,7 +458,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "ImportRepository.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\ImportRepository.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\ImportRepository.cs",
@@ -434,7 +470,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 16,
               "Title": "SupplierRepository.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\SupplierRepository.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\SupplierRepository.cs",
@@ -446,31 +482,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "ReportRepository.cs",
-              "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\ReportRepository.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\ReportRepository.cs",
-              "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\ReportRepository.cs",
-              "RelativeToolTip": "LaptopShopProject\\DataAccess\\ReportRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAADJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T08:15:56.166Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "ProductRepository.cs",
-              "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\ProductRepository.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\ProductRepository.cs",
-              "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\ProductRepository.cs",
-              "RelativeToolTip": "LaptopShopProject\\DataAccess\\ProductRepository.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAA7wBYAAADJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:54:22.342Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "ExportRepository.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\ExportRepository.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\ExportRepository.cs",
@@ -482,7 +494,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "DatabaseConnection.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\DatabaseConnection.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\DatabaseConnection.cs",
@@ -494,7 +506,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "CustomerRepository.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\CustomerRepository.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\CustomerRepository.cs",
@@ -506,7 +518,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "CategoryRepository.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\DataAccess\\CategoryRepository.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\DataAccess\\CategoryRepository.cs",
@@ -518,7 +530,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "ImportManagementForm.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ImportManagementForm.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\ImportManagementForm.cs",
@@ -531,7 +543,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "CategoryManagementForm.cs [Design]",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\CategoryManagementForm.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\CategoryManagementForm.cs",
@@ -542,7 +554,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "ImportManagementForm.cs [Design]",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ImportManagementForm.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\ImportManagementForm.cs",
@@ -553,7 +565,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "CustomerManagementForm.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\CustomerManagementForm.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\CustomerManagementForm.cs",
@@ -566,7 +578,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "ExportManagementForm.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ExportManagementForm.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\ExportManagementForm.cs",
@@ -579,7 +591,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "CategoryManagementForm.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\CategoryManagementForm.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\CategoryManagementForm.cs",
@@ -591,7 +603,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "ImportManagementForm.Designer.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ImportManagementForm.Designer.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\ImportManagementForm.Designer.cs",
@@ -603,7 +615,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 29,
               "Title": "SupplierManagementForm.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\SupplierManagementForm.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\SupplierManagementForm.cs",
@@ -615,7 +627,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 30,
               "Title": "CustomerManagementForm.Designer.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\CustomerManagementForm.Designer.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\CustomerManagementForm.Designer.cs",
@@ -627,7 +639,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 31,
               "Title": "CategoryManagementForm.Designer.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\CategoryManagementForm.Designer.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\CategoryManagementForm.Designer.cs",
@@ -639,7 +651,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 32,
               "Title": "LoginForm.Designer.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\LoginForm.Designer.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\LoginForm.Designer.cs",
@@ -651,7 +663,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 33,
               "Title": "ExportManagementForm.Designer.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ExportManagementForm.Designer.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\ExportManagementForm.Designer.cs",
@@ -663,7 +675,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 34,
               "Title": "UserManagementForm.Designer.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\UserManagementForm.Designer.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\UserManagementForm.Designer.cs",
@@ -671,12 +683,11 @@
               "RelativeToolTip": "LaptopShopProject\\Forms\\UserManagementForm.Designer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAALIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-26T08:55:37.535Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-26T08:55:37.535Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 35,
               "Title": "SupplierManagementForm.Designer.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\SupplierManagementForm.Designer.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\SupplierManagementForm.Designer.cs",
@@ -688,12 +699,12 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 36,
               "Title": "ReportForm.Designer.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ReportForm.Designer.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\ReportForm.Designer.cs",
-              "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ReportForm.Designer.cs*",
-              "RelativeToolTip": "LaptopShopProject\\Forms\\ReportForm.Designer.cs*",
+              "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ReportForm.Designer.cs",
+              "RelativeToolTip": "LaptopShopProject\\Forms\\ReportForm.Designer.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAADwv2AAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-03T12:21:31.24Z",
@@ -701,7 +712,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 37,
               "Title": "ProductManagementForm.Designer.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ProductManagementForm.Designer.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\ProductManagementForm.Designer.cs",
@@ -709,11 +720,12 @@
               "RelativeToolTip": "LaptopShopProject\\Forms\\ProductManagementForm.Designer.cs",
               "ViewState": "AgIAAAEAAAAAAAAAAADwvwMBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T18:32:25.756Z"
+              "WhenOpened": "2025-04-24T18:32:25.756Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 38,
               "Title": "MainForm.Designer.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\MainForm.Designer.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\MainForm.Designer.cs",
@@ -721,12 +733,11 @@
               "RelativeToolTip": "LaptopShopProject\\Forms\\MainForm.Designer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAOUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T17:49:58.2Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-24T17:49:58.2Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 39,
               "Title": "CustomerManagementForm.resx",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\CustomerManagementForm.resx",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\CustomerManagementForm.resx",
@@ -737,7 +748,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 40,
               "Title": "ExportManagementForm.cs [Design]",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\ExportManagementForm.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\ExportManagementForm.cs",
@@ -748,7 +759,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 41,
               "Title": "CustomerManagementForm.cs [Design]",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Forms\\CustomerManagementForm.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Forms\\CustomerManagementForm.cs",
@@ -759,7 +770,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 42,
               "Title": "Supplier.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Models\\Supplier.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Models\\Supplier.cs",
@@ -771,7 +782,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 43,
               "Title": "ProductLog.cs",
               "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Models\\ProductLog.cs",
               "RelativeDocumentMoniker": "LaptopShopProject\\Models\\ProductLog.cs",
@@ -780,18 +791,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-24T14:56:35.643Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 43,
-              "Title": "Product.cs",
-              "DocumentMoniker": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Models\\Product.cs",
-              "RelativeDocumentMoniker": "LaptopShopProject\\Models\\Product.cs",
-              "ToolTip": "D:\\DBMS\\final\\DBMS_Project\\DBMS_Project\\LaptopShopProject\\Models\\Product.cs",
-              "RelativeToolTip": "LaptopShopProject\\Models\\Product.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T06:52:22.073Z"
             },
             {
               "$type": "Document",
@@ -1014,7 +1013,7 @@
           ]
         },
         {
-          "DockedHeight": 58,
+          "DockedHeight": 37,
           "SelectedChildIndex": -1,
           "Children": [
             {

@@ -1,4 +1,4 @@
-
+﻿
 /*
  * LaptopStoreDBMS4 - Database for managing laptop store inventory, import/export operations
  *
@@ -159,24 +159,55 @@ END;
 GO
 
 
+
 CREATE PROCEDURE sp_InsertProduct
     @product_name NVARCHAR(100),
     @price DECIMAL(18,2),
-    @stock_quantity INT
+    @stock_quantity INT,
+    @category_name NVARCHAR(100) = NULL,
+    @category_description NVARCHAR(255) = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
     BEGIN TRY
         BEGIN TRANSACTION;
+        DECLARE @product_id INT;
+        DECLARE @category_id INT;
+
+        -- Check if product already exists
         IF EXISTS (SELECT 1 FROM Product WHERE product_name = @product_name)
         BEGIN
             RAISERROR ('Sản phẩm đã tồn tại!', 16, 1);
             ROLLBACK;
             RETURN;
         END;
+
+        -- Insert product
         INSERT INTO Product (product_name, price, stock_quantity)
         VALUES (@product_name, @price, @stock_quantity);
-        DECLARE @product_id INT = SCOPE_IDENTITY();
+        SET @product_id = SCOPE_IDENTITY();
+
+        -- Handle category if provided
+        IF @category_name IS NOT NULL
+        BEGIN
+            -- Check if category exists
+            SELECT @category_id = category_id
+            FROM Category
+            WHERE category_name = @category_name;
+
+            -- If category doesn't exist, create it
+            IF @category_id IS NULL
+            BEGIN
+                INSERT INTO Category (category_name, description)
+                VALUES (@category_name, ISNULL(@category_description, 'Thêm tự động khi thêm sản phẩm'));
+                SET @category_id = SCOPE_IDENTITY();
+            END;
+
+            -- Link product to category in ProductCategory
+            INSERT INTO ProductCategory (product_id, category_id)
+            VALUES (@product_id, @category_id);
+        END;
+
         COMMIT TRANSACTION;
         SELECT @product_id AS product_id;
     END TRY

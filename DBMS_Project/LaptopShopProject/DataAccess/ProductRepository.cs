@@ -217,6 +217,8 @@ namespace LaptopShopProject.DataAccess
                         cmd.Parameters.AddWithValue("@product_name", product.ProductName);
                         cmd.Parameters.AddWithValue("@price", product.Price);
                         cmd.Parameters.AddWithValue("@stock_quantity", product.StockQuantity);
+                        cmd.Parameters.AddWithValue("@category_name", (object)product.Brands?? DBNull.Value);
+                        
                         return (int)await cmd.ExecuteScalarAsync();
                     }
                 }
