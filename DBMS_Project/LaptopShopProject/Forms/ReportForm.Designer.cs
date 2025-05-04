@@ -36,7 +36,7 @@
             tabControl1.Margin = new Padding(4, 5, 4, 5);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1013, 512);
+            tabControl1.Size = new Size(1013, 453);
             tabControl1.TabIndex = 0;
             // 
             // tabInventory
@@ -44,17 +44,18 @@
             tabInventory.Location = new Point(4, 29);
             tabInventory.Margin = new Padding(4, 5, 4, 5);
             tabInventory.Name = "tabInventory";
-            tabInventory.Size = new Size(1005, 479);
+            tabInventory.Size = new Size(1005, 420);
             tabInventory.TabIndex = 0;
             tabInventory.Text = "Inventory Report";
             tabInventory.UseVisualStyleBackColor = true;
+            tabInventory.Click += tabInventory_Click;
             // 
             // tabImports
             // 
             tabImports.Location = new Point(4, 29);
             tabImports.Margin = new Padding(4, 5, 4, 5);
             tabImports.Name = "tabImports";
-            tabImports.Size = new Size(1005, 582);
+            tabImports.Size = new Size(1005, 479);
             tabImports.TabIndex = 1;
             tabImports.Text = "Import Report";
             tabImports.UseVisualStyleBackColor = true;
@@ -64,7 +65,7 @@
             tabExports.Location = new Point(4, 29);
             tabExports.Margin = new Padding(4, 5, 4, 5);
             tabExports.Name = "tabExports";
-            tabExports.Size = new Size(1005, 582);
+            tabExports.Size = new Size(1005, 479);
             tabExports.TabIndex = 2;
             tabExports.Text = "Export Report";
             tabExports.UseVisualStyleBackColor = true;
@@ -74,7 +75,7 @@
             tabRevenue.Location = new Point(4, 29);
             tabRevenue.Margin = new Padding(4, 5, 4, 5);
             tabRevenue.Name = "tabRevenue";
-            tabRevenue.Size = new Size(1005, 582);
+            tabRevenue.Size = new Size(1005, 479);
             tabRevenue.TabIndex = 3;
             tabRevenue.Text = "Revenue Report";
             tabRevenue.UseVisualStyleBackColor = true;

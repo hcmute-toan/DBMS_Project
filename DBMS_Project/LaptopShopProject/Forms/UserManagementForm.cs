@@ -33,10 +33,7 @@ namespace LaptopShopProject.Forms
 
         private void ConfigurePermissions()
         {
-            // Vô hiệu hóa tất cả các nút vì không có chức năng quản lý người dùng trong cơ sở dữ liệu hiện tại
-            btnAdd.Enabled = false;
-            btnUpdate.Enabled = false;
-            btnDelete.Enabled = false;
+           
         }
 
         private void InitializeControls()
@@ -45,7 +42,7 @@ namespace LaptopShopProject.Forms
             cboRole.SelectedIndex = 0;
 
             dgvUsers.AutoGenerateColumns = false;
-            dgvUsers.Columns.Add(new DataGridViewTextBoxColumn { Name = "UserId", HeaderText = "ID", DataPropertyName = "UserId" });
+            //  dgvUsers.Columns.Add(new DataGridViewTextBoxColumn { Name = "UserId", HeaderText = "ID", DataPropertyName = "UserId" });
             dgvUsers.Columns.Add(new DataGridViewTextBoxColumn { Name = "Username", HeaderText = "Username", DataPropertyName = "Username" });
             dgvUsers.Columns.Add(new DataGridViewTextBoxColumn { Name = "Role", HeaderText = "Role", DataPropertyName = "Role" });
             dgvUsers.Columns.Add(new DataGridViewTextBoxColumn { Name = "CreateDate", HeaderText = "Create Date", DataPropertyName = "CreateDate" });
@@ -120,6 +117,11 @@ namespace LaptopShopProject.Forms
             }
 
             MessageBox.Show(message, title, MessageBoxButtons.OK, icon);
+        }
+
+        private void UserManagementForm_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

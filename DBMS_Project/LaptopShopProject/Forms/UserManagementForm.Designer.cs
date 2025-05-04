@@ -19,10 +19,6 @@
             txtPassword = new TextBox();
             cboRole = new ComboBox();
             dgvUsers = new DataGridView();
-            btnAdd = new Button();
-            btnUpdate = new Button();
-            btnDelete = new Button();
-            btnRefresh = new Button();
             lblUserName = new Label();
             lblPassword = new Label();
             lblRole = new Label();
@@ -66,46 +62,6 @@
             dgvUsers.RowHeadersWidth = 51;
             dgvUsers.Size = new Size(987, 231);
             dgvUsers.TabIndex = 3;
-            // 
-            // btnAdd
-            // 
-            btnAdd.Location = new Point(27, 169);
-            btnAdd.Margin = new Padding(4, 5, 4, 5);
-            btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(100, 46);
-            btnAdd.TabIndex = 5;
-            btnAdd.Text = "Add";
-            btnAdd.UseVisualStyleBackColor = true;
-            // 
-            // btnUpdate
-            // 
-            btnUpdate.Location = new Point(140, 169);
-            btnUpdate.Margin = new Padding(4, 5, 4, 5);
-            btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(100, 46);
-            btnUpdate.TabIndex = 6;
-            btnUpdate.Text = "Update";
-            btnUpdate.UseVisualStyleBackColor = true;
-            // 
-            // btnDelete
-            // 
-            btnDelete.Location = new Point(253, 169);
-            btnDelete.Margin = new Padding(4, 5, 4, 5);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(100, 46);
-            btnDelete.TabIndex = 7;
-            btnDelete.Text = "Delete";
-            btnDelete.UseVisualStyleBackColor = true;
-            // 
-            // btnRefresh
-            // 
-            btnRefresh.Location = new Point(367, 169);
-            btnRefresh.Margin = new Padding(4, 5, 4, 5);
-            btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(100, 46);
-            btnRefresh.TabIndex = 8;
-            btnRefresh.Text = "Refresh";
-            btnRefresh.UseVisualStyleBackColor = true;
             // 
             // lblUserName
             // 
@@ -151,10 +107,6 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(btnRefresh);
-            Controls.Add(btnDelete);
-            Controls.Add(btnUpdate);
-            Controls.Add(btnAdd);
             Controls.Add(lblUsers);
             Controls.Add(dgvUsers);
             Controls.Add(lblRole);
@@ -166,6 +118,7 @@
             Margin = new Padding(4, 5, 4, 5);
             Name = "UserManagementForm";
             Size = new Size(1040, 800);
+            Load += UserManagementForm_Load_1;
             ((System.ComponentModel.ISupportInitialize)dgvUsers).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -175,10 +128,6 @@
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.ComboBox cboRole;
         private System.Windows.Forms.DataGridView dgvUsers;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Label lblUserName;
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Label lblRole;

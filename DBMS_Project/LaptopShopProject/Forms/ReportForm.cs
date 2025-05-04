@@ -569,5 +569,10 @@ namespace LaptopShopProject.Forms
 
             MessageBox.Show(message, title, MessageBoxButtons.OK, icon);
         }
+
+        private void tabInventory_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
